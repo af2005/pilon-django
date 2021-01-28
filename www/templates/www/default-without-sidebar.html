@@ -6,29 +6,29 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% include 'www/bootstraplibs.html' %}
+    {% include 'www/snippets/bootstraplibs.html' %}
 
     <title>donton - {{ window_title }}</title>
 </head>
 <body class="bg-light">
 <main>
-    {% include 'www/navigation.html' %}
+    {% include 'www/snippets/navigation.html' %}
     <div class="container d-flex align-items-center my-3 ">
-        <div class="lh-1">k
+        <div class="lh-1">
             <h2>{{ page_title }}</h2>
             <small>{{ page_subtitle }}</small>
         </div>
     </div>
 
     <div class="container">
-        {{ content }}
+        {{ content|safe }}
     </div>
-    {% include 'www/footer.html' %}
+    {% include 'www/snippets/footer.html' %}
 
 </main>
 
 
-{% include 'www/endofbody.html' %}
+{% include 'www/snippets/endofbody.html' %}
 
 </body>
 </html>

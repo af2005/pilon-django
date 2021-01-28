@@ -6,7 +6,13 @@ from django.template import loader
 
 
 def view_dashboard(request):
-    return HttpResponse("Hello, world. You're at the Dashboard.")
+    template = loader.get_template('www/default-without-sidebar.html')
+    context = {
+        'window_title': "Dashboard",
+        'page_title': "Today",
+
+    }
+    return HttpResponse(template.render(context, request))
 
 
 def view_project_homepage(request):
