@@ -1,42 +1,60 @@
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">donton</a>
-            <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">donton</a>
+        <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
-                           aria-expanded="false" style="">Projects</a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li class="small text-uppercase font-weight-bold mb-2 px-2">Recent Projects</li>
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            <!--<li class="small text-uppercase font-weight-bold my-2 px-2">Pinned Projects</li>-->
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                       aria-expanded="false">Projects</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                        <h6 class="dropdown-header">Recent Projects</h6>
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="dropdown-header">Pinned Projects</h6>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a class="dropdown-item" href="/project-directory">Project
+                            directory</a>
+                        </li>
+                        <li><a class="dropdown-item" href="/create-project">Create new project</a></li>
 
-                            <li class="mt-2 border-top"><a class="dropdown-item pt-2" href="/project-directory">Project directory</a>
-                            </li>
-                            <li><a class="dropdown-item" href="/create-project">Create new project</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/people">People</a>
+                </li>
 
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/people">People</a>
-                    </li>
-
-                </ul>
-                <form class="d-flex">
-                    <button class="btn btn-dark bi bi-search" type="submit"></button>
-                    <button class="btn btn-dark bi bi-list-check" type="button"></button>
-                    <button class="btn btn-dark bi bi-chat-square-text-fill" type="button"></button>
-                    <button class="btn btn-dark bi bi-person-fill" type="button"></button>
+            </ul>
 
 
-                </form>
-            </div>
+            <ul class="nav justify-content-right">
+                <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Search">
+                    <a class="btn btn-dark border-0 nav-link bi bi-search mx-1" href="#"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-dark border-0 nav-link bi bi-list-check mx-1" href="#" title="Your tasks"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-dark border-0 nav-link bi bi-chat-square-text-fill mx-1" href="#" title="Message center"></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="btn btn-dark border-0 nav-link bi bi-person-fill mx-1" href="#"
+                       id="user-menu-dropdown" data-bs-toggle="dropdown"
+                       aria-expanded="false" style=""></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-menu-dropdown">
+                        <li><a class="dropdown-item" href="/user/settings">User settings</a></li>
+                        <li><a class="dropdown-item" href="/system/settings">System settings</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>

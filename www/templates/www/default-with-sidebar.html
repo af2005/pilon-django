@@ -6,14 +6,18 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static "www/custom/main.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "www/custom/main.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "www/custom/sidebar.css" %}">
     {% include 'www/snippets/bootstraplibs.html' %}
 
     <title>donton - {{ window_title }}</title>
 </head>
 <body class="bg-light">
+<div class="wrapper">
+{% include 'www/snippets/sidebar.html' %}
 <main>
     {% include 'www/snippets/navigation.html' %}
+
     <div class="container d-flex align-items-center my-3 ">
         <div class="lh-1">
             <h2>{{ page_title }}</h2>
@@ -30,6 +34,7 @@
 
 {% include 'www/snippets/footer.html' %}
 {% include 'www/snippets/endofbody.html' %}
-
+<script type="application/javascript" src="{% static 'www/custom/sidebar.js' %}"></script>
+</div>
 </body>
 </html>

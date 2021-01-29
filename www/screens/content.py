@@ -6,7 +6,7 @@ from django.template import loader
 
 
 def view_dashboard(request):
-    template = loader.get_template('www/default-without-sidebar.html')
+    template = loader.get_template('www/default-with-sidebar.html')
     context = {
         'window_title': "Dashboard",
         'page_title': "Today",
