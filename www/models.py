@@ -1,9 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User as DjangoUser
 
 
-class User(models.Model):
-    username = models.CharField(max_length=30)
-    full_name = models.TextField()
+class User(DjangoUser):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
 
 class Project(models.Model):
