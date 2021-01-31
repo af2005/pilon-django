@@ -1,9 +1,9 @@
 from django.urls import path
 
-from . import project, people, settings, login, content
+from . import project, people, settings, login, content, dashboard
 
 urlpatterns = [
-    path('', content.view_dashboard, name='Dashboard'),
+    path('', dashboard.view_dashboard, name='Dashboard'),
     path('login', login.view_login, name="Login"),
     path('logout', login.view_logout, name="Logout"),
     path('project/<str:key>', project.view_homepage, name="Project Homepage"),
