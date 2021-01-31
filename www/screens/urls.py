@@ -1,10 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 
-from . import project, people, settings, login, content, dashboard
+from . import project, people, admin, login, content, dashboard
 
-from .settings import main
+from .admin import main
 
 urlpatterns = [
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', dashboard.view_dashboard, name='Dashboard'),
     path('login', login.view_login, name="Login"),
     path('logout', login.view_logout, name="Logout"),
@@ -13,7 +14,7 @@ urlpatterns = [
     path('create-project', project.view_create, name="Create Project"),
     path('people', people.directory, name="View People"),
 
-    path('system-settings/<str:setting>', settings.main.system_settings, name="System settings")
+    path('system-settings/<str:setting>', admin.main.system_settings, name="System settings")
 
 
 ]

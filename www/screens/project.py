@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.template import loader, Template
 from .snippets import forms
 from ..models import Project
+from . import templates
 
 
 def view_create(request):
@@ -25,15 +26,13 @@ def view_create(request):
 
 
 def view_directory(request):
-    template = loader.get_template('www/default.html')
-    context = {
-        'window_title': "Project directory",
-        'page_title': "Project Directory",
-        'page_subtitle': "All Projects visible to you",
-        'sidebar': False,
+    tpl = templates.project(request,
+                            window_title="Project directory",
+                            title="Project Directory",
+                            subtitle="All Projects visible to you",
+                            sidebar=False)
 
-    }
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(tpl)
 
 
 def view_homepage(request):

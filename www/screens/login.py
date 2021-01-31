@@ -19,13 +19,3 @@ def view_logout(request):
         'logout': True
     }
     return HttpResponse(template.render(context, request))
-
-
-def rest_login(request):
-    pass
-
-
-def rest_logout(request):
-    pass
-
-
