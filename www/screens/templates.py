@@ -46,3 +46,15 @@ def people(request, window_title, title="", subtitle="", users=[]):
         'users': users
     }
     return template.render(context, request)
+
+
+def project_directory(request, projects=[]):
+    template = loader.get_template('www/project/directory.html')
+    context = {
+        'window_title': "Project Directory",
+        'page_title': "Project Directory",
+        'page_subtitle': "All Projects visible to you",
+        'projects': projects
+    }
+    return template.render(context, request)
+

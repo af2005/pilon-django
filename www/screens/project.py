@@ -21,12 +21,7 @@ def view_create(request):
 
 @login_required
 def view_directory(request):
-    tpl = templates.simple(request,
-                           window_title="Project directory",
-                           title="Project Directory",
-                           subtitle="All Projects visible to you",
-                           )
-
+    tpl = templates.project_directory(request, projects=Project.objects.all())
     return HttpResponse(tpl)
 
 
