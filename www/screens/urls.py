@@ -6,8 +6,17 @@ from django.contrib.auth import views as auth_views
 from .admin import main
 
 urlpatterns = [
-    #path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/login/', auth_views.LoginView.as_view(template_name="www/accounts/login.html")),
+    path('accounts/login/',
+         auth_views.LoginView.as_view(
+             template_name="www/accounts/login.html"),
+         #redirect_authenticated_user=True,
+         ),
+    path('accounts/logout/',
+         auth_views.LogoutView.as_view(
+             template_name="www/accounts/logout.html"),
+         #redirect_authenticated_user=True,
+         ),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', dashboard.view_dashboard, name='Dashboard'),
     path('login', login.view_login, name="Login"),
     path('logout', login.view_logout, name="Logout"),

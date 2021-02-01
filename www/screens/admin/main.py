@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponse
 from django.template import loader
 from .. import templates
@@ -9,10 +10,13 @@ SIDEBAR_ITEMS = [
 ]
 
 
+@login_required
 def user_settings(request):
     return HttpResponse("User settings")
 
 
+@login_required
+@permission_required('admin', raise_exception=True)
 def user_manager(request):
     content = users.list_all_users()
     tpl = templates.admin(request, "User Manager", title="Manage Users", sidebar_items=SIDEBAR_ITEMS,
@@ -20,6 +24,8 @@ def user_manager(request):
     return HttpResponse(tpl)
 
 
+@login_required
+@permission_required('admin', raise_exception=True)
 def system_settings(request, setting):
     if setting == "user-manager":
         return user_manager(request)

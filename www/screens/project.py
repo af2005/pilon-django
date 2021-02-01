@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.template import loader, Template
 from .snippets import forms
@@ -5,6 +6,7 @@ from ..models import Project
 from . import templates
 
 
+@login_required
 def view_create(request):
     html = '<form action="rest/project" method="POST" class="my-4">'
 
@@ -25,15 +27,17 @@ def view_create(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required
 def view_directory(request):
     tpl = templates.simple(request,
-                            window_title="Project directory",
-                            title="Project Directory",
-                            subtitle="All Projects visible to you",
-                            )
+                           window_title="Project directory",
+                           title="Project Directory",
+                           subtitle="All Projects visible to you",
+                           )
 
     return HttpResponse(tpl)
 
 
+@login_required
 def view_homepage(request):
     pass
