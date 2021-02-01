@@ -22,7 +22,7 @@
         </thead>
         {% for project in projects %}
             <tr>
-                <td>{{ project.name }}</td>
+                <td><a href="/project/contents/{{ project.key }}">{{ project.name }}</a></td>
                 <td>{{ project.key }}</td>
                 <td>{{ project.labels }}</td>
             </tr>
