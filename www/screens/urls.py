@@ -7,7 +7,7 @@ from .admin import main
 
 urlpatterns = [
     #path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/login/', auth_views.LoginView.as_view(template_name="www/registration/login.html")),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name="www/accounts/login.html")),
     path('', dashboard.view_dashboard, name='Dashboard'),
     path('login', login.view_login, name="Login"),
     path('logout', login.view_logout, name="Logout"),

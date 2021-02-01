@@ -15,7 +15,8 @@ def user_settings(request):
 
 def user_manager(request):
     content = users.list_all_users()
-    tpl = templates.admin(request, "User Manager", title="Manage Users", sidebar=True, sidebar_items=SIDEBAR_ITEMS, content=content)
+    tpl = templates.admin(request, "User Manager", title="Manage Users", sidebar_items=SIDEBAR_ITEMS,
+                          content=content)
     return HttpResponse(tpl)
 
 
@@ -25,9 +26,8 @@ def system_settings(request, setting):
 
     content = ""
     tpl = templates.admin(request,
-                        window_title="System Settings",
-                        title=setting,
-                        sidebar=True,
-                        sidebar_items=SIDEBAR_ITEMS,
-                        content=content)
+                          window_title="System Settings",
+                          title=setting,
+                          sidebar_items=SIDEBAR_ITEMS,
+                          content=content)
     return HttpResponse(tpl)

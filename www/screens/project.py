@@ -26,11 +26,11 @@ def view_create(request):
 
 
 def view_directory(request):
-    tpl = templates.project(request,
+    tpl = templates.simple(request,
                             window_title="Project directory",
                             title="Project Directory",
                             subtitle="All Projects visible to you",
-                            sidebar=False)
+                            )
 
     return HttpResponse(tpl)
 
