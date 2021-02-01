@@ -1,9 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.template import loader
 from . import templates
+from ..rest import users
+
 
 @login_required
 def directory(request):
-    tpl = templates.default(request, window_title="People", title="People directory", sidebar=False)
+    tpl = templates.people(request,
+                           window_title="People",
+                           title="People directory",
+                           users=users.list_all_users())
     return HttpResponse(tpl)

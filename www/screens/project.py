@@ -8,22 +8,14 @@ from . import templates
 
 @login_required
 def view_create(request):
-    html = '<form action="rest/project" method="POST" class="my-4">'
-
-    html += forms.Textfield("project_key", "Project Key").render()
-    html += forms.Textfield("project_fullname", "Name").render()
-    html += forms.SubmitButton("Create").render()
-
-    html += "</form>"
-
-    template = loader.get_template('www/default.html')
+    template = loader.get_template('www/project/create.html')
     context = {
         'window_title': "Create project",
         'page_title': "Create new project",
-        'sidebar': False,
         'page_subtitle': "Every projects needs a key (consisting out of a few letters or numbers) and a name.",
-        'content': html,
+        'content': ""
     }
+
     return HttpResponse(template.render(context, request))
 
 
