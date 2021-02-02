@@ -11,7 +11,7 @@ def rest_handler_all(request):
 
         if request.POST["project_key"] and request.POST["project_fullname"]:
             create_new_project(request.POST["project_key"], request.POST["project_fullname"])
-            return HttpResponseRedirect("/project/contents/"+request.POST["project_key"])
+            return HttpResponseRedirect("/p/c/"+request.POST["project_key"])
         else:
             return HttpResponseBadRequest("You need to provide a key and a name when creating a new project")
 
