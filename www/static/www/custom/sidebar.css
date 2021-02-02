@@ -18,7 +18,8 @@
     position: fixed;
     top: 0;
     background-color: indianred;
-    height: 100vw
+    height: 100vw;
+    border-right: 1px gainsboro solid;
 }
 
 #page-content-wrapper {
@@ -41,7 +42,7 @@
 
 .sidebar-nav li {
     text-indent: 20px;
-    line-height: 40px;
+    line-height: 35px;
 }
 
 .sidebar-nav li a {
@@ -101,4 +102,10 @@
         position: relative;
         margin-right: 0;
     }
+}
+
+.sidebar-nav .bi::before{
+    display: inline!important;
+    line-height: 20px!important;
+
 }

@@ -60,15 +60,18 @@ def project_directory(request, projects=[]):
     return template.render(context, request)
 
 
-def project_homepage(request, key, sidebar_items):
+def project_view(request, key, template_name, title, sidebar_items, active_sidebar_item):
     project = list(Project.objects.filter(key=key).values())[0]
-    template = loader.get_template('www/project/homepage.html')
+    template = loader.get_template(template_name)
     context = {
-        'window_title': project["name"] + " Homepage",
-        'page_title': project["name"] + " Homepage",
+        'window_title': f'{project["name"]} {title}',
+        'page_title': f'{project["name"]} {title}',
         'page_subtitle': "",
         'project': project,
         'sidebar_items': sidebar_items,
-        'navbar_centertext': project["name"]
+        'navbar_centertext': project["name"],
+        'active_sidebar_item': active_sidebar_item
     }
     return template.render(context, request)
+
+
