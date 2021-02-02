@@ -10,42 +10,42 @@ def sidebar_items(key):
     return [
         {
             'name': "Homepage",
-            'url': f"/project/contents/{key}",
+            'url': f"/p/c/{key}",
             'icon': 'house'
         },
         {
             'name': "Team",
-            'url': f"/project/contents/{key}/team",
+            'url': f"/p/c/{key}/team",
             'icon': 'people-fill'
         },
         {
             'name': "Chat",
-            'url': f"/project/contents/{key}/chat",
+            'url': f"/p/c/{key}/chat",
             'icon': 'envelope'
         },
         {
             'name': "Tasks",
-            'url': f"/project/contents/{key}/tasks",
+            'url': f"/p/c/{key}/tasks",
             'icon': 'check2-circle'
         },
         {
             'name': "Calendar",
-            'url': f"/project/contents/{key}/calendar",
+            'url': f"/p/c/{key}/calendar",
             'icon': 'calendar3'
         },
         {
             'name': "Inventory",
-            'url': f"/project/contents/{key}/inventory",
+            'url': f"/p/c/{key}/inventory",
             'icon': 'archive'
         },
         {
             'name': "Wiki",
-            'url': f"/project/contents/{key}/wiki",
+            'url': f"/p/c/{key}/wiki",
             'icon': 'file-text'
         },
         {
             'name': "Journal",
-            'url': f"/project/contents/{key}/journal",
+            'url': f"/p/c/{key}/journal",
             'icon': 'journals'
         }
     ]
@@ -53,7 +53,7 @@ def sidebar_items(key):
 
 @login_required
 def view_project_create(request):
-    template = loader.get_template('www/project/create.html')
+    template = loader.get_template('www/project/create-project.html')
     context = {
         'window_title': "Create project",
         'page_title': "Create new project",
