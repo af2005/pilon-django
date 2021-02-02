@@ -2,7 +2,10 @@
 name = "pilon"
 version = "0.1.0"
 description = ""
-authors = ["Alexander Franke"]
+authors = [
+    "Alexander Franke",
+    "Jan Petermann"
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -10,6 +13,8 @@ Django = "^3.1.5"
 
 
 [tool.poetry.dev-dependencies]
+black = "^20.8b1"
+pytest = "^6.2.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
