@@ -24,4 +24,10 @@ a:link.btn-link,a{
     color: #495057
 }
 
+.display-4 {
+    font-size: calc(1.475rem + 1.4vw);
+}
+.font-weight-bold{
+    font-weight: bold;
+}
 
