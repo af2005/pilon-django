@@ -18,6 +18,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', dashboard.view_dashboard, name='Dashboard'),
     path('p/c/<str:key>', project.view_homepage, name="Project Homepage"),
+    path('p/c/<str:key>/create', project.view_content_create, name="Content create"),
     path('p/c/<str:key>/team', project.view_team, name="Project Tasks"),
     path('p/c/<str:key>/chat', project.view_chat, name="Project Chat"),
     path('p/c/<str:key>/tasks', project.view_tasks, name="Project Tasks"),
