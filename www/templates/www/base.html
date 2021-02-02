@@ -17,7 +17,8 @@
 </head>
 <body class="bg-light">
 <main>
-    {% include 'www/snippets/navigation.html' %}
+    {% block navigation %}{% include 'www/snippets/navigation.html' %}{% endblock %}
+
     {% block subnavigation %}{% endblock %}
     <div id="wrapper">
 
