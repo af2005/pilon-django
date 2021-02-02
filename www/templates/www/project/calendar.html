@@ -1,0 +1,41 @@
+{% extends "www/base.html" %}
+{% load static %}
+
+{% block additional_assets %}
+    <link rel="stylesheet" type="text/css" href="{% static "www/custom/sidebar.css" %}">
+    <link href='{% static "www/fullcalendar/main.min.css" %}' rel='stylesheet'/>
+    <script src='{% static "www/fullcalendar/main.min.js" %}'></script>
+    <script type="application/javascript">
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('full-calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                firstDay: 1
+            });
+            calendar.render();
+        });
+
+    </script>
+{% endblock %}
+
+
+
+{% block sidebar %}
+    {% include 'www/snippets/sidebar.html' %}
+{% endblock %}
+
+{% block additional_scripts_eob %}
+{% endblock %}
+
+{% block title %}
+    {% include 'www/snippets/title_subtitle.html' %}
+{% endblock %}
+
+{% block content %}
+    {{ content }}
+    <div id="full-calendar" class="mx-2 row">
+
+    </div>
+
+{% endblock %}
