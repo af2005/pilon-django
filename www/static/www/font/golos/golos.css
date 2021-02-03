@@ -1,0 +1,45 @@
+
+@font-face {
+	font-family: 'GolosUI';
+	src: url('ui/Golos-UI_Bold.eot') format('embedded-opentype');
+	src:
+	     url('ui/Golos-UI_Bold.eot?#iefix') format('embedded-opentype'),
+	     url('ui/Golos-UI_Bold.woff2') format('woff2'),
+	     url('ui/Golos-UI_Bold.woff') format('woff'),
+	     url('ui/Golos-UI_Bold.web.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'GolosUI';
+	src: url('ui/Golos-UI_Regular.eot') format('embedded-opentype');
+	src:
+	     url('ui/Golos-UI_Regular.eot?#iefix') format('embedded-opentype'),
+	     url('ui/Golos-UI_Regular.woff2') format('woff2'),
+	     url('ui/Golos-UI_Regular.woff') format('woff'),
+	     url('ui/Golos-UI_Regular.web.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'GolosText';
+	src: url('text/Golos-Text_Regular.eot') format('embedded-opentype');
+	src:
+	     url('text/Golos-Text_Regular.eot?#iefix') format('embedded-opentype'),
+	     url('text/Golos-Text_Regular.woff2') format('woff2'),
+	     url('text/Golos-Text_Regular.woff') format('woff'),
+	     url('text/Golos-Text_Regular.web.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'GolosText';
+	src: url('text/Golos-Text_Bold.eot') format('embedded-opentype');
+	src:
+	     url('text/Golos-Text_Bold.eot?#iefix') format('embedded-opentype'),
+	     url('text/Golos-Text_Bold.woff2') format('woff2'),
+	     url('text/Golos-Text_Bold.woff') format('woff'),
+	     url('text/Golos-Text_Bold.web.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
