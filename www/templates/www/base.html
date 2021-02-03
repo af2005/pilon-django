@@ -18,17 +18,19 @@
     <title>pilon - {{ window_title }}</title>
 </head>
 <body class="bg-light">
-<main>
-    {% block navigation %}{% include 'www/snippets/navigation.html' %}{% endblock %}
+<main class="outer-wrapper">
+    {% block navigation %}
+        {% include 'www/snippets/navigation.html' %}
+    {% endblock %}
 
     {% block subnavigation %}{% endblock %}
     <div id="wrapper">
 
         {% block sidebar %}
         {% endblock %}
-        <div id="page-content-wrapper" class="bg-white">
-            <div class="container-fluid mb-4">
-
+        <div id="page-content-wrapper" class="bg-light justify-content-between">
+            <div id="content-container" class="container-fluid mb-4 pb-5 bg-white">
+                <span id="top-of-page"></span>
                 {% block title %}
                 {% endblock %}
 

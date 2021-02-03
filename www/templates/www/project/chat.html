@@ -1,17 +1,7 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
-{% block additional_assets %}
-    <link rel="stylesheet" type="text/css" href="{% static "www/custom/sidebar.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "www/chat/main.css" %}">
 
-{% endblock %}
-
-
-
-{% block sidebar %}
-    {% include 'www/snippets/sidebar.html' %}
-{% endblock %}
 
 {% block title %}
     {% include 'www/snippets/title_subtitle.html' %}
