@@ -64,3 +64,13 @@ a:link.btn-link, a {
     margin-left: 0;
 }
 
+.card-img-top{
+    text-align: center;
+}
+.card-img-top .bi{
+    font-size: 5rem;
+}
+.text-align-center{
+    text-align: center
+}
+
