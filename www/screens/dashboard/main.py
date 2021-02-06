@@ -18,7 +18,6 @@ SUBNAV_ITEMS = [
 ]
 
 
-@login_required
 def view_dashboard(request):
     tpl = templates.dashboard(request,
                               window_title="Dashboard",
@@ -30,7 +29,6 @@ def view_dashboard(request):
     return HttpResponse(tpl)
 
 
-@login_required
 def view_all_updates_board(request):
     tpl = templates.dashboard(request,
                               window_title="All updates",
@@ -42,7 +40,6 @@ def view_all_updates_board(request):
     return HttpResponse(tpl)
 
 
-@login_required
 def view_recently_worked_on_board(request):
     tpl = templates.dashboard(request,
                               window_title="Recently worked on",

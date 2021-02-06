@@ -9,12 +9,10 @@ SIDEBAR_ITEMS = [
 ]
 
 
-@login_required
 def user_settings(request):
     return HttpResponse("User settings")
 
 
-@login_required
 @permission_required('admin', raise_exception=True)
 def user_manager(request):
     content = users.list_all_users()
@@ -23,7 +21,6 @@ def user_manager(request):
     return HttpResponse(tpl)
 
 
-@login_required
 @permission_required('admin', raise_exception=True)
 def system_settings(request, setting):
     if setting == "user-manager":

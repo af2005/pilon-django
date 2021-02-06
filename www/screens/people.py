@@ -4,7 +4,6 @@ from . import templates
 from ..rest import users
 
 
-@login_required
 def directory(request):
     tpl = templates.people(request,
                            window_title="People",

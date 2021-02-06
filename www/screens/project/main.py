@@ -5,7 +5,6 @@ from www.models import Project
 from www.screens import templates
 
 
-@login_required
 def view_project_create(request):
     template = loader.get_template('www/project/create-project.html')
     context = {
@@ -18,7 +17,6 @@ def view_project_create(request):
     return HttpResponse(template.render(context, request))
 
 
-@login_required
 def view_directory(request):
     tpl = templates.project_directory(request, projects=Project.objects.all())
     return HttpResponse(tpl)

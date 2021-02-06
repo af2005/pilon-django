@@ -51,14 +51,12 @@ def sidebar_items(key):
     ]
 
 
-@login_required
 def view_content_create(request, key):
     tpl = templates.create_page_view(request, title="Create Content", key=key, subtitle="In project",
                                      sidebar_items=sidebar_items(key))
     return HttpResponse(tpl)
 
 
-@login_required
 def view_homepage(request, key):
     tpl = templates.project_view(request, key, template_name="www/project/homepage.html", title="Homepage",
                                  sidebar_items=sidebar_items(key),
@@ -66,7 +64,6 @@ def view_homepage(request, key):
     return HttpResponse(tpl)
 
 
-@login_required
 def view_team(request, key):
     tpl = templates.project_view(request, key, template_name="www/project/team.html", title="Team",
                                  sidebar_items=sidebar_items(key),
@@ -74,7 +71,6 @@ def view_team(request, key):
     return HttpResponse(tpl)
 
 
-@login_required
 def view_chat(request, key):
     tpl = templates.project_view(request, key, template_name="www/project/chat.html", title="Chat",
                                  sidebar_items=sidebar_items(key),
@@ -82,7 +78,6 @@ def view_chat(request, key):
     return HttpResponse(tpl)
 
 
-@login_required
 def view_tasks(request, key):
     tpl = templates.project_view(request, key, template_name="www/project/tasks.html", title="Tasks",
                                  sidebar_items=sidebar_items(key),
@@ -90,7 +85,6 @@ def view_tasks(request, key):
     return HttpResponse(tpl)
 
 
-@login_required
 def view_calendar(request, key):
     tpl = templates.project_view(request, key, template_name="www/project/calendar.html", title="Calendar",
                                  sidebar_items=sidebar_items(key),
@@ -98,7 +92,6 @@ def view_calendar(request, key):
     return HttpResponse(tpl)
 
 
-@login_required
 def view_inventory(request, key):
     tpl = templates.project_view(request, key, template_name="www/project/inventory.html", title="Inventory",
                                  sidebar_items=sidebar_items(key),
@@ -106,7 +99,6 @@ def view_inventory(request, key):
     return HttpResponse(tpl)
 
 
-@login_required
 def view_wiki(request, key):
     tpl = templates.project_view(request, key, template_name="www/project/wiki.html", title="Wiki",
                                  sidebar_items=sidebar_items(key),
@@ -114,7 +106,6 @@ def view_wiki(request, key):
     return HttpResponse(tpl)
 
 
-@login_required
 def view_journal(request, key):
     tpl = templates.project_view(request, key, template_name="www/project/journal.html", title="Journal",
                                  sidebar_items=sidebar_items(key),
