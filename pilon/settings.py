@@ -38,10 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'www.apps.WwwConfig',
-    'stronghold',
 ]
 
 MIDDLEWARE = [
+    #'pilon.middleware.SimpleMiddleware',
+    'pilon.middleware.LoginRequiredMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,8 +50,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'stronghold.middleware.LoginRequiredMiddleware',
+
 ]
+
 
 ROOT_URLCONF = 'pilon.urls'
 
@@ -126,7 +128,8 @@ STATIC_URL = '/static/'
 LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = LOGIN_URL
+PUBLIC_URLS = ['/dashboard/all-updates']
 
 # Stronghold
-STRONGHOLD_DEFAULTS = True
-STRONGHOLD_PUBLIC_URLS = ()
+#STRONGHOLD_DEFAULTS = True
+#STRONGHOLD_PUBLIC_URLS = ()
