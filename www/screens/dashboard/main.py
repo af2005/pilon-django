@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from . import templates
+from www.screens import templates
 from django.contrib.auth.decorators import login_required
 
 SUBNAV_ITEMS = [
