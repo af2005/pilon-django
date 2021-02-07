@@ -3,21 +3,38 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-md-5">
             <div class="card shadow-sm text-align-center">
                 <span class="card-img-top"><i class="bi bi-file-text"></i></span>
                 <div class="card-body">
-                    <h5 class="card-title">Create wiki Page</h5>
+                    <h5 class="card-title">Wiki Page</h5>
                     <p class="card-text">Store information in the project wiki.</p>
-                    <a href="create/default-editor" class="btn btn-primary">Default editor</a>
+                    <a href="create/default-editor" class="btn btn-primary">Create Wiki page</a>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="create/markdown-editor" class="card-link">Markdown...</a>
-                    <li class="list-group-item"><a href="create/file-uploader" class="card-link">Upload file...</a>
+                    <li class="list-group-item"><a href="create/file-uploader" class="card-link">Create from file...</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+      <div class="col-md-5">
+            <div class="card shadow-sm text-align-center">
+                <span class="card-img-top"><i class="bi bi-journals"></i></span>
+                <div class="card-body">
+                    <h5 class="card-title">Journal Page</h5>
+                    <p class="card-text">Create a new page in the jounal.</p>
+                    <a href="create/default-editor" class="btn btn-primary">Create Journal page</a>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a href="create/file-uploader" class="card-link">Create from file...</a>
                     </li>
                 </ul>
             </div>
 
         </div>
     </div>
+
+
 {% endblock %}
