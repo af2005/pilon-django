@@ -1,4 +1,4 @@
-{% extends "www/project/project_base.html" %}
+{% extends "www/base+sidebar+title.html" %}
 {% load static %}
 
 {% block additional_assets %}
@@ -19,10 +19,6 @@
 {% endblock %}
 
 
-
-{% block sidebar %}
-    {% include 'www/snippets/sidebar.html' %}
-{% endblock %}
 
 {% block additional_scripts_eob %}
 {% endblock %}
