@@ -18,7 +18,7 @@ urlpatterns = [
     path('accounts/settings/', user_settings.main, name="User settings"),
     path('accounts/', include('django.contrib.auth.urls')),
     path('p/', include('www.screens.project.urls')),
-    path('people', people.directory, name="View People"),
-    path('system-settings/<str:setting>', admin.main.system_settings, name="System settings"),
+    path('people/', people.directory, name="View People"),
+    path('system-settings/<str:setting>/', admin.main.system_settings, name="System settings"),
 
 ]

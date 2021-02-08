@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+
     <div class="row">
         <div class="col-md-5">
             <div class="card shadow-sm text-align-center">
@@ -9,10 +10,10 @@
                 <div class="card-body">
                     <h5 class="card-title">Wiki Page</h5>
                     <p class="card-text">Store information in the project wiki.</p>
-                    <a href="create/default-editor" class="btn btn-primary">Create Wiki page</a>
+                    <a href="/p/c/{{ project_key }}/wiki/create" class="btn btn-primary">Create Wiki page</a>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="create/file-uploader" class="card-link">Create from file...</a>
+                    <li class="list-group-item"><a href="/p/c/{{ project_key }}/wiki/create-with-file" class="card-link">Create from file...</a>
                     </li>
                 </ul>
             </div>
@@ -24,11 +25,11 @@
                 <span class="card-img-top"><i class="bi bi-journals"></i></span>
                 <div class="card-body">
                     <h5 class="card-title">Journal Page</h5>
-                    <p class="card-text">Create a new page in the jounal.</p>
-                    <a href="create/default-editor" class="btn btn-primary">Create Journal page</a>
+                    <p class="card-text">Create a new page in the journal.</p>
+                    <a href="/p/c/{{ project_key }}/journal/create" class="btn btn-primary">Create Journal page</a>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="create/file-uploader" class="card-link">Create from file...</a>
+                    <li class="list-group-item"><a href="/p/c/{{ project_key }}/journal/create-with-file" class="card-link">Create from file...</a>
                     </li>
                 </ul>
             </div>

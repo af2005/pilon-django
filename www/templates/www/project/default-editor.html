@@ -1,33 +1,20 @@
 {% extends "www/base.html" %}
-
-
 {% load static %}
-{% block additional_assets %}
-    <link rel="stylesheet" href="{% static "www/toastui/codemirror.min.css" %}"/>
-    <!-- Editor's Style -->
-    <link rel="stylesheet" href="{% static "www/toastui/toastui-editor.min.css" %}"/>
-{% endblock %}
+{% block navigation %}{% include 'www/snippets/navigation-create-button.html' %}{% endblock %}
+
 {% block content %}
-
-    <link rel="stylesheet" href="{% static "www/toastui/custom.css" %}"/>
-
     <div class="bg-white">
-        <div id="editor" class="py-3"></div>
+        <div class="py-3 justify-content-between d-flex align-items-center">
+            <div>
+                <h6 class="display-6 mb-0">{{ page_title }}</h6>
+            </div>
+            <div>
+                <a href="/p/c/{{ project_key }}"> <button type="reset" class="btn btn-link">Cancel</button></a>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Publish</button>
+            </div>
+        </div>
+        {% include 'www/snippets/editor.html' %}
     </div>
-
-    <script src="{% static "www/toastui/toastui-editor-all.min.js" %}"></script>
-    <script type="application/javascript">
-
-        const editor = new toastui.Editor({
-            el: document.querySelector('#editor'),
-            height: '80vh',
-            initialEditType: 'wysiwyg',
-            previewStyle: 'tab',
-            usageStatistics: false
-        });
-
-        editor.getHtml();
-    </script>
 
 {% endblock %}
 

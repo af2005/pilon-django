@@ -1,0 +1,22 @@
+{% load static %}
+<div id="editor" class="shadow-sm "></div>
+
+
+<link rel="stylesheet" href="{% static "www/toastui/codemirror.min.css" %}"/>
+<link rel="stylesheet" href="{% static "www/toastui/toastui-editor.min.css" %}"/>
+<link rel="stylesheet" href="{% static "www/toastui/custom.css" %}"/>
+
+
+<script src="{% static "www/toastui/toastui-editor-all.min.js" %}"></script>
+<script type="application/javascript">
+
+    const editor = new toastui.Editor({
+        el: document.querySelector('#editor'),
+        height: '60vh',
+        initialEditType: 'wysiwyg',
+        previewStyle: 'tab',
+        usageStatistics: false
+    });
+
+    editor.getHtml();
+</script>

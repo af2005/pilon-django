@@ -1,10 +1,33 @@
-.container{
+.container {
     margin-left: auto;
+}
+
+.tui-toolbar-icons {
+    background-image: none
+}
+
+.tui-editor-defaultUI-toolbar button {
+    padding: 0;
+    height: 1.4rem;
+    width: 1.4rem;
+    align-items: center;
+    background-color: inherit;
+    border: 0;
+}
+
+.tui-editor-contents table th {
+    background-color: #f8f9fa;
+    color: black;
+    font-weight: bold;
+}
+
+.tui-editor-defaultUI-toolbar {
+    background-color: #f8f9fa;
 }
 
 
 
-.tui-toolbar-icons {
+.tui-toolbar-icons::before {
     display: inline-block;
     font-family: bootstrap-icons !important;
     font-style: normal;
@@ -12,9 +35,77 @@
     font-variant: normal;
     text-transform: none;
     line-height: 1;
-    vertical-align: text-bottom;
+    vertical-align: middle;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    content: "\f502";
+    font-size: 1.1rem;
+    color: black
+}
 
+.tui-heading::before {
+    content: "\f5b9";
+}
+
+.tui-bold:before {
+    content: "\f5b8";
+}
+
+.tui-italic:before {
+    content: "\f5bc";
+}
+
+.tui-strike:before {
+    content: "\f5bd";
+}
+
+.tui-hrline:before {
+    content: "\f406";;
+}
+
+.tui-quote:before {
+    content: "\f190";
+}
+
+.tui-ul:before {
+    content: "\f455";
+}
+
+.tui-ol:before {
+    content: "\f452";
+}
+
+.tui-task:before {
+    content: "\f270";
+}
+
+.tui-indent:before {
+    content: "\f594";
+}
+
+.tui-outdent:before {
+    content: "\f595";
+}
+
+.tui-table:before {
+    content: "\f579";
+}
+
+.tui-image:before {
+    content: "\f409";
+}
+
+.tui-link:before {
+    content: "\f44d";
+}
+
+.tui-code:before {
+    content: "\f2a8";
+}
+
+.tui-codeblock:before {
+    content: "\f2a7";
+}
+
+.tui-more:before {
+    content: "\f59f";
 }
