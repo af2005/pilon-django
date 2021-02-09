@@ -32,7 +32,6 @@ media
 # Distribution / packaging
 .Python build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -115,3 +114,4 @@ GitHub.sublime-settings
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+.DS_Store
