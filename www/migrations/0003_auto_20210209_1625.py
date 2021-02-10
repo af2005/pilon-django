@@ -6,23 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('www', '0002_auto_20210201_1241'),
+        ("www", "0002_auto_20210201_1241"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='page',
-            name='content',
-            field=models.TextField(default=''),
+            model_name="page",
+            name="content",
+            field=models.TextField(default=""),
         ),
         migrations.AddField(
-            model_name='page',
-            name='version',
+            model_name="page",
+            name="version",
             field=models.IntegerField(default=0),
         ),
         migrations.AlterField(
-            model_name='page',
-            name='id',
+            model_name="page",
+            name="id",
             field=models.IntegerField(primary_key=True, serialize=False),
         ),
     ]

@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "www.apps.WwwConfig",
     "todo",
-    "django_extensions"
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -134,6 +134,6 @@ PUBLIC_URLS = ["/dashboard/all-updates"]
 
 # TODO-specific settings
 TODO_STAFF_ONLY = False
-TODO_DEFAULT_LIST_SLUG = 'tickets'
+TODO_DEFAULT_LIST_SLUG = "tickets"
 TODO_DEFAULT_ASSIGNEE = None
-TODO_PUBLIC_SUBMIT_REDIRECT = '/'
+TODO_PUBLIC_SUBMIT_REDIRECT = "/"

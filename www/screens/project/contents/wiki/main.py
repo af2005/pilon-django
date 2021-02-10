@@ -10,14 +10,21 @@ from .. import main
 @login_required
 def view_content_create(request, key):
     tpl = templates.default_editor(
-        request, title="Create Wiki Page", key=key,
+        request,
+        title="Create Wiki Page",
+        key=key,
     )
     return HttpResponse(tpl)
 
 
 @login_required
 def view_wiki(request, key):
-    tpl = templates.project_view(request, key, template_name="www/project/wiki.html", title="Wiki",
-                                 sidebar_items=main.sidebar_items(key),
-                                 active_sidebar_item=6)
+    tpl = templates.project_view(
+        request,
+        key,
+        template_name="www/project/wiki.html",
+        title="Wiki",
+        sidebar_items=main.sidebar_items(key),
+        active_sidebar_item=6,
+    )
     return HttpResponse(tpl)
