@@ -8,11 +8,11 @@ class Project(models.Model):
 
 
 class Page(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    #project = models.ForeignKey(Project, on_delete=models.CASCADE)
     id = models.IntegerField(primary_key=True)
-    version = models.IntegerField()
-    content = models.TextField()
-    created_date = models.DateTimeField()
+    version = models.IntegerField(default=0)
+    content = models.TextField(default="")
+    #created_date = models.DateTimeField()
 
     def repr(self):
         return {"id": self.id}
