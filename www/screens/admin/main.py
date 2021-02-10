@@ -5,7 +5,7 @@ from www.rest import users
 
 SIDEBAR_ITEMS = [
     {"name": "Global", "url": "/system-settings/global"},
-    {"name": "User Manager", "url": "/system-settings/user-manager"}
+    {"name": "User Manager", "url": "/system-settings/user-manager"},
 ]
 
 
