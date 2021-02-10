@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "www.apps.WwwConfig",
     "todo",
     "django_extensions",
+    "mptt",
 ]
 
 MIDDLEWARE = [
