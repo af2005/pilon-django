@@ -4,6 +4,8 @@
 
 {% block additional_assets %}
     <link href='{% static "www/fullcalendar/main.min.css" %}' rel='stylesheet'/>
+    <link href='{% static "www/fullcalendar/custom.css" %}' rel='stylesheet'/>
+
     <script src='{% static "www/fullcalendar/main.min.js" %}'></script>
     <script type="application/javascript">
 
@@ -11,7 +13,8 @@
             var calendarEl = document.getElementById('full-calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                firstDay: 1
+                firstDay: 1,
+                themeSystem: 'bootstrap'
             });
             calendar.render();
         });
