@@ -6,11 +6,11 @@
 
 {% block sidebar_lower_content %}
     <link rel="stylesheet" type="text/css"
-          href="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.min.css" %}">
+          href="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.css" %}">
 
     <div class="bg-light">
         <h6 class="mx-2 my-2">Wiki Page Tree</h6>
-        <div id="tree" class="treeview">
+        <div id="tree" class="tui-tree-wrap">
         </div>
     </div>
 {% endblock %}
