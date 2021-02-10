@@ -1,5 +1,6 @@
 {% extends "www/base+sidebar+title.html" %}
 {% load static %}
+{% block navigation %}{% include 'www/snippets/navigation-create-button.html' %}{% endblock %}
 
 {% block additional_assets %}
     <link href='{% static "www/fullcalendar/main.min.css" %}' rel='stylesheet'/>
