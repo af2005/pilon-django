@@ -9,51 +9,61 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('www', '0001_initial'),
+        ("www", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='page',
-            name='content',
+            model_name="page",
+            name="content",
         ),
         migrations.RemoveField(
-            model_name='page',
-            name='created_date',
+            model_name="page",
+            name="created_date",
         ),
         migrations.RemoveField(
-            model_name='page',
-            name='project',
+            model_name="page",
+            name="project",
         ),
         migrations.RemoveField(
-            model_name='page',
-            name='version',
+            model_name="page",
+            name="version",
         ),
         migrations.RemoveField(
-            model_name='project',
-            name='id',
+            model_name="project",
+            name="id",
         ),
         migrations.AlterField(
-            model_name='page',
-            name='id',
-            field=models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'),
+            model_name="page",
+            name="id",
+            field=models.AutoField(
+                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+            ),
         ),
         migrations.AlterField(
-            model_name='project',
-            name='key',
+            model_name="project",
+            name="key",
             field=models.CharField(max_length=20, primary_key=True, serialize=False),
         ),
         migrations.AlterField(
-            model_name='task',
-            name='assignee',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Assignee', to=settings.AUTH_USER_MODEL),
+            model_name="task",
+            name="assignee",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="Assignee",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AlterField(
-            model_name='task',
-            name='reporter',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Reporter', to=settings.AUTH_USER_MODEL),
+            model_name="task",
+            name="reporter",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="Reporter",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.DeleteModel(
-            name='User',
+            name="User",
         ),
     ]

@@ -45,7 +45,7 @@ class LoginRequiredMiddleware:
         if self.is_public_url(request.path):
             return view_func(request, *view_args, **view_kwargs)
         return login_required(view_func)(request, *view_args, **view_kwargs)
-        #return login_required(view_func)(request, *view_args, **view_kwargs)
+        # return login_required(view_func)(request, *view_args, **view_kwargs)
 
     def is_public_url(self, url):
         return any(public_url.match(url) for public_url in self.public_view_urls)

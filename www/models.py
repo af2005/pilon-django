@@ -29,6 +29,10 @@ class JournalPage(Page):
 class Task(models.Model):
     created_date = models.DateTimeField()
     due_date = models.DateTimeField()
-    reporter = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Reporter")
-    assignee = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Assignee")
+    reporter = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="Reporter"
+    )
+    assignee = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="Assignee"
+    )
     content = models.TextField()
