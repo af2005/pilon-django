@@ -19,111 +19,231 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Entity',
+            name="Entity",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=255)),
-                ('date_created', models.DateTimeField(default=datetime.datetime.now)),
-                ('date_modified', models.DateTimeField(default=datetime.datetime.now)),
-                ('lft', models.PositiveIntegerField(editable=False)),
-                ('rght', models.PositiveIntegerField(editable=False)),
-                ('tree_id', models.PositiveIntegerField(db_index=True, editable=False)),
-                ('level', models.PositiveIntegerField(editable=False)),
-                ('creator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='creator', to=settings.AUTH_USER_MODEL)),
-                ('parent', mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='www.entity')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("date_created", models.DateTimeField(default=datetime.datetime.now)),
+                ("date_modified", models.DateTimeField(default=datetime.datetime.now)),
+                ("lft", models.PositiveIntegerField(editable=False)),
+                ("rght", models.PositiveIntegerField(editable=False)),
+                ("tree_id", models.PositiveIntegerField(db_index=True, editable=False)),
+                ("level", models.PositiveIntegerField(editable=False)),
+                (
+                    "creator",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="creator",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "parent",
+                    mptt.fields.TreeForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="children",
+                        to="www.entity",
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='Attachment',
+            name="Attachment",
             fields=[
-                ('entity_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='www.entity')),
-                ('file_name', models.CharField(max_length=255)),
-                ('file_type', models.CharField(max_length=255)),
+                (
+                    "entity_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="www.entity",
+                    ),
+                ),
+                ("file_name", models.CharField(max_length=255)),
+                ("file_type", models.CharField(max_length=255)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
-            bases=('www.entity',),
+            bases=("www.entity",),
         ),
         migrations.CreateModel(
-            name='Child',
+            name="Child",
             fields=[
-                ('entity_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='www.entity')),
-                ('space_key', models.CharField(max_length=20)),
+                (
+                    "entity_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="www.entity",
+                    ),
+                ),
+                ("space_key", models.CharField(max_length=20)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
-            bases=('www.entity',),
+            bases=("www.entity",),
         ),
         migrations.CreateModel(
-            name='MarkdownEntity',
+            name="MarkdownEntity",
             fields=[
-                ('entity_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='www.entity')),
-                ('markdown', markdownfield.models.MarkdownField(default='', rendered_field='content_rendered', use_editor=False)),
-                ('markdown_rendered', markdownfield.models.RenderedMarkdownField(default='')),
+                (
+                    "entity_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="www.entity",
+                    ),
+                ),
+                (
+                    "markdown",
+                    markdownfield.models.MarkdownField(
+                        default="", rendered_field="content_rendered", use_editor=False
+                    ),
+                ),
+                (
+                    "markdown_rendered",
+                    markdownfield.models.RenderedMarkdownField(default=""),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
-            bases=('www.entity',),
+            bases=("www.entity",),
         ),
         migrations.CreateModel(
-            name='Project',
+            name="Project",
             fields=[
-                ('entity_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, to='www.entity')),
-                ('key', models.CharField(max_length=20, primary_key=True, serialize=False)),
+                (
+                    "entity_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        to="www.entity",
+                    ),
+                ),
+                (
+                    "key",
+                    models.CharField(max_length=20, primary_key=True, serialize=False),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
-            bases=('www.entity',),
+            bases=("www.entity",),
         ),
         migrations.CreateModel(
-            name='Comment',
+            name="Comment",
             fields=[
-                ('markdownentity_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='www.markdownentity')),
+                (
+                    "markdownentity_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="www.markdownentity",
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
-            bases=('www.markdownentity',),
+            bases=("www.markdownentity",),
         ),
         migrations.CreateModel(
-            name='JournalPage',
+            name="JournalPage",
             fields=[
-                ('markdownentity_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='www.markdownentity')),
-                ('date', models.DateTimeField()),
+                (
+                    "markdownentity_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="www.markdownentity",
+                    ),
+                ),
+                ("date", models.DateTimeField()),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
-            bases=('www.markdownentity',),
+            bases=("www.markdownentity",),
         ),
         migrations.CreateModel(
-            name='WikiPage',
+            name="WikiPage",
             fields=[
-                ('markdownentity_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='www.markdownentity')),
+                (
+                    "markdownentity_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="www.markdownentity",
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
-            bases=('www.markdownentity',),
+            bases=("www.markdownentity",),
         ),
         migrations.CreateModel(
-            name='Task',
+            name="Task",
             fields=[
-                ('markdownentity_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='www.markdownentity')),
-                ('due_date', models.DateTimeField()),
-                ('content', models.TextField()),
-                ('assignee', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Assignee', to=settings.AUTH_USER_MODEL)),
+                (
+                    "markdownentity_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="www.markdownentity",
+                    ),
+                ),
+                ("due_date", models.DateTimeField()),
+                ("content", models.TextField()),
+                (
+                    "assignee",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="Assignee",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
-            bases=('www.markdownentity',),
+            bases=("www.markdownentity",),
         ),
     ]

@@ -19,9 +19,7 @@ class Entity(MPTTModel):
     )
     date_created = models.DateTimeField(default=datetime.now)
     date_modified = models.DateTimeField(default=datetime.now)
-    creator = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="creator"
-    )
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="creator")
 
     class MPTTMeta:
         order_insertion_by = ["name"]
@@ -77,7 +75,7 @@ class Attachment(Entity):
         "jpg",
         "pdf",
         "svg",
-        #"eps",
+        # "eps",
         "html",
         "docx",
         "pptx",
@@ -86,7 +84,7 @@ class Attachment(Entity):
 
     file_name = models.CharField(max_length=255)
     file_type = models.CharField(max_length=255)
-    file_path = "" # todo create uuid
+    file_path = ""  # todo create uuid
 
     @property
     def renderable(self):
