@@ -17,7 +17,22 @@
 
 {% block content %}
 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">{{ project.name }}</a></li>
+            <li class="breadcrumb-item"><a href="{% url "Project Wiki" project.key %}">Wiki</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+    </nav>
 
+    <div class="d-flex align-items-center pb-3 ">
+        <div class="lh-1">
+            <h2 class="display-4">Pagetitle</h2>
+            <div>
+                <a class="badge bg-secondary" href="#">Primary</a>
+            </div>
+        </div>
+    </div>
     {{ content }}
 
 {% endblock %}

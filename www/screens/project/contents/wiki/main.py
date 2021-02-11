@@ -33,7 +33,7 @@ def view_wiki(request, key):
         request,
         key,
         template_name="www/project/wiki.html",
-        title="Wiki",
+        title="",
         sidebar_items=main.sidebar_items(key),
         active_sidebar_item=6,
     )
