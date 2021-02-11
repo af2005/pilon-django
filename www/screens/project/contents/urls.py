@@ -3,7 +3,7 @@ from . import main
 
 urlpatterns = [
     path("<str:key>/", main.view_homepage, name="Project Homepage"),
-    path("<str:key>/create/", main.view_content_create, name="Content create"),
+    path("<str:key>/create/", main.view_content_create, name="Create Content"),
     path("<str:key>/team/", main.view_team, name="Project Tasks"),
     path("<str:key>/chat/", main.view_chat, name="Project Chat"),
     path("<str:key>/tasks/", main.view_tasks, name="Project Tasks"),

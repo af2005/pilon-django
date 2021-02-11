@@ -20,7 +20,7 @@ def sidebar_items(key):
 
 
 def view_content_create(request, key):
-    tpl = templates.create_page_view(
+    tpl = templates.create_new_content(
         request,
         title="Create Content",
         key=key,
