@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
-
 from ..models import Project
+from django.contrib.auth.models import User
 
 
 def rest_handler_all(request):
@@ -10,9 +10,10 @@ def rest_handler_all(request):
     elif request.method == "POST":
 
         if request.POST["project_key"] and request.POST["project_fullname"]:
-            create_new_project(
-                request.POST["project_key"], request.POST["project_fullname"]
-            )
+            create_new_project(request.user,
+                               request.POST["project_key"],
+                               request.POST["project_fullname"]
+                               )
             return HttpResponseRedirect("/p/c/" + request.POST["project_key"])
         else:
             return HttpResponseBadRequest(
@@ -22,23 +23,23 @@ def rest_handler_all(request):
     return HttpResponseBadRequest()
 
 
-def get_all_projects():
+def get_all_projects() -> HttpResponse:
     """
     :return: HTTPResponse with JSONObject of all project in the system
     """
     return HttpResponse(Project.objects.all())
 
 
-def get_single_project(key):
-    return repr(Project.objects.filter(key=key))
+def get_single_project(key: str) -> HttpResponse:
+    return HttpResponse(Project.objects.filter(key=key))
 
 
-def create_new_project(key, name):
+def create_new_project(creator: User, key: str, name: str):
     """
     Creates a new project
     :param key: key of the new project
     :param name: name of the new project
     :return: void
     """
-    project = Project(key=key, name=name)
+    project = Project(creator=creator, key=key, name=name)
     project.save()
