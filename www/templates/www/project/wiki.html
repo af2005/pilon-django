@@ -19,7 +19,7 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">{{ project.name }}</a></li>
+            <li class="breadcrumb-item"><a href="{% url "Project Homepage" project.key %}">{{ project.name }}</a></li>
             <li class="breadcrumb-item"><a href="{% url "Project Wiki" project.key %}">Wiki</a></li>
             <li class="breadcrumb-item active" aria-current="page">Data</li>
         </ol>
@@ -34,7 +34,29 @@
                 <a class="badge bg-secondary" href="#">label1</a>
                 <a class="badge bg-secondary" href="#">label1</a>
                 <a class="badge bg-secondary" href="#">label1</a>
-                <a class="badge text-dark" href="#">Edit labels...</a>
+                <button class="badge btn text-dark" data-bs-toggle="modal" data-bs-target="#edit-labels-modal">Edit
+                    labels...
+                </button>
+                <div class="modal fade" id="edit-labels-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit labels</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div>
