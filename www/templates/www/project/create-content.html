@@ -11,10 +11,10 @@
                 <div class="card-body">
                     <h5 class="card-title">Wiki Page</h5>
                     <p class="card-text">Store information in the project wiki.</p>
-                    <a href="/p/c/{{ project_key }}/wiki/create" class="btn btn-primary">Create Wiki page</a>
+                    <a href="{% url "Create Wiki Page" project_key %}" class="btn btn-primary">Create Wiki page</a>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="/p/c/{{ project_key }}/wiki/create-with-file" class="card-link">Create from file...</a>
+                    <li class="list-group-item"><a href="{% url "Create Wiki Page with file" project_key %}" class="card-link">Create from file...</a>
                     </li>
                 </ul>
             </div>
@@ -27,10 +27,10 @@
                 <div class="card-body">
                     <h5 class="card-title">Journal Page</h5>
                     <p class="card-text">Create a new page in the journal.</p>
-                    <a href="/p/c/{{ project_key }}/journal/create" class="btn btn-primary">Create Journal page</a>
+                    <a href="{% url "Create Journal Page" project_key %}" class="btn btn-primary">Create Journal page</a>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="/p/c/{{ project_key }}/journal/create-with-file" class="card-link">Create from file...</a>
+                    <li class="list-group-item"><a href="{% url "Create Journal Page with file" project_key %}" class="card-link">Create from file...</a>
                     </li>
                 </ul>
             </div>
