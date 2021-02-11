@@ -17,7 +17,42 @@
 
 {% block content %}
 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">{{ project.name }}</a></li>
+            <li class="breadcrumb-item"><a href="{% url "Project Wiki" project.key %}">Wiki</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+    </nav>
+
+    <div class="d-flex align-items-start justify-content-between pb-3 ">
+        <div class="lh-1">
+            <h2 class="display-4">Pagetitle</h2>
+            <div>
+                <a class="badge bg-secondary" href="#">label1</a>
+                <a class="badge bg-secondary" href="#">label1</a>
+                <a class="badge bg-secondary" href="#">label1</a>
+                <a class="badge bg-secondary" href="#">label1</a>
+                <a class="badge bg-secondary" href="#">label1</a>
+                <a class="badge text-dark" href="#">Edit labels...</a>
+            </div>
+        </div>
+        <div>
+            <a href="#">
+                <button class="btn btn-light"><i class="bi bi-pencil-square"></i> Edit</button>
+            </a>
+            <a href="#">
+                <button class="btn btn-light"><i class="bi bi-share-fill"></i> Share</button>
+
+            </a>
+        </div>
+    </div>
     {{ content }}
+
+{% endblock %}
+
+
+{% block additional_scripts_eob %}
     <script type="application/javascript"
             src="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.min.js" %}"></script>
 
@@ -72,4 +107,5 @@
 
         });
     </script>
+
 {% endblock %}

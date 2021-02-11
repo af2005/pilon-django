@@ -82,7 +82,7 @@ def project_view(
     context = {
         "project_key": project["key"],
         "window_title": f'{project["name"]} {title}',
-        "page_title": f'{project["name"]} {title}',
+        "page_title": f'{title}',
         "page_subtitle": "",
         "project": project,
         "sidebar_items": sidebar_items,
