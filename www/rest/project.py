@@ -10,10 +10,11 @@ def rest_handler_all(request):
     elif request.method == "POST":
 
         if request.POST["project_key"] and request.POST["project_fullname"]:
-            create_new_project(request.user,
-                               request.POST["project_key"],
-                               request.POST["project_fullname"]
-                               )
+            create_new_project(
+                request.user,
+                request.POST["project_key"],
+                request.POST["project_fullname"],
+            )
             return HttpResponseRedirect("/p/c/" + request.POST["project_key"])
         else:
             return HttpResponseBadRequest(
