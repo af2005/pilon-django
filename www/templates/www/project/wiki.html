@@ -17,7 +17,13 @@
 
 {% block content %}
 
+
     {{ content }}
+
+{% endblock %}
+
+
+{% block additional_scripts_eob %}
     <script type="application/javascript"
             src="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.min.js" %}"></script>
 
@@ -72,4 +78,5 @@
 
         });
     </script>
+
 {% endblock %}

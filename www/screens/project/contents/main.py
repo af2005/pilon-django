@@ -1,8 +1,4 @@
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
-from django.template import loader, Template
-from www.screens.snippets import forms
-from www.models import Project
 from www.screens import templates
 
 
