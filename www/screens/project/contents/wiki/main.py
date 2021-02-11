@@ -18,12 +18,22 @@ def view_content_create(request, key):
 
 
 @login_required
+def view_content_create_with_file(request, key):
+    tpl = templates.default_editor(
+        request,
+        title="Create Wiki Page with File",
+        key=key,
+    )
+    return HttpResponse(tpl)
+
+
+@login_required
 def view_wiki(request, key):
     tpl = templates.project_view(
         request,
         key,
         template_name="www/project/wiki.html",
-        title="Wiki",
+        title="",
         sidebar_items=main.sidebar_items(key),
         active_sidebar_item=6,
     )

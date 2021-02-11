@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <form action="/rest/project" method="POST" class="my-4">
+    <form action="{% url "Project API" %}" method="POST" class="my-4">
         {% csrf_token %}
         <div class="form-group row my-1"><label for="project_key" class="col-sm-2 col-form-label">Project Key</label>
             <div class="col-sm-10"><input type="text" class="form-control" id="project_key" name="project_key"></div>

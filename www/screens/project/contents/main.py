@@ -1,8 +1,4 @@
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
-from django.template import loader, Template
-from www.screens.snippets import forms
-from www.models import Project
 from www.screens import templates
 
 
@@ -20,7 +16,7 @@ def sidebar_items(key):
 
 
 def view_content_create(request, key):
-    tpl = templates.create_page_view(
+    tpl = templates.create_new_content(
         request,
         title="Create Content",
         key=key,

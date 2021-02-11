@@ -82,3 +82,7 @@ button > i.bi::before {
     height: 1em;
     vertical-align: -.2em;
 }
+:root{
+    --bs-breadcrumb-divider: ">"
+
+}
