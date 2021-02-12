@@ -1,3 +1,50 @@
-#full-calendar{
-
+@import "main.min.css";
+.fc a:not([href]).fc-col-header-cell-cushion {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6a737d !important;
+  font-weight: normal;
+  margin: 0.7rem 0;
+  font-size: 1.4vw;
 }
+
+.fc .fc-scrollgrid table.fc-col-header {
+  border-top: 1px #fafbfc solid;
+  border-bottom: 1px #fafbfc solid;
+}
+
+.fc .fc-daygrid-day {
+  border: 1px #fafbfc solid;
+}
+
+.fc .fc-daygrid-day-number {
+  padding: 0.7rem;
+  color: #6a737d !important;
+}
+
+.fc .fc-scrollgrid-section > * {
+  border-right-width: 0;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  padding: 1.5rem;
+  margin-bottom: 0;
+}
+
+.fc-day-other {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  cursor: not-allowed;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 2.25em;
+  color: #2f363d;
+}
+
+.fc .fc-header-toolbar .btn-primary {
+  color: #24292e;
+  background-color: #f6f8fa;
+  border-color: #f6f8fa;
+}
+
+/*# sourceMappingURL=custom.css.map */
