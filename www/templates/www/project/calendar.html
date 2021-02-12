@@ -14,7 +14,19 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 firstDay: 1,
-                themeSystem: 'bootstrap'
+                themeSystem: 'bootstrap',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridMonth,timeGridWeek'
+                },
+                bootstrapFontAwesome: {
+                    prev: ' bi bi-chevron-left',
+                    next: ' bi bi-chevron-right',
+                    prevYear: ' bi bi-chevron-double-left',
+                    nextYear: ' bi bi-chevron-double-right',
+                    close: 'bi bi-x'
+                }
             });
             calendar.render();
         });
@@ -30,7 +42,7 @@
 
 {% block content %}
     {{ content }}
-    <div id="full-calendar" class="mx-2 row">
+    <div id="full-calendar" class="mx-2 row shadow">
 
     </div>
 
