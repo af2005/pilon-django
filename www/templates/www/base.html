@@ -9,9 +9,8 @@
     <meta name="author" content="Pilon">
     {% block additional_assets %}{% endblock %}
 
-    {% include 'www/snippets/bootstraplibs.html' %}
+    {% include 'www/snippets/theme.html' %}
     <link rel="stylesheet" type="text/css" href="{% static 'www/font/source-sans-v14/font.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'www/custom/main.css' %}">
     {% block extrahead %}{% endblock extrahead %}
     <title>pilon - {{ window_title }}</title>
 </head>
