@@ -150,6 +150,25 @@ button > i.bi::before {
 .bg-navbar{
   background-color: $nav-bar-background;
 }
+.bg-gray{
+  background-color: $gray;
+  color: white;
+}
+
+a.bg-secondary:hover{
+  color:$gray-200;
+}
+.navbar .btn-icon{
+  color: white;
+  border: 1px $nav-bar-background solid;
+}
+.navbar .btn-icon:hover{
+  outline:0;
+  border: 1px $gray-800 solid;
+}
+.navbar .btn-icon:focus{
+  box-shadow: none;
+}
 .text-white-50 { color: rgba(255, 255, 255, .5); }
 
 .text-marine{ color: $marine!important;}
@@ -164,15 +183,9 @@ button > i.bi::before {
 .text-green{ color: $green!important;}
 .text-darkgreen{ color: $darkgreen!important;}
 .text-teal{ color: $teal!important;}
-.text-darkteal{ color: $darkteal!important;}
 .text-blue{ color: $blue!important;}
 .text-darkblue{ color: $darkblue!important;}
-.text-blue2{ color: $blue2!important;}
-.text-blue3{ color: $blue3!important;}
-.text-darkblue2{ color: $darkblue2!important;}
 .text-purple{ color: $purple!important;}
 .text-darkpurple{ color: $darkpurple!important;}
 .text-gray{ color: $gray!important;}
 .text-darkgray{ color: $darkgray!important;}
-.text-bluegray{ color: $bluegray!important;}
-.text-darkbluegray{ color: $darkbluegray!important;}

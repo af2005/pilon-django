@@ -20,31 +20,26 @@ $orange: #f66a0a !default;
 $darkorange: #c24e00 !default;
 $yellow: #ffd33d !default;
 $darkyellow: #b08800 !default;
+$teal: #6EFACC !default;
 $green: #28a745 !default;
 $darkgreen: #165c26 !default;
-$teal: #2bcbba !default;
-$darkteal: #0fb9b1 !default;
 $blue: #0366d6 !default;
-$darkblue: #2d98da !default;
-$blue2: #4979ea !default;
-$blue3: #0d6efd !default;
-$darkblue2: #104b7f !default;
-$purple: #a55eea !default;
-$darkpurple: #8854d0 !default;
-$gray: #d1d8e0 !default;
-$darkgray: #a5b1c2 !default;
-$bluegray: #778ca3 !default;
-$darkbluegray: #4b6584 !default;
+$darkblue: #032f62 !default;
+$purple: #6f42c1 !default;
+$darkpurple: #3a1d6e !default;
+$gray: #6a737d !default;
+$darkgray: #2f363d !default;
+
 
 $charcoal: #373333 !default;
 $darkcharcoal: #171111 !default;
 
 
 $primary:       $blue !default;
-$secondary:     $gray-600 !default;
-$success:       $teal !default;
+$secondary:     #ACD4FF !default;
+$success:       $green !default;
 $info:          $blue !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
 $light:         $gray-200 !default;
-$dark:          $charcoal !default;
+$dark:          $marine !default;
