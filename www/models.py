@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 from django.utils import timezone
 
+
 from polymorphic_tree.models import PolymorphicMPTTModel, PolymorphicTreeForeignKey
 
 from markdownfield.models import MarkdownField, RenderedMarkdownField
@@ -28,7 +29,11 @@ class Entity(PolymorphicMPTTModel):
 
 
 class Project(Entity):
-    key = models.CharField(max_length=20, primary_key=True)
+    key = models.CharField(
+        max_length=20,
+        unique=True,
+        primary_key=True,
+    )
 
 
 class MarkdownEntity(Entity):
