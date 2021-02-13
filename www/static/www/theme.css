@@ -5,6 +5,7 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+@import "main.min.css";
 :root {
   --bs-blue: #0366d6;
   --bs-indigo: #6610f2;
@@ -10806,6 +10807,11 @@ a.bg-secondary:hover {
   box-shadow: none;
 }
 
+.badge-secondary {
+  background-color: #ACD4FF;
+  color: #24292e;
+}
+
 .text-white-50 {
   color: rgba(255, 255, 255, 0.5);
 }
@@ -10885,24 +10891,24 @@ a.bg-secondary:hover {
 .fc a:not([href]).fc-col-header-cell-cushion {
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: gray !important;
+  color: #6a737d !important;
   font-weight: normal;
   margin: 0.7rem 0;
   font-size: 1.4vw;
 }
 
 .fc .fc-scrollgrid table.fc-col-header {
-  border-top: 1px gainsboro solid;
-  border-bottom: 1px gainsboro solid;
+  border-top: 1px #fafbfc solid;
+  border-bottom: 1px #fafbfc solid;
 }
 
 .fc .fc-daygrid-day {
-  border: 1px gainsboro solid;
+  border: 1px #fafbfc solid;
 }
 
 .fc .fc-daygrid-day-number {
   padding: 0.7rem;
-  color: gray !important;
+  color: #6a737d !important;
 }
 
 .fc .fc-scrollgrid-section > * {
@@ -10921,7 +10927,7 @@ a.bg-secondary:hover {
 
 .fc .fc-toolbar-title {
   font-size: 2.25em;
-  color: #1b1f23;
+  color: #2f363d;
 }
 
 .fc .fc-header-toolbar .btn-primary {

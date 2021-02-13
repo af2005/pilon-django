@@ -169,6 +169,12 @@ a.bg-secondary:hover{
 .navbar .btn-icon:focus{
   box-shadow: none;
 }
+
+.badge-secondary{
+  background-color: $secondary;
+  color: $black;
+}
+
 .text-white-50 { color: rgba(255, 255, 255, .5); }
 
 .text-marine{ color: $marine!important;}
