@@ -21,6 +21,7 @@ titlecase = "^2.0.0"
 Faker = "^6.1.1"
 django-markdownfield = "^0.8.0"
 django-mptt = "^0.11.0"
+django-polymorphic-tree = "^1.5.1"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
