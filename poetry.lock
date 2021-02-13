@@ -150,6 +150,39 @@ Django = ">=1.11"
 django-js-asset = "*"
 
 [[package]]
+name = "django-polymorphic"
+version = "3.0.0"
+description = "Seamless polymorphic inheritance for Django models"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+Django = ">=2.1"
+
+[[package]]
+name = "django-polymorphic-tree"
+version = "1.5.1"
+description = "A polymorphic mptt structure to display content in a tree."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django-mptt = ">=0.8.0"
+django-polymorphic = ">=1.3"
+django-tag-parser = ">=2.1"
+future = ">=0.12.2"
+
+[[package]]
+name = "django-tag-parser"
+version = "3.2"
+description = "Micro-library to easily write custom Django template tags"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "django-todo"
 version = "2.4.9"
 description = "A multi-user, multi-group task management and assignment system for Django."
@@ -194,6 +227,14 @@ python-versions = ">=3.6"
 [package.dependencies]
 python-dateutil = ">=2.4"
 text-unidecode = "1.3"
+
+[[package]]
+name = "future"
+version = "0.18.2"
+description = "Clean single-source support for Python 3 and 2"
+category = "main"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
 name = "gunicorn"
@@ -439,7 +480,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "7a0f8fd38f1995235a1a345c94d14ca47e773dff0e964b2da7f6f6b8ca0f31d3"
+content-hash = "fef443822c3bb4402cd5297c944ffef1b728310970ee592f671f761c3331854e"
 
 [metadata.files]
 appdirs = [
@@ -493,6 +534,18 @@ django-mptt = [
     {file = "django-mptt-0.11.0.tar.gz", hash = "sha256:dfdb3af75ad27cdd4458b0544ec8574174f2b90f99bc2cafab6a15b4bc1895a8"},
     {file = "django_mptt-0.11.0-py2.py3-none-any.whl", hash = "sha256:90eb236eb4f1a92124bd7c37852bbe09c0d21158477cc237556d59842a91c509"},
 ]
+django-polymorphic = [
+    {file = "django-polymorphic-3.0.0.tar.gz", hash = "sha256:9d886f19f031d26bb1391c055ed9be06fb226a04a4cec1842b372c58873b3caa"},
+    {file = "django_polymorphic-3.0.0-py2.py3-none-any.whl", hash = "sha256:73b75eb44ea302bd32820f8661e469509d245ce7f7ff09cd2ad149e5c42034ff"},
+]
+django-polymorphic-tree = [
+    {file = "django-polymorphic-tree-1.5.1.tar.gz", hash = "sha256:0d113886d88c31c68a304c8ae7e9af8493b177e12cc431f8135645408c9de58c"},
+    {file = "django_polymorphic_tree-1.5.1-py2.py3-none-any.whl", hash = "sha256:270388a711d43d0813af78cd8d702958eeb33d63e3948d93b40a78d43f879852"},
+]
+django-tag-parser = [
+    {file = "django-tag-parser-3.2.tar.gz", hash = "sha256:903cd4bf3692c8c060770ca2b9d6e74e4ee52d6078308852acffe1ef4a49e0f7"},
+    {file = "django_tag_parser-3.2-py2.py3-none-any.whl", hash = "sha256:92e5da35d8774a6ab4e0ac0b3b2229b8a0b78a61c5a3b0fd159255f0a66c08d7"},
+]
 django-todo = [
     {file = "django-todo-2.4.9.tar.gz", hash = "sha256:868bc658c28d50a0d828a2d5ba9e7aba2fe63d5028759bd59b7fd6f01ef96113"},
 ]
@@ -506,6 +559,9 @@ factory-boy = [
 faker = [
     {file = "Faker-6.1.1-py3-none-any.whl", hash = "sha256:bf2a9b3f8d00a5dada61fc4a3f80fe0d6795c7f02a138a7d2ef2db5817c7d017"},
     {file = "Faker-6.1.1.tar.gz", hash = "sha256:d4aecdb877519d06c2fdc01ffc5ecf70658981acf5e13cd07ded9892994ef5c6"},
+]
+future = [
+    {file = "future-0.18.2.tar.gz", hash = "sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"},
 ]
 gunicorn = [
     {file = "gunicorn-20.0.4-py2.py3-none-any.whl", hash = "sha256:cd4a810dd51bf497552cf3f863b575dabd73d6ad6a91075b65936b151cbf4f9c"},

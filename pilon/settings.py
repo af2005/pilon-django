@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "www.apps.WwwConfig",
     "todo",
     "django_extensions",
+    "polymorphic_tree",
+    "polymorphic",
     "mptt",
 ]
 

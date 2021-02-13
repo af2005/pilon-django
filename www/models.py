@@ -2,31 +2,29 @@ import uuid
 
 from django.db import models
 from django.contrib.auth.models import User, Group
+from django.utils import timezone
 
-from mptt.models import MPTTModel, TreeForeignKey
+from polymorphic_tree.models import PolymorphicMPTTModel, PolymorphicTreeForeignKey
 
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_STANDARD
 
-from datetime import datetime
 
-
-class Entity(MPTTModel):
+class Entity(PolymorphicMPTTModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
-    parent = TreeForeignKey(
+    parent = PolymorphicTreeForeignKey(
         "self", on_delete=models.CASCADE, null=True, blank=True, related_name="children"
     )
-    date_created = models.DateTimeField(default=datetime.now)
-    date_modified = models.DateTimeField(default=datetime.now)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="creator")
+    date_created = models.DateTimeField(default=timezone.now)
+    date_modified = models.DateTimeField(default=timezone.now)
+    creator = models.ForeignKey(
+        User, on_delete=models.SET_NULL, related_name="creator", null=True, default=None
+    )
 
-    class MPTTMeta:
-        order_insertion_by = ["name"]
-
-
-class Child(Entity):
-    space_key = models.CharField(max_length=20)
+    class Meta(PolymorphicMPTTModel.Meta):
+        verbose_name = "Tree node"
+        verbose_name_plural = "Tree nodes"
 
 
 class Project(Entity):
@@ -52,13 +50,13 @@ class WikiPage(MarkdownEntity):
 
 
 class JournalPage(MarkdownEntity):
-    date = models.DateTimeField()
+    date = models.DateTimeField(default=timezone.now)
 
 
 class Task(MarkdownEntity):
-    due_date = models.DateTimeField()
+    due_date = models.DateTimeField(null=True)
     assignee = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="Assignee"
+        User, null=True, on_delete=models.SET_NULL, related_name="Assignee"
     )
     content = models.TextField()
 
