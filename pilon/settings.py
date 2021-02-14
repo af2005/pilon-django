@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "polymorphic_tree",
     "polymorphic",
     "mptt",
+    "markdownfield",
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 
 WSGI_APPLICATION = "pilon.wsgi.application"
@@ -131,11 +131,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-
-STATIC_ROOT = 'www/static'
-STATIC_URL = '/static/'
-MEDIA_ROOT = 'media'
-MEDIA_URL = '/media/'
+STATIC_ROOT = "www/static"
+STATIC_URL = "/static/"
+MEDIA_ROOT = "media"
+MEDIA_URL = "/media/"
 
 LOGIN_URL = "/accounts/login"
 LOGIN_REDIRECT_URL = "/"

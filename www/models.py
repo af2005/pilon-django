@@ -3,7 +3,7 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.utils import timezone
-
+from django.utils.translation import ugettext_lazy as _
 
 from polymorphic_tree.models import PolymorphicMPTTModel, PolymorphicTreeForeignKey
 
@@ -12,6 +12,15 @@ from markdownfield.validators import VALIDATOR_STANDARD
 
 
 class Entity(PolymorphicMPTTModel):
+    #: Whether the node type allows to have children.
+    can_have_children = True
+
+    #: Whether the node type can be a root node.
+    can_be_root = True
+
+    #: Allowed child types for this page.
+    child_types = []
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     parent = PolymorphicTreeForeignKey(
@@ -24,8 +33,8 @@ class Entity(PolymorphicMPTTModel):
     )
 
     class Meta(PolymorphicMPTTModel.Meta):
-        verbose_name = "Tree node"
-        verbose_name_plural = "Tree nodes"
+        verbose_name = _("Entity")
+        verbose_name_plural = _("Entities")
 
 
 class Project(Entity):
@@ -34,6 +43,10 @@ class Project(Entity):
         unique=True,
         primary_key=True,
     )
+
+    class Meta(PolymorphicMPTTModel.Meta):
+        verbose_name = _("Project")
+        verbose_name_plural = _("Projects")
 
 
 class MarkdownEntity(Entity):
@@ -51,7 +64,9 @@ class MarkdownEntity(Entity):
 
 
 class WikiPage(MarkdownEntity):
-    pass
+    class Meta(PolymorphicMPTTModel.Meta):
+        verbose_name = _("Wiki Page")
+        verbose_name_plural = _("Wiki Pages")
 
 
 class JournalPage(MarkdownEntity):
