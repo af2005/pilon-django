@@ -57,7 +57,6 @@ class EntityParentAdmin(PolymorphicMPTTParentModelAdmin):
     list_display = (
         "name",
     )
-    # list_display = ()
 
     class Media:
         css = {"all": ("admin/treenode/admin.css",)}

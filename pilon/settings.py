@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "polymorphic",
     "mptt",
     "markdownfield",
+    "reversion",
 ]
 
 MIDDLEWARE = [
