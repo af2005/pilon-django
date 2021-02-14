@@ -1,5 +1,17 @@
+run:
+	poetry run python manage.py runserver
+
 test:
 	poetry run python manage.py test
 
 black:
 	poetry run black .
+
+reset_db:
+	poetry run python manage.py reset_db
+
+migrate:
+	poetry run python manage.py migrate
+
+migrations:
+	poetry run python manage.py makemigrations

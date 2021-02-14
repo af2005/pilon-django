@@ -4,14 +4,49 @@ from www.screens import templates
 
 def sidebar_items(key):
     return [
-        {"name": "Homepage", "url": f"/p/c/{key}", "icon": "house", "color":"primary"},
-        {"name": "Team", "url": f"/p/c/{key}/team", "icon": "people-fill", "color":"darkorange"},
-        {"name": "Chat", "url": f"/p/c/{key}/chat", "icon": "envelope", "color": "darkred"},
-        {"name": "Tasks", "url": f"/p/c/{key}/tasks", "icon": "check2-circle", "color":"indigo"},
-        {"name": "Calendar", "url": f"/p/c/{key}/calendar", "icon": "calendar3", "color":"pink"},
-        {"name": "Inventory", "url": f"/p/c/{key}/inventory", "icon": "archive", "color":"blue2"},
-        {"name": "Wiki", "url": f"/p/c/{key}/wiki", "icon": "file-text", "color":"darkred"},
-        {"name": "Journal", "url": f"/p/c/{key}/journal", "icon": "journals", "color":"darkteal"},
+        {"name": "Homepage", "url": f"/p/c/{key}", "icon": "house", "color": "primary"},
+        {
+            "name": "Team",
+            "url": f"/p/c/{key}/team",
+            "icon": "people-fill",
+            "color": "darkorange",
+        },
+        {
+            "name": "Chat",
+            "url": f"/p/c/{key}/chat",
+            "icon": "envelope",
+            "color": "darkred",
+        },
+        {
+            "name": "Tasks",
+            "url": f"/p/c/{key}/tasks",
+            "icon": "check2-circle",
+            "color": "indigo",
+        },
+        {
+            "name": "Calendar",
+            "url": f"/p/c/{key}/calendar",
+            "icon": "calendar3",
+            "color": "pink",
+        },
+        {
+            "name": "Inventory",
+            "url": f"/p/c/{key}/inventory",
+            "icon": "archive",
+            "color": "blue2",
+        },
+        {
+            "name": "Wiki",
+            "url": f"/p/c/{key}/wiki",
+            "icon": "file-text",
+            "color": "darkred",
+        },
+        {
+            "name": "Journal",
+            "url": f"/p/c/{key}/journal",
+            "icon": "journals",
+            "color": "darkteal",
+        },
     ]
 
 
