@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.staticfiles",
     "www.apps.WwwConfig",
-    "todo",
     "django_extensions",
     "polymorphic_tree",
     "polymorphic",
@@ -141,8 +140,3 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = LOGIN_URL
 PUBLIC_URLS = ["/dashboard/all-updates"]
 
-# TODO-specific settings
-TODO_STAFF_ONLY = False
-TODO_DEFAULT_LIST_SLUG = "tickets"
-TODO_DEFAULT_ASSIGNEE = None
-TODO_PUBLIC_SUBMIT_REDIRECT = "/"
