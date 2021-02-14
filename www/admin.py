@@ -17,6 +17,7 @@ from .models import (
 
 # The common admin functionality for all derived models:
 
+
 class BaseChildAdmin(PolymorphicMPTTChildModelAdmin):
     GENERAL_FIELDSET = (
         None,
@@ -54,9 +55,7 @@ class EntityParentAdmin(PolymorphicMPTTParentModelAdmin):
         Attachment,
     )
 
-    list_display = (
-        "name",
-    )
+    list_display = ("name",)
 
     class Media:
         css = {"all": ("admin/treenode/admin.css",)}

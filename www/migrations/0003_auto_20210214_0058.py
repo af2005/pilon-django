@@ -6,20 +6,35 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('www', '0002_populate'),
+        ("www", "0002_populate"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='entity',
-            options={'base_manager_name': 'objects', 'ordering': ('tree_id', 'lft'), 'verbose_name': 'Entity', 'verbose_name_plural': 'Entities'},
+            name="entity",
+            options={
+                "base_manager_name": "objects",
+                "ordering": ("tree_id", "lft"),
+                "verbose_name": "Entity",
+                "verbose_name_plural": "Entities",
+            },
         ),
         migrations.AlterModelOptions(
-            name='project',
-            options={'base_manager_name': 'objects', 'ordering': ('tree_id', 'lft'), 'verbose_name': 'Project', 'verbose_name_plural': 'Projects'},
+            name="project",
+            options={
+                "base_manager_name": "objects",
+                "ordering": ("tree_id", "lft"),
+                "verbose_name": "Project",
+                "verbose_name_plural": "Projects",
+            },
         ),
         migrations.AlterModelOptions(
-            name='wikipage',
-            options={'base_manager_name': 'objects', 'ordering': ('tree_id', 'lft'), 'verbose_name': 'Wiki Page', 'verbose_name_plural': 'Wiki Pages'},
+            name="wikipage",
+            options={
+                "base_manager_name": "objects",
+                "ordering": ("tree_id", "lft"),
+                "verbose_name": "Wiki Page",
+                "verbose_name_plural": "Wiki Pages",
+            },
         ),
     ]

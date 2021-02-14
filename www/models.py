@@ -39,6 +39,7 @@ class Entity(PolymorphicMPTTModel):
         verbose_name = _("Entity")
         verbose_name_plural = _("Entities")
 
+
 @reversion.register()
 class Project(Entity):
     key = models.CharField(
@@ -50,6 +51,7 @@ class Project(Entity):
     class Meta(PolymorphicMPTTModel.Meta):
         verbose_name = _("Project")
         verbose_name_plural = _("Projects")
+
 
 @reversion.register()
 class MarkdownEntity(Entity):
@@ -65,15 +67,18 @@ class MarkdownEntity(Entity):
     def repr(self):
         return {"id": self.id}
 
+
 @reversion.register()
 class WikiPage(MarkdownEntity):
     class Meta(PolymorphicMPTTModel.Meta):
         verbose_name = _("Wiki Page")
         verbose_name_plural = _("Wiki Pages")
 
+
 @reversion.register()
 class JournalPage(MarkdownEntity):
     date = models.DateTimeField(default=timezone.now)
+
 
 @reversion.register()
 class Task(MarkdownEntity):
@@ -83,9 +88,11 @@ class Task(MarkdownEntity):
     )
     content = models.TextField()
 
+
 @reversion.register()
 class Comment(MarkdownEntity):
     pass
+
 
 @reversion.register()
 class Attachment(Entity):
