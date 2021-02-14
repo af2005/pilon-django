@@ -55,7 +55,7 @@ class EntityParentAdmin(PolymorphicMPTTParentModelAdmin):
         Attachment,
     )
 
-    list_display = ("name",)
+    # list_display = ("name",)
 
     class Media:
         css = {"all": ("admin/treenode/admin.css",)}
@@ -66,12 +66,3 @@ admin.site.register(
     BaseChildAdmin,
 )
 admin.site.register(Entity, EntityParentAdmin)
-
-# admin.site.register(models.Entity, EntityParentAdmin)
-
-
-# Register your models here.
-# models = (Entity, Project, WikiPage, MarkdownEntity, JournalPage, Comment, Task, Attachment)
-
-# for model in models:
-#    admin.site.register(model)
