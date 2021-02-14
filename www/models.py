@@ -10,13 +10,16 @@ from polymorphic_tree.models import PolymorphicMPTTModel, PolymorphicTreeForeign
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_STANDARD
 
+import reversion
 
+
+@reversion.register()
 class Entity(PolymorphicMPTTModel):
     #: Whether the node type allows to have children.
     can_have_children = True
 
     #: Whether the node type can be a root node.
-    can_be_root = True
+    can_be_root = False
 
     #: Allowed child types for this page.
     child_types = []
@@ -29,19 +32,24 @@ class Entity(PolymorphicMPTTModel):
     date_created = models.DateTimeField(default=timezone.now)
     date_modified = models.DateTimeField(default=timezone.now)
     creator = models.ForeignKey(
-        User, on_delete=models.SET_NULL, related_name="creator", null=True, default=None
+        User, on_delete=models.SET_NULL, related_name="creator", null=True, default=None, blank=True,
     )
 
     class Meta(PolymorphicMPTTModel.Meta):
         verbose_name = _("Entity")
         verbose_name_plural = _("Entities")
 
+    def repr(self):
+        return {"id": self.id}
 
+
+@reversion.register(follow=["entity_ptr"])
 class Project(Entity):
+    can_be_root = True
+
     key = models.CharField(
         max_length=20,
         unique=True,
-        primary_key=True,
     )
 
     class Meta(PolymorphicMPTTModel.Meta):
@@ -49,6 +57,7 @@ class Project(Entity):
         verbose_name_plural = _("Projects")
 
 
+@reversion.register(follow=["entity_ptr"])
 class MarkdownEntity(Entity):
     markdown = MarkdownField(
         default="",
@@ -56,35 +65,46 @@ class MarkdownEntity(Entity):
         validator=VALIDATOR_STANDARD,
         use_editor=False,
         use_admin_editor=True,
+        blank=True,
     )
     markdown_rendered = RenderedMarkdownField(default="")
 
-    def repr(self):
-        return {"id": self.id}
 
-
+@reversion.register(follow=["markdownentity_ptr"])
 class WikiPage(MarkdownEntity):
+    can_be_root = True
+
     class Meta(PolymorphicMPTTModel.Meta):
         verbose_name = _("Wiki Page")
         verbose_name_plural = _("Wiki Pages")
 
 
+@reversion.register(follow=["markdownentity_ptr"])
 class JournalPage(MarkdownEntity):
+    child_types = ["Task", "Comment", "Attachment"]
+
     date = models.DateTimeField(default=timezone.now)
 
 
+@reversion.register(follow=["markdownentity_ptr"])
 class Task(MarkdownEntity):
+    can_have_children = True
+    child_types = ["Task", "Comment", "Attachment"]
+
     due_date = models.DateTimeField(null=True)
     assignee = models.ForeignKey(
-        User, null=True, on_delete=models.SET_NULL, related_name="Assignee"
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name="Assignee"
     )
     content = models.TextField()
 
 
+@reversion.register(follow=["markdownentity_ptr"])
 class Comment(MarkdownEntity):
-    pass
+    can_have_children = True
+    child_types = ["Comment", "Attachment"]
 
 
+@reversion.register(follow=["entity_ptr"])
 class Attachment(Entity):
     RENDERABLE_FILE_TYPES = (
         "png",
