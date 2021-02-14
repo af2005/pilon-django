@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.staticfiles",
     "www.apps.WwwConfig",
-    "todo",
     "django_extensions",
     "polymorphic_tree",
     "polymorphic",
