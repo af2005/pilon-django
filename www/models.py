@@ -10,7 +10,10 @@ from polymorphic_tree.models import PolymorphicMPTTModel, PolymorphicTreeForeign
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_STANDARD
 
+import reversion
 
+
+@reversion.register()
 class Entity(PolymorphicMPTTModel):
     #: Whether the node type allows to have children.
     can_have_children = True
@@ -36,7 +39,7 @@ class Entity(PolymorphicMPTTModel):
         verbose_name = _("Entity")
         verbose_name_plural = _("Entities")
 
-
+@reversion.register()
 class Project(Entity):
     key = models.CharField(
         max_length=20,
@@ -48,7 +51,7 @@ class Project(Entity):
         verbose_name = _("Project")
         verbose_name_plural = _("Projects")
 
-
+@reversion.register()
 class MarkdownEntity(Entity):
     markdown = MarkdownField(
         default="",
@@ -62,17 +65,17 @@ class MarkdownEntity(Entity):
     def repr(self):
         return {"id": self.id}
 
-
+@reversion.register()
 class WikiPage(MarkdownEntity):
     class Meta(PolymorphicMPTTModel.Meta):
         verbose_name = _("Wiki Page")
         verbose_name_plural = _("Wiki Pages")
 
-
+@reversion.register()
 class JournalPage(MarkdownEntity):
     date = models.DateTimeField(default=timezone.now)
 
-
+@reversion.register()
 class Task(MarkdownEntity):
     due_date = models.DateTimeField(null=True)
     assignee = models.ForeignKey(
@@ -80,11 +83,11 @@ class Task(MarkdownEntity):
     )
     content = models.TextField()
 
-
+@reversion.register()
 class Comment(MarkdownEntity):
     pass
 
-
+@reversion.register()
 class Attachment(Entity):
     RENDERABLE_FILE_TYPES = (
         "png",
