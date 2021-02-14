@@ -1,4 +1,5 @@
 from django.db import transaction
+from django.core.management import call_command
 from www.models import Project, WikiPage, JournalPage, Comment, User, Group, Entity
 
 
@@ -25,6 +26,9 @@ def populate_db(apps, schema_editor):
         journal.save()
         WikiPage(name="Orphaned Page", creator=test_user).save()
         Comment(name="First Comment", parent=journal).save()
+
+        call_command("createinitialrevisions")
+
 
 
 def depopulate_db():
