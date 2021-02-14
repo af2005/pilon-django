@@ -91,6 +91,14 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
+name = "diff-match-patch"
+version = "20200713"
+description = "Repackaging of Google's Diff Match and Patch libraries. Offers robust algorithms to perform the operations required for synchronizing plain text."
+category = "main"
+optional = false
+python-versions = ">=2.7"
+
+[[package]]
 name = "django"
 version = "3.1.6"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
@@ -184,6 +192,18 @@ python-versions = ">=3.6"
 
 [package.dependencies]
 django = ">=1.11"
+
+[[package]]
+name = "django-reversion-compare"
+version = "0.13.1"
+description = "history compare for django-reversion"
+category = "main"
+optional = false
+python-versions = ">=3.7,<4.0.0"
+
+[package.dependencies]
+diff-match-patch = "*"
+django-reversion = "*"
 
 [[package]]
 name = "django-tag-parser"
@@ -491,7 +511,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "84fa791fc08958b5fbce54715ae00d1e22cf5b9f877f52f3ca6b22317d8d5ed0"
+content-hash = "57bc4c80e1d86ca390280f22ebb2aecf932aa487c1e0974679ad614b7dd3eeb8"
 
 [metadata.files]
 appdirs = [
@@ -525,6 +545,10 @@ colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
     {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
 ]
+diff-match-patch = [
+    {file = "diff-match-patch-20200713.tar.gz", hash = "sha256:da6f5a01aa586df23dfc89f3827e1cafbb5420be9d87769eeb079ddfd9477a18"},
+    {file = "diff_match_patch-20200713-py3-none-any.whl", hash = "sha256:8bf9d9c4e059d917b5c6312bac0c137971a32815ddbda9c682b949f2986b4d34"},
+]
 django = [
     {file = "Django-3.1.6-py3-none-any.whl", hash = "sha256:169e2e7b4839a7910b393eec127fd7cbae62e80fa55f89c6510426abf673fe5f"},
     {file = "Django-3.1.6.tar.gz", hash = "sha256:c6c0462b8b361f8691171af1fb87eceb4442da28477e12200c40420176206ba7"},
@@ -556,6 +580,10 @@ django-polymorphic-tree = [
 django-reversion = [
     {file = "django-reversion-3.0.9.tar.gz", hash = "sha256:a5af55f086a3f9c38be2f049c251e06005b9ed48ba7a109473736b1fc95a066f"},
     {file = "django_reversion-3.0.9-py3-none-any.whl", hash = "sha256:1b57127a136b969f4b843a915c72af271febe7f336469db6c27121f8adcad35c"},
+]
+django-reversion-compare = [
+    {file = "django-reversion-compare-0.13.1.tar.gz", hash = "sha256:3966e4e353c02a0a26646df01b5ce62806c3db9f7642142dc03efe3af0783901"},
+    {file = "django_reversion_compare-0.13.1-py3-none-any.whl", hash = "sha256:ffc684be41b90021d6b59fe302e20c1999196c4dc80f06e51e59123c4a2109a5"},
 ]
 django-tag-parser = [
     {file = "django-tag-parser-3.2.tar.gz", hash = "sha256:903cd4bf3692c8c060770ca2b9d6e74e4ee52d6078308852acffe1ef4a49e0f7"},

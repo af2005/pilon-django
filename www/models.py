@@ -32,7 +32,7 @@ class Entity(PolymorphicMPTTModel):
     date_created = models.DateTimeField(default=timezone.now)
     date_modified = models.DateTimeField(default=timezone.now)
     creator = models.ForeignKey(
-        User, on_delete=models.SET_NULL, related_name="creator", null=True, default=None
+        User, on_delete=models.SET_NULL, related_name="creator", null=True, default=None, blank=True,
     )
 
     class Meta(PolymorphicMPTTModel.Meta):
@@ -50,7 +50,6 @@ class Project(Entity):
     key = models.CharField(
         max_length=20,
         unique=True,
-        primary_key=True,
     )
 
     class Meta(PolymorphicMPTTModel.Meta):
@@ -66,7 +65,7 @@ class MarkdownEntity(Entity):
         validator=VALIDATOR_STANDARD,
         use_editor=False,
         use_admin_editor=True,
-        blank=True
+        blank=True,
     )
     markdown_rendered = RenderedMarkdownField(default="")
 

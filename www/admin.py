@@ -4,6 +4,8 @@ from polymorphic_tree.admin import (
     PolymorphicMPTTChildModelAdmin,
 )
 from reversion.admin import VersionAdmin
+from reversion_compare.admin import CompareVersionAdmin
+
 from .models import (
     Entity,
     Project,
@@ -19,8 +21,8 @@ from .models import (
 # The common admin functionality for all derived models:
 
 
-class BaseChildAdmin(PolymorphicMPTTChildModelAdmin, VersionAdmin):
-    object_history_template = "admin/polymorphic/object_history.html"
+class BaseChildAdmin(CompareVersionAdmin,PolymorphicMPTTChildModelAdmin, ):
+    #object_history_template = "admin/polymorphic/object_history.html"
     GENERAL_FIELDSET = (
         None,
         {
@@ -45,8 +47,8 @@ class MarkdownEntityAdmin(BaseChildAdmin):
 # Create the parent admin that combines it all:
 
 
-class EntityParentAdmin(VersionAdmin, PolymorphicMPTTParentModelAdmin):
-    object_history_template = "admin/polymorphic/object_history.html"
+class EntityParentAdmin(CompareVersionAdmin, PolymorphicMPTTParentModelAdmin):
+    #object_history_template = "admin/polymorphic/object_history.html"
     base_model = Entity
     child_models = (
         Project,
@@ -62,6 +64,11 @@ class EntityParentAdmin(VersionAdmin, PolymorphicMPTTParentModelAdmin):
 
     class Media:
         css = {"all": ("admin/treenode/admin.css",)}
+
+    def compare_view(self, request, object_id, extra_context=None):
+        """Redirect the reversion-compare view to the child admin."""
+        real_admin = self._get_real_admin(object_id)
+        return real_admin.compare_view(request, object_id, extra_context=extra_context)
 
 
 admin.site.register(
