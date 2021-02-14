@@ -27,7 +27,7 @@ def populate_db(apps, schema_editor):
         WikiPage(name="Orphaned Page", creator=test_user).save()
         Comment(name="First Comment", parent=journal).save()
 
-        call_command("createinitialrevisions")
+    call_command("createinitialrevisions")
 
 
 def depopulate_db():
