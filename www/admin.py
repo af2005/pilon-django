@@ -3,6 +3,7 @@ from polymorphic_tree.admin import (
     PolymorphicMPTTParentModelAdmin,
     PolymorphicMPTTChildModelAdmin,
 )
+from reversion.admin import VersionAdmin
 from .models import (
     Entity,
     Project,
@@ -18,7 +19,8 @@ from .models import (
 # The common admin functionality for all derived models:
 
 
-class BaseChildAdmin(PolymorphicMPTTChildModelAdmin):
+class BaseChildAdmin(PolymorphicMPTTChildModelAdmin, VersionAdmin):
+    object_history_template = "admin/polymorphic/object_history.html"
     GENERAL_FIELDSET = (
         None,
         {
@@ -43,7 +45,8 @@ class MarkdownEntityAdmin(BaseChildAdmin):
 # Create the parent admin that combines it all:
 
 
-class EntityParentAdmin(PolymorphicMPTTParentModelAdmin):
+class EntityParentAdmin(VersionAdmin, PolymorphicMPTTParentModelAdmin):
+    object_history_template = "admin/polymorphic/object_history.html"
     base_model = Entity
     child_models = (
         Project,

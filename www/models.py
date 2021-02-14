@@ -43,7 +43,7 @@ class Entity(PolymorphicMPTTModel):
         return {"id": self.id}
 
 
-@reversion.register()
+@reversion.register(follow=["entity_ptr"])
 class Project(Entity):
     can_be_root = True
 
@@ -58,7 +58,7 @@ class Project(Entity):
         verbose_name_plural = _("Projects")
 
 
-@reversion.register()
+@reversion.register(follow=["entity_ptr"])
 class MarkdownEntity(Entity):
     markdown = MarkdownField(
         default="",
@@ -71,7 +71,7 @@ class MarkdownEntity(Entity):
     markdown_rendered = RenderedMarkdownField(default="")
 
 
-@reversion.register()
+@reversion.register(follow=["markdownentity_ptr"])
 class WikiPage(MarkdownEntity):
     can_be_root = True
 
@@ -80,14 +80,14 @@ class WikiPage(MarkdownEntity):
         verbose_name_plural = _("Wiki Pages")
 
 
-@reversion.register()
+@reversion.register(follow=["markdownentity_ptr"])
 class JournalPage(MarkdownEntity):
     child_types = ["Task", "Comment", "Attachment"]
 
     date = models.DateTimeField(default=timezone.now)
 
 
-@reversion.register()
+@reversion.register(follow=["markdownentity_ptr"])
 class Task(MarkdownEntity):
     can_have_children = True
     child_types = ["Task", "Comment", "Attachment"]
@@ -99,13 +99,13 @@ class Task(MarkdownEntity):
     content = models.TextField()
 
 
-@reversion.register()
+@reversion.register(follow=["markdownentity_ptr"])
 class Comment(MarkdownEntity):
     can_have_children = True
     child_types = ["Comment", "Attachment"]
 
 
-@reversion.register()
+@reversion.register(follow=["entity_ptr"])
 class Attachment(Entity):
     RENDERABLE_FILE_TYPES = (
         "png",
