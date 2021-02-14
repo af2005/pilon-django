@@ -19,7 +19,7 @@ class Entity(PolymorphicMPTTModel):
     can_have_children = True
 
     #: Whether the node type can be a root node.
-    can_be_root = True
+    can_be_root = False
 
     #: Allowed child types for this page.
     child_types = []
@@ -39,9 +39,14 @@ class Entity(PolymorphicMPTTModel):
         verbose_name = _("Entity")
         verbose_name_plural = _("Entities")
 
+    def repr(self):
+        return {"id": self.id}
+
 
 @reversion.register()
 class Project(Entity):
+    can_be_root = True
+
     key = models.CharField(
         max_length=20,
         unique=True,
@@ -61,15 +66,15 @@ class MarkdownEntity(Entity):
         validator=VALIDATOR_STANDARD,
         use_editor=False,
         use_admin_editor=True,
+        blank=True
     )
     markdown_rendered = RenderedMarkdownField(default="")
-
-    def repr(self):
-        return {"id": self.id}
 
 
 @reversion.register()
 class WikiPage(MarkdownEntity):
+    can_be_root = True
+
     class Meta(PolymorphicMPTTModel.Meta):
         verbose_name = _("Wiki Page")
         verbose_name_plural = _("Wiki Pages")
@@ -77,21 +82,27 @@ class WikiPage(MarkdownEntity):
 
 @reversion.register()
 class JournalPage(MarkdownEntity):
+    child_types = ["Task", "Comment", "Attachment"]
+
     date = models.DateTimeField(default=timezone.now)
 
 
 @reversion.register()
 class Task(MarkdownEntity):
+    can_have_children = True
+    child_types = ["Task", "Comment", "Attachment"]
+
     due_date = models.DateTimeField(null=True)
     assignee = models.ForeignKey(
-        User, null=True, on_delete=models.SET_NULL, related_name="Assignee"
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name="Assignee"
     )
     content = models.TextField()
 
 
 @reversion.register()
 class Comment(MarkdownEntity):
-    pass
+    can_have_children = True
+    child_types = ["Comment", "Attachment"]
 
 
 @reversion.register()
