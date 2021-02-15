@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     "mptt",
     "markdownfield",
     "schedule",
+    "reversion",  # https://github.com/etianen/django-reversion
+    "reversion_compare",  # https://github.com/jedie/django-reversion-compare
 ]
 
 MIDDLEWARE = [
@@ -57,6 +59,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "reversion.middleware.RevisionMiddleware",
 ]
 
 ROOT_URLCONF = "pilon.urls"
@@ -135,6 +138,14 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = LOGIN_URL
 PUBLIC_URLS = ["/dashboard/all-updates"]
 
+# TODO-specific settings
+TODO_STAFF_ONLY = False
+TODO_DEFAULT_LIST_SLUG = "tickets"
+TODO_DEFAULT_ASSIGNEE = None
+TODO_PUBLIC_SUBMIT_REDIRECT = "/"
+
+# Reversion
+ADD_REVERSION_ADMIN=True
 
 #Calendar
 FIRST_DAY_OF_WEEK=1

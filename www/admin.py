@@ -3,6 +3,9 @@ from polymorphic_tree.admin import (
     PolymorphicMPTTParentModelAdmin,
     PolymorphicMPTTChildModelAdmin,
 )
+from reversion.admin import VersionAdmin
+from reversion_compare.admin import CompareVersionAdmin
+
 from .models import (
     Entity,
     Project,
@@ -17,7 +20,9 @@ from .models import (
 
 # The common admin functionality for all derived models:
 
-class BaseChildAdmin(PolymorphicMPTTChildModelAdmin):
+
+class BaseChildAdmin(CompareVersionAdmin,PolymorphicMPTTChildModelAdmin, ):
+    #object_history_template = "admin/polymorphic/object_history.html"
     GENERAL_FIELDSET = (
         None,
         {
@@ -42,7 +47,8 @@ class MarkdownEntityAdmin(BaseChildAdmin):
 # Create the parent admin that combines it all:
 
 
-class EntityParentAdmin(PolymorphicMPTTParentModelAdmin):
+class EntityParentAdmin(CompareVersionAdmin, PolymorphicMPTTParentModelAdmin):
+    #object_history_template = "admin/polymorphic/object_history.html"
     base_model = Entity
     child_models = (
         Project,
@@ -54,13 +60,15 @@ class EntityParentAdmin(PolymorphicMPTTParentModelAdmin):
         Attachment,
     )
 
-    list_display = (
-        "name",
-    )
-    # list_display = ()
+    # list_display = ("name",)
 
     class Media:
         css = {"all": ("admin/treenode/admin.css",)}
+
+    def compare_view(self, request, object_id, extra_context=None):
+        """Redirect the reversion-compare view to the child admin."""
+        real_admin = self._get_real_admin(object_id)
+        return real_admin.compare_view(request, object_id, extra_context=extra_context)
 
 
 admin.site.register(
@@ -68,12 +76,3 @@ admin.site.register(
     BaseChildAdmin,
 )
 admin.site.register(Entity, EntityParentAdmin)
-
-# admin.site.register(models.Entity, EntityParentAdmin)
-
-
-# Register your models here.
-# models = (Entity, Project, WikiPage, MarkdownEntity, JournalPage, Comment, Task, Attachment)
-
-# for model in models:
-#    admin.site.register(model)
