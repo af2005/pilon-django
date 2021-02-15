@@ -37,7 +37,7 @@
     font-size: 2.25em;
     color: $gray-900;
 }
-.fc .fc-header-toolbar .btn-primary {
+.fc .fc-header-toolbar .btn-primary:not(.fc-createButton-button) {
    color: $black;
     background-color: $gray-200;
     border-color: $gray-200;

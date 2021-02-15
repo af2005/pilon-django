@@ -30,35 +30,30 @@ def populate_db(apps, schema_editor):
         Comment(name="First Comment", parent=journal).save()
 
         # Calendar
-        try:
-            cal = Calendar.objects.get(name="Example Calendar")
-            print("It looks like you already have loaded this sample data, quitting.")
-            import sys
-            sys.exit(1)
-        except Calendar.DoesNotExist:
-            cal = Calendar(name="Example Calendar", slug="example")
-            cal.save()
-            rule = Rule(frequency="YEARLY", name="Yearly", description="will recur once every Year")
-            rule.save()
-            rule = Rule(frequency="MONTHLY", name="Monthly", description="will recur once every Month")
-            rule.save()
-            rule = Rule(frequency="WEEKLY", name="Weekly", description="will recur once every Week")
-            rule.save()
-            rule = Rule(frequency="DAILY", name="Daily", description="will recur once every Day")
-            rule.save()
+        cal = Calendar(name="Test", slug="test")
+        cal.save()
+        cal = Calendar.objects.get(slug="test")
+        rule = Rule(frequency="YEARLY", name="Yearly", description="will recur once every Year")
+        rule.save()
+        rule = Rule(frequency="MONTHLY", name="Monthly", description="will recur once every Month")
+        rule.save()
+        rule = Rule(frequency="WEEKLY", name="Weekly", description="will recur once every Week")
+        rule.save()
+        rule = Rule(frequency="DAILY", name="Daily", description="will recur once every Day")
+        rule.save()
 
-            today = datetime.date.today()
-            rule = Rule.objects.get(frequency="WEEKLY")
-            data = {
-                'title': 'Exercise',
-                'start': datetime.datetime(today.year, today.month, today.day, 9, 0),
-                'end': datetime.datetime(today.year, today.month, today.day, 10, 0),
-                'end_recurring_period': datetime.datetime(today.year + 1, 6, 1, 0, 0),
-                'rule': rule,
-                'calendar': cal
-            }
-            event = Event(**data)
-            event.save()
+        today = datetime.date.today()
+        rule = Rule.objects.get(frequency="WEEKLY")
+        data = {
+            'title': 'Exercise',
+            'start': datetime.datetime(today.year, today.month, today.day, 9, 0),
+            'end': datetime.datetime(today.year, today.month, today.day, 10, 0),
+            'end_recurring_period': datetime.datetime(today.year + 1, 6, 1, 0, 0),
+            'rule': rule,
+            'calendar': cal
+        }
+        event = Event(**data)
+        event.save()
 
     call_command("createinitialrevisions")
 

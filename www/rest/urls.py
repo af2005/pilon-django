@@ -1,5 +1,5 @@
 from django.urls import path, include
-from . import project, users, calendar
+from . import project, users
 
 
 urlpatterns = [
