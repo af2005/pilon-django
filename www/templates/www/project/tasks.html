@@ -5,7 +5,6 @@
 
 
 {% block additional_scripts_eob %}
-    <script src="{% static "www/datepicker/datepicker-full.min.js" %}"></script>
     <script type="application/javascript">
         const elem = document.querySelector('input[name="datepickertest"]');
         const datepicker = new Datepicker(elem, {
@@ -21,7 +20,6 @@
 {% block content %}
     {{ content }}
     <link rel="stylesheet" type="text/css" href="{% static "www/custom/tasks.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "www/datepicker/datepicker.min.css" %}">
     <div class="d-flex justify-content-end">
         <button class="btn btn-sm btn-secondary m-1 float-right"><i class="bi bi-signpost"></i> Add Milestone</button>
 
