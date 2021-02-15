@@ -183,13 +183,19 @@ class Event(models.Model):
             return
         params = self._event_params()
         frequency = self.rule.rrule_frequency()
-
-        dtstart = self.start
+        if timezone.is_naive(self.start):
+            dtstart = self.start
+        else:
+            dtstart = tzinfo.normalize(self.start).replace(tzinfo=None)
 
         if self.end_recurring_period is None:
             until = None
-        else:
+        elif timezone.is_naive(self.end_recurring_period):
             until = self.end_recurring_period
+        else:
+            until = tzinfo.normalize(
+                self.end_recurring_period.astimezone(tzinfo)
+            ).replace(tzinfo=None)
 
         return rrule.rrule(frequency, dtstart=dtstart, until=until, **params)
 
@@ -244,6 +250,8 @@ class Event(models.Model):
 
             start_rule = self.get_rrule_object(tzinfo)
             start = start.replace(tzinfo=None)
+            if timezone.is_aware(end):
+                end = tzinfo.normalize(end).replace(tzinfo=None)
 
             o_starts = []
 
@@ -360,13 +368,13 @@ class Event(models.Model):
         for param in rule_params:
             # start date influences rule params
             if (
-                    param in param_dict_order
-                    and param_dict_order[param] > freq_order
-                    and param in start_params
+                param in param_dict_order
+                and param_dict_order[param] > freq_order
+                and param in start_params
             ):
                 sp = start_params[param]
                 if sp == rule_params[param] or (
-                        hasattr(rule_params[param], "__iter__") and sp in rule_params[param]
+                    hasattr(rule_params[param], "__iter__") and sp in rule_params[param]
                 ):
                     event_params[param] = [sp]
                 else:
@@ -699,7 +707,7 @@ class Occurrence(models.Model):
 
     def __eq__(self, other):
         return (
-                isinstance(other, Occurrence)
-                and self.original_start == other.original_start
-                and self.original_end == other.original_end
+            isinstance(other, Occurrence)
+            and self.original_start == other.original_start
+            and self.original_end == other.original_end
         )

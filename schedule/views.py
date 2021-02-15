@@ -265,15 +265,15 @@ class DeleteEventView(EventEditMixin, DeleteView):
 
 
 def get_occurrence(
-    event_id,
-    occurrence_id=None,
-    year=None,
-    month=None,
-    day=None,
-    hour=None,
-    minute=None,
-    second=None,
-    tzinfo=None,
+        event_id,
+        occurrence_id=None,
+        year=None,
+        month=None,
+        day=None,
+        hour=None,
+        minute=None,
+        second=None,
+        tzinfo=None,
 ):
     """
     Because occurrences don't have to be persisted, there must be two ways to
@@ -341,26 +341,14 @@ def api_occurrences(request):
 
 
 def _api_occurrences(start, end, calendar_slug, timezone):
-
     if not start or not end:
         raise ValueError("Start and end parameters are required")
+
     # version 2 of full calendar
     # TODO: improve this code with date util package
-    if "-" in start:
 
-        def convert(ddatetime):
-            if ddatetime:
-                ddatetime = ddatetime.split(" ")[0]
-                try:
-                    return datetime.datetime.strptime(ddatetime, "%Y-%m-%d")
-                except ValueError:
-                    # try a different date string format first before failing
-                    return datetime.datetime.strptime(ddatetime, "%Y-%m-%dT%H:%M:%S")
-
-    else:
-
-        def convert(ddatetime):
-            return datetime.datetime.utcfromtimestamp(float(ddatetime))
+    def convert(ddatetime):
+        return dateutil.parser.parse(ddatetime, ignoretz=True)
 
     start = convert(start)
     end = convert(end)
