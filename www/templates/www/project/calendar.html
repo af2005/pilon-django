@@ -13,6 +13,7 @@
             const calendar = new FullCalendar.Calendar(calendarEl, {
                 events: '/schedule/api/occurrences?calendar_slug={{ project.key }}',
                 timeZone: 'local',
+                editable: true,
                 initialView: 'dayGridMonth',
                 firstDay: 1,
                 themeSystem: 'bootstrap',
@@ -32,8 +33,9 @@
                     createButton: {
                         text: 'Add event...',
                         click: function () {
-                            alert('clicked the custom button!');
-                        }
+                            $('#calendar-new-event-modal').modal('show')
+                        },
+                        class: ""
                     }
                 },
             });
@@ -52,6 +54,26 @@
 {% block content %}
     {{ content }}
     <div id="full-calendar" class="mx-2 row shadow">
+    </div>
+
+
+    <div id="calendar-new-event-modal" class="modal fade" tabindex="-1" data-bs-backdrop="static"
+         data-bs-keyboard="false" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="staticBackdropLabel">Create new event</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 

@@ -82,6 +82,17 @@ button > i.bi::before {
     height: 1em;
     vertical-align: -.2em;
 }
+
+.btn-secondary{
+  background-color: white;
+  border-color:$primary;
+}
+.btn-secondary:hover, .btn-secondary:focus{
+  background-color:$primary;
+  border-color:$primary;
+  color: $white;
+}
+
 :root{
     --bs-breadcrumb-divider: ">"
 
