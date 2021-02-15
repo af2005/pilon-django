@@ -34,9 +34,9 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [package.extras]
-dev = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "zope-interface", "furo", "sphinx", "pre-commit"]
-docs = ["furo", "sphinx", "zope-interface"]
-tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "zope-interface"]
+dev = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "zope.interface", "furo", "sphinx", "pre-commit"]
+docs = ["furo", "sphinx", "zope.interface"]
+tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "zope.interface"]
 tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six"]
 
 [[package]]
@@ -206,20 +206,6 @@ diff-match-patch = "*"
 django-reversion = "*"
 
 [[package]]
-name = "django-scheduler"
-version = "0.9.3"
-description = "A calendaring app for Django."
-category = "main"
-optional = false
-python-versions = ">=3.5"
-
-[package.dependencies]
-Django = ">=1.11"
-icalendar = ">=3.8.4"
-python-dateutil = ">=2.1"
-pytz = ">=2013.9"
-
-[[package]]
 name = "django-tag-parser"
 version = "3.2"
 description = "Micro-library to easily write custom Django template tags"
@@ -234,33 +220,6 @@ description = "Utilities for Django"
 category = "main"
 optional = false
 python-versions = "*"
-
-[[package]]
-name = "factory-boy"
-version = "3.2.0"
-description = "A versatile test fixtures replacement based on thoughtbot's factory_bot for Ruby."
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-Faker = ">=0.7.0"
-
-[package.extras]
-dev = ["coverage", "django", "flake8", "isort", "pillow", "sqlalchemy", "mongoengine", "wheel (>=0.32.0)", "tox", "zest-releaser"]
-doc = ["sphinx", "sphinx-rtd-theme", "sphinxcontrib-spelling"]
-
-[[package]]
-name = "faker"
-version = "6.1.1"
-description = "Faker is a Python package that generates fake data for you."
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-python-dateutil = ">=2.4"
-text-unidecode = "1.3"
 
 [[package]]
 name = "future"
@@ -477,8 +436,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "57bc4c80e1d86ca390280f22ebb2aecf932aa487c1e0974679ad614b7dd3eeb8"
-content-hash = "0788a088b6184b2445a3addcf8a5d487c7020470539b3720e59314a364c0c5e9"
+content-hash = "8ed6765c00a2fc9530d88f5be0fa4bbcf3ecf5be4ac40e86172453c452727268"
 
 [metadata.files]
 appdirs = [
@@ -510,6 +468,7 @@ click = [
 ]
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
+    {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
 ]
 diff-match-patch = [
     {file = "diff-match-patch-20200713.tar.gz", hash = "sha256:da6f5a01aa586df23dfc89f3827e1cafbb5420be9d87769eeb079ddfd9477a18"},
@@ -550,10 +509,6 @@ django-reversion = [
 django-reversion-compare = [
     {file = "django-reversion-compare-0.13.1.tar.gz", hash = "sha256:3966e4e353c02a0a26646df01b5ce62806c3db9f7642142dc03efe3af0783901"},
     {file = "django_reversion_compare-0.13.1-py3-none-any.whl", hash = "sha256:ffc684be41b90021d6b59fe302e20c1999196c4dc80f06e51e59123c4a2109a5"},
-]
-django-scheduler = [
-    {file = "django-scheduler-0.9.3.tar.gz", hash = "sha256:7cbcc21ae98df8032ba7b5e2c86567d9c66ec4e0ea14eaeb9af348171852fc0f"},
-    {file = "django_scheduler-0.9.3-py3-none-any.whl", hash = "sha256:a926551ed2c3e3898387f1a60e2f80be70fcb7dab6fa7c3093247fa6cb4fdeb8"},
 ]
 django-tag-parser = [
     {file = "django-tag-parser-3.2.tar.gz", hash = "sha256:903cd4bf3692c8c060770ca2b9d6e74e4ee52d6078308852acffe1ef4a49e0f7"},

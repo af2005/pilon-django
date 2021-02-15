@@ -11,6 +11,8 @@
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('full-calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
+                events: '/schedule/api/occurrences?calendar_slug=example',
+                timeZone:'local',
                 initialView: 'dayGridMonth',
                 firstDay: 1,
                 themeSystem: 'bootstrap',

@@ -32,7 +32,7 @@ class Entity(PolymorphicMPTTModel):
     date_created = models.DateTimeField(default=timezone.now)
     date_modified = models.DateTimeField(default=timezone.now)
     creator = models.ForeignKey(
-        User, on_delete=models.SET_NULL, related_name="creator", null=True, default=None, blank=True,
+        User, on_delete=models.SET_NULL, related_name="EntityCreator", null=True, default=None, blank=True,
     )
 
     class Meta(PolymorphicMPTTModel.Meta):
