@@ -6,17 +6,15 @@
 - version 3.5.1
 
 #Page tree
-- https://github.com/jonmiles/bootstrap-treeview
-- version: 1.2.0
+- toast ui tree view
 
 #calendar
 - https://fullcalendar.io
 - version: 5.5.1
 
 #datepicker
-- vanillajs-datepicker
-- https://github.com/mymth/vanillajs-datepicker
-- version 1.1.2
+- flatpickr
+- version v4.6.9
 
 #wysiwyg editor
 - toast ui editor
