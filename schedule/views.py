@@ -335,6 +335,9 @@ def api_occurrences(request):
     calendar_slug = request.GET.get("calendar_slug")
     timezone = request.GET.get("timezone")
 
+    if not start or not end:
+        return HttpResponseBadRequest("Start and end parameters are required")
+
     try:
         response_data = _api_occurrences(start, end, calendar_slug, timezone)
     except (ValueError, Calendar.DoesNotExist) as e:
@@ -346,9 +349,6 @@ def api_occurrences(request):
 def _api_occurrences(start, end, calendar_slug, timezone):
     if not start or not end:
         raise ValueError("Start and end parameters are required")
-
-    # version 2 of full calendar
-    # TODO: improve this code with date util package
 
     def convert(ddatetime):
         return dateutil.parser.parse(ddatetime, ignoretz=True)
@@ -460,7 +460,7 @@ def api_edit_event(request):
     start_delta = dateutil.parser.parse(event["start"]) - dateutil.parser.parse(old_event["start"])
     end_delta = dateutil.parser.parse(event["end"]) - dateutil.parser.parse(old_event["end"])
 
-    response_data = _api_edit_event(
+    response = _api_edit_event(
         user=user,
         group_id=1,
         event_properties=event,
@@ -469,23 +469,38 @@ def api_edit_event(request):
         end_delta=end_delta,
     )
 
-    return JsonResponse(response_data)
+    return response
 
 
 def _api_edit_event(user, group_id, event_properties, existed, start_delta, end_delta):
     if existed:
         occurrence = Occurrence.objects.get(id=group_id)
-        occurrence.start += start_delta
-        occurrence.end += end_delta
+        try:
+            occurrence.start += start_delta
+        except TypeError:
+            HttpResponseBadRequest("No valid start dates provided.")
+        try:
+            occurrence.end += end_delta
+        except TypeError:
+            HttpResponseBadRequest("No valid end dates provided.")
 
         if CHECK_OCCURRENCE_PERM_FUNC(occurrence, user):
             occurrence.save()
-            return {"status": "OK"}
+            return JsonResponse({"status": "OK"})
     else:
         event = Event.objects.get(id=event_properties["id"])
-        event.start += start_delta
-        event.end += end_delta
-        event.title = event_properties["title"]
+        try:
+            event.start += start_delta
+        except TypeError:
+            HttpResponseBadRequest("No valid start dates provided.")
+
+        try:
+            event.end += end_delta
+        except TypeError:
+            HttpResponseBadRequest("No valid end dates provided.")
+
+        if event_properties["title"]:
+            event.title = event_properties["title"]
         if event_properties["description"]:
             event.description = event_properties["description"]
 
@@ -495,16 +510,16 @@ def _api_edit_event(user, group_id, event_properties, existed, start_delta, end_
                 original_start=F("original_start") + start_delta,
                 original_end=F("original_end") + end_delta,
             )
-            return {"status": "OK"}
+            return JsonResponse({"status": "OK"})
 
-    return {"status": "PERMISSION DENIED"}
+    return HttpResponseForbidden()
 
 
 @require_POST
 @check_calendar_permissions
 def api_create_event(request):
     title = request.POST.get("title")
-    location = request.POST.get("location")
+    description = request.POST.get("description")
     start = request.POST.get("start")
     end = request.POST.get("end")
     calendar_slug = request.POST.get("calendar_slug")
@@ -514,7 +529,7 @@ def api_create_event(request):
         end=end,
         calendar_slug=calendar_slug,
         title=title,
-        description=location
+        description=description
     )
 
     return response
