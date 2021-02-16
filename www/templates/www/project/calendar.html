@@ -42,6 +42,11 @@
             function open_edit_event_modal(eventInfo) {
                 $("#calendar-event-modal-heading").text("Edit event " + eventInfo.event.title);
                 $("#calendar-event-modal button[name='delete-button']").removeClass("d-none");
+                $("#calendar-event-modal button[name='delete-button']").unbind().click(function () {
+                    send_delete_event(eventInfo);
+                    calendar.refetchEvents();
+                    $("#calendar-event-modal").modal('hide');
+                });
                 set_form_value("title", eventInfo.event.title);
                 set_form_value("description", eventInfo.event.extendedProps.description);
                 set_form_value("old_start", formatDate(eventInfo.event.start));
