@@ -503,8 +503,8 @@ def _api_move_or_resize_by_code(user, group_id, event_id, existed, start_delta, 
 def api_select_create(request):
     title = request.POST.get("title")
     location = request.POST.get("location")
-    start = dateutil.parser.parse(request.POST.get("start"))
-    end = dateutil.parser.parse(request.POST.get("end"))
+    start = request.POST.get("start")
+    end = request.POST.get("end")
     calendar_slug = request.POST.get("calendar_slug")
 
     response_data = _api_select_create(

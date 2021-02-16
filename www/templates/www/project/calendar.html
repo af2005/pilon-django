@@ -19,12 +19,6 @@
 
         document.addEventListener('DOMContentLoaded', function () {
 
-
-            function submit_create_form(event) {
-                event.preventDefault();
-                calendar.refetchEvents();
-            }
-
             function send_edited_event(eventInfo) {
                 $.ajax({
                     type: 'POST',
@@ -42,28 +36,7 @@
                     },
                     success: function (result) {
                         calendar.refetchEvents();
-                    },
-                    error: function (req, status, error) {
-                        console.log(error);
-                    }
-                });
-                return false;
-            }
-
-            function send_new_event(eventInfo) {
-                $.ajax({
-                    type: 'POST',
-                    url: "{% url 'schedule_create_event' %}",
-                    dataType: 'json',
-                    data: {
-                        "title": eventInfo.title,
-                        "start": eventInfo.start,
-                        "end": eventInfo.end,
-                        "calendar": eventInfo.calendar,
-                        "location": eventInfo.location
-                    },
-                    success: function (result) {
-                        calendar.refetchEvents();
+                        $("#calendar-event-modal").modal('hide');
                     },
                     error: function (req, status, error) {
                         console.log(error);
@@ -128,18 +101,43 @@
                 });
                 //$("#calendar-event-modal input[name='start']")._flatpickr.jumpToDate(eventInfo.event.start);
                 $("#calendar-event-modal").modal('show');
-                $("#calendar-event-modal-form").on("submit", function (event) {
-                    event.preventDefault();
-                    const eventInfo = {}
-                    eventInfo.title = $("#calendar-event-modal input[name='title']").val();
-                    eventInfo.start = $("#calendar-event-modal input[name='start']").val();
-                    eventInfo.end = $("#calendar-event-modal input[name='end']").val();
 
-
-                    send_new_event()
-                });
             }
 
+            function send_new_event(eventInfo) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'schedule_create_event' %}",
+                    dataType: 'json',
+                    data: {
+                        "title": eventInfo.title,
+                        "start": eventInfo.start,
+                        "end": eventInfo.end,
+                        "calendar_slug": "{{ project.key }}",
+                        "location": eventInfo.location
+                    },
+                    success: function (result) {
+                        calendar.refetchEvents();
+                        $("#calendar-event-modal").modal('hide');
+                    },
+                    error: function (req, status, error) {
+                        console.log(error);
+                    }
+                });
+                return false;
+            }
+
+            $("#calendar-event-modal-form").on("submit", function (event) {
+                event.preventDefault();
+                const eventInfo = {}
+                eventInfo.title = $("#calendar-event-modal input[name='title']").val();
+                eventInfo.start = $("#calendar-event-modal input[name='start']").val();
+                eventInfo.end = $("#calendar-event-modal input[name='end']").val();
+                eventInfo.location = $("#calendar-event-modal input[name='location']").val();
+
+                send_new_event(eventInfo);
+                calendar.refetchEvents();
+            });
 
             const calendarEl = document.getElementById('full-calendar');
             const calendar = new FullCalendar.Calendar(calendarEl, {
@@ -237,9 +235,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" name="submit" class="btn btn-primary" data-bs-dismiss="modal">Create
-                            Event
-                        </button>
+                        <button type="submit" name="submit" class="btn btn-primary">Create Event</button>
                     </div>
                 </form>
             </div>
