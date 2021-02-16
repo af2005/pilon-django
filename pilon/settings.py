@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,12 +44,13 @@ INSTALLED_APPS = [
     "polymorphic",
     "mptt",
     "markdownfield",
+    "schedule.apps.ScheduleConfig",
     "reversion",  # https://github.com/etianen/django-reversion
     "reversion_compare",  # https://github.com/jedie/django-reversion-compare
 ]
 
 MIDDLEWARE = [
-    #'pilon.middleware.SimpleMiddleware',
+    # 'pilon.middleware.SimpleMiddleware',
     "pilon.middleware.LoginRequiredMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -61,7 +61,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "reversion.middleware.RevisionMiddleware",
 ]
-
 
 ROOT_URLCONF = "pilon.urls"
 
@@ -76,14 +75,13 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.request"
             ],
         },
     },
 ]
 
-
 WSGI_APPLICATION = "pilon.wsgi.application"
-
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -94,7 +92,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -114,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -127,7 +123,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -143,11 +138,8 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = LOGIN_URL
 PUBLIC_URLS = ["/dashboard/all-updates"]
 
-# TODO-specific settings
-TODO_STAFF_ONLY = False
-TODO_DEFAULT_LIST_SLUG = "tickets"
-TODO_DEFAULT_ASSIGNEE = None
-TODO_PUBLIC_SUBMIT_REDIRECT = "/"
-
 # Reversion
-ADD_REVERSION_ADMIN=True
+ADD_REVERSION_ADMIN = True
+
+# Calendar
+FIRST_DAY_OF_WEEK = 1

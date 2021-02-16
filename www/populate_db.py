@@ -1,6 +1,8 @@
 from django.db import transaction
 from django.core.management import call_command
 from www.models import Project, WikiPage, JournalPage, Comment, User, Group, Entity
+from schedule.models import Calendar, Event, Rule
+import datetime
 
 
 def populate_db(apps, schema_editor):
@@ -26,6 +28,32 @@ def populate_db(apps, schema_editor):
         journal.save()
         WikiPage(name="Orphaned Page", creator=test_user).save()
         Comment(name="First Comment", parent=journal).save()
+
+        # Calendar
+        cal = Calendar(name="Test", slug="test")
+        cal.save()
+        cal = Calendar.objects.get(slug="test")
+        rule = Rule(frequency="YEARLY", name="Yearly", description="will recur once every Year")
+        rule.save()
+        rule = Rule(frequency="MONTHLY", name="Monthly", description="will recur once every Month")
+        rule.save()
+        rule = Rule(frequency="WEEKLY", name="Weekly", description="will recur once every Week")
+        rule.save()
+        rule = Rule(frequency="DAILY", name="Daily", description="will recur once every Day")
+        rule.save()
+
+        today = datetime.date.today()
+        rule = Rule.objects.get(frequency="WEEKLY")
+        data = {
+            'title': 'Exercise',
+            'start': datetime.datetime(today.year, today.month, today.day, 9, 0),
+            'end': datetime.datetime(today.year, today.month, today.day, 10, 0),
+            'end_recurring_period': datetime.datetime(today.year + 1, 6, 1, 0, 0),
+            'rule': rule,
+            'calendar': cal
+        }
+        event = Event(**data)
+        event.save()
 
     call_command("createinitialrevisions")
 

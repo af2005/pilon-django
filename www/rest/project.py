@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from ..models import Project
 from django.contrib.auth.models import User
-
+from schedule.models import Calendar
 
 def rest_handler_all(request):
     if request.method == "GET":
@@ -44,3 +44,11 @@ def create_new_project(creator: User, key: str, name: str):
     """
     project = Project(creator=creator, key=key, name=name)
     project.save()
+
+    # add a calendar for this project
+    try:
+        cal = Calendar.objects.get(slug=key)
+
+    except Calendar.DoesNotExist:
+        cal = Calendar(name=name, slug=key)
+        cal.save()
