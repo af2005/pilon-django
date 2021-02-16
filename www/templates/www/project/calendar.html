@@ -101,6 +101,16 @@
                 $("#calendar-event-modal input[name='start']").val("");
                 $("#calendar-event-modal input[name='end']").val("");
                 $("#calendar-event-modal button[name='submit']").html("Create Event");
+                $("#calendar-event-modal-form").unbind().on("submit", function (event) {
+                    event.preventDefault();
+                    const e = {};
+                    e.title = get_form_value("title");
+                    e.start = get_form_value("start");
+                    e.end = get_form_value("end");
+                    e.description = get_form_value("description");
+                    send_new_event(e);
+                    calendar.refetchEvents();
+                });
 
                 flatpickr("#calendar-event-modal input[name='start']", {
                     enableTime: true,
