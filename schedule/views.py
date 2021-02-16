@@ -439,13 +439,15 @@ def _api_occurrences(start, end, calendar_slug, timezone):
 
 @require_POST
 @check_calendar_permissions
-def api_move_or_resize_by_code(request):
+def api_edit_event(request):
     user = request.user
     event = {
         "start": request.POST.get("event_start"),
         "end": request.POST.get("event_end"),
         "id": int(request.POST.get("event_id")),
-        "existed": request.POST.get("existed")
+        "existed": request.POST.get("existed"),
+        "title": request.POST.get("title"),
+        "description": request.POST.get("location"),
     }
     old_event = {
         "start": request.POST.get("old_event_start"),
@@ -455,38 +457,34 @@ def api_move_or_resize_by_code(request):
     start_delta = dateutil.parser.parse(event["start"]) - dateutil.parser.parse(old_event["start"])
     end_delta = dateutil.parser.parse(event["end"]) - dateutil.parser.parse(old_event["end"])
 
-    response_data = _api_move_or_resize_by_code(
+    response_data = _api_edit_event(
         user=user,
         group_id=1,
-        event_id=event["id"],
+        event_properties=event,
         existed=False,
         start_delta=start_delta,
         end_delta=end_delta,
-
     )
 
     return JsonResponse(response_data)
 
 
-def _api_move_or_resize_by_code(user, group_id, event_id, existed, start_delta, end_delta):
-    response_data = {"status": "PERMISSION DENIED"}
-
+def _api_edit_event(user, group_id, event_properties, existed, start_delta, end_delta):
     if existed:
-        print("occurrence detected")
         occurrence = Occurrence.objects.get(id=group_id)
         occurrence.start += start_delta
         occurrence.end += end_delta
 
         if CHECK_OCCURRENCE_PERM_FUNC(occurrence, user):
             occurrence.save()
-            response_data["status"] = "OK"
+            return {"status": "OK"}
     else:
-        print("no occurrence detected")
-
-        event = Event.objects.get(id=event_id)
+        event = Event.objects.get(id=event_properties["id"])
         event.start += start_delta
         event.end += end_delta
-        print(event)
+        event.title = event_properties["title"]
+        if event_properties["description"]:
+            event.description = event_properties["description"]
 
         if CHECK_EVENT_PERM_FUNC(event, user):
             event.save()
@@ -494,8 +492,9 @@ def _api_move_or_resize_by_code(user, group_id, event_id, existed, start_delta, 
                 original_start=F("original_start") + start_delta,
                 original_end=F("original_end") + end_delta,
             )
-            response_data["status"] = "OK"
-    return response_data
+            return {"status": "OK"}
+
+    return {"status": "PERMISSION DENIED"}
 
 
 @require_POST
@@ -529,6 +528,19 @@ def _api_select_create(start, end, calendar_slug, title, description):
         calendar=calendar,
         description=description
     )
+    return {"status": "OK"}
 
-    response_data = {"status": "OK"}
-    return response_data
+
+@require_POST
+@check_calendar_permissions
+def api_delete(request):
+    event_id = request.POST.get("event_id")
+    if CHECK_EVENT_PERM_FUNC(Event.objects.get(id=event_id), request.user):
+        return JsonResponse(_api_delete(event_id))
+
+    return JsonResponse({"status": "PERMISSION DENIED"})
+
+
+def _api_delete(event_id):
+    Event.objects.get(id=event_id).delete()
+    return {"status": "OK"}

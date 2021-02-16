@@ -19,31 +19,6 @@
 
         document.addEventListener('DOMContentLoaded', function () {
 
-            function send_edited_event(eventInfo) {
-                $.ajax({
-                    type: 'POST',
-                    url: "{% url 'schedule_edit_event' %}",
-                    dataType: 'json',
-                    data: {
-                        "event_start": eventInfo.event.startStr,
-                        "event_end": eventInfo.event.endStr,
-                        "old_event_start": eventInfo.oldEvent.startStr,
-                        "old_event_end": eventInfo.oldEvent.endStr,
-                        "event_id": eventInfo.event.extendedProps.event_id,
-                        "existed": eventInfo.event.extendedProps.existed,
-                        "calendar": eventInfo.event.extendedProps.calendar,
-
-                    },
-                    success: function (result) {
-                        calendar.refetchEvents();
-                        $("#calendar-event-modal").modal('hide');
-                    },
-                    error: function (req, status, error) {
-                        console.log(error);
-                    }
-                });
-                return false;
-            }
 
             function formatDate(d) {
                 let date = [
@@ -56,13 +31,44 @@
 
             }
 
+            function get_form_value(dom_name) {
+                return $("#calendar-event-modal input[name=" + dom_name + "]").val();
+            }
+
+            function set_form_value(dom_name, value) {
+                return $("#calendar-event-modal input[name=" + dom_name + "]").val(value);
+            }
+
             function open_edit_event_modal(eventInfo) {
                 $("#calendar-event-modal-heading").text("Edit event " + eventInfo.event.title);
-                $("#calendar-event-modal input[name='title']").val(eventInfo.event.title);
-                $("#calendar-event-modal input[name='location']").val(eventInfo.event.extendedProps.description);
-                $("#calendar-event-modal input[name='start']").val(formatDate(eventInfo.event.start));
-                $("#calendar-event-modal input[name='end']").val(formatDate(eventInfo.event.end));
+                $("#calendar-event-modal button[name='delete-button']").removeClass("d-none");
+                set_form_value("title", eventInfo.event.title);
+                set_form_value("description", eventInfo.event.extendedProps.description);
+                set_form_value("old_start", formatDate(eventInfo.event.start));
+                set_form_value("old_end", formatDate(eventInfo.event.end));
+                set_form_value("start", formatDate(eventInfo.event.start));
+                set_form_value("end", formatDate(eventInfo.event.end));
+                set_form_value("event_id", eventInfo.event.extendedProps.event_id);
                 $("#calendar-event-modal button[name='submit']").html("Edit Event");
+
+                $("#calendar-event-modal-form").unbind().on("submit", function (event) {
+                    event.preventDefault();
+                    const e = {};
+                    e.event = {};
+                    e.oldEvent = {};
+                    e.event.extendedProps = {};
+                    e.event.title = get_form_value("title");
+                    e.event.startStr = get_form_value("start");
+                    e.event.endStr = get_form_value("end");
+                    e.oldEvent.startStr = get_form_value("old_start");
+                    e.oldEvent.endStr = get_form_value("old_end");
+                    e.event.extendedProps.description = get_form_value("description");
+                    e.event.extendedProps.event_id = get_form_value("event_id");
+                    e.event.extendedProps.existed = get_form_value("existed");
+                    e.event.extendedProps.calendar = get_form_value("calendar_slug");
+                    send_edited_event(e);
+                    calendar.refetchEvents();
+                });
 
                 flatpickr("#calendar-event-modal input[name='start']", {
                     enableTime: true,
@@ -82,8 +88,11 @@
 
             function open_create_event_modal() {
                 $("#calendar-event-modal-heading").text("Create new event");
+                $("#calendar-event-modal button[name='delete-button']").addClass("d-none");
                 $("#calendar-event-modal input[name='title']").val("");
-                $("#calendar-event-modal input[name='location']").val("");
+                $("#calendar-event-modal input[name='description']").val("");
+                $("#calendar-event-modal input[name='old_start']").val();
+                $("#calendar-event-modal input[name='old_end']").val();
                 $("#calendar-event-modal input[name='start']").val("");
                 $("#calendar-event-modal input[name='end']").val("");
                 $("#calendar-event-modal button[name='submit']").html("Create Event");
@@ -114,7 +123,7 @@
                         "start": eventInfo.start,
                         "end": eventInfo.end,
                         "calendar_slug": "{{ project.key }}",
-                        "location": eventInfo.location
+                        "description": eventInfo.description
                     },
                     success: function (result) {
                         calendar.refetchEvents();
@@ -127,17 +136,54 @@
                 return false;
             }
 
-            $("#calendar-event-modal-form").on("submit", function (event) {
-                event.preventDefault();
-                const eventInfo = {}
-                eventInfo.title = $("#calendar-event-modal input[name='title']").val();
-                eventInfo.start = $("#calendar-event-modal input[name='start']").val();
-                eventInfo.end = $("#calendar-event-modal input[name='end']").val();
-                eventInfo.location = $("#calendar-event-modal input[name='location']").val();
+            function send_edited_event(eventInfo) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'schedule_edit_event' %}",
+                    dataType: 'json',
+                    data: {
+                        "title": eventInfo.event.title,
+                        "description": eventInfo.event.extendedProps.description,
+                        "event_start": eventInfo.event.startStr,
+                        "event_end": eventInfo.event.endStr,
+                        "old_event_start": eventInfo.oldEvent.startStr,
+                        "old_event_end": eventInfo.oldEvent.endStr,
+                        "event_id": eventInfo.event.extendedProps.event_id,
+                        "existed": eventInfo.event.extendedProps.existed,
+                        "calendar": eventInfo.event.extendedProps.calendar,
 
-                send_new_event(eventInfo);
-                calendar.refetchEvents();
-            });
+                    },
+                    success: function (result) {
+                        calendar.refetchEvents();
+                        $("#calendar-event-modal").modal('hide');
+                    },
+                    error: function (req, status, error) {
+                        console.log(error);
+                    }
+                });
+                return false;
+            }
+
+            function send_delete_event(eventInfo) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'schedule_delete_event' %}",
+                    dataType: 'json',
+                    data: {
+                        "event_id": eventInfo.event.extendedProps.event_id,
+                        "calendar": eventInfo.event.extendedProps.calendar,
+                    },
+                    success: function (result) {
+                        calendar.refetchEvents();
+                        $("#calendar-event-modal").modal('hide');
+                    },
+                    error: function (req, status, error) {
+                        console.log(error);
+                    }
+                });
+                return false;
+            }
+
 
             const calendarEl = document.getElementById('full-calendar');
             const calendar = new FullCalendar.Calendar(calendarEl, {
@@ -196,7 +242,7 @@
          data-bs-keyboard="false" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="calendar-event-modal-form" action="{% url 'schedule_create_event' %}" method="post">
+                <form id="calendar-event-modal-form" method="post">
                     <div class="modal-header">
                         <h4 class="modal-title" id="calendar-event-modal-heading">Create new event</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -206,14 +252,18 @@
                         {% csrf_token %}
 
                         <input type="hidden" name="calendar_slug" value="{{ project.key }}">
-
+                        <input type="hidden" name="old_start" value="">
+                        <input type="hidden" name="old_end" value="">
+                        <input type="hidden" name="event_id" value="">
+                        <input type="hidden" name="existed" value="">
                         <div class="input-group input-group-lg mb-1">
                             <input name="title" type="text" class="form-control" placeholder="Enter a title ..."
                                    aria-label="title"
                                    aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group input-group-sm mb-3">
-                            <input name="location" type="text" class="form-control" placeholder="Enter a location ..."
+                            <input name="description" type="text" class="form-control"
+                                   placeholder="Enter a description or location ..."
                                    aria-label="title"
                                    aria-describedby="basic-addon1">
                         </div>
@@ -233,9 +283,16 @@
                         </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" name="submit" class="btn btn-primary">Create Event</button>
+                    <div class="modal-footer justify-content-between">
+                        <div>
+                            <button name="delete-button" type="button" class="btn btn-outline-danger d-none">Delete
+                                Event
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" name="submit" class="btn btn-primary">Create Event</button>
+                        </div>
                     </div>
                 </form>
             </div>
