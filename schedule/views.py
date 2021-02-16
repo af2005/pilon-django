@@ -501,26 +501,34 @@ def _api_move_or_resize_by_code(user, group_id, event_id, existed, start_delta, 
 @require_POST
 @check_calendar_permissions
 def api_select_create(request):
-    response_data = {}
+    title = request.POST.get("title")
+    location = request.POST.get("location")
     start = dateutil.parser.parse(request.POST.get("start"))
     end = dateutil.parser.parse(request.POST.get("end"))
-    location = request.POST.get("location")
     calendar_slug = request.POST.get("calendar_slug")
 
-    response_data = _api_select_create(start, end, calendar_slug)
+    response_data = _api_select_create(
+        start=start,
+        end=end,
+        calendar_slug=calendar_slug,
+        title=title,
+        description=location
+    )
 
     return JsonResponse(response_data)
 
 
-def _api_select_create(start, end, calendar_slug):
+def _api_select_create(start, end, calendar_slug, title, description):
     start = dateutil.parser.parse(start)
     end = dateutil.parser.parse(end)
-
     calendar = Calendar.objects.get(slug=calendar_slug)
     Event.objects.create(
-        start=start, end=end, title=EVENT_NAME_PLACEHOLDER, calendar=calendar
+        start=start,
+        end=end,
+        title=title,
+        calendar=calendar,
+        description=description
     )
 
-    response_data = {}
-    response_data["status"] = "OK"
+    response_data = {"status": "OK"}
     return response_data

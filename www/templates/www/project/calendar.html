@@ -14,52 +14,18 @@
 {% block additional_scripts_eob %}
     <script src='{% static "www/flatpickr/flatpickr.js" %}'></script>
     <script src='{% static "www/fullcalendar/main.min.js" %}'></script>
+    <script src='{% static "www/fullcalendar/custom.js" %}'></script>
     <script type="application/javascript">
 
         document.addEventListener('DOMContentLoaded', function () {
+
 
             function submit_create_form(event) {
                 event.preventDefault();
                 calendar.refetchEvents();
             }
 
-
-            function formatDate(d) {
-                let date = [
-                    d.getFullYear(),
-                    ('0' + (d.getMonth() + 1)).slice(-2),
-                    ('0' + d.getDate()).slice(-2)
-                ].join('-');
-                date += " " + ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2);
-                return date
-
-            }
-
-            function open_edit_event_modal(eventInfo) {
-                $("#calendar-event-modal-heading").text("Edit event " + eventInfo.event.title);
-                $("#calendar-event-modal input[name='title']").val(eventInfo.event.title);
-                $("#calendar-event-modal input[name='location']").val(eventInfo.event.extendedProps.description);
-                $("#calendar-event-modal input[name='start']").val(formatDate(eventInfo.event.start));
-                $("#calendar-event-modal input[name='end']").val(formatDate(eventInfo.event.end));
-
-                flatpickr("#calendar-event-modal input[name='start']", {
-                    enableTime: true,
-                    dateFormat: "Y-m-d H:i",
-                    time_24hr: true,
-                });
-
-                flatpickr("#calendar-event-modal input[name='end']", {
-                    enableTime: true,
-                    dateFormat: "Y-m-d H:i",
-                    time_24hr: true,
-                });
-                //$("#calendar-event-modal input[name='start']")._flatpickr.jumpToDate(eventInfo.event.start);
-                $("#calendar-event-modal").modal('show');
-
-            }
-
-            function send_event_change(eventInfo) {
-                console.log(eventInfo);
+            function send_edited_event(eventInfo) {
                 $.ajax({
                     type: 'POST',
                     url: "{% url 'schedule_edit_event' %}",
@@ -84,12 +50,95 @@
                 return false;
             }
 
-            const flatpickr_objs = flatpickr(".datetime-selector", {
-                enableTime: true,
-                dateFormat: "Y-m-d H:i",
-                time_24hr: true,
+            function send_new_event(eventInfo) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'schedule_create_event' %}",
+                    dataType: 'json',
+                    data: {
+                        "title": eventInfo.title,
+                        "start": eventInfo.start,
+                        "end": eventInfo.end,
+                        "calendar": eventInfo.calendar,
+                        "location": eventInfo.location
+                    },
+                    success: function (result) {
+                        calendar.refetchEvents();
+                    },
+                    error: function (req, status, error) {
+                        console.log(error);
+                    }
+                });
+                return false;
+            }
 
-            });
+            function formatDate(d) {
+                let date = [
+                    d.getFullYear(),
+                    ('0' + (d.getMonth() + 1)).slice(-2),
+                    ('0' + d.getDate()).slice(-2)
+                ].join('-');
+                date += " " + ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2);
+                return date
+
+            }
+
+            function open_edit_event_modal(eventInfo) {
+                $("#calendar-event-modal-heading").text("Edit event " + eventInfo.event.title);
+                $("#calendar-event-modal input[name='title']").val(eventInfo.event.title);
+                $("#calendar-event-modal input[name='location']").val(eventInfo.event.extendedProps.description);
+                $("#calendar-event-modal input[name='start']").val(formatDate(eventInfo.event.start));
+                $("#calendar-event-modal input[name='end']").val(formatDate(eventInfo.event.end));
+                $("#calendar-event-modal button[name='submit']").html("Edit Event");
+
+                flatpickr("#calendar-event-modal input[name='start']", {
+                    enableTime: true,
+                    dateFormat: "Y-m-d H:i",
+                    time_24hr: true,
+                });
+
+                flatpickr("#calendar-event-modal input[name='end']", {
+                    enableTime: true,
+                    dateFormat: "Y-m-d H:i",
+                    time_24hr: true,
+                });
+                //$("#calendar-event-modal input[name='start']")._flatpickr.jumpToDate(eventInfo.event.start);
+                $("#calendar-event-modal").modal('show');
+
+            }
+
+            function open_create_event_modal() {
+                $("#calendar-event-modal-heading").text("Create new event");
+                $("#calendar-event-modal input[name='title']").val("");
+                $("#calendar-event-modal input[name='location']").val("");
+                $("#calendar-event-modal input[name='start']").val("");
+                $("#calendar-event-modal input[name='end']").val("");
+                $("#calendar-event-modal button[name='submit']").html("Create Event");
+
+                flatpickr("#calendar-event-modal input[name='start']", {
+                    enableTime: true,
+                    dateFormat: "Y-m-d H:i",
+                    time_24hr: true,
+                });
+
+                flatpickr("#calendar-event-modal input[name='end']", {
+                    enableTime: true,
+                    dateFormat: "Y-m-d H:i",
+                    time_24hr: true,
+                });
+                //$("#calendar-event-modal input[name='start']")._flatpickr.jumpToDate(eventInfo.event.start);
+                $("#calendar-event-modal").modal('show');
+                $("#calendar-event-modal-form").on("submit", function (event) {
+                    event.preventDefault();
+                    const eventInfo = {}
+                    eventInfo.title = $("#calendar-event-modal input[name='title']").val();
+                    eventInfo.start = $("#calendar-event-modal input[name='start']").val();
+                    eventInfo.end = $("#calendar-event-modal input[name='end']").val();
+
+
+                    send_new_event()
+                });
+            }
 
 
             const calendarEl = document.getElementById('full-calendar');
@@ -100,6 +149,11 @@
                 initialView: 'dayGridMonth',
                 firstDay: 1,
                 themeSystem: 'bootstrap',
+                eventTimeFormat: { // like '14:30:00'
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                },
                 headerToolbar: {
                     start: 'prev,next today',
                     center: 'title',
@@ -115,9 +169,7 @@
                 customButtons: {
                     createButton: {
                         text: 'Add event...',
-                        click: function () {
-                            $('#calendar-event-modal').modal('show')
-                        },
+                        click: open_create_event_modal,
                     }
                 },
                 navLinks: true,
@@ -126,8 +178,8 @@
                     calendar.gotoDate(date);
 
                 },
-                eventResize: send_event_change,
-                eventDrop: send_event_change,
+                eventResize: send_edited_event,
+                eventDrop: send_edited_event,
                 eventClick: open_edit_event_modal,
             });
             calendar.render();
@@ -146,7 +198,7 @@
          data-bs-keyboard="false" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form onsubmit="submit_create_form()" action="{% url 'schedule_create_event' %}" method="post">
+                <form id="calendar-event-modal-form" action="{% url 'schedule_create_event' %}" method="post">
                     <div class="modal-header">
                         <h4 class="modal-title" id="calendar-event-modal-heading">Create new event</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -185,7 +237,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Create Event</button>
+                        <button type="button" name="submit" class="btn btn-primary" data-bs-dismiss="modal">Create
+                            Event
+                        </button>
                     </div>
                 </form>
             </div>
