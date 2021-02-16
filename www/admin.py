@@ -21,17 +21,9 @@ from .models import (
 # The common admin functionality for all derived models:
 
 
-class BaseChildAdmin(CompareVersionAdmin,PolymorphicMPTTChildModelAdmin, ):
-    #object_history_template = "admin/polymorphic/object_history.html"
-    GENERAL_FIELDSET = (
-        None,
-        {
-            "fields": (
-                "parent",
-                "name",
-            ),
-        },
-    )
+class BaseChildAdmin(CompareVersionAdmin, PolymorphicMPTTChildModelAdmin):
+    # object_history_template = "admin/polymorphic/object_history.html"
+    GENERAL_FIELDSET = (None, {"fields": ("parent", "name")})
 
     base_model = Entity
     base_fieldsets = (GENERAL_FIELDSET,)
@@ -48,7 +40,7 @@ class MarkdownEntityAdmin(BaseChildAdmin):
 
 
 class EntityParentAdmin(CompareVersionAdmin, PolymorphicMPTTParentModelAdmin):
-    #object_history_template = "admin/polymorphic/object_history.html"
+    # object_history_template = "admin/polymorphic/object_history.html"
     base_model = Entity
     child_models = (
         Project,

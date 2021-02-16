@@ -9,11 +9,7 @@ def populate_db(apps, schema_editor):
     with transaction.atomic():
         test_group = Group(name="TestGroup")
         test_group.save()
-        test_user = User(
-            username="TestUser",
-            first_name="Hans",
-            last_name="Wurst",
-        )
+        test_user = User(username="TestUser", first_name="Hans", last_name="Wurst")
         test_user.set_password(raw_password="password")
         test_user.save()
         test_user.groups.add(test_group)
@@ -33,24 +29,34 @@ def populate_db(apps, schema_editor):
         cal = Calendar(name="Test", slug="test")
         cal.save()
         cal = Calendar.objects.get(slug="test")
-        rule = Rule(frequency="YEARLY", name="Yearly", description="will recur once every Year")
+        rule = Rule(
+            frequency="YEARLY", name="Yearly", description="will recur once every Year"
+        )
         rule.save()
-        rule = Rule(frequency="MONTHLY", name="Monthly", description="will recur once every Month")
+        rule = Rule(
+            frequency="MONTHLY",
+            name="Monthly",
+            description="will recur once every Month",
+        )
         rule.save()
-        rule = Rule(frequency="WEEKLY", name="Weekly", description="will recur once every Week")
+        rule = Rule(
+            frequency="WEEKLY", name="Weekly", description="will recur once every Week"
+        )
         rule.save()
-        rule = Rule(frequency="DAILY", name="Daily", description="will recur once every Day")
+        rule = Rule(
+            frequency="DAILY", name="Daily", description="will recur once every Day"
+        )
         rule.save()
 
         today = datetime.date.today()
         rule = Rule.objects.get(frequency="WEEKLY")
         data = {
-            'title': 'Exercise',
-            'start': datetime.datetime(today.year, today.month, today.day, 9, 0),
-            'end': datetime.datetime(today.year, today.month, today.day, 10, 0),
-            'end_recurring_period': datetime.datetime(today.year + 1, 6, 1, 0, 0),
-            'rule': rule,
-            'calendar': cal
+            "title": "Exercise",
+            "start": datetime.datetime(today.year, today.month, today.day, 9, 0),
+            "end": datetime.datetime(today.year, today.month, today.day, 10, 0),
+            "end_recurring_period": datetime.datetime(today.year + 1, 6, 1, 0, 0),
+            "rule": rule,
+            "calendar": cal,
         }
         event = Event(**data)
         event.save()

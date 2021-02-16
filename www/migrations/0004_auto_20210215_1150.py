@@ -9,13 +9,20 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('www', '0003_auto_20210214_1018'),
+        ("www", "0003_auto_20210214_1018"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='entity',
-            name='creator',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='EntityCreator', to=settings.AUTH_USER_MODEL),
-        ),
+            model_name="entity",
+            name="creator",
+            field=models.ForeignKey(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="EntityCreator",
+                to=settings.AUTH_USER_MODEL,
+            ),
+        )
     ]

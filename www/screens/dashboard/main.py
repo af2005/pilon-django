@@ -3,18 +3,9 @@ from www.screens import templates
 from django.contrib.auth.decorators import login_required
 
 SUBNAV_ITEMS = [
-    {
-        "name": "Dashboard",
-        "url": "/",
-    },
-    {
-        "name": "All updates",
-        "url": "/dashboard/all-updates",
-    },
-    {
-        "name": "Last worked on",
-        "url": "/dashboard/last-worked-on",
-    },
+    {"name": "Dashboard", "url": "/"},
+    {"name": "All updates", "url": "/dashboard/all-updates"},
+    {"name": "Last worked on", "url": "/dashboard/last-worked-on"},
 ]
 
 

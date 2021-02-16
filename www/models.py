@@ -32,7 +32,12 @@ class Entity(PolymorphicMPTTModel):
     date_created = models.DateTimeField(default=timezone.now)
     date_modified = models.DateTimeField(default=timezone.now)
     creator = models.ForeignKey(
-        User, on_delete=models.SET_NULL, related_name="EntityCreator", null=True, default=None, blank=True,
+        User,
+        on_delete=models.SET_NULL,
+        related_name="EntityCreator",
+        null=True,
+        default=None,
+        blank=True,
     )
 
     class Meta(PolymorphicMPTTModel.Meta):
@@ -47,10 +52,7 @@ class Entity(PolymorphicMPTTModel):
 class Project(Entity):
     can_be_root = True
 
-    key = models.CharField(
-        max_length=20,
-        unique=True,
-    )
+    key = models.CharField(max_length=20, unique=True)
 
     class Meta(PolymorphicMPTTModel.Meta):
         verbose_name = _("Project")

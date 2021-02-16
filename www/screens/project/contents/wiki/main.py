@@ -9,21 +9,13 @@ from .. import main
 
 @login_required
 def view_content_create(request, key):
-    tpl = templates.default_editor(
-        request,
-        title="Create Wiki Page",
-        key=key,
-    )
+    tpl = templates.default_editor(request, title="Create Wiki Page", key=key)
     return HttpResponse(tpl)
 
 
 @login_required
 def view_content_create_with_file(request, key):
-    tpl = templates.default_editor(
-        request,
-        title="Create Wiki Page with File",
-        key=key,
-    )
+    tpl = templates.default_editor(request, title="Create Wiki Page with File", key=key)
     return HttpResponse(tpl)
 
 

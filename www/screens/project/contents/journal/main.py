@@ -9,20 +9,14 @@ from .. import main
 
 @login_required
 def view_content_create(request, key):
-    tpl = templates.default_editor(
-        request,
-        title="Create Journal Page",
-        key=key,
-    )
+    tpl = templates.default_editor(request, title="Create Journal Page", key=key)
     return HttpResponse(tpl)
 
 
 @login_required
 def view_content_create_with_file(request, key):
     tpl = templates.default_editor(
-        request,
-        title="Create Journal Page with File",
-        key=key,
+        request, title="Create Journal Page with File", key=key
     )
     return HttpResponse(tpl)
 

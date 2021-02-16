@@ -3,6 +3,7 @@ from ..models import Project
 from django.contrib.auth.models import User
 from schedule.models import Calendar
 
+
 def rest_handler_all(request):
     if request.method == "GET":
         return get_all_projects()
