@@ -9,7 +9,10 @@ from django.http import (
     Http404,
     HttpResponseBadRequest,
     HttpResponseRedirect,
+    HttpResponseNotFound,
+    HttpResponseForbidden,
     JsonResponse,
+
 )
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -447,7 +450,7 @@ def api_edit_event(request):
         "id": int(request.POST.get("event_id")),
         "existed": request.POST.get("existed"),
         "title": request.POST.get("title"),
-        "description": request.POST.get("location"),
+        "description": request.POST.get("description"),
     }
     old_event = {
         "start": request.POST.get("old_event_start"),
@@ -499,14 +502,14 @@ def _api_edit_event(user, group_id, event_properties, existed, start_delta, end_
 
 @require_POST
 @check_calendar_permissions
-def api_select_create(request):
+def api_create_event(request):
     title = request.POST.get("title")
     location = request.POST.get("location")
     start = request.POST.get("start")
     end = request.POST.get("end")
     calendar_slug = request.POST.get("calendar_slug")
 
-    response_data = _api_select_create(
+    response = _api_create_event(
         start=start,
         end=end,
         calendar_slug=calendar_slug,
@@ -514,13 +517,31 @@ def api_select_create(request):
         description=location
     )
 
-    return JsonResponse(response_data)
+    return response
 
 
-def _api_select_create(start, end, calendar_slug, title, description):
-    start = dateutil.parser.parse(start)
-    end = dateutil.parser.parse(end)
-    calendar = Calendar.objects.get(slug=calendar_slug)
+def _api_create_event(start, end, calendar_slug, title, description):
+    try:
+        start = dateutil.parser.parse(start)
+    except dateutil.parser.ParserError:
+        return HttpResponseBadRequest("No valid start date was provided.")
+
+    try:
+        end = dateutil.parser.parse(end)
+    except dateutil.parser.ParserError:
+        return HttpResponseBadRequest("No valid end date was provided.")
+
+    if not end > start:
+        return HttpResponseBadRequest("End date must be later than the start date.")
+
+    if not title:
+        return HttpResponseBadRequest("Title must not be empty.")
+
+    try:
+        calendar = Calendar.objects.get(slug=calendar_slug)
+    except Calendar.DoesNotExist:
+        return HttpResponseNotFound(f"No Calendar found with name {calendar_slug}")
+
     Event.objects.create(
         start=start,
         end=end,
@@ -528,19 +549,22 @@ def _api_select_create(start, end, calendar_slug, title, description):
         calendar=calendar,
         description=description
     )
-    return {"status": "OK"}
+    return JsonResponse({"status": "OK"})
 
 
 @require_POST
 @check_calendar_permissions
-def api_delete(request):
+def api_delete_event(request):
     event_id = request.POST.get("event_id")
     if CHECK_EVENT_PERM_FUNC(Event.objects.get(id=event_id), request.user):
-        return JsonResponse(_api_delete(event_id))
+        return _api_delete_event(event_id)
+    return HttpResponseForbidden()
 
-    return JsonResponse({"status": "PERMISSION DENIED"})
 
+def _api_delete_event(event_id):
+    try:
+        Event.objects.get(id=event_id).delete()
+    except Event.DoesNotExist:
+        return HttpResponseNotFound(f"No Event found with id {event_id}")
 
-def _api_delete(event_id):
-    Event.objects.get(id=event_id).delete()
-    return {"status": "OK"}
+    return JsonResponse({"status": "OK"})
