@@ -15,17 +15,48 @@
     <script src='{% static "www/flatpickr/flatpickr.js" %}'></script>
     <script src='{% static "www/fullcalendar/main.min.js" %}'></script>
     <script type="application/javascript">
-        function eventInfoDeltaToMinutes(delta) {
-            return delta.milliseconds / 60000 + delta.days * 24 * 60 + delta.months * 24*60
-        }
 
-        flatpickr(".datetime-selector", {
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-            time_24hr: true,
 
-        });
         document.addEventListener('DOMContentLoaded', function () {
+
+            function submit_create_form(event) {
+                event.preventDefault();
+                calendar.refetchEvents();
+            }
+
+            function send_event_change(eventInfo) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'schedule_edit_event' %}",
+                    dataType: 'json',
+                    data: {
+                        "event_start": eventInfo.event.startStr,
+                        "event_end": eventInfo.event.endStr,
+                        "old_event_start": eventInfo.oldEvent.startStr,
+                        "old_event_end": eventInfo.oldEvent.endStr,
+                        "event_id": eventInfo.event.extendedProps.event_id,
+                        "existed": eventInfo.event.extendedProps.existed,
+                        "calendar": eventInfo.event.extendedProps.calendar,
+
+                    },
+                    success: function (result) {
+                        calendar.refetchEvents();
+                    },
+                    error: function (req, status, error) {
+                        console.log(error);
+                    }
+                });
+                return false;
+            }
+
+            flatpickr(".datetime-selector", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+                time_24hr: true,
+
+            });
+
+
             const calendarEl = document.getElementById('full-calendar');
             const calendar = new FullCalendar.Calendar(calendarEl, {
                 events: '{% url 'api_occurrences' %}?calendar_slug={{ project.key }}',
@@ -37,7 +68,7 @@
                 headerToolbar: {
                     start: 'prev,next today',
                     center: 'title',
-                    end: 'dayGridMonth,timeGridWeek createButton'
+                    end: 'dayGridMonth,dayGridWeek,timeGridDay createButton'
                 },
                 bootstrapFontAwesome: {
                     prev: ' bi bi-chevron-left',
@@ -54,118 +85,14 @@
                         },
                     }
                 },
-                eventDidMount: function (event, element) {
-                    /*
-                    var s = element[0].className;
-                    if (s.indexOf("fc-day-grid-event") < 0) {
-                        title = element.children().find('.fc-title');
-                        title.html('<a href="' + getEventViewURL(event) +
-                            '">' + title.html() + '</a>')
-                        if (event.editable && "
-                    {{ request.get_full_path }}".indexOf("/admin") != 0) {
-                            const time = element.children().find('.fc-time');
-                            const edit_button = document.createElement("button");
-                            const edit_icon = document.createElement("span");
-                            console.log("we are live");
-                            edit_button.className = 'btn btn-default btn-sm pull-right edit_event';
-                            edit_button.onclick = function (jsEvent) {
-                                jsEvent.preventDefault();
-                                setModalProperties('edit', event);
-                            };
-                            edit_button.setAttribute('data-toggle', 'modal');
-                            edit_button.setAttribute('data-target', '#eventModal');
-                            edit_icon.className = 'glyphicon glyphicon-pencil';
-                            edit_button.appendChild(edit_icon);
+                navLinks: true,
+                navLinkDayClick: function (date) {
+                    calendar.changeView('timeGridDay');
+                    calendar.gotoDate(date);
 
-                            var delete_button = document.createElement("button");
-                            var delete_icon = document.createElement("span");
-                            delete_button.className = 'btn btn-default btn-sm pull-right delete_event';
-                            delete_button.onclick = function (jsEvent) {
-                                jsEvent.preventDefault();
-                                setModalProperties('delete', event);
-                            };
-                            delete_button.setAttribute('data-toggle', 'modal');
-                            delete_button.setAttribute('data-target', '#eventModal');
-                            delete_icon.className = 'glyphicon glyphicon-trash'
-                            delete_button.appendChild(delete_icon);
-
-                            time.prepend('<br>');
-                            time.prepend(delete_button);
-                            time.prepend(edit_button);
-                        }
-                    }
-                    */
                 },
-
-                eventDrop: function (eventDropInfo) {
-                    console.log(eventDropInfo.delta);
-                    $.ajax({
-                        type: 'POST',
-                        url: "{% url 'api_move_or_resize' %}",
-                        dataType: 'json',
-                        data: {
-                            'id': event.id,
-                            'event_id': event.event_id,
-                            'existed': event.existed,
-                            'delta': delta.milliseconds * 60000,
-                        },
-                        success: function (result) {
-                            if (result.success) $('#feedback input').attr('value', '');
-                            calendar.refetchEvents();
-                        },
-                        error: function (req, status, error) {
-                            console.log(error);
-                        }
-                    });
-                    return false;
-                },
-                eventResize: function (event, delta, revertFunc) {
-                    $.ajax({
-                        type: 'POST',
-                        url: "{% url 'api_move_or_resize' %}",
-                        dataType: 'json',
-                        data: {
-                            'id': event.id,
-                            'event_id': event.event_id,
-                            'existed': event.existed,
-                            'delta': delta.milliseconds * 60000,
-                            'resize': true,
-                        },
-                        success: function (result) {
-                            if (result.success) $('#feedback input').attr('value', '');
-                            calendar.refetchEvents();
-                        },
-                        error: function (req, status, error) {
-                            console.log(error);
-                        }
-                    });
-                    return false;
-                },
-                select: function (start, end, jsEvent, view) {
-                    if (jsEvent.toElement.className === 'fc-bg') {
-                        console.log('{{calendar_slug}}');
-                        $.ajax({
-                            type: 'POST',
-                            url: "{% url 'api_select_create' %}",
-                            dataType: 'json',
-                            data: {
-                                'start': start.toISOString(),
-                                'end': end.toISOString(),
-                                'calendar_slug': '{{calendar_slug}}',
-                            },
-                            success: function (result) {
-                                console.log(result);
-                                if (result.success) $('#feedback input').attr('value', '');
-                                calendar.refetchEvents();
-                            },
-                            error: function (req, status, error) {
-                                console.log(error);
-                            }
-                        });
-                        $('#calendar').fullCalendar('unselect');
-                        return false;
-                    }
-                }
+                eventResize: send_event_change,
+                eventDrop: send_event_change,
             });
             calendar.render();
         });
@@ -183,46 +110,52 @@
          data-bs-keyboard="false" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="staticBackdropLabel">Create new event</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post">
+                <form onsubmit="submit_create_form()" action="{% url 'schedule_create_event' %}" method="post">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="staticBackdropLabel">Create new event</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
                         {% csrf_token %}
 
+                        <input type="hidden" name="calendar_slug" value="{{ project.key }}">
+
                         <div class="input-group input-group-lg mb-1">
-                            <input type="text" class="form-control" placeholder="Enter a title ..." aria-label="title"
+                            <input name="title" type="text" class="form-control" placeholder="Enter a title ..."
+                                   aria-label="title"
                                    aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group input-group-sm mb-3">
-                            <input type="text" class="form-control" placeholder="Enter a location ..."
+                            <input name="location" type="text" class="form-control" placeholder="Enter a location ..."
                                    aria-label="title"
                                    aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group">
                             <span class="input-group-text" style="width: 6em;">Start time</span>
-                            <input type="text" class="form-control datetime-selector"
+                            <input name="start" type="text" class="form-control datetime-selector"
                                    placeholder="Click to select a time"
                                    aria-label="Start time"
                                    aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width: 6em;">End time</span>
-                            <input type="text" class="form-control datetime-selector"
+                            <input name="end" type="text" class="form-control datetime-selector"
                                    placeholder="Click to select a time"
                                    aria-label="End time"
                                    aria-describedby="basic-addon1">
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Create Event</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Create Event</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
 
 
 {% endblock %}

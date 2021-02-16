@@ -122,6 +122,7 @@ $(document).ready(function() {
             }
         },
         eventRender: function(event, element) {
+
             var s = element[0].className;
             if(s.indexOf("fc-day-grid-event") < 0){
                 title = element.children().find( '.fc-title' );
@@ -159,16 +160,17 @@ $(document).ready(function() {
                 }
             }
         },
-        dayClick: function(date, allDay, jsEvent, view) {
+        dayClick: function(info, allDay, jsEvent, view) {
                     if (allDay) {
                         $('#calendar').fullCalendar('changeView', 'agendaWeek');
                         $("#calendar").fullCalendar('gotoDate', date);
                     }
                 },
         eventDrop: function(event,delta,revertFunc) {
+            console.log(event);
             $.ajax({
                     type: 'POST',
-                    url: "{% url 'api_move_or_resize' %}",
+                    url: "{% url 'schedule_edit_event' %}",
                     dataType: 'json',
                     data : {
                         'id': event.id,
@@ -189,7 +191,7 @@ $(document).ready(function() {
         eventResize: function(event,delta,revertFunc) {
             $.ajax({
                     type: 'POST',
-                    url: "{% url 'api_move_or_resize' %}",
+                    url: "{% url 'schedule_edit_event' %}",
                     dataType: 'json',
                     data : {
                         'id': event.id,

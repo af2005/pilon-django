@@ -440,46 +440,59 @@ def _api_occurrences(start, end, calendar_slug, timezone):
 @require_POST
 @check_calendar_permissions
 def api_move_or_resize_by_code(request):
-    response_data = {}
     user = request.user
-    id = request.POST.get("id")
-    existed = bool(request.POST.get("existed") == "true")
-    delta = datetime.timedelta(minutes=int(request.POST.get("delta")))
-    resize = bool(request.POST.get("resize", False))
-    event_id = request.POST.get("event_id")
+    event = {
+        "start": request.POST.get("event_start"),
+        "end": request.POST.get("event_end"),
+        "id": int(request.POST.get("event_id")),
+        "existed": request.POST.get("existed")
+    }
+    old_event = {
+        "start": request.POST.get("old_event_start"),
+        "end": request.POST.get("old_event_end")
+    }
+
+    start_delta = dateutil.parser.parse(event["start"]) - dateutil.parser.parse(old_event["start"])
+    end_delta = dateutil.parser.parse(event["end"]) - dateutil.parser.parse(old_event["end"])
 
     response_data = _api_move_or_resize_by_code(
-        user, id, existed, delta, resize, event_id
+        user=user,
+        group_id=1,
+        event_id=event["id"],
+        existed=False,
+        start_delta=start_delta,
+        end_delta=end_delta,
+
     )
 
     return JsonResponse(response_data)
 
 
-def _api_move_or_resize_by_code(user, id, existed, delta, resize, event_id):
-    response_data = {}
-    response_data["status"] = "PERMISSION DENIED"
+def _api_move_or_resize_by_code(user, group_id, event_id, existed, start_delta, end_delta):
+    response_data = {"status": "PERMISSION DENIED"}
 
     if existed:
-        occurrence = Occurrence.objects.get(id=id)
-        occurrence.end += delta
-        if not resize:
-            occurrence.start += delta
+        print("occurrence detected")
+        occurrence = Occurrence.objects.get(id=group_id)
+        occurrence.start += start_delta
+        occurrence.end += end_delta
+
         if CHECK_OCCURRENCE_PERM_FUNC(occurrence, user):
             occurrence.save()
             response_data["status"] = "OK"
     else:
+        print("no occurrence detected")
+
         event = Event.objects.get(id=event_id)
-        dts = 0
-        dte = delta
-        if not resize:
-            event.start += delta
-            dts = delta
-        event.end = event.end + delta
+        event.start += start_delta
+        event.end += end_delta
+        print(event)
+
         if CHECK_EVENT_PERM_FUNC(event, user):
             event.save()
             event.occurrence_set.all().update(
-                original_start=F("original_start") + dts,
-                original_end=F("original_end") + dte,
+                original_start=F("original_start") + start_delta,
+                original_end=F("original_end") + end_delta,
             )
             response_data["status"] = "OK"
     return response_data
@@ -489,8 +502,9 @@ def _api_move_or_resize_by_code(user, id, existed, delta, resize, event_id):
 @check_calendar_permissions
 def api_select_create(request):
     response_data = {}
-    start = request.POST.get("start")
-    end = request.POST.get("end")
+    start = dateutil.parser.parse(request.POST.get("start"))
+    end = dateutil.parser.parse(request.POST.get("end"))
+    location = request.POST.get("location")
     calendar_slug = request.POST.get("calendar_slug")
 
     response_data = _api_select_create(start, end, calendar_slug)

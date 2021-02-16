@@ -138,10 +138,8 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = LOGIN_URL
 PUBLIC_URLS = ["/dashboard/all-updates"]
 
-
 # Reversion
-ADD_REVERSION_ADMIN=True
+ADD_REVERSION_ADMIN = True
 
-#Calendar
-FIRST_DAY_OF_WEEK=1
-
+# Calendar
+FIRST_DAY_OF_WEEK = 1

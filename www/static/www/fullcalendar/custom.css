@@ -33,7 +33,7 @@
   font-size: 2.25em;
   color: #2f363d; }
 
-.fc .fc-header-toolbar .btn-primary:not(.fc-createButton-button) {
+.fc .fc-header-toolbar .btn-primary:not(.fc-createButton-button):not(.active) {
   color: #24292e;
   background-color: #f6f8fa;
   border-color: #f6f8fa; }

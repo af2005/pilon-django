@@ -131,8 +131,8 @@ urlpatterns = [
     # api urls
     url(r"^api/occurrences", api_occurrences, name="api_occurrences"),
     url(
-        r"^api/move_or_resize/$", api_move_or_resize_by_code, name="api_move_or_resize"
+        r"^api/move_or_resize/$", api_move_or_resize_by_code, name="schedule_edit_event"
     ),
-    url(r"^api/select_create/$", api_select_create, name="api_select_create"),
+    url(r"^api/select_create/$", api_select_create, name="schedule_create_event"),
     url(r"^$", ListView.as_view(queryset=Calendar.objects.all()), name="schedule"),
 ]
