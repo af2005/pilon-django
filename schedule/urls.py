@@ -19,8 +19,8 @@ from schedule.views import (
     OccurrenceView,
     api_edit_event,
     api_occurrences,
-    api_select_create,
-    api_delete
+    api_create_event,
+    api_delete_event
 )
 
 urlpatterns = [
@@ -134,8 +134,8 @@ urlpatterns = [
     url(
         r"^api/move_or_resize/$", api_edit_event, name="schedule_edit_event"
     ),
-    url(r"^api/select_create/$", api_select_create, name="schedule_create_event"),
-    url(r"^api/delete/$", api_delete, name="schedule_delete_event"),
+    url(r"^api/select_create/$", api_create_event, name="schedule_create_event"),
+    url(r"^api/delete/$", api_delete_event, name="schedule_delete_event"),
 
     url(r"^$", ListView.as_view(queryset=Calendar.objects.all()), name="schedule"),
 ]

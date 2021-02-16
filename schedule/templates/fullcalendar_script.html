@@ -215,7 +215,7 @@ $(document).ready(function() {
                 console.log('{{calendar_slug}}');
                 $.ajax({
                         type: 'POST',
-                        url: "{% url 'api_select_create' %}",
+                        url: "{% url 'api_create_event' %}",
                         dataType: 'json',
                         data : {
                             'start': start.toISOString(),
