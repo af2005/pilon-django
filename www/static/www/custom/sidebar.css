@@ -14,7 +14,19 @@
     overflow-y: auto;
 }
 
+.btn-stealth{
+    color: #41464b;
+}
+.sidebar-collapsed span, .sidebar-collapsed span, .sidebar-collapsed .sidebar-lower-content{
+    display: none;
 
+}
+.sidebar-collapsed .container{
+    padding:0;
+}
+#sidebar-upper-content-header{
+    grid-template-columns: 1fr auto;
+}
 /* Sidebar Styles */
 
 .sidebar-nav {

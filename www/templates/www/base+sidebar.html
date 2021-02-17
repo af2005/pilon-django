@@ -8,7 +8,7 @@
 
 {% block sidebar %}
     <link rel="stylesheet" type="text/css" href="{% static "www/custom/sidebar.css" %}">
-    <div id="sidebar-wrapper" class="bg-light border-end pt-3">
+    <div id="sidebar-wrapper" class="bg-light border-end">
         <ul class="sidebar-nav">
             {% block sidebar_upper_content %}
             {% endblock %}
@@ -21,8 +21,11 @@
                     </a></li>
             {% endfor %}
         </ul>
-        {% block sidebar_lower_content %}
-        {% endblock %}
+        <div class="sidebar-lower-content">
+            {% block sidebar_lower_content %}
+            {% endblock %}
+        </div>
+
 
     </div>
 {% endblock sidebar %}
