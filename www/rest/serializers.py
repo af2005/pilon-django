@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from ..models import Entity, Project, MarkdownEntity, Task, Attachment
+from rest_polymorphic.serializers import PolymorphicSerializer
 
 
 class EntitySerializer(serializers.ModelSerializer):
@@ -30,3 +31,13 @@ class AttachmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attachment
         fields = ("file_name", "file_type", "file_path")
+
+
+class ProjectPolymorphicSerializer(PolymorphicSerializer):
+    model_serializer_mapping = {
+        Entity: EntitySerializer,
+        Project: ProjectSerializer,
+        MarkdownEntity: MarkdownEntitySerializer,
+        Task: TaskSerializer,
+        Attachment: AttachmentSerializer,
+    }
