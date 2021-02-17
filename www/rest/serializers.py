@@ -1,39 +1,60 @@
 from rest_framework import serializers
-from ..models import Entity, Project, MarkdownEntity, Task, Attachment
+from ..models import User, Group, Entity, Project, MarkdownEntity, Task, Attachment
 from rest_polymorphic.serializers import PolymorphicSerializer
 
 
-class EntitySerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ["url", "username", "email", "groups", "tasks", "created"]
+
+
+class GroupSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Group
+        fields = ["url", "name"]
+
+
+class EntitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Entity
-        fields = ("id", "name", "parent", "date_created", "date_modified", "creator")
+        fields = ("id", "name", "parent", "date_created", "date_modified", "creator", "children")
+        extra_kwargs = {
+            "creator": {"view_name": "user-detail", "lookup_field": "pk"},
+        }
 
 
-class ProjectSerializer(serializers.ModelSerializer):
+class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Project
-        fields = "key"
+        fields = EntitySerializer.Meta.fields + ("key",)
+        extra_kwargs = EntitySerializer.Meta.extra_kwargs
 
 
-class MarkdownEntitySerializer(serializers.ModelSerializer):
+class MarkdownEntitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MarkdownEntity
-        fields = ("markdown", "markdown_rendered")
+        fields = EntitySerializer.Meta.fields + ("markdown", "markdown_rendered")
+        extra_kwargs = EntitySerializer.Meta.extra_kwargs
 
 
-class TaskSerializer(serializers.ModelSerializer):
+class TaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Task
-        fields = ("due_date", "assignee")
+        fields = EntitySerializer.Meta.fields + ("due_date", "assignee")
+        extra_kwargs = EntitySerializer.Meta.extra_kwargs | {
+            "assignee": {"view_name": "user-detail", "lookup_field": "pk"},
+        }
 
 
-class AttachmentSerializer(serializers.ModelSerializer):
+class AttachmentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Attachment
-        fields = ("file_name", "file_type", "file_path")
+        fields = EntitySerializer.Meta.fields + ("file_name", "file_type", "file_path")
+        extra_kwargs = EntitySerializer.Meta.extra_kwargs
 
 
-class ProjectPolymorphicSerializer(PolymorphicSerializer):
+class EntityPolymorphicSerializer(PolymorphicSerializer):
     model_serializer_mapping = {
         Entity: EntitySerializer,
         Project: ProjectSerializer,

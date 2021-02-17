@@ -34,7 +34,7 @@ class Entity(PolymorphicMPTTModel):
     creator = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
-        related_name="creator",
+        related_name="created",
         null=True,
         default=None,
         blank=True,
@@ -98,9 +98,8 @@ class Task(MarkdownEntity):
 
     due_date = models.DateTimeField(null=True)
     assignee = models.ForeignKey(
-        User, null=True, blank=True, on_delete=models.SET_NULL, related_name="Assignee"
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name="tasks"
     )
-    content = models.TextField()
 
 
 @reversion.register(follow=["markdownentity_ptr"])

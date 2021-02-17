@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     "markdownfield",
     "reversion",  # https://github.com/etianen/django-reversion
     "reversion_compare",  # https://github.com/jedie/django-reversion-compare
-    "rest_framework",
-    "rest-polymorphic",
+    "rest_framework",  # https://www.django-rest-framework.org/tutorial/quickstart/
+    # "rest-polymorphic",  # https://github.com/apirobot/django-rest-polymorphic
 ]
 
 MIDDLEWARE = [
