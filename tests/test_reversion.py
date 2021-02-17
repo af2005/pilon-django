@@ -4,8 +4,8 @@ from www.models import Entity, User
 import reversion
 from reversion.models import Version
 
-class TestReversion(TestCase):
 
+class TestReversion(TestCase):
     def setUp(self) -> None:
         super().setUp()
         self.user = User.objects.create_user(
@@ -14,9 +14,7 @@ class TestReversion(TestCase):
 
     def test_revision_data(self):
         with reversion.create_revision():
-            entity = Entity.objects.create(
-                name="TestEntity", creator=self.user
-            )
+            entity = Entity.objects.create(name="TestEntity", creator=self.user)
         with reversion.create_revision():
             entity.name = "TestEntityUpdated"
             entity.save()
@@ -35,9 +33,7 @@ class TestReversion(TestCase):
 
     def test_revert_reversion(self):
         with reversion.create_revision():
-            entity = Entity.objects.create(
-                name="TestEntity", creator=self.user
-            )
+            entity = Entity.objects.create(name="TestEntity", creator=self.user)
 
         with reversion.create_revision():
             entity.name = "TestEntityUpdated"
