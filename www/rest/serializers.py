@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import User, Group, Entity, Project, MarkdownEntity, Task, Attachment
+from ..models import User, Group, Entity, Project, MarkdownEntity, WikiPage, JournalPage, Task, Attachment
 from rest_polymorphic.serializers import PolymorphicSerializer
 
 
@@ -18,7 +18,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class EntitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Entity
-        fields = ("id", "name", "parent", "date_created", "date_modified", "creator", "children")
+        fields = ("url", "name", "parent", "date_created", "date_modified", "creator", "children")
         extra_kwargs = {
             "creator": {"view_name": "user-detail", "lookup_field": "pk"},
         }
@@ -35,6 +35,20 @@ class MarkdownEntitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MarkdownEntity
         fields = EntitySerializer.Meta.fields + ("markdown", "markdown_rendered")
+        extra_kwargs = EntitySerializer.Meta.extra_kwargs
+
+
+class WikiPageSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = WikiPage
+        fields = EntitySerializer.Meta.fields
+        extra_kwargs = EntitySerializer.Meta.extra_kwargs
+
+
+class JournalPageSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = JournalPage
+        fields = EntitySerializer.Meta.fields + ("date", )
         extra_kwargs = EntitySerializer.Meta.extra_kwargs
 
 
@@ -55,10 +69,13 @@ class AttachmentSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class EntityPolymorphicSerializer(PolymorphicSerializer):
+    resource_type_field_name = 'entity_type'
     model_serializer_mapping = {
         Entity: EntitySerializer,
         Project: ProjectSerializer,
         MarkdownEntity: MarkdownEntitySerializer,
+        WikiPage: MarkdownEntitySerializer,
+        JournalPage: JournalPageSerializer,
         Task: TaskSerializer,
         Attachment: AttachmentSerializer,
     }

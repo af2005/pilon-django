@@ -8,6 +8,8 @@ router.register(r"group", views.GroupViewSet)
 router.register(r"entity", views.EntityViewSet)
 router.register(r"project", views.ProjectViewSet)
 router.register(r"markdown-entity", views.MarkdownEntityViewSet)
+router.register(r"wiki-page", views.WikiPageViewSet)
+router.register(r"journal-page", views.JournalPageViewSet)
 router.register(r"task", views.TaskViewSet)
 router.register(r"attachment", views.AttachmentViewSet)
 
