@@ -33,3 +33,8 @@
 - django-markdownfield
 - License: MIT
 - https://pypi.org/project/django-markdownfield/
+
+# Polymorhpic rest support
+- django-rest-polymorphic
+- License: MIT
+- https://github.com/apirobot/django-rest-polymorphic
