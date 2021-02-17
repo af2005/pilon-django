@@ -3,6 +3,7 @@ from ..models import Entity, Project, MarkdownEntity, Task, Attachment
 from .serializers import ProjectPolymorphicSerializer
 
 
+# TODO: add permission
 class EntityViewSet(viewsets.ModelViewSet):
     queryset = Entity.objects.all()
     serializer_class = ProjectPolymorphicSerializer
