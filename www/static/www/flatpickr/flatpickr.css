@@ -488,8 +488,9 @@ span.flatpickr-weekday {
   border-radius: 0; }
 
 .flatpickr-day.today {
-  background-color: #6EFACC !important;
-  border-radius: 0; }
+  background-color: #ffd33d !important;
+  border-radius: 0;
+  font-weight: 700; }
 
 .flatpickr-day.today:hover, .flatpickr-day.today:focus {
   border-color: #959da5;
