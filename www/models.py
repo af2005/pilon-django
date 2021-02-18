@@ -93,7 +93,6 @@ class JournalPage(MarkdownEntity):
 
 @reversion.register(follow=["markdownentity_ptr"])
 class Task(MarkdownEntity):
-    can_have_children = True
     child_types = ["Task", "Comment", "Attachment"]
 
     due_date = models.DateTimeField(null=True)
@@ -104,12 +103,13 @@ class Task(MarkdownEntity):
 
 @reversion.register(follow=["markdownentity_ptr"])
 class Comment(MarkdownEntity):
-    can_have_children = True
     child_types = ["Comment", "Attachment"]
 
 
 @reversion.register(follow=["entity_ptr"])
 class Attachment(Entity):
+    can_have_children = False
+
     RENDERABLE_FILE_TYPES = (
         "png",
         "gif",

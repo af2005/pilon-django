@@ -59,22 +59,22 @@ class MarkdownEntitySerializer(serializers.HyperlinkedModelSerializer):
 class WikiPageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = WikiPage
-        fields = EntitySerializer.Meta.fields
-        extra_kwargs = EntitySerializer.Meta.extra_kwargs
+        fields = MarkdownEntitySerializer.Meta.fields
+        extra_kwargs = MarkdownEntitySerializer.Meta.extra_kwargs
 
 
 class JournalPageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = JournalPage
-        fields = EntitySerializer.Meta.fields + ("date",)
-        extra_kwargs = EntitySerializer.Meta.extra_kwargs
+        fields = MarkdownEntitySerializer.Meta.fields + ("date",)
+        extra_kwargs = MarkdownEntitySerializer.Meta.extra_kwargs
 
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Task
-        fields = EntitySerializer.Meta.fields + ("due_date", "assignee")
-        extra_kwargs = EntitySerializer.Meta.extra_kwargs | {
+        fields = MarkdownEntitySerializer.Meta.fields + ("due_date", "assignee")
+        extra_kwargs = MarkdownEntitySerializer.Meta.extra_kwargs | {
             "assignee": {"view_name": "user-detail", "lookup_field": "pk"},
         }
 
@@ -92,7 +92,7 @@ class EntityPolymorphicSerializer(PolymorphicSerializer):
         Entity: EntitySerializer,
         Project: ProjectSerializer,
         MarkdownEntity: MarkdownEntitySerializer,
-        WikiPage: MarkdownEntitySerializer,
+        WikiPage: WikiPageSerializer,
         JournalPage: JournalPageSerializer,
         Task: TaskSerializer,
         Attachment: AttachmentSerializer,
