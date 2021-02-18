@@ -1,7 +1,16 @@
 from rest_framework import viewsets, permissions
-from ..models import User, Group, Entity, Project, MarkdownEntity, WikiPage, JournalPage, Task, Attachment
+from ..models import (
+    User,
+    Group,
+    Entity,
+    Project,
+    MarkdownEntity,
+    WikiPage,
+    JournalPage,
+    Task,
+    Attachment,
+)
 from .serializers import EntityPolymorphicSerializer, UserSerializer, GroupSerializer
-
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -38,6 +47,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
 class MarkdownEntityViewSet(viewsets.ModelViewSet):
     queryset = MarkdownEntity.objects.all()
     serializer_class = EntityPolymorphicSerializer
+
 
 class WikiPageViewSet(viewsets.ModelViewSet):
     queryset = WikiPage.objects.all()
