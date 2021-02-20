@@ -222,6 +222,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "django-widget-tweaks"
+version = "1.4.8"
+description = "Tweak the form field rendering in templates, not in python-level form definitions."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "future"
 version = "0.18.2"
 description = "Clean single-source support for Python 3 and 2"
@@ -436,7 +444,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "8ed6765c00a2fc9530d88f5be0fa4bbcf3ecf5be4ac40e86172453c452727268"
+content-hash = "b3bc8d942dd0ad92ee79473f9008f7e98fc3877d85582e024b9371774c3b78b9"
 
 [metadata.files]
 appdirs = [
@@ -468,7 +476,6 @@ click = [
 ]
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
-    {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
 ]
 diff-match-patch = [
     {file = "diff-match-patch-20200713.tar.gz", hash = "sha256:da6f5a01aa586df23dfc89f3827e1cafbb5420be9d87769eeb079ddfd9477a18"},
@@ -516,6 +523,10 @@ django-tag-parser = [
 ]
 django-utils = [
     {file = "django-utils-0.0.2.tar.gz", hash = "sha256:98b59b368d499b4d1b6dc66f15c0a136833bea12e0b299efdbfd754dc04c79d5"},
+]
+django-widget-tweaks = [
+    {file = "django-widget-tweaks-1.4.8.tar.gz", hash = "sha256:9f91ca4217199b7671971d3c1f323a2bec71a0c27dec6260b3c006fa541bc489"},
+    {file = "django_widget_tweaks-1.4.8-py2.py3-none-any.whl", hash = "sha256:f80bff4a8a59b278bb277a405a76a8b9a884e4bae7a6c70e78a39c626cd1c836"},
 ]
 future = [
     {file = "future-0.18.2.tar.gz", hash = "sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"},

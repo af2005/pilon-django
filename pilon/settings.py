@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "schedule.apps.ScheduleConfig",
     "reversion",  # https://github.com/etianen/django-reversion
     "reversion_compare",  # https://github.com/jedie/django-reversion-compare
+    "widget_tweaks"
 ]
 
 MIDDLEWARE = [
