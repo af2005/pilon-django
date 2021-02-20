@@ -1,19 +1,5 @@
 {% extends "www/base+sidebar+title.html" %}
-{% load static %}
-{% block sidebar_upper_content %}
-    <div id="sidebar-upper-content-header" class="d-grid align-content-center my-4">
-
-        <span class="mx-3 my-auto"><strong>{{ project.name }}</strong></span>
-        <button id="sidebar-collapse-toggle" class="btn btn-sm btn-stealth mx-1"><i class=" bi bi-arrow-bar-left"></i>
-        </button>
-    </div>
-    <script src="{% static "www/jquery/jquery-3.5.1.min.js" %}"></script>
-    <script type="application/javascript">
-        $("#sidebar-collapse-toggle").click(function () {
-            $("#sidebar-wrapper").toggleClass("sidebar-collapsed");
-            $("#sidebar-collapse-toggle i").toggleClass("bi-arrow-bar-left").toggleClass("bi-arrow-bar-right");
-
-        });
-    </script>
-{% endblock %}
+{% block sidebar_title %}
+<strong>{{ project.name }}</strong>
+{% endblock sidebar_title %}
 
