@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="Layer_1"
+   enable-background="new 0 0 510 510"
+   height="298.81445"
+   viewBox="0 0 393.9617 297.64721"
+   width="395.50665"
+   version="1.1"
+   sodipodi:docname="pilon-logo-blue.svg"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)">
+  <metadata
+     id="metadata844">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs842" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1688"
+     inkscape:window-height="1442"
+     id="namedview840"
+     showgrid="false"
+     inkscape:zoom="1.214392"
+     inkscape:cx="179.96017"
+     inkscape:cy="146.59089"
+     inkscape:window-x="358"
+     inkscape:window-y="29"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer3"
+     inkscape:document-rotation="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Layer 2"
+     style="display:inline"
+     transform="translate(-58.349142,-212.32388)" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Layer 1"
+     style="display:inline"
+     transform="translate(-58.349142,-212.32388)">
+    <g
+       aria-label="π"
+       transform="matrix(0.81346937,0,0,0.87746128,37.325869,101.74371)"
+       id="text850"
+       style="font-style:normal;font-weight:normal;font-size:966.002px;line-height:1.25;font-family:sans-serif;fill:#0366d6;fill-opacity:1;stroke:none;stroke-width:1.81125">
+      <path
+         d="m 488.3478,170.07662 7.72802,-44.05377 H 150.2471 c -69.552148,0 -103.071907,4.25739 -124.403136,11.87947 0,0 7.132908,18.38561 10.774223,37.34816 3.526192,18.36303 3.724278,33.08574 3.724278,33.08574 24.150051,-5.13961 49.222112,-8.60423 85.930185,-8.60423 -3.86401,92.51293 -27.223657,198.69004 -61.033727,265.50493 h 70.518147 c 31.87806,-56.53568 59.55824,-171.85233 64.38825,-262.8968 l 152.80096,7.27816 -0.80476,161.63725 c -0.27417,55.06663 5.79601,83.70217 14.49003,93.98139 H 437.1497 C 430.38768,448.34964 425.55767,421.18315 425.55767,364.64746 V 170.07662 Z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:966.002px;font-family:'.Apple SD Gothic NeoI';-inkscape-font-specification:'.Apple SD Gothic NeoI';fill:#0366d6;fill-opacity:1;stroke-width:1.57908"
+         id="path856"
+         sodipodi:nodetypes="ccscsccccccsccscc" />
+    </g>
+    <g
+       aria-label="π"
+       transform="matrix(0.81346937,0,0,0.87746128,37.325869,101.74371)"
+       id="text850-0"
+       style="font-style:normal;font-weight:normal;font-size:966.002px;line-height:1.25;font-family:sans-serif;fill:#0366d6;fill-opacity:1;stroke:none;stroke-width:1.81125">
+      <path
+         d="m 483.79038,209.15833 c 0,0 2.2826,-21.9832 8.89263,-42.16228 7.58884,-23.16717 17.4591,-40.9732 17.4591,-40.9732 H 150.2471 c 72.03198,22.40936 140.70635,41.02936 202.69918,83.59543 l -0.80476,161.63725 c -0.27417,55.06663 5.79601,83.70217 14.49003,93.98139 h 70.51815 c -6.76202,-16.88728 -11.59203,-44.05377 -11.59203,-100.58946 l 1.13935,-154.12732 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:966.002px;font-family:'.Apple SD Gothic NeoI';-inkscape-font-specification:'.Apple SD Gothic NeoI';fill:#0366d6;fill-opacity:1;stroke-width:1.57908"
+         id="path856-3"
+         sodipodi:nodetypes="cscccsccscc" />
+    </g>
+  </g>
+</svg>

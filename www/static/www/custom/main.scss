@@ -194,6 +194,18 @@ a.bg-secondary:hover {
   color: $black;
 }
 
+.navbar-dark a.navbar-brand:hover{
+  color:$primary;
+  transition: color 0.15s ease-in-out;
+}
+.navbar-brand svg{
+  height: 0.7em;
+  padding: 0 0.2em;
+  vertical-align: baseline;
+}
+
+
+
 .text-white-50 {
   color: rgba(255, 255, 255, .5);
 }
