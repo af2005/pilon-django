@@ -8410,7 +8410,7 @@ a.bg-secondary:hover {
 
 .navbar .btn-icon {
   color: white;
-  border: 1px #1b1f23 solid; }
+  border: 1px transparent solid; }
 
 .navbar .btn-icon:hover {
   outline: 0;
