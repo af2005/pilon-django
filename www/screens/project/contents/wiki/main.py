@@ -30,3 +30,10 @@ def view_wiki(request, key):
         active_sidebar_item=6,
     )
     return HttpResponse(tpl)
+
+
+def test_page_tree(request, key):
+    tpl = loader.get_template("www/project/wiki-tree-test.html")
+    context = {"nodes": Project.objects.filter(key=key)}
+    tpl = tpl.render(context, request)
+    return HttpResponse(tpl)
