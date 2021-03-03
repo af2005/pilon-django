@@ -74,9 +74,12 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Task
         fields = MarkdownEntitySerializer.Meta.fields + ("due_date", "assignee")
-        extra_kwargs = {**MarkdownEntitySerializer.Meta.extra_kwargs, **{
-            "assignee": {"view_name": "user-detail", "lookup_field": "pk"},
-        }}
+        extra_kwargs = {
+            **MarkdownEntitySerializer.Meta.extra_kwargs,
+            **{
+                "assignee": {"view_name": "user-detail", "lookup_field": "pk"},
+            },
+        }
 
 
 class AttachmentSerializer(serializers.HyperlinkedModelSerializer):

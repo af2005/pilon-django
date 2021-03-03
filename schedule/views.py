@@ -12,7 +12,6 @@ from django.http import (
     HttpResponseNotFound,
     HttpResponseForbidden,
     JsonResponse,
-
 )
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -268,15 +267,15 @@ class DeleteEventView(EventEditMixin, DeleteView):
 
 
 def get_occurrence(
-        event_id,
-        occurrence_id=None,
-        year=None,
-        month=None,
-        day=None,
-        hour=None,
-        minute=None,
-        second=None,
-        tzinfo=None,
+    event_id,
+    occurrence_id=None,
+    year=None,
+    month=None,
+    day=None,
+    hour=None,
+    minute=None,
+    second=None,
+    tzinfo=None,
 ):
     """
     Because occurrences don't have to be persisted, there must be two ways to
@@ -454,11 +453,15 @@ def api_edit_event(request):
     }
     old_event = {
         "start": request.POST.get("old_event_start"),
-        "end": request.POST.get("old_event_end")
+        "end": request.POST.get("old_event_end"),
     }
 
-    start_delta = dateutil.parser.parse(event["start"]) - dateutil.parser.parse(old_event["start"])
-    end_delta = dateutil.parser.parse(event["end"]) - dateutil.parser.parse(old_event["end"])
+    start_delta = dateutil.parser.parse(event["start"]) - dateutil.parser.parse(
+        old_event["start"]
+    )
+    end_delta = dateutil.parser.parse(event["end"]) - dateutil.parser.parse(
+        old_event["end"]
+    )
 
     response = _api_edit_event(
         user=user,
@@ -529,7 +532,7 @@ def api_create_event(request):
         end=end,
         calendar_slug=calendar_slug,
         title=title,
-        description=description
+        description=description,
     )
 
     return response
@@ -558,11 +561,7 @@ def _api_create_event(start, end, calendar_slug, title, description):
         return HttpResponseNotFound(f"No Calendar found with name {calendar_slug}")
 
     Event.objects.create(
-        start=start,
-        end=end,
-        title=title,
-        calendar=calendar,
-        description=description
+        start=start, end=end, title=title, calendar=calendar, description=description
     )
     return JsonResponse({"status": "OK"})
 

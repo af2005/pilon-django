@@ -20,7 +20,7 @@ from schedule.views import (
     api_edit_event,
     api_occurrences,
     api_create_event,
-    api_delete_event
+    api_delete_event,
 )
 
 urlpatterns = [
@@ -131,11 +131,8 @@ urlpatterns = [
     url(r"^ical/calendar/(.*)/$", CalendarICalendar(), name="calendar_ical"),
     # api urls
     url(r"^api/occurrences", api_occurrences, name="api_occurrences"),
-    url(
-        r"^api/move_or_resize/$", api_edit_event, name="schedule_edit_event"
-    ),
+    url(r"^api/move_or_resize/$", api_edit_event, name="schedule_edit_event"),
     url(r"^api/select_create/$", api_create_event, name="schedule_create_event"),
     url(r"^api/delete/$", api_delete_event, name="schedule_delete_event"),
-
     url(r"^$", ListView.as_view(queryset=Calendar.objects.all()), name="schedule"),
 ]
