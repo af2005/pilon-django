@@ -4,6 +4,7 @@
 
 {% block content %}
 
+<<<<<<< HEAD
     <ul class="root">
         {% recursetree nodes %}
             <li>
@@ -28,5 +29,17 @@
             {% endfor %}
         </ul>
     </div>
+=======
+<ul class="root">
+    {% recursetree nodes %}
+        <li>
+            {{ node.name }}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+        </li>
+    {% endrecursetree %}
+</ul>
+>>>>>>> 63-render-page-tree
 
 {% endblock %}
