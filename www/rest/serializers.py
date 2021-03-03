@@ -16,7 +16,7 @@ from rest_polymorphic.serializers import PolymorphicSerializer
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ["url", "username", "email", "groups", "tasks", "created"]
+        fields = ["url", "username", "email", "groups", "tasks", "created_entities"]
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -74,9 +74,9 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Task
         fields = MarkdownEntitySerializer.Meta.fields + ("due_date", "assignee")
-        extra_kwargs = MarkdownEntitySerializer.Meta.extra_kwargs | {
+        extra_kwargs = {**MarkdownEntitySerializer.Meta.extra_kwargs, **{
             "assignee": {"view_name": "user-detail", "lookup_field": "pk"},
-        }
+        }}
 
 
 class AttachmentSerializer(serializers.HyperlinkedModelSerializer):

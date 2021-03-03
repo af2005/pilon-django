@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     "schedule.apps.ScheduleConfig",
     "reversion",  # https://github.com/etianen/django-reversion
     "reversion_compare",  # https://github.com/jedie/django-reversion-compare
-    "widget_tweaks"
+    "widget_tweaks",
     "rest_framework",  # https://www.django-rest-framework.org/tutorial/quickstart/
     # "rest-polymorphic",  # https://github.com/apirobot/django-rest-polymorphic
 ]
