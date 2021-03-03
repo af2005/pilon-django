@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     "reversion",  # https://github.com/etianen/django-reversion
     "reversion_compare",  # https://github.com/jedie/django-reversion-compare
     "widget_tweaks"
+    "rest_framework",  # https://www.django-rest-framework.org/tutorial/quickstart/
+    # "rest-polymorphic",  # https://github.com/apirobot/django-rest-polymorphic
 ]
 
 MIDDLEWARE = [

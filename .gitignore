@@ -116,3 +116,7 @@ GitHub.sublime-settings
 .history
 .DS_Store
 .sass-cache/
+
+# imdone
+.imdoneignore
+.imdone

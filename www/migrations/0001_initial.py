@@ -181,7 +181,7 @@ class Migration(migrations.Migration):
                         serialize=False,
                         to="www.markdownentity",
                     ),
-                )
+                ),
             ],
             options={
                 "ordering": ("tree_id", "lft"),
@@ -226,7 +226,7 @@ class Migration(migrations.Migration):
                         serialize=False,
                         to="www.markdownentity",
                     ),
-                )
+                ),
             ],
             options={
                 "verbose_name": "Wiki Page",

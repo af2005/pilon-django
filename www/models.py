@@ -34,7 +34,7 @@ class Entity(PolymorphicMPTTModel):
     creator = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
-        related_name="EntityCreator",
+        related_name="created_entities",
         null=True,
         default=None,
         blank=True,
@@ -90,24 +90,23 @@ class JournalPage(MarkdownEntity):
 
 @reversion.register(follow=["markdownentity_ptr"])
 class Task(MarkdownEntity):
-    can_have_children = True
     child_types = ["Task", "Comment", "Attachment"]
 
     due_date = models.DateTimeField(null=True)
     assignee = models.ForeignKey(
-        User, null=True, blank=True, on_delete=models.SET_NULL, related_name="Assignee"
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name="tasks"
     )
-    content = models.TextField()
 
 
 @reversion.register(follow=["markdownentity_ptr"])
 class Comment(MarkdownEntity):
-    can_have_children = True
     child_types = ["Comment", "Attachment"]
 
 
 @reversion.register(follow=["entity_ptr"])
 class Attachment(Entity):
+    can_have_children = False
+
     RENDERABLE_FILE_TYPES = (
         "png",
         "gif",
