@@ -7,27 +7,16 @@
     <ul class="root">
         {% recursetree nodes %}
             <li>
-                {{ node.name }}
-            </li>
-            <li>
-                {{ node.children.all }}
+            {{ node.name }}
+            {% if not node.is_leaf_node %}
                 <ul class="children">
                     {{ children }}
                 </ul>
-            </li>
+            {% endif %}
+        </li>
         {% endrecursetree %}
 
     </ul>
-
-    <div>
-
-        <ul>
-            {% drilldown_tree_for_node nodes as wikipage all_descendants %}
-            {% for item in wikipage %}
-                {{ item }}
-            {% endfor %}
-        </ul>
-    </div>
 
 
 {% endblock %}

@@ -19,7 +19,9 @@ def populate_db(apps, schema_editor):
 
         test_project = Project(name="Test Project", key="test", creator=test_user)
         test_project.save()
-        WikiPage(name="Test Wiki Page", creator=test_user, parent=test_project).save()
+        parent_page = WikiPage(name="Test Wiki Page", creator=test_user, parent=test_project)
+        parent_page.save()
+        WikiPage(name="Test Wiki Page Child", creator=test_user, parent=parent_page).save()
         journal = JournalPage(name="Test Journal Page", parent=test_project)
         journal.save()
         WikiPage(name="Orphaned Page", creator=test_user).save()
