@@ -1,5 +1,6 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
+{% load mptt_tags %}
 
 {% block navigation %}{% include 'www/snippets/navigation-create-button.html' %}{% endblock %}
 
@@ -77,54 +78,42 @@
 {% block additional_scripts_eob %}
     <script type="application/javascript"
             src="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.min.js" %}"></script>
-
+    <script type="application/javascript" src="{% static "www/mustache/mustache.min.js" %}"></script>
     <script type="application/javascript">
-
-        const data = [
-            {
-                text: 'rootA', children: [
-                    {text: 'sub-A1'},
-                    {text: 'sub-A2'},
-                    {text: 'sub-A3'},
-                    {text: 'sub-A4'},
-                    {
-                        text: 'sub-A5', state: 'closed', children: [
-                            {
-                                text: 'sub-A5A', children: [
-                                    {text: 'sub-A5A1'}
-                                ]
-                            },
-                            {text: 'sub_A5B'}
-                        ]
-                    },
-                    {text: 'sub-A6'},
-                    {text: 'sub-A7'},
-                    {text: 'sub-A8'},
-                    {
-                        text: 'sub-A9', state: 'closed', children: [
-                            {text: 'sub-A9A'},
-                            {text: 'sub-A9B'}
-                        ]
-                    },
-                    {text: 'sub-A10'},
-                    {text: 'sub-A11'},
-                    {text: 'sub-A12'}
-                ]
-            },
-            {
-                text: 'rootB', state: 'closed', children: [
-                    {text: 'sub-B1'},
-                    {text: 'sub-B2'},
-                    {text: 'sub-B3'}
-                ]
-            }
-        ];
-
+        const data = [{% recursetree nodes %}
+                {text: '{{ node.name }}', url: '{{ node.id }}',
+                    {% if not node.is_leaf_node %}
+                        children: [{{ children }}]
+                    {% endif %}
+                },{% endrecursetree %}];
 
         const tree = new tui.Tree('#tree', {
-            data: data,
-            nodeDefaultState: 'opened',
-            usageStatistics: false,
+            data: data, nodeDefaultState: 'opened', usageStatistics: false,
+            template: {
+                internalNode:
+                    '<div class="tui-tree-content-wrapper">' +
+                        '<button type="button" class="tui-tree-toggle-btn tui-js-tree-toggle-btn">' +
+                            '<span class="tui-ico-tree"></span>' +
+                            '{% templatetag openvariable %}stateLabel{% templatetag closevariable %}' +
+                        '</button>' +
+                        '<span class="tui-tree-text tui-js-tree-text">' +
+                            '<span class="tui-tree-ico tui-ico-folder"></span>' +
+                            '<a href="{% url "Project Wiki" project.key %}{% templatetag openvariable %}url{% templatetag closevariable %}">'+
+                            '{% templatetag openvariable %}text{% templatetag closevariable %}' +
+                        '</a></span>' +
+                    '</div>' +
+                    '<ul class="tui-tree-subtree tui-js-tree-subtree">' +
+                        '{% templatetag openvariable %}children{% templatetag closevariable %}' +
+                    '</ul>',
+                leafNode:
+                    '<div class="tui-tree-content-wrapper">' +
+                    '<span class="tui-tree-text tui-js-tree-text">' +
+                    '<span class="tui-tree-ico tui-ico-file"></span>' +
+                    '<a href="{% url "Project Wiki" project.key %}{% templatetag openvariable %}url{% templatetag closevariable %}">'+
+                    '{% templatetag openvariable %}text{% templatetag closevariable %}' +
+                    '</a></span>' +
+                    '</div>'
+            },
 
 
         });

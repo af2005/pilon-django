@@ -1,8 +1,6 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseBadRequest
-from django.template import loader, Template
-from www.screens.snippets import forms
-from www.models import Project, Genre, Entity, WikiPage
+from django.http import HttpResponse
+
+from www.models import Project, Entity, WikiPage
 from www.screens import templates
 from .. import main
 
@@ -18,6 +16,10 @@ def view_content_create_with_file(request, key):
 
 
 def view_wiki(request, key):
+    project_descendants = Project.objects.filter(key=key).first().get_descendants()
+    wiki_pages = WikiPage.objects.filter(id__in=project_descendants)
+    context = {"nodes": wiki_pages}
+
     tpl = templates.project_view(
         request,
         key,
@@ -25,16 +27,6 @@ def view_wiki(request, key):
         title="",
         sidebar_items=main.sidebar_items(key),
         active_sidebar_item=6,
+        additional_context=context
     )
-    return HttpResponse(tpl)
-
-
-def test_page_tree(request, key):
-    tpl = loader.get_template("www/project/wiki-tree-test.html")
-    project_descendants = Project.objects.filter(key=key).first().get_descendants()
-    print(project_descendants.query)
-    wiki_pages = WikiPage.objects.filter(id__in=project_descendants)
-    print(wiki_pages.query)
-    context = {"nodes": wiki_pages}
-    tpl = tpl.render(context, request)
     return HttpResponse(tpl)
