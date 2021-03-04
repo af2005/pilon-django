@@ -75,8 +75,10 @@ def project_directory(request, projects=[]):
 
 
 def project_view(
-    request, key, template_name, title, sidebar_items, active_sidebar_item
+    request, key, template_name, title, sidebar_items, active_sidebar_item, additional_context={}
 ):
+    if additional_context is None:
+        additional_context = {}
     project = list(Project.objects.filter(key=key).values())[0]
     template = loader.get_template(template_name)
     context = {
@@ -89,6 +91,8 @@ def project_view(
         "navbar_centertext": project["name"],
         "active_sidebar_item": active_sidebar_item,
     }
+    context = {**context, **additional_context}
+
     return template.render(context, request)
 
 

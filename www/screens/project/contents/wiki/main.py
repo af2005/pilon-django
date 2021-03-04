@@ -1,26 +1,25 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseBadRequest
-from django.template import loader, Template
-from www.screens.snippets import forms
-from www.models import Project
+from django.http import HttpResponse
+
+from www.models import Project, Entity, WikiPage
 from www.screens import templates
 from .. import main
 
 
-@login_required
 def view_content_create(request, key):
     tpl = templates.default_editor(request, title="Create Wiki Page", key=key)
     return HttpResponse(tpl)
 
 
-@login_required
 def view_content_create_with_file(request, key):
     tpl = templates.default_editor(request, title="Create Wiki Page with File", key=key)
     return HttpResponse(tpl)
 
 
-@login_required
 def view_wiki(request, key):
+    project_descendants = Project.objects.filter(key=key).first().get_descendants()
+    wiki_pages = WikiPage.objects.filter(id__in=project_descendants)
+    context = {"nodes": wiki_pages}
+
     tpl = templates.project_view(
         request,
         key,
@@ -28,5 +27,6 @@ def view_wiki(request, key):
         title="",
         sidebar_items=main.sidebar_items(key),
         active_sidebar_item=6,
+        additional_context=context
     )
     return HttpResponse(tpl)

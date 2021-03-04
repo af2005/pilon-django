@@ -49,7 +49,10 @@ class Event(models.Model):
     other models.
     """
 
-    start = models.DateTimeField(_("start"), db_index=True, )
+    start = models.DateTimeField(
+        _("start"),
+        db_index=True,
+    )
     end = models.DateTimeField(
         _("end"),
         db_index=True,
