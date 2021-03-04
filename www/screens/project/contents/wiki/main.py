@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.template import loader, Template
 from www.screens.snippets import forms
-from www.models import Project, Genre, Entity, WikiPage
+from www.models import Project, Entity, WikiPage
 from www.screens import templates
 from .. import main
 
@@ -31,10 +31,7 @@ def view_wiki(request, key):
 
 def test_page_tree(request, key):
     tpl = loader.get_template("www/project/wiki-tree-test.html")
-    project_descendants = Project.objects.filter(key=key).first().get_descendants()
-    print(project_descendants.query)
-    wiki_pages = WikiPage.objects.filter(id__in=project_descendants)
-    print(wiki_pages.query)
+    wiki_pages = Project.objects.filter(key=key).first().get_descendants().instance_of(WikiPage)
     context = {"nodes": wiki_pages}
     tpl = tpl.render(context, request)
     return HttpResponse(tpl)
