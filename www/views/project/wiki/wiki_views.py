@@ -34,6 +34,7 @@ def view_wiki_page(request, key, uid):
     ancestors = wiki_page.get_ancestors_of_type(WikiPage)
     page_contents = {
         "name": wiki_page.name,
+        "id": wiki_page.id,
         "content": wiki_page.markdown_rendered,
         "creator": wiki_page.creator,
         "created_date": wiki_page.date_created,
