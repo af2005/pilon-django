@@ -4,16 +4,26 @@
 
 {% block content %}
     <div class="bg-white">
-        <div class="py-3 justify-content-between d-flex align-items-center">
-            <div>
-                <h6 class="display-6 mb-0">{{ page_title }}</h6>
+        <form action="{% url "wikipage-list" %}" method="post">
+            {% csrf_token %}
+            <div class="py-3 justify-content-between d-flex align-items-center">
+                <div>
+                    <h6 class="display-6 mb-0">{{ page_title }}</h6>
+                </div>
+                <div>
+                    <a href="{% url "Project Homepage" project_key %}">
+                        <button type="reset" class="btn btn-link">Cancel</button>
+                    </a>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Publish</button>
+                </div>
             </div>
-            <div>
-                <a href="{% url "Project Homepage" project_key %}"> <button type="reset" class="btn btn-link">Cancel</button></a>
-                <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Publish</button>
+            <div class="input-group input-group-lg my-3">
+                <span class="input-group-text" id="page-name">Page Name</span>
+                <input name="name" type="text" class="form-control" aria-label="Sizing example input"
+                       aria-describedby="page-name">
             </div>
-        </div>
-        {% include 'www/snippets/editor.html' %}
+            {% include 'www/snippets/editor.html' %}
+        </form>
     </div>
 
 {% endblock %}
