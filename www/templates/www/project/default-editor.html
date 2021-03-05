@@ -6,6 +6,8 @@
     <div class="bg-white">
         <form action="{% url "wikipage-list" %}" method="post">
             {% csrf_token %}
+            <input type="hidden" name="entity_type" value="WikiPage">
+            <input type="hidden" name="parent" value="http://localhost:8000/rest/entity/1078f5c6-cc92-4aa4-a3d5-60459f8c7eb8/">
             <div class="py-3 justify-content-between d-flex align-items-center">
                 <div>
                     <h6 class="display-6 mb-0">{{ page_title }}</h6>
