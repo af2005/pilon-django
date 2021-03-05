@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseBadRequest
-from www.screens import templates
+from www.views import templates
 from django.urls import reverse
 
 

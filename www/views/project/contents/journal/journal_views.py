@@ -1,10 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.template import loader, Template
-from www.screens.snippets import forms
+from www.views.snippets import forms
 from www.models import Project
-from www.screens import templates
-from .. import main
+from www.views import templates
+from .. import project_content_views
 
 
 @login_required
@@ -28,7 +28,7 @@ def view_journal(request, key):
         key,
         template_name="www/project/journal.html",
         title="Journal",
-        sidebar_items=main.sidebar_items(key),
+        sidebar_items=project_content_views.sidebar_items(key),
         active_sidebar_item=7,
     )
     return HttpResponse(tpl)

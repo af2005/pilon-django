@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import loader
 from www.models import Project
-from www.screens import templates
+from www.views import templates
 
 
 def view_project_create(request):
