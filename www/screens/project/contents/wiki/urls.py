@@ -6,5 +6,5 @@ urlpatterns = [
     path(
         "create-with-file/", main.view_content_create, name="Create Wiki Page with file"
     ),
-    path("", main.view_wiki, name="Project Wiki"),
+    path("", main.view_wiki_homepage, name="Project Wiki"),
 ]

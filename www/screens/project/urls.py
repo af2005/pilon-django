@@ -1,8 +1,7 @@
 from django.urls import path, include
-from . import main
+from . import project_views
 
 urlpatterns = [
-    path("c/", include("www.screens.project.contents.urls")),
-    path("directory/", main.view_directory, name="Project Directory"),
-    path("create/", main.view_project_create, name="Create Project"),
+    path("", include("www.screens.project.contents.urls")),
+
 ]

@@ -16,62 +16,17 @@
     </div>
 {% endblock %}
 
-{% block content %}
 
-    <nav aria-label="breadcrumb">
+{% block breadcrumbs %}
+ <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url "Project Homepage" project.key %}">{{ project.name }}</a></li>
             <li class="breadcrumb-item"><a href="{% url "Project Wiki" project.key %}">Wiki</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data</li>
+            {% for ancestor in ancestors %}
+                <li class="breadcrumb-item"><a href="{% url "Content by UID" ancestor.id%}">{{ ancestor.name }}</a></li>
+            {% endfor %}
         </ol>
     </nav>
-
-    <div class="d-flex align-items-start justify-content-between pb-3 ">
-        <div class="lh-1">
-            <h2 class="display-4">Pagetitle</h2>
-            <div>
-                <a class="badge badge-secondary" href="#">label1</a>
-                <a class="badge badge-secondary" href="#">label1</a>
-                <a class="badge badge-secondary" href="#">label1</a>
-                <a class="badge badge-secondary" href="#">label1</a>
-                <a class="badge badge-secondary" href="#">label1</a>
-                <button class="badge btn text-dark" data-bs-toggle="modal" data-bs-target="#edit-labels-modal">Edit
-                    labels...
-                </button>
-                <div class="modal fade" id="edit-labels-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit labels</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div>
-            <a href="#">
-                <button class="btn btn-light"><i class="bi bi-pencil-square"></i> Edit</button>
-            </a>
-            <a href="#">
-                <button class="btn btn-light"><i class="bi bi-share-fill"></i> Share</button>
-
-            </a>
-        </div>
-    </div>
-    {{ content }}
-
 {% endblock %}
 
 
@@ -98,7 +53,7 @@
                         '</button>' +
                         '<span class="tui-tree-text tui-js-tree-text">' +
                             '<span class="tui-tree-ico tui-ico-folder"></span>' +
-                            '<a href="{% url "Project Wiki" project.key %}{% templatetag openvariable %}url{% templatetag closevariable %}">'+
+                            '<a href="{% url "Content by UID root" %}{% templatetag openvariable %}url{% templatetag closevariable %}">'+
                             '{% templatetag openvariable %}text{% templatetag closevariable %}' +
                         '</a></span>' +
                     '</div>' +
@@ -109,7 +64,7 @@
                     '<div class="tui-tree-content-wrapper">' +
                     '<span class="tui-tree-text tui-js-tree-text">' +
                     '<span class="tui-tree-ico tui-ico-file"></span>' +
-                    '<a href="{% url "Project Wiki" project.key %}{% templatetag openvariable %}url{% templatetag closevariable %}">'+
+                    '<a href="{% url "Content by UID root" %}{% templatetag openvariable %}url{% templatetag closevariable %}">'+
                     '{% templatetag openvariable %}text{% templatetag closevariable %}' +
                     '</a></span>' +
                     '</div>'
