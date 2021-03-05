@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponseNotFound
 
 from www.models import Entity, Project, WikiPage, JournalPage
 
@@ -10,13 +10,13 @@ def main(request, uid):
         if wiki_page:
             project = wiki_page.get_ancestors_of_type(Project).first()
             # Wiki Page View
-            import www.views.project.contents.wiki.wiki_views as wiki
+            import www.views.project.wiki.wiki_views as wiki
             return wiki.view_wiki_page(request, key=project.key, uid=uid)
 
         journal_page = Entity.objects.filter(Q(instance_of=JournalPage), id=uid).first()
         if journal_page:
             project = journal_page.get_ancestors_of_type(Project).first()
-            #TODO
+            # TODO
 
     except AttributeError:
         # orphaned page

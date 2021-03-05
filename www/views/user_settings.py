@@ -1,9 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseBadRequest
-from django.template import loader, Template
-from .snippets import forms
-from ..models import Project
+from django.http import HttpResponse
 from . import templates
 
 

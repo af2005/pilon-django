@@ -48,7 +48,7 @@ def create_new_project(creator: User, key: str, name: str):
 
     # add a calendar for this project
     try:
-        cal = Calendar.objects.get(slug=key)
+        Calendar.objects.get(slug=key)
 
     except Calendar.DoesNotExist:
         cal = Calendar(name=name, slug=key)

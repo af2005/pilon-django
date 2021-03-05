@@ -52,7 +52,9 @@ def dashboard(
     return template.render(context, request)
 
 
-def people(request, window_title, title="", subtitle="", users=[]):
+def people(request, window_title, title="", subtitle="", users=None):
+    if users is None:
+        users = []
     template = loader.get_template("www/snippets/people.html")
     context = {
         "window_title": window_title,
@@ -63,7 +65,9 @@ def people(request, window_title, title="", subtitle="", users=[]):
     return template.render(context, request)
 
 
-def project_directory(request, projects=[]):
+def project_directory(request, projects=None):
+    if projects is None:
+        projects = []
     template = loader.get_template("www/project/directory.html")
     context = {
         "window_title": "Project Directory",
@@ -75,7 +79,7 @@ def project_directory(request, projects=[]):
 
 
 def project_view(
-    request, key, template_name, title, sidebar_items, active_sidebar_item, additional_context={}
+    request, key, template_name, title, sidebar_items, active_sidebar_item, additional_context=None
 ):
     if additional_context is None:
         additional_context = {}

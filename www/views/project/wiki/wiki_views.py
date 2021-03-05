@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 
-from www.models import Project, Entity, WikiPage
+from www.models import Project, WikiPage
 from www.views import templates
 from .. import project_content_views
 

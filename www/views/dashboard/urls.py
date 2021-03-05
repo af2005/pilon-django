@@ -1,5 +1,5 @@
 from . import dashboard_views
-from django.urls import path, include
+from django.urls import path
 
 urlpatterns = [
     path("", dashboard_views.view_dashboard, name="View Dashboard"),
