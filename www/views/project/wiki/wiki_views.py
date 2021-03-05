@@ -2,7 +2,7 @@ from django.http import HttpResponse
 
 from www.models import Project, WikiPage
 from www.views import templates
-from .. import project_content_views
+from .. import project_views
 
 
 def view_content_create(request, key):
@@ -21,7 +21,7 @@ def view_wiki_homepage(request, key):
         key,
         template_name="www/project/wiki_base.html",
         title="Wiki",
-        sidebar_items=project_content_views.sidebar_items(key),
+        sidebar_items=project_views.sidebar_items(key),
         active_sidebar_item=6,
         additional_context=get_page_tree(key)
     )
@@ -46,7 +46,7 @@ def view_wiki_page(request, key, uid):
         key,
         template_name="www/project/wiki_page_view.html",
         title="",
-        sidebar_items=project_content_views.sidebar_items(key),
+        sidebar_items=project_views.sidebar_items(key),
         active_sidebar_item=6,
         additional_context={**page_tree, **page_contents}
     )

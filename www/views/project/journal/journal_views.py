@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 
 from www.views import templates
-from .. import project_content_views
+from .. import project_views
 
 
 def view_content_create(request, key):
@@ -22,7 +22,7 @@ def view_journal(request, key):
         key,
         template_name="www/project/journal.html",
         title="Journal",
-        sidebar_items=project_content_views.sidebar_items(key),
+        sidebar_items=project_views.sidebar_items(key),
         active_sidebar_item=7,
     )
     return HttpResponse(tpl)
