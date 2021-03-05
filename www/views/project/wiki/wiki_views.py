@@ -54,7 +54,6 @@ def view_wiki_page(request, key, uid):
 
 
 def get_page_tree(key):
-    project_descendants = Project.objects.filter(key=key).first().get_descendants()
-    wiki_pages = WikiPage.objects.filter(id__in=project_descendants)
+    wiki_pages = Project.objects.filter(key=key).first().get_descendants().instance_of(WikiPage)
     context = {"nodes": wiki_pages}
     return context
