@@ -1,5 +1,7 @@
-from django.http import HttpResponse
-
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseBadRequest
+from django.template import loader, Template
+from www.screens.snippets import forms
 from www.models import Project, Entity, WikiPage
 from www.screens import templates
 from .. import main
@@ -29,4 +31,12 @@ def view_wiki(request, key):
         active_sidebar_item=6,
         additional_context=context
     )
+    return HttpResponse(tpl)
+
+
+def test_page_tree(request, key):
+    tpl = loader.get_template("www/project/wiki-tree-test.html")
+    wiki_pages = Project.objects.filter(key=key).first().get_descendants().instance_of(WikiPage)
+    context = {"nodes": wiki_pages}
+    tpl = tpl.render(context, request)
     return HttpResponse(tpl)
