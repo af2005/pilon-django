@@ -27,8 +27,12 @@
         {% block sidebar %}
         {% endblock %}
         <div id="page-content-wrapper" class="bg-light justify-content-between">
-            <div id="content-container" class="container-fluid mb-4 pb-5 bg-white">
+
+            <div id="content-container" class="container-fluid mb-4 py-4 bg-white">
+
                 <span id="top-of-page"></span>
+                {% block breadcrumbs %}
+                {% endblock %}
                 {% block title %}
                 {% endblock %}
 

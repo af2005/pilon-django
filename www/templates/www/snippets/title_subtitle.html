@@ -1,6 +1,8 @@
-<div class="container d-flex align-items-center py-3 ">
+{% if page_title %}
+<div class="container d-flex align-items-center py-1 ">
     <div class="lh-1">
         <h2 class="display-4">{{ page_title }}</h2>
         <small>{{ page_subtitle }}</small>
     </div>
 </div>
+{% endif %}

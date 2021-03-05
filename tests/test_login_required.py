@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AnonymousUser, User
 from django.test import RequestFactory, TestCase
 from unittest import skip
-from www.screens.dashboard.main import (
+from www.views.dashboard.dashboard_views import (
     view_dashboard,
     view_all_updates_board,
     view_recently_worked_on_board,
