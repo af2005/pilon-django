@@ -138,25 +138,3 @@ def view_inventory(request, key):
     return HttpResponse(tpl)
 
 
-def view_wiki(request, key):
-    tpl = templates.project_view(
-        request,
-        key,
-        template_name="www/project/wiki_page_view.html",
-        title="Wiki",
-        sidebar_items=sidebar_items(key),
-        active_sidebar_item=6,
-    )
-    return HttpResponse(tpl)
-
-
-def view_journal(request, key):
-    tpl = templates.project_view(
-        request,
-        key,
-        template_name="www/project/journal.html",
-        title="Journal",
-        sidebar_items=sidebar_items(key),
-        active_sidebar_item=7,
-    )
-    return HttpResponse(tpl)

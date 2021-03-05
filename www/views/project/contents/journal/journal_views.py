@@ -1,19 +1,14 @@
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
-from django.template import loader, Template
-from www.views.snippets import forms
-from www.models import Project
+
 from www.views import templates
 from .. import project_content_views
 
 
-@login_required
 def view_content_create(request, key):
     tpl = templates.default_editor(request, title="Create Journal Page", key=key)
     return HttpResponse(tpl)
 
 
-@login_required
 def view_content_create_with_file(request, key):
     tpl = templates.default_editor(
         request, title="Create Journal Page with File", key=key
@@ -21,7 +16,6 @@ def view_content_create_with_file(request, key):
     return HttpResponse(tpl)
 
 
-@login_required
 def view_journal(request, key):
     tpl = templates.project_view(
         request,
