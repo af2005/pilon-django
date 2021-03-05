@@ -2,14 +2,16 @@ from django.urls import include, path
 from rest_framework import routers
 from . import views
 
+app_name = "rest"
+
 router = routers.DefaultRouter()
 router.register(r"user", views.UserViewSet)
 router.register(r"group", views.GroupViewSet)
 router.register(r"entity", views.EntityViewSet)
 router.register(r"project", views.ProjectViewSet)
 router.register(r"markdown-entity", views.MarkdownEntityViewSet)
-router.register(r"wiki-page", views.WikiPageViewSet)
-router.register(r"journal-page", views.JournalPageViewSet)
+router.register(r"wikipage", views.WikiPageViewSet,)
+router.register(r"journalpage", views.JournalPageViewSet)
 router.register(r"task", views.TaskViewSet)
 router.register(r"attachment", views.AttachmentViewSet)
 
