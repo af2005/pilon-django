@@ -1,49 +1,54 @@
 from django.http import HttpResponse, HttpResponseBadRequest
 from www.screens import templates
+from django.urls import reverse
 
 
 def sidebar_items(key):
     return [
-        {"name": "Homepage", "url": f"/p/c/{key}", "icon": "house", "color": "primary"},
+        {
+            "name": "Homepage",
+            "url": reverse('Project Homepage', args=[key]),
+            "icon": "house-fill",
+        },
         {
             "name": "Team",
-            "url": f"/p/c/{key}/team",
-            "icon": "people-fill",
+            "url": reverse('Project Team', args=[key]),
+            "icon": "people",
             "color": "darkorange",
         },
         {
             "name": "Chat",
-            "url": f"/p/c/{key}/chat",
+            "url": reverse('Project Chat', args=[key]),
             "icon": "envelope",
             "color": "darkred",
         },
         {
             "name": "Tasks",
-            "url": f"/p/c/{key}/tasks",
+            "url": reverse('Project Tasks', args=[key]),
             "icon": "check2-circle",
             "color": "indigo",
         },
         {
             "name": "Calendar",
-            "url": f"/p/c/{key}/calendar",
+            "url": reverse('Project Calendar', args=[key]),
             "icon": "calendar3",
             "color": "pink",
         },
         {
             "name": "Inventory",
-            "url": f"/p/c/{key}/inventory",
+            "url": reverse('Project Inventory', args=[key]),
             "icon": "archive",
             "color": "blue2",
         },
         {
             "name": "Wiki",
-            "url": f"/p/c/{key}/wiki",
+            "url": reverse('Project Wiki', args=[key]),
             "icon": "file-text",
             "color": "darkred",
         },
         {
             "name": "Journal",
-            "url": f"/p/c/{key}/journal",
+            "url": reverse('Project Journal', args=[key]),
             "icon": "journals",
             "color": "darkteal",
         },
@@ -137,7 +142,7 @@ def view_wiki(request, key):
     tpl = templates.project_view(
         request,
         key,
-        template_name="www/project/wiki.html",
+        template_name="www/project/wiki_page_view.html",
         title="Wiki",
         sidebar_items=sidebar_items(key),
         active_sidebar_item=6,
