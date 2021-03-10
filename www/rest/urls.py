@@ -11,6 +11,7 @@ router.register(r"markdown-entity", views.MarkdownEntityViewSet)
 router.register(r"wiki-page", views.WikiPageViewSet)
 router.register(r"journal-page", views.JournalPageViewSet)
 router.register(r"task", views.TaskViewSet)
+router.register(r"comment", views.CommentViewSet)
 router.register(r"attachment", views.AttachmentViewSet)
 
 # Wire up our API using automatic URL routing.

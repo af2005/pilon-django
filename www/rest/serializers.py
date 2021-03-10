@@ -8,6 +8,7 @@ from ..models import (
     WikiPage,
     JournalPage,
     Task,
+    Comment,
     Attachment,
 )
 from rest_polymorphic.serializers import PolymorphicSerializer
@@ -82,6 +83,13 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
         }
 
 
+class CommentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Comment
+        fields = MarkdownEntitySerializer.Meta.fields
+        extra_kwargs = EntitySerializer.Meta.extra_kwargs
+
+
 class AttachmentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Attachment
@@ -98,5 +106,6 @@ class EntityPolymorphicSerializer(PolymorphicSerializer):
         WikiPage: WikiPageSerializer,
         JournalPage: JournalPageSerializer,
         Task: TaskSerializer,
+        Comment: CommentSerializer,
         Attachment: AttachmentSerializer,
     }

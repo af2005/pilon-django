@@ -8,6 +8,7 @@ from ..models import (
     WikiPage,
     JournalPage,
     Task,
+    Comment,
     Attachment,
 )
 from .serializers import EntityPolymorphicSerializer, UserSerializer, GroupSerializer
@@ -61,6 +62,11 @@ class JournalPageViewSet(viewsets.ModelViewSet):
 
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
+    serializer_class = EntityPolymorphicSerializer
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
     serializer_class = EntityPolymorphicSerializer
 
 
