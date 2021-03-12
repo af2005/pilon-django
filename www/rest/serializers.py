@@ -8,6 +8,7 @@ from ..models import (
     WikiPage,
     JournalPage,
     Task,
+    Comment,
     Attachment,
 )
 from rest_polymorphic.serializers import PolymorphicSerializer
@@ -16,13 +17,13 @@ from rest_polymorphic.serializers import PolymorphicSerializer
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ["url", "username", "email", "groups", "tasks", "created_entities"]
+        fields = ["url", "id", "username", "email", "groups", "tasks", "created_entities"]
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
-        fields = ["url", "name"]
+        fields = ["url", "id", "name"]
 
 
 class EntitySerializer(serializers.HyperlinkedModelSerializer):
@@ -30,6 +31,7 @@ class EntitySerializer(serializers.HyperlinkedModelSerializer):
         model = Entity
         fields = (
             "url",
+            "id",
             "name",
             "parent",
             "date_created",
@@ -82,6 +84,13 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
         }
 
 
+class CommentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Comment
+        fields = MarkdownEntitySerializer.Meta.fields
+        extra_kwargs = EntitySerializer.Meta.extra_kwargs
+
+
 class AttachmentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Attachment
@@ -98,5 +107,9 @@ class EntityPolymorphicSerializer(PolymorphicSerializer):
         WikiPage: WikiPageSerializer,
         JournalPage: JournalPageSerializer,
         Task: TaskSerializer,
+        Comment: CommentSerializer,
         Attachment: AttachmentSerializer,
     }
+
+    # def to_resource_type(self, model_or_instance):
+    #     return model_or_instance._meta.object_name.lower()
