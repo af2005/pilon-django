@@ -55,11 +55,9 @@ class EntityViewSet(viewsets.ModelViewSet):
         # Copy and manipulate the request
         if self.request.method != "GET":
             draft_request_data = self.request.data.copy()
-            #print(f"{self.request.data = }")
             if draft_request_data:
                 draft_request_data["entity_type"] = self.model.__name__
                 kwargs["data"] = draft_request_data
-                #print(f"kwargs2 = {kwargs}")
                 serializer = serializer_class(*args, **kwargs)
                 serializer.is_valid()
                 return serializer
