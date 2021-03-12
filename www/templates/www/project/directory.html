@@ -18,7 +18,7 @@
         </thead>
         {% for project in projects %}
             <tr>
-                <td><a href="{% url "Project Homepage" project.key %}">{{ project.name }}</a></td>
+                <td><a href="{% url "project:homepage" project.key %}">{{ project.name }}</a></td>
                 <td>{{ project.key }}</td>
                 <td>{{ project.labels }}</td>
             </tr>

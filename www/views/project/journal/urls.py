@@ -2,11 +2,11 @@ from django.urls import path
 from . import journal_views
 
 urlpatterns = [
-    path("create", journal_views.view_content_create, name="Create Journal Page"),
+    path("create", journal_views.view_content_create, name="create-journal-page"),
     path(
-        "create-with-file/",
+        "create-from-file/",
         journal_views.view_content_create,
-        name="Create Journal Page with file",
+        name="create-journal-page-from-file",
     ),
-    path("", journal_views.view_journal, name="Project Journal"),
+    path("", journal_views.view_journal, name="journal"),
 ]

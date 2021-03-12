@@ -42,19 +42,19 @@ class TestFrontend(TestCase):
 
     def test_project_views(self):
         PROJECT_VIEWS = [
-            "Project Homepage",
-            "Create Content",
-            "Project Tasks",
-            "Project Chat",
-            "Project Tasks",
-            "Project Calendar",
-            "Project Inventory",
-            "Project Wiki",
-            "Create Wiki Page",
-            "Create Wiki Page with file",
-            "Project Journal",
-            "Create Journal Page",
-            "Create Journal Page with file",
+            "project:homepage",
+            "project:create-child-entity",
+            "project:tasks",
+            "project:chat",
+            "project:tasks",
+            "project:calendar",
+            "project:inventory",
+            "project:wiki",
+            "project:create-wiki-page",
+            "project:create-wiki-page-from-file",
+            "project:journal",
+            "project:create-journal-page",
+            "project:create-journal-page-from-file",
         ]
         for view in PROJECT_VIEWS:
             reversed_url = reverse(view, kwargs={"key": TEST_PROJECT_KEY})
