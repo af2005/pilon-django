@@ -63,7 +63,7 @@ class Project(Entity):
 class MarkdownEntity(Entity):
     markdown = MarkdownField(
         default="",
-        rendered_field="content_rendered",
+        rendered_field="markdown_rendered",
         validator=VALIDATOR_STANDARD,
         use_editor=False,
         use_admin_editor=True,
