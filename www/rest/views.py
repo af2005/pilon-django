@@ -44,27 +44,6 @@ class EntityViewSet(viewsets.ModelViewSet):
     #     return self.model.objects.all()
 
     # taken from: https://www.valentinog.com/blog/drf-request/
-    # def get_serializer(self, *args, **kwargs):
-    #     """
-    #     Return the serializer instance that should be used for validating and
-    #     deserializing input, and for serializing output.
-    #     """
-    #     serializer_class = self.get_serializer_class()
-    #     kwargs.setdefault('context', self.get_serializer_context())
-    #     print(f"kwargs = {kwargs}")
-    #     #
-    #     # Copy and manipulate the request
-    #     if self.request.method != "GET":
-    #         draft_request_data = self.request.data.copy()
-    #         draft_request_data["entity_type"] = self.model.__name__
-    #         kwargs["data"] = draft_request_data
-    #         print(f"kwargs2 = {kwargs}")
-    #         serializer = serializer_class(*args, **kwargs)
-    #         serializer.is_valid()
-    #     else:
-    #         serializer = serializer_class(*args, **kwargs)
-    #     return serializer
-
     def get_serializer(self, *args, **kwargs):
         """
         Return the serializer instance that should be used for validating and
