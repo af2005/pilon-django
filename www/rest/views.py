@@ -43,7 +43,7 @@ class EntityViewSet(viewsets.ModelViewSet):
     # def get_queryset(self):
     #     return self.model.objects.all()
 
-    # taken from: https://www.valentinog.com/blog/drf-request/
+    # inspired by: https://www.valentinog.com/blog/drf-request/
     def get_serializer(self, *args, **kwargs):
         """
         Return the serializer instance that should be used for validating and
