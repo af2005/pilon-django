@@ -1,7 +1,6 @@
 {% extends "www/base.html" %}
 {% load static %}
 {% block navigation %}{% include 'www/snippets/navigation-create-button.html' %}{% endblock %}
-
 {% block content %}
     <div class="bg-white">
         <form action="{% url "wikipage-list" %}" method="post">
