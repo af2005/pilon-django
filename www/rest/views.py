@@ -36,40 +36,65 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 # TODO:0 add permission
 class EntityViewSet(viewsets.ModelViewSet):
-    queryset = Entity.objects.all()
+    model = Entity
+    queryset = model.objects.all()
     serializer_class = EntityPolymorphicSerializer
 
+    # def get_queryset(self):
+    #     return self.model.objects.all()
 
-class ProjectViewSet(viewsets.ModelViewSet):
-    queryset = Project.objects.all()
-    serializer_class = EntityPolymorphicSerializer
-
-
-class MarkdownEntityViewSet(viewsets.ModelViewSet):
-    queryset = MarkdownEntity.objects.all()
-    serializer_class = EntityPolymorphicSerializer
-
-
-class WikiPageViewSet(viewsets.ModelViewSet):
-    queryset = WikiPage.objects.all()
-    serializer_class = EntityPolymorphicSerializer
-
-
-class JournalPageViewSet(viewsets.ModelViewSet):
-    queryset = JournalPage.objects.all()
-    serializer_class = EntityPolymorphicSerializer
-
-
-class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all()
-    serializer_class = EntityPolymorphicSerializer
-
-
-class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.all()
-    serializer_class = EntityPolymorphicSerializer
+    #  taken from: https://www.valentinog.com/blog/drf-request/
+    def get_serializer(self, *args, **kwargs):
+        """
+        Return the serializer instance that should be used for validating and
+        deserializing input, and for serializing output.
+        """
+        serializer_class = self.get_serializer_class()
+        kwargs['context'] = self.get_serializer_context()
+        print(self.request.data)
+        #
+        # Copy and manipulate the request
+        if self.request.method != "GET":
+            draft_request_data = self.request.data.copy()
+            draft_request_data["entity_type"] = self.model.__name__
+            kwargs["data"] = draft_request_data
+            serializer = serializer_class(*args, **kwargs)
+            serializer.is_valid()
+        else:
+            serializer = serializer_class(*args, **kwargs)
+        return serializer
 
 
-class AttachmentViewSet(viewsets.ModelViewSet):
-    queryset = Attachment.objects.all()
-    serializer_class = EntityPolymorphicSerializer
+class ProjectViewSet(EntityViewSet):
+    model = Project
+    queryset = model.objects.all()
+
+
+class MarkdownEntityViewSet(EntityViewSet):
+    model = MarkdownEntity
+    queryset = model.objects.all()
+
+
+class WikiPageViewSet(EntityViewSet):
+    model = WikiPage
+    queryset = model.objects.all()
+
+
+class JournalPageViewSet(EntityViewSet):
+    model = JournalPage
+    queryset = model.objects.all()
+
+
+class TaskViewSet(EntityViewSet):
+    model = Task
+    queryset = model.objects.all()
+
+
+class CommentViewSet(EntityViewSet):
+    model = Comment
+    queryset = model.objects.all()
+
+
+class AttachmentViewSet(EntityViewSet):
+    model = Attachment
+    queryset = model.objects.all()

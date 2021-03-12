@@ -63,6 +63,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "reversion.middleware.RevisionMiddleware",
+    #"www.rest.middleware.RestMiddleware",
 ]
 
 ROOT_URLCONF = "pilon.urls"
