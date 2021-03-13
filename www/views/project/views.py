@@ -102,18 +102,6 @@ def view_chat(request, key):
     return HttpResponse(tpl)
 
 
-def view_tasks(request, key):
-    tpl = templates.project_view(
-        request,
-        key,
-        template_name="www/project/tasks.html",
-        title="Tasks",
-        sidebar_items=sidebar_items(key),
-        active_sidebar_item=3,
-    )
-    return HttpResponse(tpl)
-
-
 def view_calendar(request, key):
     tpl = templates.project_view(
         request,

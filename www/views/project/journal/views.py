@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 
 from www.views import templates
-from .. import project_views
+import www.views.project.views as project_views
 
 
 def view_content_create(request, key):

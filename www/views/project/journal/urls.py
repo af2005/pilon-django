@@ -1,12 +1,12 @@
 from django.urls import path
-from . import journal_views
+from . import views
 
 urlpatterns = [
-    path("create", journal_views.view_content_create, name="create-journal-page"),
+    path("create", views.view_content_create, name="create-journal-page"),
     path(
         "create-from-file/",
-        journal_views.view_content_create,
+        views.view_content_create,
         name="create-journal-page-from-file",
     ),
-    path("", journal_views.view_journal, name="journal"),
+    path("", views.view_journal, name="journal"),
 ]

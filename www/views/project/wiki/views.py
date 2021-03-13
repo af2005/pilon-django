@@ -2,7 +2,7 @@ from django.http import HttpResponse
 
 from www.models import Project, WikiPage
 from www.views import templates
-from .. import project_views
+import www.views.project.views as project_views
 
 
 def view_content_create(request, key):
@@ -28,9 +28,9 @@ def view_wiki_homepage(request, key):
     return HttpResponse(tpl)
 
 
-def view_wiki_page(request, key, uid):
+def view_wiki_page(request, key, uuid):
     page_tree = get_page_tree(key)
-    wiki_page = WikiPage.objects.filter(id=uid).first()
+    wiki_page = WikiPage.objects.filter(id=uuid).first()
     ancestors = wiki_page.get_ancestors_of_type(WikiPage)
     page_contents = {
         "name": wiki_page.name,

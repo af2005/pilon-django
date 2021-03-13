@@ -1,10 +1,10 @@
 from django.urls import path
-from . import wiki_views
+from . import views
 
 urlpatterns = [
-    path("create/", wiki_views.view_content_create, name="create-wiki-page"),
+    path("create/", views.view_content_create, name="create-wiki-page"),
     path(
-        "create-from-file/", wiki_views.view_content_create, name="create-wiki-page-from-file"
+        "create-from-file/", views.view_content_create, name="create-wiki-page-from-file"
     ),
-    path("", wiki_views.view_wiki_homepage, name="wiki"),
+    path("", views.view_wiki_homepage, name="wiki"),
 ]
