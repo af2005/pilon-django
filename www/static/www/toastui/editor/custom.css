@@ -42,9 +42,6 @@
     color: black
 }
 
-.tui-heading::before {
-    content: "\f5b9";
-}
 
 .tui-bold:before {
     content: "\f5b8";
