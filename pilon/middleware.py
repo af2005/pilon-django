@@ -41,7 +41,6 @@ class LoginRequiredMiddleware:
         return response
 
     def process_view(self, request, view_func, view_args, view_kwargs):
-        print(self.public_view_urls)
         if self.is_public_url(request.path):
             return view_func(request, *view_args, **view_kwargs)
         return login_required(view_func)(request, *view_args, **view_kwargs)
