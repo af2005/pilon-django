@@ -29,7 +29,7 @@ class Entity(PolymorphicMPTTModel):
     parent = PolymorphicTreeForeignKey(
         "self", on_delete=models.CASCADE, null=True, blank=True, related_name="children"
     )
-    date_created = models.DateTimeField(default=timezone.now)
+    date_created = models.DateTimeField(default=timezone.now, editable=False)
     date_modified = models.DateTimeField(default=timezone.now)
     creator = models.ForeignKey(
         User,
@@ -63,7 +63,7 @@ class Project(Entity):
 class MarkdownEntity(Entity):
     markdown = MarkdownField(
         default="",
-        rendered_field="content_rendered",
+        rendered_field="markdown_rendered",
         validator=VALIDATOR_STANDARD,
         use_editor=False,
         use_admin_editor=True,

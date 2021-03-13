@@ -22,6 +22,8 @@ icalendar = "^4.0.7"
 django-widget-tweaks = "^1.4.8"
 django-rest-polymorphic = "^0.1.9"
 httpie-django-auth = "^0.1.2"
+pytest-django = "^4.1.0"
+pytest-cov = "^2.11.1"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
@@ -32,3 +34,23 @@ pytest-django = "^4.1.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+#addopts = "--verbose --log-level=INFO --cov openqlab --cov-report term-missing  --no-cov-on-fail --cov-report=html"
+addopts = "-v -p no:warnings --cov=. --cov-report term-missing --no-cov-on-fail --ignore=tests/schedule --log-level=INFO"
+DJANGO_SETTINGS_MODULE = "pilon.settings"
+python_files = "tests.py test_*.py *_tests.py"
+
+[tool.coverage]
+    [tool.coverage.run]
+    omit =[
+        "*/schedule/*",
+    ]
+    [tool.coverage.report]
+    fail_under = 35
+    omit =[
+        "*/schedule/*",
+    ]
+
+    [tool.coverage.html]
+    directory = "htmlcov"
