@@ -1,5 +1,7 @@
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import redirect
+
 
 import www.views.project.wiki.views as wiki
 import www.views.project.journal.views as journal
@@ -24,7 +26,7 @@ def main(request, uuid):
             return task.view_tasks(request, key=project.key)
 
         if isinstance(entity, Project):
-            return HttpResponseRedirect(redirect_to=reverse("project:homepage", args=[entity.key]))
+            return redirect(reverse("project:homepage", args=[entity.key]))
 
     except AttributeError:
         if isinstance(entity, Project):
