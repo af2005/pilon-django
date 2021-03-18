@@ -3,9 +3,12 @@
 {% block navigation %}{% include 'www/snippets/navigation-create-button.html' %}{% endblock %}
 {% block content %}
     <div class="bg-white">
-        <form action="{% url "wikipage-list" %}" method="post">
+
+        <form action="{% url "wikipage-list" %}" method="post" id="markdown-create-form">
             {% csrf_token %}
-            <input type="hidden" name="parent" value="http://localhost:8000/rest/entity/1078f5c6-cc92-4aa4-a3d5-60459f8c7eb8/">
+            <input type="hidden" name="markdown" value="">
+            <input type="hidden" name="parent"
+                   value="http://localhost:8000/rest/entity/1078f5c6-cc92-4aa4-a3d5-60459f8c7eb8/">
             <div class="py-3 justify-content-between d-flex align-items-center">
                 <div>
                     <h6 class="display-6 mb-0">{{ page_title }}</h6>
@@ -24,6 +27,15 @@
             </div>
             {% include 'www/snippets/editor.html' %}
         </form>
+        <script type="application/javascript">
+            const markdownForm = document.getElementById("markdown-create-form");
+            markdownForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                markdownForm.markdown.value = editor.getMarkdown();
+                console.log(markdownForm.markdown.value);
+                //markdownForm.submit();
+            })
+        </script>
     </div>
 
 {% endblock %}
