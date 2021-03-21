@@ -1,4 +1,4 @@
-from django.http import HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponseNotFound, HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.shortcuts import redirect
 
@@ -10,7 +10,7 @@ import www.views.project.tasks.views
 from www.models import Entity, Project, WikiPage, JournalPage, Task
 
 
-def main(request, uuid):
+def main(request, uuid) -> HttpResponse:
     entity = Entity.objects.filter(id=uuid).first()
     try:
         if isinstance(entity, WikiPage):

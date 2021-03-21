@@ -83,7 +83,7 @@ def sidebar_items(key):
 
 def project_view(
         request, key, template, title, additional_context=None, active_sidebar_item=None,
-):
+) -> HttpResponse:
     if additional_context is None:
         additional_context = {}
     project = list(Project.objects.filter(key=key).values())[0]
@@ -103,29 +103,29 @@ def project_view(
     return HttpResponse(template.render(context, request))
 
 
-def content_create(request, key):
+def content_create(request, key) -> HttpResponse:
     tpl = templates.create_new_content(
         request, title="Create Content", key=key, subtitle="In project", sidebar_items=sidebar_items(key),
     )
     return HttpResponse(tpl)
 
 
-def homepage(request, key):
+def homepage(request, key) -> HttpResponse:
     return project_view(request, key, template="homepage", title="Homepage", active_sidebar_item="Homepage")
 
 
-def team(request, key):
+def team(request, key) -> HttpResponse:
     return project_view(request, key, template="team", title="Team", active_sidebar_item="Team")
 
 
-def chat(request, key):
+def chat(request, key) -> HttpResponse:
     return project_view(request, key, template="chat", title="Chat", active_sidebar_item="Chat")
 
 
-def calendar(request, key):
+def calendar(request, key) -> HttpResponse:
     return project_view(request, key, template="calendar", title="Calendar", active_sidebar_item="Calendar")
 
 
-def inventory(request, key):
+def inventory(request, key) -> HttpResponse:
     return project_view(request, key, template="inventory", title="Inventory", active_sidebar_item="Inventory")
 
