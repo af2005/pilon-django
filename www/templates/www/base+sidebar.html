@@ -25,7 +25,7 @@
             </script>
             {% for listitem in sidebar_items %}
                 <li>
-                    <a class="{% if forloop.counter0 == active_sidebar_item %} font-weight-bold text-primary{% endif %} "
+                    <a class="{% if listitem.name == active_sidebar_item %} font-weight-bold text-primary{% endif %} "
                        href="{{ listitem.url }}">
                         <i class="bi bi-{{ listitem.icon }}"></i>
                         <span class="mx-1">{{ listitem.name }}</span>

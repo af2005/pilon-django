@@ -3,7 +3,7 @@ from ..models import Project
 
 
 def admin(
-    request, window_title, title="", subtitle="", sidebar_items=None, content=None
+        request, window_title, title="", subtitle="", sidebar_items=None, content=None
 ):
     template = loader.get_template("www/base+sidebar+title.html")
     context = {
@@ -18,7 +18,7 @@ def admin(
 
 
 def simple(
-    request, window_title, title="", subtitle="", content="", navbar_centertext=""
+        request, window_title, title="", subtitle="", content="", navbar_centertext=""
 ):
     template = loader.get_template("www/base+title.html")
     context = {
@@ -31,15 +31,9 @@ def simple(
     return template.render(context, request)
 
 
-def dashboard(
-    request,
-    window_title,
-    title="",
-    subtitle="",
-    subnav_items=None,
-    active_subnav_item=None,
-    content="",
-):
+def dashboard(request, window_title, title="", subtitle="", subnav_items=None, active_subnav_item=None,
+              content="",
+              ):
     template = loader.get_template("www/dashboard/dashboard.html")
     context = {
         "window_title": window_title,
@@ -75,28 +69,6 @@ def project_directory(request, projects=None):
         "page_subtitle": "All Projects visible to you",
         "projects": projects,
     }
-    return template.render(context, request)
-
-
-def project_view(
-    request, key, template_name, title, sidebar_items, active_sidebar_item, additional_context=None
-):
-    if additional_context is None:
-        additional_context = {}
-    project = list(Project.objects.filter(key=key).values())[0]
-    template = loader.get_template(template_name)
-    context = {
-        "project_key": project["key"],
-        "window_title": f'{project["name"]} {title}',
-        "page_title": f"{title}",
-        "page_subtitle": "",
-        "project": project,
-        "sidebar_items": sidebar_items,
-        "navbar_centertext": project["name"],
-        "active_sidebar_item": active_sidebar_item,
-    }
-    context = {**context, **additional_context}
-
     return template.render(context, request)
 
 

@@ -5,55 +5,40 @@ from www.views import templates
 import www.views.project.views as project_views
 
 
-def view_content_create(request, key):
+def content_create(request, key):
     tpl = templates.default_editor(request, title="Create Wiki Page", key=key)
     return HttpResponse(tpl)
 
 
-def view_content_create_with_file(request, key):
+def content_create_with_file(request, key):
     tpl = templates.default_editor(request, title="Create Wiki Page with File", key=key)
     return HttpResponse(tpl)
 
 
-def view_wiki_homepage(request, key):
-    tpl = templates.project_view(
-        request,
-        key,
-        template_name="www/project/wiki_base.html",
-        title="Wiki",
-        sidebar_items=project_views.sidebar_items(key),
-        active_sidebar_item=6,
-        additional_context=get_page_tree(key)
-    )
-    return HttpResponse(tpl)
+def wiki_homepage(request, key):
+    return project_views.project_view(request, key, template="wiki_base", title="Wiki",
+                                      additional_context=_get_page_tree(key), active_sidebar_item="Wiki")
 
 
-def view_wiki_page(request, key, uuid):
-    page_tree = get_page_tree(key)
-    wiki_page = WikiPage.objects.filter(id=uuid).first()
-    ancestors = wiki_page.get_ancestors_of_type(WikiPage)
+def page(request, key, uuid):
+    page_tree = _get_page_tree(key)
+    wikipage = WikiPage.objects.filter(id=uuid).first()
+    ancestors = wikipage.get_ancestors_of_type(WikiPage)
     page_contents = {
-        "name": wiki_page.name,
-        "id": wiki_page.id,
-        "content": wiki_page.markdown_rendered,
-        "creator": wiki_page.creator,
-        "created_date": wiki_page.date_created,
-        "modified_date": wiki_page.date_modified,
+        "name": wikipage.name,
+        "id": wikipage.id,
+        "content": wikipage.markdown_rendered,
+        "creator": wikipage.creator,
+        "created_date": wikipage.date_created,
+        "modified_date": wikipage.date_modified,
         "ancestors": ancestors,
     }
-    tpl = templates.project_view(
-        request,
-        key,
-        template_name="www/project/wiki_page_view.html",
-        title="",
-        sidebar_items=project_views.sidebar_items(key),
-        active_sidebar_item=6,
-        additional_context={**page_tree, **page_contents}
-    )
-    return HttpResponse(tpl)
+    return project_views.project_view(request, key, template="wiki_page_view", title="",
+                                      additional_context={**page_tree, **page_contents}, active_sidebar_item="Wiki"
+                                      )
 
 
-def get_page_tree(key):
+def _get_page_tree(key):
     wiki_pages = Project.objects.filter(key=key).first().get_descendants().instance_of(WikiPage)
     context = {"nodes": wiki_pages}
     return context
