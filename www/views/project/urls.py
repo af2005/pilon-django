@@ -8,7 +8,9 @@ urlpatterns = [
     path("<str:key>/chat/", project_views.view_chat, name="Project Chat"),
     path("<str:key>/tasks/", project_views.view_tasks, name="Project Tasks"),
     path("<str:key>/calendar/", project_views.view_calendar, name="Project Calendar"),
-    path("<str:key>/inventory/", project_views.view_inventory, name="Project Inventory"),
+    path(
+        "<str:key>/inventory/", project_views.view_inventory, name="Project Inventory"
+    ),
     path("<str:key>/wiki/", include("www.views.project.wiki.urls")),
     path("<str:key>/journal/", include("www.views.project.journal.urls")),
 ]

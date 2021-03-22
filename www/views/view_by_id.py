@@ -11,6 +11,7 @@ def main(request, uid):
             project = wiki_page.get_ancestors_of_type(Project).first()
             # Wiki Page View
             import www.views.project.wiki.wiki_views as wiki
+
             return wiki.view_wiki_page(request, key=project.key, uid=uid)
 
         journal_page = Entity.objects.filter(Q(instance_of=JournalPage), id=uid).first()
