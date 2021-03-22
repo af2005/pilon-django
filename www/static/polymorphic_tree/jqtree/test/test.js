@@ -868,7 +868,7 @@ test('moveNode', function() {
 });
 
 test('initFromData', function() {
-    var data = 
+    var data =
         {
             label: 'main',
             children: [

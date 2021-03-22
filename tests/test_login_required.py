@@ -21,6 +21,6 @@ class TestLoginRequired(TestCase):
         assert 302 == response.status_code
 
     def test_logged_in(self):
-        self.client.login(username='user', password='password')
+        self.client.login(username="user", password="password")
         response = self.client.get("/")
         assert 200 == response.status_code

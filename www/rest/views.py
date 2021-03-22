@@ -50,7 +50,7 @@ class EntityViewSet(viewsets.ModelViewSet):
         deserializing input, and for serializing output.
         """
         serializer_class = self.get_serializer_class()
-        kwargs.setdefault('context', self.get_serializer_context())
+        kwargs.setdefault("context", self.get_serializer_context())
         print("called get serialiser")
         # Copy and manipulate the request
         if self.request.method != "GET":

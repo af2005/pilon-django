@@ -23,7 +23,7 @@ def view_wiki_homepage(request, key):
         title="Wiki",
         sidebar_items=project_views.sidebar_items(key),
         active_sidebar_item=6,
-        additional_context=get_page_tree(key)
+        additional_context=get_page_tree(key),
     )
     return HttpResponse(tpl)
 
@@ -48,12 +48,14 @@ def view_wiki_page(request, key, uid):
         title="",
         sidebar_items=project_views.sidebar_items(key),
         active_sidebar_item=6,
-        additional_context={**page_tree, **page_contents}
+        additional_context={**page_tree, **page_contents},
     )
     return HttpResponse(tpl)
 
 
 def get_page_tree(key):
-    wiki_pages = Project.objects.filter(key=key).first().get_descendants().instance_of(WikiPage)
+    wiki_pages = (
+        Project.objects.filter(key=key).first().get_descendants().instance_of(WikiPage)
+    )
     context = {"nodes": wiki_pages}
     return context
