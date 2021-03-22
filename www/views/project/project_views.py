@@ -7,48 +7,48 @@ def sidebar_items(key):
     return [
         {
             "name": "Homepage",
-            "url": reverse('Project Homepage', args=[key]),
+            "url": reverse("Project Homepage", args=[key]),
             "icon": "house-fill",
         },
         {
             "name": "Team",
-            "url": reverse('Project Team', args=[key]),
+            "url": reverse("Project Team", args=[key]),
             "icon": "people",
             "color": "darkorange",
         },
         {
             "name": "Chat",
-            "url": reverse('Project Chat', args=[key]),
+            "url": reverse("Project Chat", args=[key]),
             "icon": "envelope",
             "color": "darkred",
         },
         {
             "name": "Tasks",
-            "url": reverse('Project Tasks', args=[key]),
+            "url": reverse("Project Tasks", args=[key]),
             "icon": "check2-circle",
             "color": "indigo",
         },
         {
             "name": "Calendar",
-            "url": reverse('Project Calendar', args=[key]),
+            "url": reverse("Project Calendar", args=[key]),
             "icon": "calendar3",
             "color": "pink",
         },
         {
             "name": "Inventory",
-            "url": reverse('Project Inventory', args=[key]),
+            "url": reverse("Project Inventory", args=[key]),
             "icon": "archive",
             "color": "blue2",
         },
         {
             "name": "Wiki",
-            "url": reverse('Project Wiki', args=[key]),
+            "url": reverse("Project Wiki", args=[key]),
             "icon": "file-text",
             "color": "darkred",
         },
         {
             "name": "Journal",
-            "url": reverse('Project Journal', args=[key]),
+            "url": reverse("Project Journal", args=[key]),
             "icon": "journals",
             "color": "darkteal",
         },
@@ -136,5 +136,3 @@ def view_inventory(request, key):
         active_sidebar_item=5,
     )
     return HttpResponse(tpl)
-
-

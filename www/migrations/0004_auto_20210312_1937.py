@@ -7,13 +7,18 @@ import markdownfield.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('www', '0003_auto_20210304_1416'),
+        ("www", "0003_auto_20210304_1416"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='markdownentity',
-            name='markdown',
-            field=markdownfield.models.MarkdownField(blank=True, default='', rendered_field='markdown_rendered', use_editor=False),
+            model_name="markdownentity",
+            name="markdown",
+            field=markdownfield.models.MarkdownField(
+                blank=True,
+                default="",
+                rendered_field="markdown_rendered",
+                use_editor=False,
+            ),
         ),
     ]

@@ -79,7 +79,13 @@ def project_directory(request, projects=None):
 
 
 def project_view(
-    request, key, template_name, title, sidebar_items, active_sidebar_item, additional_context=None
+    request,
+    key,
+    template_name,
+    title,
+    sidebar_items,
+    active_sidebar_item,
+    additional_context=None,
 ):
     if additional_context is None:
         additional_context = {}
