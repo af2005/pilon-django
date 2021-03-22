@@ -15,12 +15,24 @@ from rest_polymorphic.serializers import PolymorphicSerializer
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    tasks = serializers.HyperlinkedRelatedField(many=True, read_only=True, required=False, view_name="task-detail")
-    created_entities = serializers.HyperlinkedRelatedField(many=True, read_only=True, required=False, view_name="entity-detail")
+    tasks = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, required=False, view_name="task-detail"
+    )
+    created_entities = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, required=False, view_name="entity-detail"
+    )
 
     class Meta:
         model = User
-        fields = ["url", "id", "username", "email", "groups", "tasks", "created_entities"]
+        fields = [
+            "url",
+            "id",
+            "username",
+            "email",
+            "groups",
+            "tasks",
+            "created_entities",
+        ]
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -30,7 +42,9 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class EntitySerializer(serializers.HyperlinkedModelSerializer):
-    children = serializers.HyperlinkedRelatedField(many=True, read_only=True, required=False, view_name="entity-detail")
+    children = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, required=False, view_name="entity-detail"
+    )
 
     class Meta:
         model = Entity
