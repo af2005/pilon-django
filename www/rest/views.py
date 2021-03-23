@@ -74,6 +74,7 @@ class EntityViewSet(viewsets.ModelViewSet):
                 serializer.is_valid()
                 return serializer
 
+
 class ProjectViewSet(EntityViewSet):
     model = Project
     queryset = model.objects.all()
