@@ -128,3 +128,4 @@ class Attachment(Entity):
     @property
     def renderable(self):
         return self.file_type in self.RENDERABLE_FILE_TYPES
+

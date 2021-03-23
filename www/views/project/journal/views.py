@@ -4,25 +4,22 @@ from www.views import templates
 import www.views.project.views as project_views
 
 
-def view_content_create(request, key):
+def content_create(request, key) -> HttpResponse:
     tpl = templates.default_editor(request, title="Create Journal Page", key=key)
     return HttpResponse(tpl)
 
 
-def view_content_create_with_file(request, key):
+def content_create_with_file(request, key) -> HttpResponse:
     tpl = templates.default_editor(
         request, title="Create Journal Page with File", key=key
     )
     return HttpResponse(tpl)
 
 
-def view_journal(request, key):
-    tpl = templates.project_view(
-        request,
-        key,
-        template_name="www/project/journal.html",
-        title="Journal",
-        sidebar_items=project_views.sidebar_items(key),
-        active_sidebar_item=7,
-    )
-    return HttpResponse(tpl)
+def homepage(request, key) -> HttpResponse:
+    return project_views.project_view(request, key, template="journal", title="Journal", active_sidebar_item="Journal")
+
+
+def page(request, key, uuid) -> HttpResponse:
+    # TODO: Do not return homepage but actual page
+    return project_views.project_view(request, key, template="journal", title="Journal", active_sidebar_item="Journal")
