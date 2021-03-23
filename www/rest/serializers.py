@@ -17,7 +17,15 @@ from rest_polymorphic.serializers import PolymorphicSerializer
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ["url", "id", "username", "email", "groups", "tasks", "created_entities"]
+        fields = [
+            "url",
+            "id",
+            "username",
+            "email",
+            "groups",
+            "tasks",
+            "created_entities",
+        ]
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):

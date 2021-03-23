@@ -16,8 +16,14 @@ def content_create_with_file(request, key) -> HttpResponse:
 
 
 def wiki_homepage(request, key) -> HttpResponse:
-    return project_views.project_view(request, key, template="wiki_base", title="Wiki",
-                                      additional_context=_get_page_tree(key), active_sidebar_item="Wiki")
+    return project_views.project_view(
+        request,
+        key,
+        template="wiki_base",
+        title="Wiki",
+        additional_context=_get_page_tree(key),
+        active_sidebar_item="Wiki",
+    )
 
 
 def page(request, key, uuid) -> HttpResponse:
@@ -33,12 +39,19 @@ def page(request, key, uuid) -> HttpResponse:
         "modified_date": wikipage.date_modified,
         "ancestors": ancestors,
     }
-    return project_views.project_view(request, key, template="wiki_page_view", title="",
-                                      additional_context={**page_tree, **page_contents}, active_sidebar_item="Wiki"
-                                      )
+    return project_views.project_view(
+        request,
+        key,
+        template="wiki_page_view",
+        title="",
+        additional_context={**page_tree, **page_contents},
+        active_sidebar_item="Wiki",
+    )
 
 
 def _get_page_tree(key) -> dict:
-    wiki_pages = Project.objects.filter(key=key).first().get_descendants().instance_of(WikiPage)
+    wiki_pages = (
+        Project.objects.filter(key=key).first().get_descendants().instance_of(WikiPage)
+    )
     context = {"nodes": wiki_pages}
     return context

@@ -18,10 +18,13 @@ css_classes_to_extend = {
     "three-dots": "tui-more",
 }
 
-with open("bootstrap-icons.css", 'r') as f:
+with open("bootstrap-icons.css", "r") as f:
     s = f.read()
     for old_css_class in css_classes_to_extend:
-        s = s.replace(f".bi-{old_css_class}::before", f".{css_classes_to_extend[old_css_class]}::before, .bi-{old_css_class}::before")
+        s = s.replace(
+            f".bi-{old_css_class}::before",
+            f".{css_classes_to_extend[old_css_class]}::before, .bi-{old_css_class}::before",
+        )
 
-with open("bootstrap-icons-patched.css", 'w') as o:
+with open("bootstrap-icons-patched.css", "w") as o:
     o.write(s)

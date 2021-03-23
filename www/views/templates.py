@@ -3,7 +3,7 @@ from ..models import Project
 
 
 def admin(
-        request, window_title, title="", subtitle="", sidebar_items=None, content=None
+    request, window_title, title="", subtitle="", sidebar_items=None, content=None
 ):
     template = loader.get_template("www/base+sidebar+title.html")
     context = {
@@ -18,7 +18,7 @@ def admin(
 
 
 def simple(
-        request, window_title, title="", subtitle="", content="", navbar_centertext=""
+    request, window_title, title="", subtitle="", content="", navbar_centertext=""
 ):
     template = loader.get_template("www/base+title.html")
     context = {
@@ -31,9 +31,15 @@ def simple(
     return template.render(context, request)
 
 
-def dashboard(request, window_title, title="", subtitle="", subnav_items=None, active_subnav_item=None,
-              content="",
-              ):
+def dashboard(
+    request,
+    window_title,
+    title="",
+    subtitle="",
+    subnav_items=None,
+    active_subnav_item=None,
+    content="",
+):
     template = loader.get_template("www/dashboard/dashboard.html")
     context = {
         "window_title": window_title,

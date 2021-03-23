@@ -15,11 +15,15 @@ def main(request, uuid) -> HttpResponse:
     try:
         if isinstance(entity, WikiPage):
             project = entity.get_ancestors_of_type(Project).first()
-            return www.views.project.wiki.views.page(request, key=project.key, uuid=uuid)
+            return www.views.project.wiki.views.page(
+                request, key=project.key, uuid=uuid
+            )
 
         if isinstance(entity, JournalPage):
             project = entity.get_ancestors_of_type(Project).first()
-            return www.views.project.journal.views.page(request, key=project.key, uuid=uuid)
+            return www.views.project.journal.views.page(
+                request, key=project.key, uuid=uuid
+            )
 
         if isinstance(entity, Task):
             project = entity.get_ancestors_of_type(Project).first()

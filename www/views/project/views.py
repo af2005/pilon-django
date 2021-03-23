@@ -19,10 +19,10 @@ class ProjectComponent:
         return "www/project/" + self.template
 
     def url(self):
-        return reverse('project:' + self.url_lookup, args=[self.key])
+        return reverse("project:" + self.url_lookup, args=[self.key])
 
 
-'''
+"""
 homepage = ProjectComponent(sidebar_index=10, name="Homepage", icon="house-fill", url_lookup="homepage",
                             template="homepage")
 team = ProjectComponent(sidebar_index=20, name="Team", icon="house-fill", url_lookup="project:homepage")
@@ -32,57 +32,61 @@ calendar = ProjectComponent(sidebar_index=50, name="", icon="house-fill", url_lo
 inventory = ProjectComponent(sidebar_index=60, name="Tasks", icon="house-fill", url_lookup="project:homepage")
 wiki = ProjectComponent(sidebar_index=70, name="Tasks", icon="house-fill", url_lookup="project:homepage")
 journal = ProjectComponent(sidebar_index=80, name="Tasks", icon="house-fill", url_lookup="project:homepage")
-'''
+"""
 
 
 def sidebar_items(key):
     return [
         {
             "name": "Homepage",
-            "url": reverse('project:homepage', args=[key]),
+            "url": reverse("project:homepage", args=[key]),
             "icon": "house-fill",
         },
-
         {
             "name": "Team",
-            "url": reverse('project:team', args=[key]),
+            "url": reverse("project:team", args=[key]),
             "icon": "people",
         },
         {
             "name": "Chat",
-            "url": reverse('project:chat', args=[key]),
+            "url": reverse("project:chat", args=[key]),
             "icon": "envelope",
         },
         {
             "name": "Tasks",
-            "url": reverse('project:tasks', args=[key]),
+            "url": reverse("project:tasks", args=[key]),
             "icon": "check2-circle",
         },
         {
             "name": "Calendar",
-            "url": reverse('project:calendar', args=[key]),
+            "url": reverse("project:calendar", args=[key]),
             "icon": "calendar3",
         },
         {
             "name": "Inventory",
-            "url": reverse('project:inventory', args=[key]),
+            "url": reverse("project:inventory", args=[key]),
             "icon": "archive",
         },
         {
             "name": "Wiki",
-            "url": reverse('project:wiki', args=[key]),
+            "url": reverse("project:wiki", args=[key]),
             "icon": "file-text",
         },
         {
             "name": "Journal",
-            "url": reverse('project:journal', args=[key]),
+            "url": reverse("project:journal", args=[key]),
             "icon": "journals",
         },
     ]
 
 
 def project_view(
-        request, key, template, title, additional_context=None, active_sidebar_item=None,
+    request,
+    key,
+    template,
+    title,
+    additional_context=None,
+    active_sidebar_item=None,
 ) -> HttpResponse:
     if additional_context is None:
         additional_context = {}
@@ -105,27 +109,52 @@ def project_view(
 
 def content_create(request, key) -> HttpResponse:
     tpl = templates.create_new_content(
-        request, title="Create Content", key=key, subtitle="In project", sidebar_items=sidebar_items(key),
+        request,
+        title="Create Content",
+        key=key,
+        subtitle="In project",
+        sidebar_items=sidebar_items(key),
     )
     return HttpResponse(tpl)
 
 
 def homepage(request, key) -> HttpResponse:
-    return project_view(request, key, template="homepage", title="Homepage", active_sidebar_item="Homepage")
+    return project_view(
+        request,
+        key,
+        template="homepage",
+        title="Homepage",
+        active_sidebar_item="Homepage",
+    )
 
 
 def team(request, key) -> HttpResponse:
-    return project_view(request, key, template="team", title="Team", active_sidebar_item="Team")
+    return project_view(
+        request, key, template="team", title="Team", active_sidebar_item="Team"
+    )
 
 
 def chat(request, key) -> HttpResponse:
-    return project_view(request, key, template="chat", title="Chat", active_sidebar_item="Chat")
+    return project_view(
+        request, key, template="chat", title="Chat", active_sidebar_item="Chat"
+    )
 
 
 def calendar(request, key) -> HttpResponse:
-    return project_view(request, key, template="calendar", title="Calendar", active_sidebar_item="Calendar")
+    return project_view(
+        request,
+        key,
+        template="calendar",
+        title="Calendar",
+        active_sidebar_item="Calendar",
+    )
 
 
 def inventory(request, key) -> HttpResponse:
-    return project_view(request, key, template="inventory", title="Inventory", active_sidebar_item="Inventory")
-
+    return project_view(
+        request,
+        key,
+        template="inventory",
+        title="Inventory",
+        active_sidebar_item="Inventory",
+    )
