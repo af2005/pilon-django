@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AnonymousUser, User
-from django.test import RequestFactory, TestCase
+from django.test import Client, TestCase
 from unittest import skip
 from www.views.dashboard.dashboard_views import (
     view_dashboard,
@@ -8,27 +8,19 @@ from www.views.dashboard.dashboard_views import (
 )
 
 
-@skip
-class SimpleTest(TestCase):
+class TestLoginRequired(TestCase):
     def setUp(self):
         # Every test needs access to the request factory.
-        self.factory = RequestFactory()
+        self.client = Client()
         self.user = User.objects.create_user(
-            username="jacob", email="jacob@…", password="top_secret"
+            username="user", email="testuser@email.com", password="password"
         )
 
-    def test_dashboard(self):
-        # Create an instance of a GET request.
-        request = self.factory.get("/")
+    def test_not_logged_in(self):
+        response = self.client.get("/")
+        assert 302 == response.status_code
 
-        # Recall that middleware are not supported. You can simulate a
-        # logged-in user by setting request.user manually.
-        request.user = self.user
-
-        # Or you can simulate an anonymous user by setting request.user to
-        # an AnonymousUser instance.
-        request.user = AnonymousUser()
-
-        # Test my_view() as if it were deployed at /customer/details
-        response = view_dashboard(request)
-        print(response)
+    def test_logged_in(self):
+        self.client.login(username="user", password="password")
+        response = self.client.get("/")
+        assert 200 == response.status_code

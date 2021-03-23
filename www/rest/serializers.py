@@ -15,6 +15,13 @@ from rest_polymorphic.serializers import PolymorphicSerializer
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    tasks = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, required=False, view_name="task-detail"
+    )
+    created_entities = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, required=False, view_name="entity-detail"
+    )
+
     class Meta:
         model = User
         fields = [
@@ -35,6 +42,10 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class EntitySerializer(serializers.HyperlinkedModelSerializer):
+    children = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, required=False, view_name="entity-detail"
+    )
+
     class Meta:
         model = Entity
         fields = (
@@ -52,35 +63,35 @@ class EntitySerializer(serializers.HyperlinkedModelSerializer):
         }
 
 
-class ProjectSerializer(serializers.HyperlinkedModelSerializer):
+class ProjectSerializer(EntitySerializer):
     class Meta:
         model = Project
         fields = EntitySerializer.Meta.fields + ("key",)
         extra_kwargs = EntitySerializer.Meta.extra_kwargs
 
 
-class MarkdownEntitySerializer(serializers.HyperlinkedModelSerializer):
+class MarkdownEntitySerializer(EntitySerializer):
     class Meta:
         model = MarkdownEntity
         fields = EntitySerializer.Meta.fields + ("markdown", "markdown_rendered")
         extra_kwargs = EntitySerializer.Meta.extra_kwargs
 
 
-class WikiPageSerializer(serializers.HyperlinkedModelSerializer):
+class WikiPageSerializer(MarkdownEntitySerializer):
     class Meta:
         model = WikiPage
         fields = MarkdownEntitySerializer.Meta.fields
         extra_kwargs = MarkdownEntitySerializer.Meta.extra_kwargs
 
 
-class JournalPageSerializer(serializers.HyperlinkedModelSerializer):
+class JournalPageSerializer(MarkdownEntitySerializer):
     class Meta:
         model = JournalPage
         fields = MarkdownEntitySerializer.Meta.fields + ("date",)
         extra_kwargs = MarkdownEntitySerializer.Meta.extra_kwargs
 
 
-class TaskSerializer(serializers.HyperlinkedModelSerializer):
+class TaskSerializer(MarkdownEntitySerializer):
     class Meta:
         model = Task
         fields = MarkdownEntitySerializer.Meta.fields + ("due_date", "assignee")
@@ -92,14 +103,14 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
         }
 
 
-class CommentSerializer(serializers.HyperlinkedModelSerializer):
+class CommentSerializer(MarkdownEntitySerializer):
     class Meta:
         model = Comment
         fields = MarkdownEntitySerializer.Meta.fields
         extra_kwargs = EntitySerializer.Meta.extra_kwargs
 
 
-class AttachmentSerializer(serializers.HyperlinkedModelSerializer):
+class AttachmentSerializer(EntitySerializer):
     class Meta:
         model = Attachment
         fields = EntitySerializer.Meta.fields + ("file_name", "file_type", "file_path")

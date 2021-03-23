@@ -15,3 +15,6 @@ migrate:
 
 migrations:
 	poetry run python manage.py makemigrations
+
+linter:
+	poetry run flakehell lint

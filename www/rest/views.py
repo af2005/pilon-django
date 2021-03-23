@@ -51,6 +51,18 @@ class EntityViewSet(viewsets.ModelViewSet):
         """
         serializer_class = self.get_serializer_class()
         kwargs.setdefault("context", self.get_serializer_context())
+        print("called get serialiser")
+        # Copy and manipulate the request
+        if self.request.method != "GET":
+            draft_request_data = self.request.data.copy()
+            if draft_request_data:
+                draft_request_data["entity_type"] = self.model.__name__
+                kwargs["data"] = draft_request_data
+                serializer = serializer_class(*args, **kwargs)
+                serializer.is_valid()
+                serializer.save()
+                return serializer
+        return serializer_class(*args, **kwargs)
 
         # Copy and manipulate the request
         if self.request.method != "GET":
@@ -61,9 +73,6 @@ class EntityViewSet(viewsets.ModelViewSet):
                 serializer = serializer_class(*args, **kwargs)
                 serializer.is_valid()
                 return serializer
-
-        return serializer_class(*args, **kwargs)
-
 
 class ProjectViewSet(EntityViewSet):
     model = Project
