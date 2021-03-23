@@ -30,9 +30,5 @@ urlpatterns = [
     path("id/", page_not_found, name="Content by UUID root"),
     path("id/<str:uuid>", view_by_uuid.main, name="Content by UUID"),
     path("people/", people.directory, name="View People"),
-    path(
-        "system-settings/<str:setting>/",
-        admin.admin_views.system_settings,
-        name="System settings",
-    ),
+    path("system-settings/", include("www.views.admin.urls")),
 ]
