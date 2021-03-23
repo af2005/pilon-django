@@ -64,6 +64,16 @@ class EntityViewSet(viewsets.ModelViewSet):
                 return serializer
         return serializer_class(*args, **kwargs)
 
+        # Copy and manipulate the request
+        if self.request.method != "GET":
+            draft_request_data = self.request.data.copy()
+            if draft_request_data:
+                draft_request_data["entity_type"] = self.model.__name__
+                kwargs["data"] = draft_request_data
+                serializer = serializer_class(*args, **kwargs)
+                serializer.is_valid()
+                return serializer
+
 
 class ProjectViewSet(EntityViewSet):
     model = Project

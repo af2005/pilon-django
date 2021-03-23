@@ -1,10 +1,10 @@
 from django.contrib.auth.models import AnonymousUser, User
 from django.test import Client, TestCase
 from unittest import skip
-from www.views.dashboard.dashboard_views import (
-    view_dashboard,
-    view_all_updates_board,
-    view_recently_worked_on_board,
+from www.views.dashboard.views import (
+    dashboard,
+    all_updates_board,
+    recently_worked_on_board,
 )
 
 

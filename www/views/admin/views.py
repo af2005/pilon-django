@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
 from .. import templates
-from www.rest import users
+from www.models import User
 
 SIDEBAR_ITEMS = [
     {"name": "Global", "url": "/system-settings/global"},
@@ -15,7 +15,7 @@ def user_settings(request):
 
 @permission_required("admin", raise_exception=True)
 def user_manager(request):
-    content = users.list_all_users()
+    content = User.objects.all()
     tpl = templates.admin(
         request,
         "User Manager",
