@@ -4,8 +4,6 @@ from . import people, admin, user_settings, view_by_uuid, project_helper_views
 from django.contrib.auth import views as auth_views
 from django.views.defaults import page_not_found
 
-from .admin import admin_views
-
 urlpatterns = [
     path("", include("www.views.dashboard.urls")),
     path(

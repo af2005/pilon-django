@@ -1,9 +1,7 @@
-from django.contrib.auth import get_user_model, models
-from django.http import HttpResponse
-from django.test import TestCase, Client
-from django.contrib.auth.models import AnonymousUser, User
+
+from django.test import Client
+from django.contrib.auth.models import User
 from django.test import RequestFactory, TestCase
-import unittest
 from www.models import Project
 
 from django.urls import reverse
@@ -26,7 +24,7 @@ class TestFrontend(TestCase):
         )
 
     def test_default_views(self):
-        DEFAULT_VIEWS = [
+        default_views = [
             "View Dashboard",
             "All updates board",
             "Last worked on board",
@@ -35,13 +33,13 @@ class TestFrontend(TestCase):
             "Create Project",
             "Project Directory",
         ]
-        for view in DEFAULT_VIEWS:
+        for view in default_views:
             reversed_url = reverse(view)
             response = self.client.get(reversed_url)
             self.assertEqual(response.status_code, 200)
 
     def test_project_views(self):
-        PROJECT_VIEWS = [
+        project_views = [
             "project:homepage",
             "project:create-child-entity",
             "project:tasks",
@@ -56,7 +54,7 @@ class TestFrontend(TestCase):
             "project:create-journal-page",
             "project:create-journal-page-from-file",
         ]
-        for view in PROJECT_VIEWS:
+        for view in project_views:
             reversed_url = reverse(view, kwargs={"key": TEST_PROJECT_KEY})
             response = self.client.get(reversed_url)
             self.assertEqual(response.status_code, 200)

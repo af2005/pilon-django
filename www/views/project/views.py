@@ -5,7 +5,7 @@ from www.models import Project
 from www.views import templates
 from django.urls import reverse
 
-
+"""
 class ProjectComponent:
     def __init__(self, key, sidebar_index, name, icon, url_lookup, template):
         self.key = key
@@ -22,16 +22,22 @@ class ProjectComponent:
         return reverse("project:" + self.url_lookup, args=[self.key])
 
 
-"""
-homepage = ProjectComponent(sidebar_index=10, name="Homepage", icon="house-fill", url_lookup="homepage",
-                            template="homepage")
-team = ProjectComponent(sidebar_index=20, name="Team", icon="house-fill", url_lookup="project:homepage")
-chat = ProjectComponent(sidebar_index=30, name="Chat", icon="house-fill", url_lookup="project:homepage")
-tasks = ProjectComponent(sidebar_index=40, name="Tasks", icon="house-fill", url_lookup="project:homepage")
-calendar = ProjectComponent(sidebar_index=50, name="", icon="house-fill", url_lookup="project:homepage")
-inventory = ProjectComponent(sidebar_index=60, name="Tasks", icon="house-fill", url_lookup="project:homepage")
-wiki = ProjectComponent(sidebar_index=70, name="Tasks", icon="house-fill", url_lookup="project:homepage")
-journal = ProjectComponent(sidebar_index=80, name="Tasks", icon="house-fill", url_lookup="project:homepage")
+homepage = ProjectComponent(sidebar_index=10, name="Homepage", icon="house-fill",
+                            url_lookup="homepage", template="homepage")
+team = ProjectComponent(sidebar_index=20, name="Team", icon="house-fill",
+                        url_lookup="project:homepage")
+chat = ProjectComponent(sidebar_index=30, name="Chat", icon="house-fill",
+                        url_lookup="project:homepage")
+tasks = ProjectComponent(sidebar_index=40, name="Tasks", icon="house-fill",
+                         url_lookup="project:homepage")
+calendar = ProjectComponent(sidebar_index=50, name="", icon="house-fill",
+                            url_lookup="project:homepage")
+inventory = ProjectComponent(sidebar_index=60, name="Tasks", icon="house-fill",
+                             url_lookup="project:homepage")
+wiki = ProjectComponent(sidebar_index=70, name="Tasks", icon="house-fill",
+                        url_lookup="project:homepage")
+journal = ProjectComponent(sidebar_index=80, name="Tasks", icon="house-fill",
+                           url_lookup="project:homepage")
 """
 
 
@@ -81,12 +87,12 @@ def sidebar_items(key):
 
 
 def project_view(
-    request,
-    key,
-    template,
-    title,
-    additional_context=None,
-    active_sidebar_item=None,
+        request,
+        key,
+        template,
+        title,
+        additional_context=None,
+        active_sidebar_item=None,
 ) -> HttpResponse:
     if additional_context is None:
         additional_context = {}
