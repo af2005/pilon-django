@@ -61,8 +61,21 @@ python_files = "tests.py test_*.py *_tests.py"
     directory = "htmlcov"
 
 
+[tool.flakehell]
+# specify any flake8 options. For example, exclude "example.py":
+exclude = ["www/migrations/*"]
+# 80 chars aren't enough in 21 century
+max_line_length = 90
+# make output nice
+#format = "grouped"
+
+# show line of source code in output
+#show_source = false
+
+
 [tool.flakehell.plugins]
-pycodestyle = ["+*"]
+format = "grouped"
+pycodestyle = ["+*","-W503"]
 pyflakes = ["+*"]
 pep8-naming = ["+*"]
 mccabe = ["+*"]
