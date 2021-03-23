@@ -8,7 +8,7 @@
             {% csrf_token %}
             <input type="hidden" name="markdown" value="">
             <input type="hidden" name="parent"
-                   value="1078f5c6-cc92-4aa4-a3d5-60459f8c7eb8">
+                   value="{{ project.id }}">
             <div class="py-3 justify-content-between d-flex align-items-center">
                 <div>
                     <h6 class="display-6 mb-0">{{ page_title }}</h6>
@@ -33,7 +33,7 @@
                 e.preventDefault();
                 markdownForm.markdown.value = editor.getMarkdown();
                 console.log(markdownForm.markdown.value);
-                //markdownForm.submit();
+                markdownForm.submit();
             })
         </script>
     </div>
