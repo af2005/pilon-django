@@ -80,7 +80,8 @@ def project_directory(request, projects=None):
 
 def create_new_content(request, key, title, subtitle, sidebar_items):
     project = list(Project.objects.filter(key=key).values())[0]
-    template = loader.get_template("www/project/create-child-entity.html")
+    template = loader.get_template(
+        "www/project/create/chooser.html")
     context = {
         "project_key": project["key"],
         "window_title": f'{title} {project["name"]} ',
@@ -95,7 +96,7 @@ def create_new_content(request, key, title, subtitle, sidebar_items):
 
 def default_editor(request, key, title):
     project = list(Project.objects.filter(key=key).values())[0]
-    template = loader.get_template("www/project/create-wiki-page.html")
+    template = loader.get_template("www/project/create/wiki-page.html")
     context = {
         "project_key": project["key"],
         "window_title": f'{title} {project["name"]} ',

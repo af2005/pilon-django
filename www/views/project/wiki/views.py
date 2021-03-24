@@ -19,7 +19,7 @@ def wiki_homepage(request, key) -> HttpResponse:
     return project_views.project_view(
         request,
         key,
-        template="wiki_base",
+        template="wiki/base",
         title="Wiki",
         additional_context=_get_page_tree(key),
         active_sidebar_item="Wiki",
@@ -42,7 +42,7 @@ def page(request, key, uuid) -> HttpResponse:
     return project_views.project_view(
         request,
         key,
-        template="wiki_page_view",
+        template="wiki/page_view",
         title="",
         additional_context={**page_tree, **page_contents},
         active_sidebar_item="Wiki",
