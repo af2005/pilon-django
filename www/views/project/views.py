@@ -97,7 +97,7 @@ def project_view(
     if additional_context is None:
         additional_context = {}
     project = list(Project.objects.filter(key=key).values())[0]
-    template = loader.get_template(f"www/project/{template}.html")
+    template = loader.get_template(f"www/project/content/{template}.html")
     context = {
         "project_key": key,
         "window_title": f'{project["name"]} {title}',
