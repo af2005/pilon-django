@@ -87,12 +87,12 @@ def sidebar_items(key):
 
 
 def project_view(
-        request,
-        key,
-        template,
-        title,
-        additional_context=None,
-        active_sidebar_item=None,
+    request,
+    key,
+    template,
+    title,
+    additional_context=None,
+    active_sidebar_item=None,
 ) -> HttpResponse:
     if additional_context is None:
         additional_context = {}
