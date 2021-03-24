@@ -2,14 +2,15 @@
 
 {% block content %}
 
-    <form action="" method="POST" class="my-4">
+    <form action="{% url "project-list" %}" method="POST" class="my-4">
         {% csrf_token %}
+        <input type="hidden" name="redirect" value="">
         <div class="form-group row my-1"><label for="project_key" class="col-sm-2 col-form-label">Project Key</label>
-            <div class="col-sm-10"><input type="text" class="form-control" id="project_key" name="project_key"></div>
+            <div class="col-sm-10"><input type="text" class="form-control" id="project_key" name="key"></div>
         </div>
         <div class="form-group row my-1"><label for="project_fullname" class="col-sm-2 col-form-label">Name</label>
             <div class="col-sm-10"><input type="text" class="form-control" id="project_fullname"
-                                          name="project_fullname">
+                                          name="name">
             </div>
         </div>
         <div class="form-group row my-3">

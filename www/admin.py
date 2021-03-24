@@ -3,7 +3,6 @@ from polymorphic_tree.admin import (
     PolymorphicMPTTParentModelAdmin,
     PolymorphicMPTTChildModelAdmin,
 )
-from reversion.admin import VersionAdmin
 from reversion_compare.admin import CompareVersionAdmin
 
 from .models import (

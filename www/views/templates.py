@@ -78,37 +78,9 @@ def project_directory(request, projects=None):
     return template.render(context, request)
 
 
-def project_view(
-    request,
-    key,
-    template_name,
-    title,
-    sidebar_items,
-    active_sidebar_item,
-    additional_context=None,
-):
-    if additional_context is None:
-        additional_context = {}
-    project = list(Project.objects.filter(key=key).values())[0]
-    template = loader.get_template(template_name)
-    context = {
-        "project_key": project["key"],
-        "window_title": f'{project["name"]} {title}',
-        "page_title": f"{title}",
-        "page_subtitle": "",
-        "project": project,
-        "sidebar_items": sidebar_items,
-        "navbar_centertext": project["name"],
-        "active_sidebar_item": active_sidebar_item,
-    }
-    context = {**context, **additional_context}
-
-    return template.render(context, request)
-
-
 def create_new_content(request, key, title, subtitle, sidebar_items):
     project = list(Project.objects.filter(key=key).values())[0]
-    template = loader.get_template("www/project/create-content.html")
+    template = loader.get_template("www/project/create/chooser.html")
     context = {
         "project_key": project["key"],
         "window_title": f'{title} {project["name"]} ',
@@ -123,7 +95,7 @@ def create_new_content(request, key, title, subtitle, sidebar_items):
 
 def default_editor(request, key, title):
     project = list(Project.objects.filter(key=key).values())[0]
-    template = loader.get_template("www/project/default-editor.html")
+    template = loader.get_template("www/project/create/wiki-page.html")
     context = {
         "project_key": project["key"],
         "window_title": f'{title} {project["name"]} ',

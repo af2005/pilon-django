@@ -1,16 +1,16 @@
 from django.urls import path, include
-from . import project_views
+from . import views
+
+app_name = "project"
 
 urlpatterns = [
-    path("<str:key>/", project_views.view_homepage, name="Project Homepage"),
-    path("<str:key>/create/", project_views.view_content_create, name="Create Content"),
-    path("<str:key>/team/", project_views.view_team, name="Project Team"),
-    path("<str:key>/chat/", project_views.view_chat, name="Project Chat"),
-    path("<str:key>/tasks/", project_views.view_tasks, name="Project Tasks"),
-    path("<str:key>/calendar/", project_views.view_calendar, name="Project Calendar"),
-    path(
-        "<str:key>/inventory/", project_views.view_inventory, name="Project Inventory"
-    ),
+    path("<str:key>/", views.homepage, name="homepage"),
+    path("<str:key>/create/", views.content_create, name="create-child-entity"),
+    path("<str:key>/team/", views.team, name="team"),
+    path("<str:key>/chat/", views.chat, name="chat"),
+    path("<str:key>/tasks/", include("www.views.project.tasks.urls"), name="tasks"),
+    path("<str:key>/calendar/", views.calendar, name="calendar"),
+    path("<str:key>/inventory/", views.inventory, name="inventory"),
     path("<str:key>/wiki/", include("www.views.project.wiki.urls")),
     path("<str:key>/journal/", include("www.views.project.journal.urls")),
 ]

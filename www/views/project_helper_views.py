@@ -5,7 +5,7 @@ from www.views import templates
 
 
 def view_project_create(request):
-    template = loader.get_template("www/project/create-project.html")
+    template = loader.get_template("www/project/create/project.html")
     context = {
         "window_title": "Create project",
         "page_title": "Create new project",

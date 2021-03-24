@@ -19,10 +19,10 @@
 {% block breadcrumbs %}
  <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url "Project Homepage" project.key %}">{{ project.name }}</a></li>
-            <li class="breadcrumb-item"><a href="{% url "Project Wiki" project.key %}">Wiki</a></li>
+            <li class="breadcrumb-item"><a href="{% url "project:homepage" project.key %}">{{ project.name }}</a></li>
+            <li class="breadcrumb-item"><a href="{% url "project:wiki" project.key %}">Wiki</a></li>
             {% for ancestor in ancestors %}
-                <li class="breadcrumb-item"><a href="{% url "Content by UID" ancestor.id%}">{{ ancestor.name }}</a></li>
+                <li class="breadcrumb-item"><a href="{% url "Content by UUID" ancestor.id%}">{{ ancestor.name }}</a></li>
             {% endfor %}
         </ol>
     </nav>
