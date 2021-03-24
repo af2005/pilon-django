@@ -34,7 +34,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-# TODO:0 add permission
+# TODO:10 add permission
 class EntityViewSet(viewsets.ModelViewSet):
     model = Entity
     queryset = model.objects.all()
