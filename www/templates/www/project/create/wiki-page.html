@@ -2,14 +2,12 @@
 {% load static %}
 {% block navigation %}{% include 'www/snippets/navigation-create-button.html' %}{% endblock %}
 {% block content %}
-    <script type="application/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <div class="bg-white">
 
         <form action="{% url "wikipage-list" %}" method="post" id="markdown-create-form">
             {% csrf_token %}
             <input type="hidden" name="markdown" value="">
-            <input type="hidden" name="parent"
-                   value="http://localhost:8000/rest/entity/1078f5c6-cc92-4aa4-a3d5-60459f8c7eb8/">
+
             <div class="py-3 justify-content-between d-flex align-items-center">
                 <div>
                     <h6 class="display-6 mb-0">{{ page_title }}</h6>
@@ -24,6 +22,8 @@
             <div class="input-group input-group-lg my-3">
                 <span id="parent">Parent</span>
                 <span type="text" aria-describedby="page-name"></span>
+                <input type="hidden" name="parent"
+                   value="http://localhost:8000/rest/entity/1078f5c6-cc92-4aa4-a3d5-60459f8c7eb8/">
             </div>
             <div class="input-group input-group-lg my-3">
                 <span class="input-group-text" id="page-name">Page Name</span>

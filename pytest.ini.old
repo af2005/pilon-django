@@ -1,4 +1,0 @@
-[pytest]
-addopts = -v -p no:warnings --cov=. --no-cov-on-fail --ignore=tests/schedule
-DJANGO_SETTINGS_MODULE = pilon.settings
-python_files = tests.py test_*.py *_tests.py
