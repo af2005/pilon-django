@@ -5,6 +5,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r"user", views.UserViewSet)
 router.register(r"group", views.GroupViewSet)
+router.register(r"label", views.LabelViewSet)
 router.register(r"entity", views.EntityViewSet)
 router.register(r"project", views.ProjectViewSet)
 router.register(r"markdown-entity", views.MarkdownEntityViewSet)

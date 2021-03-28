@@ -1,11 +1,12 @@
-from django.test import Client
-from django.contrib.auth.models import User
-from django.test import RequestFactory, TestCase
+from django.contrib.auth import get_user_model
+from django.test import RequestFactory, TestCase, Client
 from www.models import Project
 
 from django.urls import reverse
 
 TEST_PROJECT_KEY = "testproject"
+
+User = get_user_model()
 
 
 class TestFrontend(TestCase):

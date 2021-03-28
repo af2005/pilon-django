@@ -159,12 +159,31 @@ argon2 = ["argon2-cffi (>=16.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-colorfield"
+version = "0.4.1"
+description = "simple color field for your models with a nice color-picker in the admin-interface."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "django-extensions"
 version = "3.1.1"
 description = "Extensions for Django"
 category = "main"
 optional = false
 python-versions = ">=3.6"
+
+[[package]]
+name = "django-filter"
+version = "2.4.0"
+description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+Django = ">=2.2"
 
 [[package]]
 name = "django-js-asset"
@@ -261,6 +280,19 @@ python-versions = ">=3.7,<4.0.0"
 [package.dependencies]
 diff-match-patch = "*"
 django-reversion = "*"
+
+[[package]]
+name = "django-shortuuidfield"
+version = "0.1.3"
+description = "Short UUIDField for Django.  Good for use in urls & file names.  (Base 57, 22 characters)"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = "*"
+shortuuid = "*"
+six = "*"
 
 [[package]]
 name = "django-tag-parser"
@@ -775,7 +807,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "bf0c4aa351a51f541042ef664fb038e5df3ddd895b89e2bfac2c5c7bc976c01e"
+content-hash = "4acc34f2780a07aff55ac86eca03207d496c31f665160e81039718de768d0ff3"
 
 [metadata.files]
 appdirs = [
@@ -887,9 +919,17 @@ django = [
     {file = "Django-3.1.7-py3-none-any.whl", hash = "sha256:baf099db36ad31f970775d0be5587cc58a6256a6771a44eb795b554d45f211b8"},
     {file = "Django-3.1.7.tar.gz", hash = "sha256:32ce792ee9b6a0cbbec340123e229ac9f765dff8c2a4ae9247a14b2ba3a365a7"},
 ]
+django-colorfield = [
+    {file = "django-colorfield-0.4.1.tar.gz", hash = "sha256:63a542c417b72d0dac898a0f61a2a00aed3c9aabc2f5057c926efccf421f7887"},
+    {file = "django_colorfield-0.4.1-py3-none-any.whl", hash = "sha256:e38f8b9dabbab48a6dab3d1eb5bd802decb92970d56a28128c9a70cdbf383e30"},
+]
 django-extensions = [
     {file = "django-extensions-3.1.1.tar.gz", hash = "sha256:674ad4c3b1587a884881824f40212d51829e662e52f85b012cd83d83fe1271d9"},
     {file = "django_extensions-3.1.1-py3-none-any.whl", hash = "sha256:9507f8761ee760748938fd8af766d0608fb2738cf368adfa1b2451f61c15ae35"},
+]
+django-filter = [
+    {file = "django-filter-2.4.0.tar.gz", hash = "sha256:84e9d5bb93f237e451db814ed422a3a625751cbc9968b484ecc74964a8696b06"},
+    {file = "django_filter-2.4.0-py3-none-any.whl", hash = "sha256:e00d32cebdb3d54273c48f4f878f898dced8d5dfaad009438fe61ebdf535ace1"},
 ]
 django-js-asset = [
     {file = "django-js-asset-1.2.2.tar.gz", hash = "sha256:c163ae80d2e0b22d8fb598047cd0dcef31f81830e127cfecae278ad574167260"},
@@ -922,6 +962,9 @@ django-reversion = [
 django-reversion-compare = [
     {file = "django-reversion-compare-0.13.1.tar.gz", hash = "sha256:3966e4e353c02a0a26646df01b5ce62806c3db9f7642142dc03efe3af0783901"},
     {file = "django_reversion_compare-0.13.1-py3-none-any.whl", hash = "sha256:ffc684be41b90021d6b59fe302e20c1999196c4dc80f06e51e59123c4a2109a5"},
+]
+django-shortuuidfield = [
+    {file = "django-shortuuidfield-0.1.3.tar.gz", hash = "sha256:a292c0fe5538abe947b131e2b914edd9ac44afcc6a40eaec71448e6231a3ef00"},
 ]
 django-tag-parser = [
     {file = "django-tag-parser-3.2.tar.gz", hash = "sha256:903cd4bf3692c8c060770ca2b9d6e74e4ee52d6078308852acffe1ef4a49e0f7"},

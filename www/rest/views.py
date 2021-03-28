@@ -10,8 +10,14 @@ from ..models import (
     Task,
     Comment,
     Attachment,
+    Label,
 )
-from .serializers import EntityPolymorphicSerializer, UserSerializer, GroupSerializer
+from .serializers import (
+    EntityPolymorphicSerializer,
+    UserSerializer,
+    GroupSerializer,
+    LabelSerializer,
+)
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -34,11 +40,21 @@ class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
+class LabelViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows labels to be viewed or edited.
+    """
+
+    queryset = Label.objects.all()
+    serializer_class = LabelSerializer
+
+
 # TODO:10 add permission
 class EntityViewSet(viewsets.ModelViewSet):
     model = Entity
     queryset = model.objects.all()
     serializer_class = EntityPolymorphicSerializer
+    filterset_fields = ("name", "date_modified")
 
     # def get_queryset(self):
     #     return self.model.objects.all()
@@ -51,7 +67,7 @@ class EntityViewSet(viewsets.ModelViewSet):
         """
         serializer_class = self.get_serializer_class()
         kwargs.setdefault("context", self.get_serializer_context())
-        print("called get serialiser")
+
         # Copy and manipulate the request
         if self.request.method != "GET":
             draft_request_data = self.request.data.copy()
@@ -63,16 +79,6 @@ class EntityViewSet(viewsets.ModelViewSet):
                 serializer.save()
                 return serializer
         return serializer_class(*args, **kwargs)
-
-        # Copy and manipulate the request
-        if self.request.method != "GET":
-            draft_request_data = self.request.data.copy()
-            if draft_request_data:
-                draft_request_data["entity_type"] = self.model.__name__
-                kwargs["data"] = draft_request_data
-                serializer = serializer_class(*args, **kwargs)
-                serializer.is_valid()
-                return serializer
 
 
 class ProjectViewSet(EntityViewSet):
