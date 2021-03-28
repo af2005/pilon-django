@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 from shortuuidfield import ShortUUIDField
 from polymorphic_tree.models import PolymorphicMPTTModel, PolymorphicTreeForeignKey
 
@@ -74,6 +75,9 @@ class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
 
     def repr(self):
         return {"id": self.id}
+
+    def get_absolute_url(self):
+        return reverse("Content by UUID", kwargs={"uuid": str(self.id)})
 
 
 @reversion.register()
