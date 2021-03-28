@@ -1,11 +1,7 @@
-from django.contrib.auth.models import AnonymousUser, User
+from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
-from unittest import skip
-from www.views.dashboard.views import (
-    dashboard,
-    all_updates_board,
-    recently_worked_on_board,
-)
+
+User = get_user_model()
 
 
 class TestLoginRequired(TestCase):

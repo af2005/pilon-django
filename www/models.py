@@ -1,20 +1,50 @@
-import uuid
+import shortuuid
 
 from django.db import models
-from django.contrib.auth.models import User, Group
+import django.contrib.auth.models as auth_models
+from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
-
+from shortuuidfield import ShortUUIDField
 from polymorphic_tree.models import PolymorphicMPTTModel, PolymorphicTreeForeignKey
 
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_STANDARD
+from colorfield.fields import ColorField
 
 import reversion
 
 
+class RandomUUIDMixin(models.Model):
+    id = ShortUUIDField(primary_key=True, default=shortuuid.uuid)
+
+    class Meta:
+        abstract = True
+
+
+class SluggedNameMixin(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(editable=False)
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+
+class User(auth_models.AbstractUser, RandomUUIDMixin):
+    pass
+
+
+class Group(auth_models.Group, RandomUUIDMixin):
+    pass
+
+
 @reversion.register()
-class Entity(PolymorphicMPTTModel):
+class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
     #: Whether the node type allows to have children.
     can_have_children = True
 
@@ -24,8 +54,6 @@ class Entity(PolymorphicMPTTModel):
     #: Allowed child types for this page.
     child_types = []
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=255)
     parent = PolymorphicTreeForeignKey(
         "self", on_delete=models.CASCADE, null=True, blank=True, related_name="children"
     )
@@ -48,11 +76,18 @@ class Entity(PolymorphicMPTTModel):
         return {"id": self.id}
 
 
+@reversion.register()
+class Label(RandomUUIDMixin, SluggedNameMixin):
+    name = models.CharField(unique=True, max_length=50)
+    entities = models.ManyToManyField(Entity, related_name="labels")
+
+
 @reversion.register(follow=["entity_ptr"])
 class Project(Entity):
     can_be_root = True
 
     key = models.CharField(max_length=20, unique=True)
+    color = ColorField(default="#FF0000", blank=True)
 
     class Meta(PolymorphicMPTTModel.Meta):
         verbose_name = _("Project")

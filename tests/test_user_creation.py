@@ -1,10 +1,11 @@
 from django.contrib.auth import get_user_model, models
 from django.test import TestCase
 
+User = get_user_model()
+
 
 class UsersManagersTests(TestCase):
     def test_create_user(self):
-        User = get_user_model()
         user = User.objects.create_user(username="testuser", password="foo")
         self.assertEqual(user.username, "testuser")
         self.assertTrue(user.is_active)
@@ -19,7 +20,6 @@ class UsersManagersTests(TestCase):
             User.objects.create_user(username="", password="foo")
 
     def test_create_superuser(self):
-        User = get_user_model()
         admin_user = User.objects.create_superuser(username="testadmin", password="foo")
         self.assertEqual(admin_user.username, "testadmin")
         self.assertTrue(admin_user.is_active)
@@ -31,8 +31,7 @@ class UsersManagersTests(TestCase):
             )
 
     def test_delete_user(self):
-        User = get_user_model()
         user = User.objects.create_user(username="testuser", password="foo")
         user.delete()
-        with self.assertRaises(models.User.DoesNotExist):
+        with self.assertRaises(User.DoesNotExist):
             User.objects.get(username="testuser")

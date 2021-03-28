@@ -7,7 +7,7 @@ class TestEntityType:
     client = APIClient()
 
     @pytest.fixture(autouse=True)
-    def setup_stuff(self, db):
+    def setup_login(self, db):
         self.client.login(username="TestUser", password="password")
 
     def test_get_wikipage(self):

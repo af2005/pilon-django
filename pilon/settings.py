@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "rest_framework",  # https://www.django-rest-framework.org/tutorial/quickstart/
     # "rest-polymorphic",  # https://github.com/apirobot/django-rest-polymorphic
+    "colorfield",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -114,6 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+AUTH_USER_MODEL = "www.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -147,3 +150,8 @@ ADD_REVERSION_ADMIN = True
 
 # Calendar
 FIRST_DAY_OF_WEEK = 1
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",)
+}
