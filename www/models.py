@@ -78,7 +78,7 @@ class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
 
     def get_absolute_url(self):
         print(self.get_ancestors_of_type(Project))
-        return reverse("Content by UUID", kwargs={"uuid": str(self.id)})
+        return reverse("Content by UUID", kwargs={"uuid": self.id})
 
 
 @reversion.register()

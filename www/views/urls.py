@@ -27,7 +27,6 @@ urlpatterns = [
         project_helper_views.view_project_create,
         name="Create Project",
     ),
-    path("id/", page_not_found, name="Content by UUID root"),
     path("id/<str:uuid>", view_by_uuid.main, name="Content by UUID"),
     path("people/", people.directory, name="View People"),
     path("system-settings/", include("www.views.admin.urls")),

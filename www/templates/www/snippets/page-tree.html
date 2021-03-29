@@ -10,7 +10,7 @@ context = {"nodes": wiki_pages}
     <script type="application/javascript" src="{% static "www/mustache/mustache.min.js" %}"></script>
     <script type="application/javascript">
         const data = [{% recursetree nodes %}
-                {text: '{{ node.name }}', url: '{{ node.id }}',
+                {text: '{{ node.name }}', url: '{{ node.get_absolute_url }}',
                 additionalClasses: {% if node.id == id %}"fw-bold"{% else %}""{% endif %},
                     {% if not node.is_leaf_node %}
                         children: [{{ children }}]
@@ -28,7 +28,7 @@ context = {"nodes": wiki_pages}
                         '</button>' +
                         '<span class="tui-tree-text tui-js-tree-text">' +
                             '<span class="tui-tree-ico tui-ico-folder"></span>' +
-                            '<a class="{% templatetag openvariable %}additionalClasses{% templatetag closevariable %}" href="{% url "Content by UUID root" %}{% templatetag openvariable %}url{% templatetag closevariable %}">'+
+                            '<a class="{% templatetag openvariable %}additionalClasses{% templatetag closevariable %}" href="{% templatetag openvariable %}url{% templatetag closevariable %}">'+
                             '{% templatetag openvariable %}text{% templatetag closevariable %}' +
                         '</a></span>' +
                     '</div>' +
@@ -39,7 +39,7 @@ context = {"nodes": wiki_pages}
                     '<div class="tui-tree-content-wrapper">' +
                     '<span class="tui-tree-text tui-js-tree-text">' +
                     '<span class="tui-tree-ico tui-ico-file"></span>' +
-                    '<a class="{% templatetag openvariable %}additionalClasses{% templatetag closevariable %}"  href="{% url "Content by UUID root" %}{% templatetag openvariable %}url{% templatetag closevariable %}">'+
+                    '<a class="{% templatetag openvariable %}additionalClasses{% templatetag closevariable %}"  href="{% templatetag openvariable %}url{% templatetag closevariable %}">'+
                     '{% templatetag openvariable %}text{% templatetag closevariable %}' +
                     '</a></span>' +
                     '</div>'

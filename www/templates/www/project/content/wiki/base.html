@@ -1,7 +1,6 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
-{% block navigation %}{% include 'www/snippets/navigation-create-button.html' %}{% endblock %}
 
 
 {% block sidebar_lower_content %}
@@ -22,7 +21,7 @@
             <li class="breadcrumb-item"><a href="{% url "project:homepage" project.key %}">{{ project.name }}</a></li>
             <li class="breadcrumb-item"><a href="{% url "project:wiki" project.key %}">Wiki</a></li>
             {% for ancestor in ancestors %}
-                <li class="breadcrumb-item"><a href="{% url "Content by UUID" ancestor.id%}">{{ ancestor.name }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ ancestor.get_absolute_url }}">{{ ancestor.name }}</a></li>
             {% endfor %}
         </ol>
     </nav>
