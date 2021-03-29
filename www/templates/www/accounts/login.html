@@ -1,4 +1,4 @@
-{% extends "www/minimal.html" %}
+{% extends "www/base/minimal.html" %}
 {% load static %}
 {% load widget_tweaks %}
 
@@ -20,6 +20,11 @@
                                     <div class="card-header">Login</div>
 
                                     <div class="card-body">
+                                        {% if user.is_authenticated %}
+                                            <div class="alert alert-info" role="alert">
+                                                Already logged in as <span class="font-weight-bold">{{ user.username }}</span>, but you can change.
+                                            </div>
+                                        {% endif %}
                                         {% if next %}
                                             {% if user.is_authenticated %}
                                                 <p>Your account doesn't have access to this page. To proceed,
