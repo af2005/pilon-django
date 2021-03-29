@@ -77,6 +77,7 @@ class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
         return {"id": self.id}
 
     def get_absolute_url(self):
+        print(self.get_ancestors_of_type(Project))
         return reverse("Content by UUID", kwargs={"uuid": str(self.id)})
 
 
@@ -118,6 +119,12 @@ class WikiPage(MarkdownEntity):
     class Meta(PolymorphicMPTTModel.Meta):
         verbose_name = _("Wiki Page")
         verbose_name_plural = _("Wiki Pages")
+
+    def get_absolute_url(self):
+        project = self.get_ancestors_of_type(Project).first()
+        return reverse(
+            "project:wiki-page-detail", kwargs={"key": project.key, "pk": str(self.id)}
+        )
 
 
 @reversion.register(follow=["markdownentity_ptr"])

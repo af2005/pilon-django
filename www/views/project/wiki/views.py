@@ -100,8 +100,8 @@ class WikiPageDetail(DetailView):
 class WikiPageCreate(CreateView):
     model = WikiPage
     fields = [
+        "parent",
         "name",
-        "markdown",
     ]
     template_name = "www/project/wiki/wiki_page_create.html"
     # success_url = "/"
@@ -119,6 +119,7 @@ class WikiPageCreate(CreateView):
             "page_title": self.title,
             "page_subtitle": "",
             "project": project,
+            "parent": project.id,  # TODO: check how to give the parent
             "sidebar_items": sidebar_items(key),
             "navbar_centertext": project.name,
             "active_sidebar_item": active_sidebar_item,
