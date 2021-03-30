@@ -9,27 +9,29 @@
 
             <div class="py-3 justify-content-between d-flex align-items-center">
                 <div>
-                    <h6 class="display-6 mb-0">{{ page_title }}</h6>
+                    <h6 class="display-6 mb-0">Create Wiki Page</h6>
                 </div>
-                <div>
-                    <a href="{% url "project:homepage" project.key %}">
-                        <button type="reset" class="btn btn-link">Cancel</button>
-                    </a>
-                    <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Publish Page</button>
-                </div>
+
             </div>
-            <div class="input-group input-group-lg my-3">
-                <span id="parent">Parent</span>
-                <span type="text" aria-describedby="page-name"></span>
-                <input type="hidden" name="parent"
-                   value="{{ parent }}">
-            </div>
+
             <div class="input-group input-group-lg my-3">
                 <span class="input-group-text" id="page-name">Page Name</span>
                 <input name="name" type="text" class="form-control" aria-label="Page name"
                        aria-describedby="page-name">
             </div>
+             <div class="input-group input-group-lg my-3">
+                <span id="parent">Parent</span>
+                <span type="text" aria-describedby="page-name"></span>
+                <input type="hidden" name="parent"
+                   value="{{ parent }}">
+            </div>
             {% include 'www/snippets/editor.html' %}
+            <div class="py-3 justify-content-end d-flex">
+                    <a href="{% url "project:homepage" project.key %}">
+                        <button type="reset" class="btn btn-link">Cancel</button>
+                    </a>
+                    <button type="submit" class="btn btn-primary">Publish Page</button>
+            </div>
         </form>
         <script type="application/javascript">
             const markdownForm = document.getElementById("markdown-create-form");
