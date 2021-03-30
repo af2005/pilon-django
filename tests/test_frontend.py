@@ -48,7 +48,7 @@ class TestFrontend(TestCase):
             "project:calendar",
             "project:inventory",
             "project:wiki",
-            "project:create-wiki-page",
+            "project:wiki-page-create",
             "project:create-wiki-page-from-file",
             "project:journal",
             "project:create-journal-page",

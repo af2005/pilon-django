@@ -1,6 +1,12 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
+{% block sidebar %}
+    {% with active_sidebar_item="Journal" %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
+
 {% block sidebar_lower_content %}
 
     <link href='{% static "www/flatpickr/flatpickr.css" %}' rel='stylesheet'/>

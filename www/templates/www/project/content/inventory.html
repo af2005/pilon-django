@@ -1,9 +1,15 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
+{% block sidebar %}
+    {% with active_sidebar_item="Inventory" %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
 
 {% block content %}
-    {{ content }}
+    {{ project.sidebar_items }}
 
+    {{ project.name }}
 
 {% endblock %}

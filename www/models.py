@@ -98,6 +98,50 @@ class Project(Entity):
         verbose_name = _("Project")
         verbose_name_plural = _("Projects")
 
+    def sidebar_items(self):
+        return [
+        {
+            "name": "Homepage",
+            "url": reverse("project:homepage", args=[self.key]),
+            "icon": "house-fill",
+        },
+        {
+            "name": "Team",
+            "url": reverse("project:team", args=[self.key]),
+            "icon": "people",
+        },
+        {
+            "name": "Chat",
+            "url": reverse("project:chat", args=[self.key]),
+            "icon": "envelope",
+        },
+        {
+            "name": "Tasks",
+            "url": reverse("project:tasks", args=[self.key]),
+            "icon": "check2-circle",
+        },
+        {
+            "name": "Calendar",
+            "url": reverse("project:calendar", args=[self.key]),
+            "icon": "calendar3",
+        },
+        {
+            "name": "Inventory",
+            "url": reverse("project:inventory", args=[self.key]),
+            "icon": "archive",
+        },
+        {
+            "name": "Wiki",
+            "url": reverse("project:wiki", args=[self.key]),
+            "icon": "file-text",
+        },
+        {
+            "name": "Journal",
+            "url": reverse("project:journal", args=[self.key]),
+            "icon": "journals",
+        },
+    ]
+
 
 @reversion.register(follow=["entity_ptr"])
 class MarkdownEntity(Entity):

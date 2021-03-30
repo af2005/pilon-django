@@ -1,9 +1,13 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
+{% block sidebar %}
+    {% with active_sidebar_item="Team" %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
 
 {% block content %}
-    {{ content }}
     <div class="row">
         <div class="my-3 p-3 ">
             <h6 class="d-flex align-items-end justify-content-between border-bottom pb-2 mb-0">

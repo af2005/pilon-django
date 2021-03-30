@@ -4,11 +4,13 @@
 {% block additional_assets %}
     <link href='{% static "www/fullcalendar/custom.css" %}' rel='stylesheet'/>
     <link href='{% static "www/flatpickr/flatpickr.css" %}' rel='stylesheet'/>
-
-
 {% endblock %}
 
-
+{% block sidebar %}
+    {% with active_sidebar_item="Calendar" %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
 
 {% block additional_scripts_eob %}
     <script src='{% static "www/flatpickr/flatpickr.js" %}'></script>

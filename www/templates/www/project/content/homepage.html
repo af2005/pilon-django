@@ -1,7 +1,11 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
-
+{% block sidebar %}
+    {% with active_sidebar_item="Homepage" %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
 
 
 {% block content %}
@@ -52,7 +56,7 @@
                     </p>
                 </div>
                 <small class="d-block text-end mt-3">
-                    <a href="{% url "project:journal" project_key %}">All updates</a>
+                    <a href="{% url "project:journal" project.key %}">All updates</a>
                 </small>
             </div>
         </div>

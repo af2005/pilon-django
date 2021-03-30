@@ -1,7 +1,11 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
-
+{% block sidebar %}
+    {% with active_sidebar_item="Tasks" %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
 
 {% block additional_scripts_eob %}
     <script type="application/javascript">
