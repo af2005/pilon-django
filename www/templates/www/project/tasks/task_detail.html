@@ -1,0 +1,75 @@
+{% extends "www/project/project_base.html" %}
+{% load static %}
+
+{% block sidebar %}
+    {% with active_sidebar_item="Tasks" %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
+
+{% block window_title %}
+    {% with window_title=project.name|add:" - Tasks" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block title %}
+    {% with page_title="Tasks" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+
+{% block additional_scripts_eob %}
+    <script type="application/javascript">
+        const elem = document.querySelector('input[name="datepickertest"]');
+        const datepicker = new Datepicker(elem, {
+            buttonClass: "btn",
+            todayHighlight: true,
+            format: "dd.mm.yyyy"
+
+        });
+    </script>
+{% endblock %}
+
+
+{% block content %}
+    {{ content }}
+    <link rel="stylesheet" type="text/css" href="{% static "www/custom/tasks.css" %}">
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-sm btn-secondary m-1 float-right"><i class="bi bi-signpost"></i> Add Milestone</button>
+
+    </div>
+
+    <div class="row">
+        <div class="my-3 p-3 ">
+            <h6 class="d-flex align-items-end justify-content-between border-bottom pb-2 mb-0">
+                <span>
+                    <i class="bi bi-signpost"></i>
+                    <span class="">Milestone 1</span>
+                    <input name="datepickertest" type="text" class="input-sm input border-0 mx-2"
+                           placeholder="Due date">
+                </span>
+                <a href="#" class="btn btn-sm  btn-icon">
+                    <i class="bi bi-plus-circle"></i>
+                </a></h6>
+
+        </div>
+        <div class="input-group mb-1">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="task description">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Task description">
+            <div class="input-group-append">
+                         <input type="text" class="form-control" aria-label="assignee" placeholder="Assignee">
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+{% endblock %}

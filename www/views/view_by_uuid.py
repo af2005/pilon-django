@@ -10,12 +10,12 @@ import www.views.project.tasks.views
 from www.models import Entity, Project, WikiPage, JournalPage, Task
 
 
-def main(request, uuid) -> HttpResponse:
+def main(request, uuid):
     entity = Entity.objects.filter(id=uuid).first()
     try:
         if isinstance(entity, WikiPage):
             project = entity.get_ancestors_of_type(Project).first()
-            return www.views.project.wiki.views.page(
+            return www.views.project.wiki.views.WikiPageDetail(
                 request, key=project.key, uuid=uuid
             )
 

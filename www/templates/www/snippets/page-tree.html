@@ -11,7 +11,7 @@ context = {"nodes": wiki_pages}
     <script type="application/javascript">
         const data = [{% recursetree nodes %}
                 {text: '{{ node.name }}', url: '{{ node.get_absolute_url }}',
-                additionalClasses: {% if node.id == id %}"fw-bold"{% else %}""{% endif %},
+                additionalClasses: {% if node.id == object.id %}"fw-bold"{% else %}""{% endif %},
                     {% if not node.is_leaf_node %}
                         children: [{{ children }}]
                     {% endif %}

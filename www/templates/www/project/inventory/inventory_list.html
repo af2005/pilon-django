@@ -1,0 +1,28 @@
+{% extends "www/project/project_base.html" %}
+{% load static %}
+
+{% block sidebar %}
+    {% with active_sidebar_item="Inventory" %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
+
+{% block window_title %}
+    {% with window_title=project.name|add:" - Inventory" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block title %}
+    {% with page_title="Inventory" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+
+{% block content %}
+    {{ project.sidebar_items }}
+
+    {{ project.name }}
+
+{% endblock %}

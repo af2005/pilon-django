@@ -1,18 +1,22 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
+{% block sidebar %}
+    {% with active_sidebar_item="Tasks" %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
 
+{% block window_title %}
+    {% with window_title=project.name|add:" - Tasks" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
 
-{% block additional_scripts_eob %}
-    <script type="application/javascript">
-        const elem = document.querySelector('input[name="datepickertest"]');
-        const datepicker = new Datepicker(elem, {
-            buttonClass: "btn",
-            todayHighlight: true,
-            format: "dd.mm.yyyy"
-
-        });
-    </script>
+{% block title %}
+    {% with page_title="Tasks" %}
+        {{ block.super }}
+    {% endwith %}
 {% endblock %}
 
 
