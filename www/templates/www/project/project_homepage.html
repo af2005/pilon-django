@@ -7,6 +7,17 @@
     {% endwith%}
 {% endblock %}
 
+{% block window_title %}
+    {% with window_title=project.name|add:" - Homepage" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block title %}
+    {% with page_title="Homepage" %}
+    {{ block.super }}
+    {% endwith %}
+{% endblock %}
 
 {% block content %}
     {{ content }}

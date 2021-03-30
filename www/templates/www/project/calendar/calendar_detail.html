@@ -6,10 +6,22 @@
     <link href='{% static "www/flatpickr/flatpickr.css" %}' rel='stylesheet'/>
 {% endblock %}
 
+{% block window_title %}
+    {% with window_title=project.name|add:" - Calendar" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
 {% block sidebar %}
     {% with active_sidebar_item="Calendar" %}
         {{ block.super }}
     {% endwith%}
+{% endblock %}
+
+{% block title %}
+    {% with page_title="Calendar" %}
+        {{ block.super }}
+    {% endwith %}
 {% endblock %}
 
 {% block additional_scripts_eob %}

@@ -18,12 +18,12 @@ def content_create_with_file(request, key) -> HttpResponse:
 
 def homepage(request, key) -> HttpResponse:
     return project_views.project_view(
-        request, key, template="journal", title="Journal",
+        request, key, template="www/project/journal/journal_list.html"
     )
 
 
 def page(request, key, uuid) -> HttpResponse:
     # TODO: Do not return homepage but actual page
     return project_views.project_view(
-        request, key, template="journal", title="Journal"
+        request, key, template="journal"
     )

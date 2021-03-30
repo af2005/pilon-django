@@ -10,17 +10,13 @@ def project_view(
         request,
         key,
         template,
-        title,
         additional_context=None,
 ) -> HttpResponse:
     if additional_context is None:
         additional_context = {}
     project = (Project.objects.filter(key=key))[0]
-    template = loader.get_template(f"www/project/content/{template}.html")
+    template = loader.get_template(template)
     context = {
-        "window_title": f'{project.name} {title}',
-        "page_title": title,
-        "page_subtitle": "",
         "project": project,
     }
     context = {**context, **additional_context}
@@ -42,19 +38,18 @@ def homepage(request, key) -> HttpResponse:
     return project_view(
         request,
         key,
-        template="homepage",
-        title="Homepage",
+        template="www/project/project_homepage.html",
     )
 
 
 def team(request, key) -> HttpResponse:
     return project_view(
-        request, key, template="team", title="Team", )
+        request, key, template="www/project/team/team_detail.html")
 
 
 def chat(request, key) -> HttpResponse:
     return project_view(
-        request, key, template="chat", title="Chat",
+        request, key, template="www/project/chat/chat_detail.html",
     )
 
 
@@ -62,8 +57,7 @@ def calendar(request, key) -> HttpResponse:
     return project_view(
         request,
         key,
-        template="calendar",
-        title="Calendar",
+        template="www/project/calendar/calendar_detail.html",
     )
 
 
@@ -71,6 +65,5 @@ def inventory(request, key) -> HttpResponse:
     return project_view(
         request,
         key,
-        template="inventory",
-        title="Inventory",
+        template="www/project/inventory/inventory_list.html",
     )

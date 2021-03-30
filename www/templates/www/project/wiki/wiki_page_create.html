@@ -37,9 +37,12 @@
                 e.preventDefault();
                 markdownForm.markdown.value = editor.getMarkdown();
                 console.log(markdownForm.markdown.value);
-                {#markdownForm.submit();#}
+                markdownForm.submit();
             })
         </script>
     </div>
 
 {% endblock %}
+
+
+

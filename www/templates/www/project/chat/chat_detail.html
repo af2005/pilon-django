@@ -7,6 +7,17 @@
     {% endwith%}
 {% endblock %}
 
+{% block window_title %}
+    {% with window_title=project.name|add:" - Chat" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+{% block title %}
+    {% with page_title="Chat" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
 {% block content %}
 
     <div class="card">

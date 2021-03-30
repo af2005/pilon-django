@@ -7,16 +7,16 @@
     {% endwith%}
 {% endblock %}
 
-{% block additional_scripts_eob %}
-    <script type="application/javascript">
-        const elem = document.querySelector('input[name="datepickertest"]');
-        const datepicker = new Datepicker(elem, {
-            buttonClass: "btn",
-            todayHighlight: true,
-            format: "dd.mm.yyyy"
+{% block window_title %}
+    {% with window_title=project.name|add:" - Tasks" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
 
-        });
-    </script>
+{% block title %}
+    {% with page_title="Tasks" %}
+        {{ block.super }}
+    {% endwith %}
 {% endblock %}
 
 
