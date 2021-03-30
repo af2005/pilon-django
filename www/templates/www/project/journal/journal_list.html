@@ -1,4 +1,4 @@
-{% extends "www/project/project_base.html" %}
+{% extends "www/project/project/../project_base.html" %}
 {% load static %}
 
 {% block sidebar %}
@@ -12,6 +12,14 @@
         {{ block.super }}
     {% endwith %}
 {% endblock %}
+
+
+{% block title %}
+    {% with page_title="Journal" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
 
 {% block sidebar_lower_content %}
 

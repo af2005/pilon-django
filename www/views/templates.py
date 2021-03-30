@@ -68,7 +68,7 @@ def people(request, window_title, title="", subtitle="", users=None):
 def project_directory(request, projects=None):
     if projects is None:
         projects = []
-    template = loader.get_template("www/project/directory.html")
+    template = loader.get_template("www/project/project_list.html")
     context = {
         "window_title": "Project Directory",
         "page_title": "Project Directory",

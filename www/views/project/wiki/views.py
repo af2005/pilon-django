@@ -3,7 +3,6 @@ from django.views.generic import UpdateView, DetailView, ListView, CreateView
 
 from www.models import Project, WikiPage
 from www.views import templates
-import www.views.project.views as project_views
 
 
 def _get_page_tree(key) -> dict:
