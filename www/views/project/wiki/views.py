@@ -13,11 +13,6 @@ def _get_page_tree(key) -> dict:
     return context
 
 
-def content_create(request, key) -> HttpResponse:
-    tpl = templates.default_editor(request, title="Create Wiki Page", key=key)
-    return HttpResponse(tpl)
-
-
 def content_create_with_file(request, key) -> HttpResponse:
     tpl = templates.default_editor(request, title="Create Wiki Page with File", key=key)
     return HttpResponse(tpl)
