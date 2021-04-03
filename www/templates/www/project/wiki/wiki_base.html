@@ -4,8 +4,8 @@
 {% block sidebar %}
     {% with active_sidebar_item="Wiki" %}
         {{ block.super }}
-    {% endwith%}
-{% endblock %}
+    {% endwith %}
+{% endblock sidebar %}
 
 {% block sidebar_lower_content %}
     <link rel="stylesheet" type="text/css"
@@ -16,23 +16,24 @@
         <div id="tree" class="tui-tree-wrap">
         </div>
     </div>
-{% endblock %}
+{% endblock sidebar_lower_content %}
 
 
 {% block breadcrumbs %}
- <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url "project:homepage" project.key %}">{{ project.name }}</a></li>
             <li class="breadcrumb-item"><a href="{% url "project:wiki" project.key %}">Wiki</a></li>
-            {% for ancestor in ancestors %}
-                <li class="breadcrumb-item"><a href="{{ ancestor.get_absolute_url }}">{{ ancestor.name }}</a></li>
+            {% for breadcrumb in object.breadcrumbs %}
+                <li class="breadcrumb-item"><a href="{{ breadcrumb.get_absolute_url }}">{{ breadcrumb.name }}</a></li>
             {% endfor %}
         </ol>
     </nav>
-{% endblock %}
+{% endblock breadcrumbs %}
 
 
 {% block additional_scripts_eob %}
-
-{% include "www/snippets/page-tree.html" %}
-{% endblock %}
+    {% with nodes=project.wiki_page_tree %}
+        {% include "www/snippets/page-tree.html" %}
+    {% endwith %}
+{% endblock additional_scripts_eob %}
