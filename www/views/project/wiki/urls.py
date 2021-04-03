@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     path("", views.WikiHomepage.as_view(), name="wiki"),
     path("create/", views.WikiPageCreate.as_view(), name="wiki-page-create"),
-    path("update/<slug:pk>/", views.WikiPageUpdate.as_view(), name="wiki-page-update"),
+    path("edit/<slug:pk>/", views.WikiPageEdit.as_view(), name="wiki-page-edit"),
     path(
         "create-from-file/",
         views.content_create_with_file,

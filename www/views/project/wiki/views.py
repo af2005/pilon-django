@@ -33,10 +33,10 @@ class WikiPageCreate(ProjectContext, CreateView):
     template_name = "www/project/wiki/wiki_page_create.html"
 
 
-class WikiPageUpdate(ProjectContext, UpdateView):
+class WikiPageEdit(ProjectContext, UpdateView):
     model = WikiPage
     fields = ["name"]
-    template_name = "www/project/wiki/wiki_page_update.html"
+    template_name = "www/project/wiki/wiki_page_edit.html"
 
 
 class WikiHomepage(ProjectContext, ListView):
