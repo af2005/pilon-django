@@ -18,6 +18,7 @@
         <form action="." method="post" id="markdown-create-form">
             {% csrf_token %}
             <input type="hidden" name="markdown" value="">
+            <input type="hidden" name="parent" value="{{ project.id }}">
 
             <div class="py-3 justify-content-between d-flex align-items-center">
                 <div>
@@ -52,6 +53,3 @@
     </div>
 
 {% endblock %}
-
-
-

@@ -33,10 +33,10 @@
                 <div class="card-body">
                     <h5 class="card-title">Journal Page</h5>
                     <p class="card-text">Create a new page in the journal.</p>
-                    <a href="{% url "project:create-journal-page" project.key %}" class="btn btn-primary">Create Journal page</a>
+                    <a href="{% url "project:journal-page-create" project.key %}" class="btn btn-primary">Create Journal page</a>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="{% url "project:create-journal-page" project.key %}" class="card-link">Create from file...</a>
+                    <li class="list-group-item"><a href="{% url "project:journal-page-create" project.key %}" class="card-link">Create from file...</a>
                     </li>
                 </ul>
             </div>

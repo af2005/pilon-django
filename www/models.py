@@ -2,6 +2,7 @@ import shortuuid
 
 from django.db import models
 import django.contrib.auth.models as auth_models
+import inflection
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django.utils.text import slugify
@@ -87,9 +88,16 @@ class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
     def repr(self):
         return {"id": self.id}
 
+    # def get_absolute_url(self):
+    #     print(self.get_ancestors_of_type(Project))
+    #     return reverse("Content by UUID", kwargs={"uuid": self.id})
+
     def get_absolute_url(self):
-        print(self.get_ancestors_of_type(Project))
-        return reverse("Content by UUID", kwargs={"uuid": self.id})
+        project = self.get_ancestors_of_type(Project).first()
+        return reverse(
+            f"project:{inflection.dasherize(inflection.underscore(self.__class__.__name__))}-detail",
+            kwargs={"key": project.key, "pk": self.id},
+        )
 
 
 @reversion.register()
@@ -184,11 +192,11 @@ class WikiPage(MarkdownEntity):
     def breadcrumbs(self):
         return self.get_ancestors_of_type(WikiPage)
 
-    def get_absolute_url(self):
-        project = self.get_ancestors_of_type(Project).first()
-        return reverse(
-            "project:wiki-page-detail", kwargs={"key": project.key, "pk": self.id}
-        )
+    # def get_absolute_url(self):
+    #     project = self.get_ancestors_of_type(Project).first()
+    #     return reverse(
+    #         "project:wiki-page-detail", kwargs={"key": project.key, "pk": self.id}
+    #     )
 
 
 @reversion.register(follow=["markdownentity_ptr"])

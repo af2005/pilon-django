@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from www.models import JournalPage, Project
 from www.views import templates
 import www.views.project.views as project_views
+from ..views import ProjectContext
 from django.views.generic import UpdateView, DetailView, ListView, CreateView
 
 
@@ -24,17 +25,18 @@ def page(request, key, uuid) -> HttpResponse:
     return project_views.project_view(request, key, template="journal")
 
 
-class JournalCreate(CreateView):
+class JournalPageBase(ProjectContext):
     model = JournalPage
-    fields = ["name", "date"]
-    template_name = "www/project/journal/journal_page_create.html"
+    fields = ["parent", "name", "markdown"]
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        key = self.kwargs.get("key")
-        project = list(Project.objects.filter(key=key))[0]
-        normal_context = {
-            "project": project,
-        }
-        context = {**context, **normal_context}
-        return context
+
+class JournalHomepage(JournalPageBase, ListView):
+    template_name = "www/project/journal/journal_page_list.html"
+
+
+class JournalPageDetail(JournalPageBase, DetailView):
+    template_name = "www/project/journal/journal_page_detail.html"
+
+
+class JournalPageCreate(JournalPageBase, CreateView):
+    template_name = "www/project/journal/journal_page_create.html"
