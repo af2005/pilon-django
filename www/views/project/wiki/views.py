@@ -1,17 +1,9 @@
 from django.http import HttpResponse
-from django.views.generic import UpdateView, DetailView, ListView, CreateView, View
-from django.views.generic.base import ContextMixin
+from django.views.generic import UpdateView, DetailView, ListView, CreateView
 
-from www.models import Project, WikiPage
+from www.models import WikiPage
 from www.views import templates
-
-
-class ProjectContext(ContextMixin, View):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        key = self.kwargs.get("key")
-        context["project"] = Project.objects.filter(key=key).first()
-        return context
+from ..views import ProjectContext
 
 
 def content_create_with_file(request, key) -> HttpResponse:
@@ -35,7 +27,7 @@ class WikiPageCreate(ProjectContext, CreateView):
 
 class WikiPageEdit(ProjectContext, UpdateView):
     model = WikiPage
-    fields = ["name"]
+    fields = ["name", "markdown"]
     template_name = "www/project/wiki/wiki_page_edit.html"
 
 

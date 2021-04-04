@@ -12,7 +12,7 @@
                 <span id="parent">Parent</span>
                 <span type="text" aria-describedby="page-name"></span>
                 <input type="hidden" name="parent"
-                   value="http://localhost:8000/rest/entity/1078f5c6-cc92-4aa4-a3d5-60459f8c7eb8/">
+                       value="http://localhost:8000/rest/entity/1078f5c6-cc92-4aa4-a3d5-60459f8c7eb8/">
             </div>
             <div class="input-group input-group-lg my-3">
                 <span class="input-group-text" id="page-name">Page Name</span>
@@ -20,11 +20,11 @@
                        aria-describedby="page-name">
             </div>
             {% include 'www/snippets/editor.html' %}
-             <div class="py-3 d-flex justify-content-end">
-                    <a href="{% url "project:homepage" project.key %}">
-                        <button type="reset" class="btn btn-link">Cancel</button>
-                    </a>
-                    <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Publish</button>
+            <div class="py-3 d-flex justify-content-end">
+                <a href="{% url "project:homepage" project.key %}">
+                    <button type="reset" class="btn btn-link">Cancel</button>
+                </a>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Publish</button>
             </div>
         </form>
         <script type="application/javascript">

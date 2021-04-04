@@ -155,7 +155,7 @@ class MarkdownEntity(Entity):
         rendered_field="markdown_rendered",
         validator=VALIDATOR_STANDARD,
         use_editor=False,
-        use_admin_editor=True,
+        use_admin_editor=False,
         blank=True,
     )
     markdown_rendered = RenderedMarkdownField(default="")
