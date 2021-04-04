@@ -18,3 +18,6 @@ migrations:
 
 linter:
 	poetry run flakehell lint
+
+compile_theme:
+	sass ./www/static/www/theme.scss ./www/static/www/theme.css
