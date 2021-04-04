@@ -1,14 +1,6 @@
-from django.http import HttpResponse
 from django.views.generic import UpdateView, DetailView, ListView, CreateView
-
 from www.models import WikiPage
-from www.views import templates
 from ..views import ProjectContext
-
-
-def content_create_with_file(request, key) -> HttpResponse:
-    tpl = templates.default_editor(request, title="Create Wiki Page with File", key=key)
-    return HttpResponse(tpl)
 
 
 class WikiPageBase(ProjectContext):
