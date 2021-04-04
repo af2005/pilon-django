@@ -15,41 +15,10 @@
             {% csrf_token %}
             <input type="hidden" name="markdown" value="">
 
+            {% with nodes=project.wiki_page_tree hideSelf=True %}
+                {% include "www/snippets/project/page-tree-for-edit-view.html" %}
+            {% endwith %}
 
-            <div class="my-3">
-                <span>Parent: </span>
-                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-parent-modal">{{ object.parent.name }}</a>
-                <input type="hidden" name="parent" class=""
-                       value="{{ object.parent.id }}">
-
-
-                <div class="modal fade" id="edit-parent-modal" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit parent</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <link rel="stylesheet" type="text/css"
-                                      href="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.css" %}">
-
-                                <div id="tree" class="tui-tree-wrap"></div>
-                                {% with nodes=project.wiki_page_tree %}
-                                    {% include "www/snippets/page-tree.html" %}
-                                {% endwith %}
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Save parent</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
             <div class="input-group input-group-lg my-3">
                 <span class="input-group-text" id="page-name">Page Name</span>
                 <input name="name" value="{{ object.name }}" type="text" class="form-control" aria-label="Page name"

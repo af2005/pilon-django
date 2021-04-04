@@ -15,8 +15,8 @@
         <h6 class="mx-2 my-2">Wiki Page Tree</h6>
         <div id="tree" class="tui-tree-wrap">
         </div>
-        {% with nodes=project.wiki_page_tree %}
-            {% include "www/snippets/page-tree.html" %}
+        {% with nodes=project.wiki_page_tree idToHighlight=object.id %}
+            {% include "www/snippets/project/page-tree.html" %}
         {% endwith %}
     </div>
 {% endblock sidebar_lower_content %}
