@@ -13,15 +13,11 @@ class TestFrontend(TestCase):
     def setUp(self):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
-        self.user = User.objects.create_superuser(
-            username="testuser", password="top_secret"
-        )
+        self.user = User.objects.create_superuser(username="testuser", password="top_secret")
         self.client = Client()
         login = self.client.login(username="testuser", password="top_secret")
         self.assertTrue(login)
-        self.project = Project.objects.create(
-            key=TEST_PROJECT_KEY, name="This is a test project"
-        )
+        self.project = Project.objects.create(key=TEST_PROJECT_KEY, name="This is a test project")
 
     def test_default_views(self):
         default_views = [

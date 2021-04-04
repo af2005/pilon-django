@@ -43,9 +43,7 @@ class Migration(migrations.Migration):
                 ("object_id", models.IntegerField()),
                 (
                     "distinction",
-                    models.CharField(
-                        null=True, max_length=20, verbose_name="distinction"
-                    ),
+                    models.CharField(null=True, max_length=20, verbose_name="distinction"),
                 ),
                 (
                     "inheritable",
@@ -61,9 +59,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "content_type",
-                    models.ForeignKey(
-                        to="contenttypes.ContentType", on_delete=models.CASCADE
-                    ),
+                    models.ForeignKey(to="contenttypes.ContentType", on_delete=models.CASCADE),
                 ),
             ],
             options={
@@ -154,15 +150,11 @@ class Migration(migrations.Migration):
                 ("object_id", models.IntegerField()),
                 (
                     "distinction",
-                    models.CharField(
-                        null=True, max_length=20, verbose_name="distinction"
-                    ),
+                    models.CharField(null=True, max_length=20, verbose_name="distinction"),
                 ),
                 (
                     "content_type",
-                    models.ForeignKey(
-                        to="contenttypes.ContentType", on_delete=models.CASCADE
-                    ),
+                    models.ForeignKey(to="contenttypes.ContentType", on_delete=models.CASCADE),
                 ),
                 (
                     "event",
@@ -193,9 +185,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "title",
-                    models.CharField(
-                        blank=True, null=True, max_length=255, verbose_name="title"
-                    ),
+                    models.CharField(blank=True, null=True, max_length=255, verbose_name="title"),
                 ),
                 (
                     "description",

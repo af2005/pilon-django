@@ -63,12 +63,16 @@ python_files = "tests.py test_*.py *_tests.py"
     [tool.coverage.html]
     directory = "htmlcov"
 
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
 
 [tool.flakehell]
 # specify any flake8 options. For example, exclude "example.py":
 exclude = ["www/migrations/*"]
 # 80 chars aren't enough in 21 century
-max_line_length = 90
+max_line_length = 100
 # make output nice
 #format = "grouped"
 

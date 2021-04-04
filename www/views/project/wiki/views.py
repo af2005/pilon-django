@@ -25,6 +25,10 @@ class WikiPageCreate(WikiPageBase, CreateView):
     template_name = "www/project/wiki/wiki_page_create.html"
 
 
+class WikiPageCreateFromFile(WikiPageBase, CreateView):
+    template_name = "www/project/wiki/wiki_page_create_from_file.html"
+
+
 class WikiPageEdit(WikiPageBase, UpdateView):
     template_name = "www/project/wiki/wiki_page_edit.html"
 

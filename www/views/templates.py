@@ -2,9 +2,7 @@ from django.template import loader
 from ..models import Project
 
 
-def admin(
-    request, window_title, title="", subtitle="", sidebar_items=None, content=None
-):
+def admin(request, window_title, title="", subtitle="", sidebar_items=None, content=None):
     template = loader.get_template("www/base/base+sidebar+title.html")
     context = {
         "window_title": window_title,
@@ -17,9 +15,7 @@ def admin(
     return template.render(context, request)
 
 
-def simple(
-    request, window_title, title="", subtitle="", content="", navbar_centertext=""
-):
+def simple(request, window_title, title="", subtitle="", content="", navbar_centertext=""):
     template = loader.get_template("www/base/base+title.html")
     context = {
         "window_title": window_title,

@@ -23,9 +23,7 @@ def populate_calendar():
     cal = Calendar(name="Test", slug="test")
     cal.save()
     cal = Calendar.objects.get(slug="test")
-    rule = Rule(
-        frequency="YEARLY", name="Yearly", description="will recur once every Year"
-    )
+    rule = Rule(frequency="YEARLY", name="Yearly", description="will recur once every Year")
     rule.save()
     rule = Rule(
         frequency="MONTHLY",
@@ -33,13 +31,9 @@ def populate_calendar():
         description="will recur once every Month",
     )
     rule.save()
-    rule = Rule(
-        frequency="WEEKLY", name="Weekly", description="will recur once every Week"
-    )
+    rule = Rule(frequency="WEEKLY", name="Weekly", description="will recur once every Week")
     rule.save()
-    rule = Rule(
-        frequency="DAILY", name="Daily", description="will recur once every Day"
-    )
+    rule = Rule(frequency="DAILY", name="Daily", description="will recur once every Day")
     rule.save()
 
     today = datetime.date.today()
@@ -73,9 +67,7 @@ def populate_user_groups():
 def populate_entities(test_user):
     test_project = Project(name="Test Project", key="test", creator=test_user)
     test_project.save()
-    parent_page = WikiPage(
-        name="Test Wiki Page", creator=test_user, parent=test_project
-    )
+    parent_page = WikiPage(name="Test Wiki Page", creator=test_user, parent=test_project)
     parent_page.save()
     WikiPage(name="Test Wiki Page Child", creator=test_user, parent=parent_page).save()
     journal = JournalPage(name="Test Journal Page", parent=test_project)

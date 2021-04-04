@@ -182,9 +182,7 @@ class Calendar(models.Model):
 
 
 class CalendarRelationManager(models.Manager):
-    def create_relation(
-        self, calendar, content_object, distinction="", inheritable=True
-    ):
+    def create_relation(self, calendar, content_object, distinction="", inheritable=True):
         """
         Creates a relation between calendar and content_object.
         See CalendarRelation for help on distinction and inheritable
@@ -217,9 +215,7 @@ class CalendarRelation(models.Model):
     may not scale well.  If you use this, keep that in mind.
     """
 
-    calendar = models.ForeignKey(
-        Calendar, on_delete=models.CASCADE, verbose_name=_("calendar")
-    )
+    calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE, verbose_name=_("calendar"))
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.IntegerField(db_index=True)
     content_object = fields.GenericForeignKey("content_type", "object_id")

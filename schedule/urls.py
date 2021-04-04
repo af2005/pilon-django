@@ -39,9 +39,7 @@ urlpatterns = [
     ),
     url(
         r"^calendar/compact_month/(?P<calendar_slug>[-\w]+)/$",
-        CalendarByPeriodsView.as_view(
-            template_name="schedule/calendar_compact_month.html"
-        ),
+        CalendarByPeriodsView.as_view(template_name="schedule/calendar_compact_month.html"),
         name="compact_calendar",
         kwargs={"period": Month},
     ),

@@ -26,9 +26,7 @@ class UsersManagersTests(TestCase):
         self.assertTrue(admin_user.is_staff)
         self.assertTrue(admin_user.is_superuser)
         with self.assertRaises(ValueError):
-            User.objects.create_superuser(
-                username="testadmin", password="foo", is_superuser=False
-            )
+            User.objects.create_superuser(username="testadmin", password="foo", is_superuser=False)
 
     def test_delete_user(self):
         user = User.objects.create_user(username="testuser", password="foo")

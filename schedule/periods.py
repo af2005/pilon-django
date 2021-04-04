@@ -84,18 +84,13 @@ class Period:
         occurrences = []
         if hasattr(self, "occurrence_pool") and self.occurrence_pool is not None:
             for occurrence in self.occurrence_pool:
-                if (
-                    occurrence.start <= self.utc_end
-                    and occurrence.end >= self.utc_start
-                ):
+                if occurrence.start <= self.utc_end and occurrence.end >= self.utc_start:
                     occurrences.append(occurrence)
             return occurrences
 
         prefetch_related_objects(self.events, "occurrence_set")
         for event in self.events:
-            event_occurrences = event.get_occurrences(
-                self.start, self.end, clear_prefetch=False
-            )
+            event_occurrences = event.get_occurrences(self.start, self.end, clear_prefetch=False)
             occurrences += event_occurrences
         return sorted(occurrences, **self.sorting_options)
 
@@ -112,9 +107,7 @@ class Period:
         if hasattr(self, "_persisted_occurrences"):
             return self._persisted_occurrences
         else:
-            self._persisted_occurrences = Occurrence.objects.filter(
-                event__in=self.events
-            )
+            self._persisted_occurrences = Occurrence.objects.filter(event__in=self.events)
             return self._persisted_occurrences
 
     def classify_occurrence(self, occurrence):
@@ -191,16 +184,12 @@ class Period:
 
 
 class Year(Period):
-    def __init__(
-        self, events, date=None, parent_persisted_occurrences=None, tzinfo=pytz.utc
-    ):
+    def __init__(self, events, date=None, parent_persisted_occurrences=None, tzinfo=pytz.utc):
         self.tzinfo = self._get_tzinfo(tzinfo)
         if date is None:
             date = timezone.now()
         start, end = self._get_year_range(date)
-        super().__init__(
-            events, start, end, parent_persisted_occurrences, tzinfo=tzinfo
-        )
+        super().__init__(events, start, end, parent_persisted_occurrences, tzinfo=tzinfo)
 
     def get_months(self):
         return self.get_periods(Month)
@@ -284,9 +273,7 @@ class Month(Period):
     next = __next__ = next_month
 
     def prev_month(self):
-        start = (self.start - datetime.timedelta(days=1)).replace(
-            day=1, tzinfo=self.tzinfo
-        )
+        start = (self.start - datetime.timedelta(days=1)).replace(day=1, tzinfo=self.tzinfo)
         return Month(self.events, start, tzinfo=self.tzinfo)
 
     prev = prev_month
@@ -295,15 +282,11 @@ class Month(Period):
         return Year(self.events, self.start, tzinfo=self.tzinfo)
 
     def prev_year(self):
-        start = datetime.datetime.min.replace(
-            year=self.start.year - 1, tzinfo=self.tzinfo
-        )
+        start = datetime.datetime.min.replace(year=self.start.year - 1, tzinfo=self.tzinfo)
         return Year(self.events, start, tzinfo=self.tzinfo)
 
     def next_year(self):
-        start = datetime.datetime.min.replace(
-            year=self.start.year + 1, tzinfo=self.tzinfo
-        )
+        start = datetime.datetime.min.replace(year=self.start.year + 1, tzinfo=self.tzinfo)
         return Year(self.events, start, tzinfo=self.tzinfo)
 
     def _get_month_range(self, month):
@@ -363,9 +346,7 @@ class Week(Period):
         )
 
     def prev_week(self):
-        return Week(
-            self.events, self.start - datetime.timedelta(days=7), tzinfo=self.tzinfo
-        )
+        return Week(self.events, self.start - datetime.timedelta(days=7), tzinfo=self.tzinfo)
 
     prev = prev_week
 
@@ -452,9 +433,7 @@ class Day(Period):
             date = date.date()
 
         naive_start = datetime.datetime.combine(date, datetime.time.min)
-        naive_end = datetime.datetime.combine(
-            date + datetime.timedelta(days=1), datetime.time.min
-        )
+        naive_end = datetime.datetime.combine(date + datetime.timedelta(days=1), datetime.time.min)
         if self.tzinfo is not None:
             local_start = self.tzinfo.localize(naive_start)
             local_end = self.tzinfo.localize(naive_end)
@@ -474,9 +453,7 @@ class Day(Period):
         }
 
     def prev_day(self):
-        return Day(
-            self.events, self.start - datetime.timedelta(days=1), tzinfo=self.tzinfo
-        )
+        return Day(self.events, self.start - datetime.timedelta(days=1), tzinfo=self.tzinfo)
 
     prev = prev_day
 
