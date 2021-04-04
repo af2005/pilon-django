@@ -3,7 +3,7 @@
 {% block content %}
     <div class="bg-white">
 
-        <form action="." method="post" id="markdown-create-form">
+        <form action="." method="post" id="markdown-form">
             {% csrf_token %}
             <input type="hidden" name="markdown" value="">
 
@@ -28,13 +28,13 @@
             </div>
         </form>
         <script type="application/javascript">
-            const markdownForm = document.getElementById("markdown-create-form");
+            const markdownForm = document.getElementById("markdown-form");
             markdownForm.addEventListener("submit", function (e) {
                 e.preventDefault();
                 markdownForm.markdown.value = editor.getMarkdown();
-                console.log(markdownForm.markdown.value);
                 markdownForm.submit();
             })
+            editor.setMarkdown("{{ object.markdown|escapejs }}", cursorToEnd=false);
         </script>
     </div>
 
