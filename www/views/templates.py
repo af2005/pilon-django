@@ -78,17 +78,6 @@ def project_directory(request, projects=None):
     return template.render(context, request)
 
 
-def create_new_content(request, key, title, subtitle):
-    project = list(Project.objects.filter(key=key))[0]
-    template = loader.get_template("www/project/create_chooser.html")
-    context = {
-        "page_title": f"{title}",
-        "page_subtitle": f'{subtitle} {project.name}',
-        "project": project,
-    }
-    return template.render(context, request)
-
-
 def default_editor(request, key, title):
     project = list(Project.objects.filter(key=key).values())[0]
     template = loader.get_template("www/project/wiki/wiki_page_create.html")

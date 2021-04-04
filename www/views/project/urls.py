@@ -4,8 +4,10 @@ from . import views
 app_name = "project"
 
 urlpatterns = [
-    path("<str:key>/", views.homepage, name="homepage"),
-    path("<str:key>/create/", views.content_create, name="create-child-entity"),
+    path("<str:key>/", views.ProjectHomepage.as_view(), name="homepage"),
+    path(
+        "<str:key>/create/", views.ContentCreate.as_view(), name="create-child-entity"
+    ),
     path("<str:key>/team/", views.team, name="team"),
     path("<str:key>/chat/", views.chat, name="chat"),
     path("<str:key>/tasks/", include("www.views.project.tasks.urls"), name="tasks"),

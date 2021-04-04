@@ -1,10 +1,9 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.views.generic.base import ContextMixin, View
+from django.views.generic import ListView, CreateView, TemplateView
 
 from www.models import Project
-from www.views import templates
-from django.urls import reverse
 
 
 class ProjectContext(ContextMixin, View):
@@ -13,6 +12,26 @@ class ProjectContext(ContextMixin, View):
         key = self.kwargs.get("key")
         context["project"] = Project.objects.filter(key=key).first()
         return context
+
+
+class ProjectHomepage(ProjectContext, TemplateView):
+    template_name = "www/project/project_homepage.html"
+
+
+class ProjectCreate(CreateView):
+    model = Project
+    fields = ["name", "key"]
+    template_name = "www/project/project_create.html"
+
+
+class ProjectList(ListView):
+    model = Project
+    template_name = "www/project/project_list.html"
+    context_object_name = "projects"
+
+
+class ContentCreate(ProjectContext, TemplateView):
+    template_name = "www/project/create_chooser.html"
 
 
 def project_view(
@@ -31,24 +50,6 @@ def project_view(
     context = {**context, **additional_context}
 
     return HttpResponse(template.render(context, request))
-
-
-def content_create(request, key) -> HttpResponse:
-    tpl = templates.create_new_content(
-        request,
-        title="Create Content",
-        key=key,
-        subtitle="In project",
-    )
-    return HttpResponse(tpl)
-
-
-def homepage(request, key) -> HttpResponse:
-    return project_view(
-        request,
-        key,
-        template="www/project/project_homepage.html",
-    )
 
 
 def team(request, key) -> HttpResponse:

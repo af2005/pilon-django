@@ -21,17 +21,12 @@ def homepage(request, key) -> HttpResponse:
 
 def page(request, key, uuid) -> HttpResponse:
     # TODO: Do not return homepage but actual page
-    return project_views.project_view(
-        request, key, template="journal"
-    )
+    return project_views.project_view(request, key, template="journal")
 
 
 class JournalCreate(CreateView):
     model = JournalPage
-    fields = [
-        "name",
-        "date"
-    ]
+    fields = ["name", "date"]
     template_name = "www/project/journal/journal_page_create.html"
 
     def get_context_data(self, **kwargs):
