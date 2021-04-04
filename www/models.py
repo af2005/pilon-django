@@ -182,7 +182,7 @@ class MarkdownEntity(Entity):
 
 @reversion.register(follow=["markdownentity_ptr"])
 class WikiPage(MarkdownEntity):
-    can_be_root = True
+    can_be_root = False
 
     class Meta(PolymorphicMPTTModel.Meta):
         verbose_name = _("Wiki Page")
