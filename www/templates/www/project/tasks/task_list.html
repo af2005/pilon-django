@@ -4,7 +4,7 @@
 {% block sidebar %}
     {% with active_sidebar_item="Tasks" %}
         {{ block.super }}
-    {% endwith%}
+    {% endwith %}
 {% endblock %}
 
 {% block window_title %}
@@ -21,7 +21,6 @@
 
 
 {% block content %}
-    {{ content }}
     <link rel="stylesheet" type="text/css" href="{% static "www/custom/tasks.css" %}">
     <div class="d-flex justify-content-end">
         <button class="btn btn-sm btn-secondary m-1 float-right"><i class="bi bi-signpost"></i> Add Milestone</button>
@@ -42,21 +41,20 @@
                 </a></h6>
 
         </div>
-        <div class="input-group mb-1">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    <input type="checkbox" aria-label="task description">
+        {% for task in tasks %}
+            <div class="input-group mb-1">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" aria-label="task description">
+                    </div>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with checkbox"
+                       placeholder="Task description" value="{{ task.markdown }}">
+                <div class="input-group-append">
+                    <input type="text" class="form-control" aria-label="assignee" placeholder="Assignee" value="{{ task.assignee.username }}">
                 </div>
             </div>
-            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Task description">
-            <div class="input-group-append">
-                         <input type="text" class="form-control" aria-label="assignee" placeholder="Assignee">
-            </div>
-        </div>
-
+        {% endfor %}
     </div>
 
-
-
-
-{% endblock %}
+{% endblock content %}

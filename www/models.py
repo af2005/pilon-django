@@ -210,7 +210,7 @@ class JournalPage(MarkdownEntity):
 class Task(MarkdownEntity):
     child_types = ["Task", "Comment", "Attachment"]
 
-    due_date = models.DateTimeField(null=True)
+    due_date = models.DateTimeField(null=True, blank=True)
     assignee = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL, related_name="tasks"
     )

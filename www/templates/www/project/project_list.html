@@ -1,13 +1,19 @@
 {% extends "www/base/base+title.html" %}
 {% load static %}
 
+{% block window_title %}
+    {% with window_title="Projects" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
 
-
+{% block title %}
+    {% with page_title="Projects" %}
+    {{ block.super }}
+    {% endwith %}
+{% endblock %}
 
 {% block content %}
-
-    {{ content }}
-
     <table class="table table-bordered" data-toggle="table">
         <thead class="thead-light">
         <tr class="th">
@@ -25,4 +31,4 @@
         {% endfor %}
     </table>
 
-{% endblock %}
+{% endblock content %}
