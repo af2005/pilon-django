@@ -1,8 +1,11 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
-{% block navigation %}{% include 'www/snippets/navigation-create-button.html' %}{% endblock %}
-
+{% block sidebar %}
+    {% with active_sidebar_item="Wiki" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock sidebar %}
 
 {% block sidebar_lower_content %}
     <link rel="stylesheet" type="text/css"
@@ -12,24 +15,26 @@
         <h6 class="mx-2 my-2">Wiki Page Tree</h6>
         <div id="tree" class="tui-tree-wrap">
         </div>
+        {% with nodes=project.wiki_page_tree idToHighlight=object.id %}
+            {% include "www/snippets/project/page_tree.html" %}
+        {% endwith %}
     </div>
-{% endblock %}
+{% endblock sidebar_lower_content %}
 
 
 {% block breadcrumbs %}
- <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url "project:homepage" project.key %}">{{ project.name }}</a></li>
             <li class="breadcrumb-item"><a href="{% url "project:wiki" project.key %}">Wiki</a></li>
-            {% for ancestor in ancestors %}
-                <li class="breadcrumb-item"><a href="{% url "Content by UUID" ancestor.id%}">{{ ancestor.name }}</a></li>
+            {% for breadcrumb in object.breadcrumbs %}
+                <li class="breadcrumb-item"><a href="{{ breadcrumb.get_absolute_url }}">{{ breadcrumb.name }}</a></li>
             {% endfor %}
         </ol>
     </nav>
-{% endblock %}
+{% endblock breadcrumbs %}
 
 
 {% block additional_scripts_eob %}
 
-{% include "www/snippets/page-tree.html" %}
-{% endblock %}
+{% endblock additional_scripts_eob %}

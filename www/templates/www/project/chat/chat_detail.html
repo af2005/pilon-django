@@ -1,10 +1,24 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
-{% block navigation %}{% include 'www/snippets/navigation-create-button.html' %}{% endblock %}
+{% block sidebar %}
+    {% with active_sidebar_item="Chat" %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
+
+{% block window_title %}
+    {% with window_title=project.name|add:" - Chat" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+{% block title %}
+    {% with page_title="Chat" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
 
 {% block content %}
-    {{ content }}
 
     <div class="card">
         <div class="row g-0">

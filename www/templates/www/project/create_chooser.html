@@ -1,6 +1,12 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
-{% block navigation %}{% include 'www/snippets/navigation-create-button.html' %}{% endblock %}
+
+{% block window_title %}
+    {% with window_title=project.name|add:" - Create content " %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
 
 {% block content %}
 
@@ -11,10 +17,10 @@
                 <div class="card-body">
                     <h5 class="card-title">Wiki Page</h5>
                     <p class="card-text">Store information in the project wiki.</p>
-                    <a href="{% url "project:create-wiki-page" project_key %}" class="btn btn-primary">Create Wiki page</a>
+                    <a href="{% url "project:wiki-page-create" project.key %}" class="btn btn-primary">Create Wiki page</a>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="{% url "project:create-wiki-page-from-file" project_key %}" class="card-link">Create from file...</a>
+                    <li class="list-group-item"><a href="{% url "project:create-wiki-page-from-file" project.key %}" class="card-link">Create from file...</a>
                     </li>
                 </ul>
             </div>
@@ -27,10 +33,10 @@
                 <div class="card-body">
                     <h5 class="card-title">Journal Page</h5>
                     <p class="card-text">Create a new page in the journal.</p>
-                    <a href="{% url "project:create-journal-page" project_key %}" class="btn btn-primary">Create Journal page</a>
+                    <a href="{% url "project:journal-page-create" project.key %}" class="btn btn-primary">Create Journal page</a>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="{% url "project:create-journal-page-from-file" project_key %}" class="card-link">Create from file...</a>
+                    <li class="list-group-item"><a href="{% url "project:journal-page-create" project.key %}" class="card-link">Create from file...</a>
                     </li>
                 </ul>
             </div>

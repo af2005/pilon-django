@@ -5,7 +5,7 @@ from ..models import Project
 def admin(
     request, window_title, title="", subtitle="", sidebar_items=None, content=None
 ):
-    template = loader.get_template("www/base+sidebar+title.html")
+    template = loader.get_template("www/base/base+sidebar+title.html")
     context = {
         "window_title": window_title,
         "page_title": title,
@@ -20,7 +20,7 @@ def admin(
 def simple(
     request, window_title, title="", subtitle="", content="", navbar_centertext=""
 ):
-    template = loader.get_template("www/base+title.html")
+    template = loader.get_template("www/base/base+title.html")
     context = {
         "window_title": window_title,
         "content": content,
@@ -68,7 +68,7 @@ def people(request, window_title, title="", subtitle="", users=None):
 def project_directory(request, projects=None):
     if projects is None:
         projects = []
-    template = loader.get_template("www/project/directory.html")
+    template = loader.get_template("www/project/project_list.html")
     context = {
         "window_title": "Project Directory",
         "page_title": "Project Directory",
@@ -78,24 +78,9 @@ def project_directory(request, projects=None):
     return template.render(context, request)
 
 
-def create_new_content(request, key, title, subtitle, sidebar_items):
-    project = list(Project.objects.filter(key=key).values())[0]
-    template = loader.get_template("www/project/create/chooser.html")
-    context = {
-        "project_key": project["key"],
-        "window_title": f'{title} {project["name"]} ',
-        "page_title": f"{title}",
-        "page_subtitle": f'{subtitle} {project["name"]}',
-        "project": project,
-        "sidebar_items": sidebar_items,
-        "navbar_centertext": project["name"],
-    }
-    return template.render(context, request)
-
-
 def default_editor(request, key, title):
     project = list(Project.objects.filter(key=key).values())[0]
-    template = loader.get_template("www/project/create/wiki-page.html")
+    template = loader.get_template("www/project/wiki/wiki_page_create.html")
     context = {
         "project_key": project["key"],
         "window_title": f'{title} {project["name"]} ',

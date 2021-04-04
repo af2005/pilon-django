@@ -1,0 +1,9 @@
+{% extends "www/project/wiki/wiki_page_editor_base.html" %}
+{% load static %}
+
+{% block content %}
+    {% with parent=project %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+

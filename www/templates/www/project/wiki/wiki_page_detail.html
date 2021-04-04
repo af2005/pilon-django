@@ -1,17 +1,18 @@
-{% extends "www/project/content/wiki/base.html" %}
+{% extends "www/project/wiki/wiki_base.html" %}
 {% load static %}
 
+{% block window_title %}
+    {% with window_title=project.name|add:" - "|add:object.name %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
 
 {% block content %}
 
     <div class="d-flex align-items-start justify-content-between pb-3 ">
         <div class="lh-1">
-            <h2 class="display-4">{{ name }}</h2>
-            <div class="text-muted">
-                <small>
-                Created by {{ creator }} on {{ created_date }}
-                and last updated {{ modified_date }}</small>
-            </div>
+            <h2 class="display-4">{{ object.name }}</h2>
+            {% include "www/snippets/entity_metadata.html" %}
             <div class="my-2">
                 {% for label in labels %}
                     <a class="badge badge-secondary" href="#">label</a>
@@ -30,7 +31,7 @@
                                         aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                ...
+                                .
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -44,7 +45,7 @@
 
         </div>
         <div>
-            <a href="#">
+            <a href="{% url "project:wiki-page-edit" project.key object.id %}">
                 <button class="btn btn-light"><i class="bi bi-pencil-square"></i> Edit</button>
             </a>
             <a href="#">
@@ -55,6 +56,6 @@
 
     </div>
 
-    {{ content }}
+    {{ object.markdown_rendered | safe }}
 
 {% endblock %}

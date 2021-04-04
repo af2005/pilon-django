@@ -1,10 +1,25 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
-{% block navigation %}{% include 'www/snippets/navigation-create-button.html' %}{% endblock %}
+{% block sidebar %}
+    {% with active_sidebar_item="Team" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block window_title %}
+    {% with window_title=project.name|add:" - Team" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block title %}
+    {% with page_title="Team" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
 
 {% block content %}
-    {{ content }}
     <div class="row">
         <div class="my-3 p-3 ">
             <h6 class="d-flex align-items-end justify-content-between border-bottom pb-2 mb-0">
@@ -26,11 +41,11 @@
         </div>
     </div>
 
-     <div class="row">
+    <div class="row">
         <div class="my-3 p-3 ">
             <h6 class="d-flex align-items-end justify-content-between border-bottom pb-2 mb-0">
                 <span>Guests</span>
-                <a href="#"  class="btn btn-sm btn-light border btn-icon">
+                <a href="#" class="btn btn-sm btn-light border btn-icon">
                     <i class="bi bi-person-plus-fill"></i>
                 </a></h6>
 

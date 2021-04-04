@@ -13,7 +13,10 @@
     {% include 'www/snippets/theme.html' %}
     <link rel="stylesheet" type="text/css" href="{% static 'www/font/source-sans-v14/font.css' %}">
     {% block extrahead %}{% endblock extrahead %}
-    <title>pilon - {{ window_title }}</title>
+    {% block window_title %}
+        {% include "www/snippets/window_title.html" %}
+    {% endblock window_title %}
+
 </head>
 <body class="bg-light">
 <main class="outer-wrapper">

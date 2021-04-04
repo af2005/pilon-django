@@ -2,12 +2,18 @@ import shortuuid
 
 from django.db import models
 import django.contrib.auth.models as auth_models
+import inflection
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 from shortuuidfield import ShortUUIDField
-from polymorphic_tree.models import PolymorphicMPTTModel, PolymorphicTreeForeignKey
+from polymorphic_tree.models import (
+    PolymorphicMPTTModel,
+    PolymorphicTreeForeignKey,
+    _get_base_polymorphic_model,
+)
 
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_STANDARD
@@ -43,6 +49,13 @@ class Group(auth_models.Group, RandomUUIDMixin):
     pass
 
 
+class ShortUUIDPolymorphicTreeForeignKey(PolymorphicTreeForeignKey):
+    def _validate_parent(self, parent, model_instance):
+        base_model = _get_base_polymorphic_model(model_instance.__class__)
+        parent = base_model.objects.get(pk=parent)
+        super()._validate_parent(parent, model_instance)
+
+
 @reversion.register()
 class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
     #: Whether the node type allows to have children.
@@ -54,7 +67,7 @@ class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
     #: Allowed child types for this page.
     child_types = []
 
-    parent = PolymorphicTreeForeignKey(
+    parent = ShortUUIDPolymorphicTreeForeignKey(
         "self", on_delete=models.CASCADE, null=True, blank=True, related_name="children"
     )
     date_created = models.DateTimeField(default=timezone.now, editable=False)
@@ -75,6 +88,17 @@ class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
     def repr(self):
         return {"id": self.id}
 
+    # def get_absolute_url(self):
+    #     print(self.get_ancestors_of_type(Project))
+    #     return reverse("Content by UUID", kwargs={"uuid": self.id})
+
+    def get_absolute_url(self):
+        project = self.get_ancestors_of_type(Project).first()
+        return reverse(
+            f"project:{inflection.dasherize(inflection.underscore(self.__class__.__name__))}-detail",
+            kwargs={"key": project.key, "pk": self.id},
+        )
+
 
 @reversion.register()
 class Label(RandomUUIDMixin, SluggedNameMixin):
@@ -93,6 +117,55 @@ class Project(Entity):
         verbose_name = _("Project")
         verbose_name_plural = _("Projects")
 
+    @property
+    def wiki_page_tree(self):
+        return self.get_descendants().instance_of(WikiPage)
+
+    @property
+    def sidebar_items(self):
+        return [
+            {
+                "name": "Homepage",
+                "url": reverse("project:homepage", args=[self.key]),
+                "icon": "house-fill",
+            },
+            {
+                "name": "Team",
+                "url": reverse("project:team", args=[self.key]),
+                "icon": "people",
+            },
+            {
+                "name": "Chat",
+                "url": reverse("project:chat", args=[self.key]),
+                "icon": "envelope",
+            },
+            {
+                "name": "Tasks",
+                "url": reverse("project:tasks", args=[self.key]),
+                "icon": "check2-circle",
+            },
+            {
+                "name": "Calendar",
+                "url": reverse("project:calendar", args=[self.key]),
+                "icon": "calendar3",
+            },
+            {
+                "name": "Inventory",
+                "url": reverse("project:inventory", args=[self.key]),
+                "icon": "archive",
+            },
+            {
+                "name": "Wiki",
+                "url": reverse("project:wiki", args=[self.key]),
+                "icon": "file-text",
+            },
+            {
+                "name": "Journal",
+                "url": reverse("project:journal", args=[self.key]),
+                "icon": "journals",
+            },
+        ]
+
 
 @reversion.register(follow=["entity_ptr"])
 class MarkdownEntity(Entity):
@@ -101,7 +174,7 @@ class MarkdownEntity(Entity):
         rendered_field="markdown_rendered",
         validator=VALIDATOR_STANDARD,
         use_editor=False,
-        use_admin_editor=True,
+        use_admin_editor=False,
         blank=True,
     )
     markdown_rendered = RenderedMarkdownField(default="")
@@ -109,11 +182,15 @@ class MarkdownEntity(Entity):
 
 @reversion.register(follow=["markdownentity_ptr"])
 class WikiPage(MarkdownEntity):
-    can_be_root = True
+    can_be_root = False
 
     class Meta(PolymorphicMPTTModel.Meta):
         verbose_name = _("Wiki Page")
         verbose_name_plural = _("Wiki Pages")
+
+    @property
+    def breadcrumbs(self):
+        return self.get_ancestors_of_type(WikiPage)
 
 
 @reversion.register(follow=["markdownentity_ptr"])
@@ -127,7 +204,7 @@ class JournalPage(MarkdownEntity):
 class Task(MarkdownEntity):
     child_types = ["Task", "Comment", "Attachment"]
 
-    due_date = models.DateTimeField(null=True)
+    due_date = models.DateTimeField(null=True, blank=True)
     assignee = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL, related_name="tasks"
     )

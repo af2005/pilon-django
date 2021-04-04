@@ -1,9 +1,18 @@
-{% extends "www/base.html" %}
+{% extends "www/base/base+title.html" %}
 {% load static %}
 
-{% block title %}
-    {% include 'www/snippets/title_subtitle.html' %}
+{% block window_title %}
+    {% with window_title="People" %}
+        {{ block.super }}
+    {% endwith %}
 {% endblock %}
+
+{% block title %}
+    {% with page_title="People Directory" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
 {% block content %}
     <table class="table table-bordered" data-toggle="table">
         <thead class="thead-light">
