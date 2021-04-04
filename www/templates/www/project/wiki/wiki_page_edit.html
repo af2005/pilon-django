@@ -31,6 +31,7 @@
             const markdownForm = document.getElementById("markdown-form");
             markdownForm.addEventListener("submit", function (e) {
                 e.preventDefault();
+                editor.changeMode("wysiwyg");
                 markdownForm.markdown.value = editor.getMarkdown();
                 markdownForm.submit();
             })
