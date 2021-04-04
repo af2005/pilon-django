@@ -8,7 +8,11 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 from shortuuidfield import ShortUUIDField
-from polymorphic_tree.models import PolymorphicMPTTModel, PolymorphicTreeForeignKey
+from polymorphic_tree.models import (
+    PolymorphicMPTTModel,
+    PolymorphicTreeForeignKey,
+    _get_base_polymorphic_model,
+)
 
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_STANDARD
@@ -44,6 +48,13 @@ class Group(auth_models.Group, RandomUUIDMixin):
     pass
 
 
+class ShortUUIDPolymorphicTreeForeignKey(PolymorphicTreeForeignKey):
+    def _validate_parent(self, parent, model_instance):
+        base_model = _get_base_polymorphic_model(model_instance.__class__)
+        parent = base_model.objects.get(pk=parent)
+        super()._validate_parent(parent, model_instance)
+
+
 @reversion.register()
 class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
     #: Whether the node type allows to have children.
@@ -55,7 +66,7 @@ class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
     #: Allowed child types for this page.
     child_types = []
 
-    parent = PolymorphicTreeForeignKey(
+    parent = ShortUUIDPolymorphicTreeForeignKey(
         "self", on_delete=models.CASCADE, null=True, blank=True, related_name="children"
     )
     date_created = models.DateTimeField(default=timezone.now, editable=False)
@@ -176,7 +187,7 @@ class WikiPage(MarkdownEntity):
     def get_absolute_url(self):
         project = self.get_ancestors_of_type(Project).first()
         return reverse(
-            "project:wiki-page-detail", kwargs={"key": project.key, "pk": str(self.id)}
+            "project:wiki-page-detail", kwargs={"key": project.key, "pk": self.id}
         )
 
 

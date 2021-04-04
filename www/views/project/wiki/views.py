@@ -11,26 +11,23 @@ def content_create_with_file(request, key) -> HttpResponse:
     return HttpResponse(tpl)
 
 
-class WikiPageDetail(ProjectContext, DetailView):
+class WikiPageBase(ProjectContext):
+    model = WikiPage
+    fields = ["parent", "name", "markdown"]
+
+
+class WikiPageDetail(WikiPageBase, DetailView):
     model = WikiPage
     template_name = "www/project/wiki/wiki_page_detail.html"
 
 
-class WikiPageCreate(ProjectContext, CreateView):
-    model = WikiPage
-    fields = [
-        "parent",
-        "name",
-    ]
+class WikiPageCreate(WikiPageBase, CreateView):
     template_name = "www/project/wiki/wiki_page_create.html"
 
 
-class WikiPageEdit(ProjectContext, UpdateView):
-    model = WikiPage
-    fields = ["name", "markdown"]
+class WikiPageEdit(WikiPageBase, UpdateView):
     template_name = "www/project/wiki/wiki_page_edit.html"
 
 
-class WikiHomepage(ProjectContext, ListView):
-    model = WikiPage
+class WikiHomepage(WikiPageBase, ListView):
     template_name = "www/project/wiki/wiki_home.html"
