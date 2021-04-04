@@ -1,42 +1,8 @@
-{% extends "www/project/project_base.html" %}
+{% extends "www/project/wiki/wiki_page_editor_base.html" %}
 {% load static %}
+
 {% block content %}
-    <div class="bg-white">
-
-        <form action="." method="post" id="markdown-form">
-            {% csrf_token %}
-            <input type="hidden" name="markdown" value="">
-
-
-            <div class="input-group input-group-lg my-3">
-                <span class="input-group-text" id="page-name">Parent</span>
-                <span type="text" aria-describedby="page-name"></span>
-                <input type="text" name="parent" class="form-control"
-                       value="{{ object.parent.id }}">
-            </div>
-            <div class="input-group input-group-lg my-3">
-                <span class="input-group-text" id="page-name">Page Name</span>
-                <input name="name" value="{{ object.name }}" type="text" class="form-control" aria-label="Page name"
-                       aria-describedby="page-name">
-            </div>
-            {% include 'www/snippets/editor.html' %}
-            <div class="py-3 d-flex justify-content-end">
-                <a href="{% url "project:homepage" project.key %}">
-                    <button type="reset" class="btn btn-link">Cancel</button>
-                </a>
-                <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Publish</button>
-            </div>
-        </form>
-        <script type="application/javascript">
-            const markdownForm = document.getElementById("markdown-form");
-            markdownForm.addEventListener("submit", function (e) {
-                e.preventDefault();
-                editor.changeMode("wysiwyg");
-                markdownForm.markdown.value = editor.getMarkdown();
-                markdownForm.submit();
-            })
-            editor.setMarkdown("{{ object.markdown|escapejs }}", cursorToEnd=false);
-        </script>
-    </div>
-
+    {% with parent=object.parent %}
+        {{ block.super }}
+    {% endwith %}
 {% endblock %}

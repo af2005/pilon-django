@@ -1,0 +1,13 @@
+<div class="text-muted small">
+    Created by
+    {% if object.creator.first_name and object.creator.last_name %}
+        {{ object.creator.first_name }} {{ object.creator.last_name }}
+    {% elif object.creator.username %}
+        {{ object.creator.username }}
+    {% else %}
+        unknown
+    {% endif %}
+
+    on {{ object.date_created }}
+    and last updated {{ object.date_modified }}
+</div>
