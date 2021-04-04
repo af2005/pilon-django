@@ -1,4 +1,4 @@
-{% extends 'www/snippets/project/page-tree.html' %}
+{% extends 'www/snippets/project/page_tree.html' %}
 {% load static %}
 
 {% block urls %}
@@ -9,9 +9,9 @@
             <div class="my-3">
                 <span>Parent: </span>
                 <a href="#" data-bs-toggle="modal" data-bs-target="#edit-parent-modal"><span
-                        id="parentSpan">{{ object.parent.name }}</span></a>
+                        id="parentSpan">{{ parent.name }}</span></a>
                 <input type="hidden" id="parentInput" name="parent" class=""
-                       value="{{ object.parent.id }}">
+                       value="{{ parent.id }}">
 
 
                 <div class="modal fade" id="edit-parent-modal" tabindex="-1" aria-hidden="true">
