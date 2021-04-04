@@ -192,12 +192,6 @@ class WikiPage(MarkdownEntity):
     def breadcrumbs(self):
         return self.get_ancestors_of_type(WikiPage)
 
-    # def get_absolute_url(self):
-    #     project = self.get_ancestors_of_type(Project).first()
-    #     return reverse(
-    #         "project:wiki-page-detail", kwargs={"key": project.key, "pk": self.id}
-    #     )
-
 
 @reversion.register(follow=["markdownentity_ptr"])
 class JournalPage(MarkdownEntity):
