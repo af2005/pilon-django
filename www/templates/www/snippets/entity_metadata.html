@@ -1,6 +1,6 @@
 {% load humanize %}
 
-<div class="text-muted small d-none ">
+<div class="text-muted small">
     Created by
     {% if object.creator.first_name and object.creator.last_name %}
         {{ object.creator.first_name }} {{ object.creator.last_name }}
@@ -10,6 +10,5 @@
     unknown
     {% endif %}
     {{ object.date_created|naturaltime }}
-    <br>
     and last updated {{ object.date_modified|naturaltime }}
 </div>
