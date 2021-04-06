@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # "rest-polymorphic",  # https://github.com/apirobot/django-rest-polymorphic
     "colorfield",
     "django_filters",
+'django.contrib.humanize'
 ]
 
 MIDDLEWARE = [
