@@ -19,7 +19,7 @@ def homepage(request, key) -> HttpResponse:
 
 
 def page(request, key, uuid) -> HttpResponse:
-    # TODO: Do not return homepage but actual page
+    # TODO:0 Do not return homepage but actual page
     return project_views.project_view(request, key, template="journal")
 
 
