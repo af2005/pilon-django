@@ -12,11 +12,7 @@
     <div class="d-flex align-items-start justify-content-between pb-3 ">
         <div class="lh-1">
             <h2 class="display-4">{{ object.name }}</h2>
-            <div class="text-muted">
-                <small>
-                Created by {{ object.creator }} on {{ object.created_date }}
-                and last updated {{ object.modified_date }}</small>
-            </div>
+            {% include "www/snippets/entity_metadata.html" %}
             <div class="my-2">
                 {% for label in labels %}
                     <a class="badge badge-secondary" href="#">label</a>
@@ -35,7 +31,7 @@
                                         aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                ...
+                                .
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
