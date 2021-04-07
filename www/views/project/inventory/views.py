@@ -9,8 +9,8 @@ class InventoryBase(ProjectContext):
 
 
 class InventoryList(InventoryBase, ListView):
-    template_name = "www/project/tasks/task_list.html"
-    context_object_name = "tasks"
+    template_name = "www/project/inventory/inventory_list.html"
+    context_object_name = "inventory"
 
 
 class InventoryHomepage(InventoryList):
