@@ -4,7 +4,7 @@
 {% block sidebar %}
     {% with active_sidebar_item="Inventory" %}
         {{ block.super }}
-    {% endwith%}
+    {% endwith %}
 {% endblock %}
 
 {% block window_title %}
@@ -21,8 +21,5 @@
 
 
 {% block content %}
-    {{ project.sidebar_items }}
-
-    {{ project.name }}
-
+    {% lorem 3 p %}
 {% endblock %}
