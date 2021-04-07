@@ -95,6 +95,10 @@ class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
             kwargs={"key": project.key, "pk": self.id},
         )
 
+    @property
+    def comments(self):
+        return self.get_descendants().instance_of(Comment)
+
 
 @reversion.register()
 class Label(RandomUUIDMixin, SluggedNameMixin):
