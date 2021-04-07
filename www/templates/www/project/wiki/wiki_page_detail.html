@@ -17,12 +17,23 @@
         </div>
         <div>
             <a href="{% url "project:wiki-page-edit" project.key object.id %}">
-                <button class="btn btn-stealth"><i class="bi bi-pencil"></i> </button>
+                <button class="btn btn-stealth"><i class="bi bi-pencil"></i></button>
             </a>
-            <a href="#">
-                <button class="btn btn-stealth"><i class="bi bi-three-dots"></i> </button>
+            <a class="btn btn-stealth" data-bs-toggle="dropdown"
+               aria-expanded="false"><i class="bi bi-three-dots"></i>
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#"><i class="bi bi-star"></i> Mark as favorite</a>
+                <a class="dropdown-item" href="#"><i class="bi bi-share"></i> Share</a>
+                <a class="dropdown-item" href="#"><i class="bi bi-paperclip"></i>Attachments</a>
+                <a class="dropdown-item" href="#"><i class="bi bi-clock-history"></i> History</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Export</a>
+                <a class="dropdown-item" href="#">Copy</a>
+                <a class="dropdown-item" href="#">Delete</a>
 
-            </a>
+
+            </div>
         </div>
 
     </div>
