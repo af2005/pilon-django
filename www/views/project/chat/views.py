@@ -1,4 +1,4 @@
-from django.views.generic import DetailView
+from django.views.generic import TemplateView
 from ..views import ProjectContext
 
 
@@ -6,5 +6,5 @@ class ChatBase(ProjectContext):
     pass
 
 
-class ChatDetail(ChatBase, DetailView):
+class ChatDetail(ChatBase, TemplateView):
     template_name = "www/project/chat/chat_detail.html"
