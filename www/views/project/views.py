@@ -1,5 +1,3 @@
-from django.http import HttpResponse
-from django.template import loader
 from django.views.generic.base import ContextMixin, View
 from django.views.generic import ListView, CreateView, TemplateView
 
@@ -32,49 +30,3 @@ class ProjectList(ListView):
 
 class ContentCreate(ProjectContext, TemplateView):
     template_name = "www/project/create_chooser.html"
-
-
-def project_view(
-    request,
-    key,
-    template,
-    additional_context=None,
-) -> HttpResponse:
-    if additional_context is None:
-        additional_context = {}
-    project = (Project.objects.filter(key=key))[0]
-    template = loader.get_template(template)
-    context = {
-        "project": project,
-    }
-    context = {**context, **additional_context}
-
-    return HttpResponse(template.render(context, request))
-
-
-def team(request, key) -> HttpResponse:
-    return project_view(request, key, template="www/project/team/team_detail.html")
-
-
-def chat(request, key) -> HttpResponse:
-    return project_view(
-        request,
-        key,
-        template="www/project/chat/chat_detail.html",
-    )
-
-
-def calendar(request, key) -> HttpResponse:
-    return project_view(
-        request,
-        key,
-        template="www/project/calendar/calendar_home.html",
-    )
-
-
-def inventory(request, key) -> HttpResponse:
-    return project_view(
-        request,
-        key,
-        template="www/project/inventory/inventory_list.html",
-    )
