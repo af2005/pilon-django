@@ -78,6 +78,7 @@ def populate_wiki(test_user, test_project):
         name="Test Wiki Page", creator=test_user, parent=test_project, markdown=lorem.paragraph()
     )
     parent_page.save()
+    Comment(name="Wiki Comment", parent=parent_page, markdown=lorem.sentence()).save()
     WikiPage(
         name="Test Wiki Page Child",
         creator=test_user,
@@ -100,7 +101,7 @@ def populate_journal(test_user, test_project):
     JournalPage(
         name="Test Journal Page 2",
         creator=test_user,
-        date_created=datetime.datetime.now() - datetime.timedelta(days=10),
+        date=datetime.datetime.now() - datetime.timedelta(days=10),
         parent=test_project,
         markdown=lorem.paragraph(),
     ).save()
