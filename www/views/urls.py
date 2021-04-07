@@ -3,7 +3,6 @@ from django.urls import path, include
 from . import people, admin, user_settings, view_by_uuid, project_helper_views
 from django.contrib.auth import views as auth_views
 from .project.views import ProjectList, ProjectCreate
-from django.contrib.auth.decorators import user_passes_test
 from .people import PeopleDirectory
 
 urlpatterns = [
