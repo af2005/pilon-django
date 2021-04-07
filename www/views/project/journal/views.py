@@ -1,8 +1,4 @@
-from django.http import HttpResponse
-
-from www.models import JournalPage, Project
-from www.views import templates
-import www.views.project.views as project_views
+from www.models import JournalPage
 from ..views import ProjectContext
 from django.views.generic import DetailView, ListView, CreateView
 
@@ -16,11 +12,11 @@ class JournalHomepage(JournalBase, ListView):
     template_name = "www/project/journal/journal_page_list.html"
 
 
-class JournalDetail(JournalBase, DetailView):
+class JournalPageDetail(JournalBase, DetailView):
     template_name = "www/project/journal/journal_page_detail.html"
 
 
-class JournalCreate(JournalBase, CreateView):
+class JournalPageCreate(JournalBase, CreateView):
     template_name = "www/project/journal/journal_page_create.html"
 
 
