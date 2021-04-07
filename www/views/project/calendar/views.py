@@ -8,6 +8,3 @@ class CalendarBase(ProjectContext):
 
 class CalendarHome(CalendarBase, TemplateView):
     template_name = "www/project/calendar/calendar_home.html"
-
-
-

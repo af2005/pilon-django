@@ -102,7 +102,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 name = "click"
 version = "7.1.2"
 description = "Composable command line interface toolkit"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
@@ -473,6 +473,17 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "lorem-text"
+version = "1.5"
+description = "Dummy lorem ipsum text generator"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+Click = ">=7.0"
+
+[[package]]
 name = "markdown"
 version = "3.3.4"
 description = "Python implementation of Markdown."
@@ -818,7 +829,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "e98287e15885fbaafc513f207a0d288c177e92ccdee360ec9402465256ba1a25"
+content-hash = "7741e9483e4b8702e5135a90cc7f2d1d11edd9abad971ae6d15e1fd0d128b97c"
 
 [metadata.files]
 appdirs = [
@@ -1040,6 +1051,10 @@ inflection = [
 iniconfig = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
+]
+lorem-text = [
+    {file = "lorem_text-1.5-py2.py3-none-any.whl", hash = "sha256:1997aa4efe8f6505d3d73056fb8c8d3d8e2847107329469d395388010e531036"},
+    {file = "lorem_text-1.5.tar.gz", hash = "sha256:3f151466814bd1ad66b9b41e8482c755d1e3bc78d6dad528f1f8586d868e8a7e"},
 ]
 markdown = [
     {file = "Markdown-3.3.4-py3-none-any.whl", hash = "sha256:96c3ba1261de2f7547b46a00ea8463832c921d3f9d6aba3f255a6f71386db20c"},

@@ -3,6 +3,7 @@ from django.core.management import call_command
 from www.models import Project, WikiPage, JournalPage, Comment, User, Group, Entity
 from schedule.models import Calendar, Event, Rule
 import datetime
+from lorem_text import lorem
 
 
 def populate_db(apps, schema_editor):
@@ -67,10 +68,40 @@ def populate_user_groups():
 def populate_entities(test_user):
     test_project = Project(name="Test Project", key="test", creator=test_user)
     test_project.save()
-    parent_page = WikiPage(name="Test Wiki Page", creator=test_user, parent=test_project)
+    populate_wiki(test_user, test_project)
+    populate_journal(test_user, test_project)
+
+
+def populate_wiki(test_user, test_project):
+    WikiPage(name="Orphaned Page", creator=test_user, markdown=lorem.paragraph()).save()
+    parent_page = WikiPage(
+        name="Test Wiki Page", creator=test_user, parent=test_project, markdown=lorem.paragraph()
+    )
     parent_page.save()
-    WikiPage(name="Test Wiki Page Child", creator=test_user, parent=parent_page).save()
-    journal = JournalPage(name="Test Journal Page", parent=test_project)
+    WikiPage(
+        name="Test Wiki Page Child",
+        creator=test_user,
+        parent=parent_page,
+        markdown=lorem.paragraph(),
+    ).save()
+    WikiPage(
+        name="Child 2", creator=test_user, parent=parent_page, markdown=lorem.paragraph()
+    ).save()
+    WikiPage(
+        name="Child 3", creator=test_user, parent=parent_page, markdown=lorem.paragraph()
+    ).save()
+
+
+def populate_journal(test_user, test_project):
+    journal = JournalPage(
+        name="Test Journal Page", creator=test_user, parent=test_project, markdown=lorem.paragraph()
+    )
     journal.save()
-    WikiPage(name="Orphaned Page", creator=test_user).save()
-    Comment(name="First Comment", parent=journal).save()
+    JournalPage(
+        name="Test Journal Page 2",
+        creator=test_user,
+        date_created=datetime.datetime.now() - datetime.timedelta(days=10),
+        parent=test_project,
+        markdown=lorem.paragraph(),
+    ).save()
+    Comment(name="First Comment", parent=journal, markdown=lorem.sentence()).save()
