@@ -12,7 +12,7 @@ from www.models import Entity, Project, WikiPage, JournalPage, Task
 
 def main(request, uuid):
     entity = Entity.objects.filter(id=uuid).first()
-    return "Not Implemented"
+    # return "Not Implemented"
     try:
         if isinstance(entity, WikiPage):
             project = entity.get_ancestors_of_type(Project).first()
@@ -24,7 +24,7 @@ def main(request, uuid):
 
         if isinstance(entity, Task):
             project = entity.get_ancestors_of_type(Project).first()
-            return www.views.project.tasks.views.overview(request, key=project.key)
+            return www.views.project.tasks.views.TaskHomepage(request, key=project.key)
 
         if isinstance(entity, Project):
             return redirect(reverse("project:homepage", args=[entity.key]))
