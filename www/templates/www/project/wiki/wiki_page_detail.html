@@ -13,49 +13,31 @@
         <div class="lh-1">
             <h2 class="display-4">{{ object.name }}</h2>
             {% include "www/snippets/entity_metadata.html" %}
-            <div class="my-2">
-                {% for label in labels %}
-                    <a class="badge badge-secondary" href="#">label</a>
-                {% endfor %}
-
-                <button class="badge btn text-dark" data-bs-toggle="modal" data-bs-target="#edit-labels-modal">Edit
-                    labels...
-                </button>
-                <div class="modal fade" id="edit-labels-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit labels</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                .
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
 
         </div>
         <div>
             <a href="{% url "project:wiki-page-edit" project.key object.id %}">
-                <button class="btn btn-light"><i class="bi bi-pencil-square"></i> Edit</button>
+                <button class="btn btn-stealth"><i class="bi bi-pencil"></i></button>
             </a>
-            <a href="#">
-                <button class="btn btn-light"><i class="bi bi-share-fill"></i> Share</button>
+            <a class="btn btn-stealth" data-bs-toggle="dropdown"
+               aria-expanded="false"><i class="bi bi-three-dots"></i>
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#"><i class="bi bi-star"></i> Mark as favorite</a>
+                <a class="dropdown-item" href="#"><i class="bi bi-share"></i> Share</a>
+                <a class="dropdown-item" href="#"><i class="bi bi-paperclip"></i>Attachments</a>
+                <a class="dropdown-item" href="#"><i class="bi bi-clock-history"></i> History</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Export</a>
+                <a class="dropdown-item" href="#">Copy</a>
+                <a class="dropdown-item" href="#">Delete</a>
 
-            </a>
+
+            </div>
         </div>
 
     </div>
-
-    {{ object.markdown_rendered | safe }}
-
+    <div>
+        {{ object.markdown_rendered | safe }}
+    </div>
 {% endblock %}
