@@ -9,7 +9,6 @@ class TaskBase(ProjectContext):
 
 
 class TaskDetail(TaskBase, DetailView):
-    model = Task
     template_name = "www/project/tasks/task_detail.html"
 
 
