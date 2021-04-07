@@ -21,7 +21,10 @@
 
 {% block content %}
     {% for object in object_list %}
-        <div>{{ object.id }}</div>
+        <hr>
+        <div class="font-weight-bold">{{ object.name}}</div>
+        <div><span class="font-weight-bold">UUID</span>: {{ object.id }}</div>
+        <div><span class="font-weight-bold">Date</span>: {{ object.date }}</div>
         <div>{{ object.markdown_rendered | safe }}</div>
     {% endfor %}
 

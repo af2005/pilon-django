@@ -24,6 +24,6 @@ urlpatterns = [
     path("project-directory/", ProjectList.as_view(), name="project-directory"),
     path("project-create/", ProjectCreate.as_view(), name="project-create"),
     path("id/<str:uuid>", view_by_uuid.main, name="Content by UUID"),
-    path("people/", PeopleDirectory.as_view(), name="user-list"),
+    path("people/", PeopleDirectory.as_view(), name="people-list"),
     path("system-settings/", include("www.views.admin.urls")),
 ]
