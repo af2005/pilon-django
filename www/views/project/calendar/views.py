@@ -1,30 +1,13 @@
-from django.views.generic import UpdateView, DetailView, ListView, CreateView
+from django.views.generic import TemplateView
 from ..views import ProjectContext
-from www.models import Task
 
 
-class TaskBase(ProjectContext):
-    model = Task
-    fields = ["parent", "name", "assignee"]
-
-
-class TaskDetail(TaskBase, DetailView):
-    model = Task
-    template_name = "www/project/tasks/task_detail.html"
-
-
-class TaskCreate(TaskBase, CreateView):
-    template_name = "www/project/tasks/task_create.html"
-
-
-class TaskEdit(TaskBase, UpdateView):
-    template_name = "www/project/tasks/task_edit.html"
-
-
-class TaskList(TaskBase, ListView):
-    template_name = "www/project/tasks/task_list.html"
-    context_object_name = "tasks"
-
-
-class TaskHomepage(TaskList):
+class CalendarBase(ProjectContext):
     pass
+
+
+class CalendarHome(CalendarBase, TemplateView):
+    template_name = "www/project/calendar/calendar_home.html"
+
+
+

@@ -68,7 +68,7 @@ def calendar(request, key) -> HttpResponse:
     return project_view(
         request,
         key,
-        template="www/project/calendar/calendar_detail.html",
+        template="www/project/calendar/calendar_home.html",
     )
 
 
