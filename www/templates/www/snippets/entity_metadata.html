@@ -1,14 +1,38 @@
 {% load humanize %}
 
 <div class="text-muted small">
-    Created by
-    {% if object.creator.first_name and object.creator.last_name %}
-        {{ object.creator.first_name }} {{ object.creator.last_name }}
-    {% elif object.creator.username %}
-        {{ object.creator.username }}
-    {% else %}
-    unknown
-    {% endif %}
-    {{ object.date_created|naturaltime }}
-    and last updated {{ object.date_modified|naturaltime }}
+    <div class=" pe-4 d-inline-block my-1">
+        <i class="bi bi-person"></i>
+        {% if object.creator.first_name and object.creator.last_name %}
+            {{ object.creator.first_name }} {{ object.creator.last_name }}
+        {% elif object.creator.username %}
+            {{ object.creator.username }}
+        {% else %}
+            unknown
+        {% endif %}
+    </div>
+    <div class=" pe-4 d-inline-block my-1">
+        <i class="bi bi-clock"></i>
+            {{ object.date_modified|naturaltime }}
+    </div>
+    <div class=" pe-4 d-inline-block my-1">
+        <i class="bi bi-tag"></i>
+        {% if labels|length == 0 %}
+            <span>None</span>
+        {% endif %}
+        {% for label in labels %}
+            <a class="badge badge-secondary" href="#">label</a>
+        {% endfor %}
+
+    </div>
+    <div class=" pe-4 d-inline-block my-1">
+        <i class="bi bi-chat-left"></i>
+        <span>
+        {% if object.comments %}
+            {{ object.comments|length }}
+        {% else %}
+            No comments
+        {% endif %}
+        </span>
+    </div>
 </div>

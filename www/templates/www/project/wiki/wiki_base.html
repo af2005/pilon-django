@@ -23,7 +23,7 @@
 
 
 {% block breadcrumbs %}
-    <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb" class="container">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url "project:homepage" project.key %}">{{ project.name }}</a></li>
             <li class="breadcrumb-item"><a href="{% url "project:wiki" project.key %}">Wiki</a></li>
