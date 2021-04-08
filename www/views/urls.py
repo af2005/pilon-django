@@ -1,5 +1,4 @@
 from django.urls import path, include
-
 from . import view_by_uuid
 from django.contrib.auth import views as auth_views
 from .project.views import ProjectList, ProjectCreate
