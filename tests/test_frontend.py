@@ -21,23 +21,24 @@ class TestFrontend(TestCase):
 
     def test_default_views(self):
         default_views = [
-            "View Dashboard",
+            "dashboard-view",
             "All updates board",
             "Last worked on board",
-            "User settings",
-            "View People",
-            "Create Project",
-            "Project Directory",
+            "user-settings",
+            "people-list",
+            "project-create",
+            "project-directory",
         ]
         for view in default_views:
-            reversed_url = reverse(view)
-            response = self.client.get(reversed_url)
-            self.assertEqual(response.status_code, 200)
+            with self.subTest(view=view):
+                reversed_url = reverse(view)
+                response = self.client.get(reversed_url)
+                self.assertEqual(response.status_code, 200)
 
     def test_project_views(self):
         project_views = [
             "project:homepage",
-            "project:create-child-entity",
+            "project:child-entity-create",
             "project:tasks",
             "project:chat",
             "project:tasks",
@@ -45,12 +46,13 @@ class TestFrontend(TestCase):
             "project:inventory",
             "project:wiki",
             "project:wiki-page-create",
-            "project:create-wiki-page-from-file",
+            "project:wiki-page-create-from-file",
             "project:journal",
-            "project:create-journal-page",
-            "project:create-journal-page-from-file",
+            "project:journal-page-create",
+            "project:journal-page-create-from-file",
         ]
         for view in project_views:
-            reversed_url = reverse(view, kwargs={"key": TEST_PROJECT_KEY})
-            response = self.client.get(reversed_url)
-            self.assertEqual(response.status_code, 200)
+            with self.subTest(view=view):
+                reversed_url = reverse(view, kwargs={"key": TEST_PROJECT_KEY})
+                response = self.client.get(reversed_url)
+                self.assertEqual(response.status_code, 200)
