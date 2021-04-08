@@ -1,11 +1,24 @@
 from django.http import HttpResponse
 from www.views import templates
+from django.views.generic import TemplateView
 
 SUBNAV_ITEMS = [
     {"name": "Dashboard", "url": "/"},
     {"name": "All updates", "url": "/dashboard/all-updates"},
     {"name": "Last worked on", "url": "/dashboard/last-worked-on"},
 ]
+
+
+class DashboardView(TemplateView):
+    template_name = "www/dashboard/dashboard.html"
+
+
+class DashboardAllUpdates(TemplateView):
+    template_name = "www/dashboard/dashboard_all_updates.html"
+
+
+class DashboardRecentlyWorkedOn(TemplateView):
+    template_name = "www/dashboard/dashboard_recently_worked_on.html"
 
 
 def dashboard(request):
