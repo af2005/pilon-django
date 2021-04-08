@@ -4,6 +4,7 @@ from . import user_settings, view_by_uuid
 from django.contrib.auth import views as auth_views
 from .project.views import ProjectList, ProjectCreate
 from .people import PeopleDirectory
+from .user_settings import UserSettingsHome
 
 urlpatterns = [
     path("", include("www.views.dashboard.urls")),
@@ -17,7 +18,7 @@ urlpatterns = [
         "accounts/logout/",
         auth_views.LogoutView.as_view(template_name="www/accounts/logout.html"),
     ),
-    path("accounts/settings/", user_settings.main, name="user-settings"),
+    path("accounts/settings/", UserSettingsHome.as_view(), name="user-settings"),
     path("accounts/", include("django.contrib.auth.urls")),
     path("project/", include("www.views.project.urls")),
     path("project-directory/", ProjectList.as_view(), name="project-directory"),
