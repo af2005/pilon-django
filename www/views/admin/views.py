@@ -1,13 +1,27 @@
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth import get_user_model
 from django.http import HttpResponse
-from .. import templates
-from www.models import User
+from django.template import loader
+
+User = get_user_model()
 
 SIDEBAR_ITEMS = [
     {"name": "Global", "url": "/system-settings/global"},
     {"name": "User Manager", "url": "/system-settings/user-manager"},
 ]
 
+
+def template_admin(request, window_title, title="", subtitle="", sidebar_items=None, content=None):
+    template = loader.get_template("www/base/base+sidebar+title.html")
+    context = {
+        "window_title": window_title,
+        "page_title": title,
+        "page_subtitle": subtitle,
+        "sidebar_items": sidebar_items,
+        "content": content,
+        "navbar_centertext": "System settings",
+    }
+    return template.render(context, request)
 
 def user_settings(request):
     return HttpResponse("User settings")
@@ -16,7 +30,7 @@ def user_settings(request):
 @permission_required("admin", raise_exception=True)
 def user_manager(request):
     content = User.objects.all()
-    tpl = templates.admin(
+    tpl = template_admin(
         request,
         "User Manager",
         title="Manage Users",
@@ -32,7 +46,7 @@ def system_settings(request, setting):
         return user_manager(request)
 
     content = ""
-    tpl = templates.admin(
+    tpl = template_admin(
         request,
         window_title="System Settings",
         title=setting,

@@ -1,5 +1,3 @@
-from django.http import HttpResponse
-from . import templates
 from django.views.generic import ListView
 from django.contrib.auth import get_user_model
 
