@@ -13,6 +13,7 @@ from ..models import (
     Label,
 )
 from rest_polymorphic.serializers import PolymorphicSerializer
+from django.urls import reverse
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

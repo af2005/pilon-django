@@ -5,8 +5,8 @@ from ..views import ProjectContext
 
 class WikiPageBase(ProjectContext):
     model = WikiPage
+    active_sidebar_item = "Wiki"
     fields = ["parent", "name", "markdown"]
-    extra_context = {"active_sidebar_item": "Wiki"}
 
 
 class WikiPageDetail(WikiPageBase, DetailView):
