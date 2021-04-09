@@ -125,8 +125,8 @@ class Project(Entity):
     def sidebar_items(self):
         return [
             {
-                "name": "Homepage",
-                "url": reverse("project:homepage", args=[self.key]),
+                "name": "Home",
+                "url": reverse("project:home", args=[self.key]),
                 "icon": "house-fill",
             },
             {

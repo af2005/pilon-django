@@ -20,8 +20,9 @@ class ProjectContext(ContextMixin, View):
         context["page_title"] = self.active_sidebar_item
 
 
-class ProjectHomepage(ProjectContext, TemplateView):
-    template_name = "www/project/project_homepage.html"
+class ProjectHome(ProjectContext, TemplateView):
+    template_name = "www/project/project_home.html"
+    active_sidebar_item = "Home"
 
 
 class ProjectCreate(CreateView):

@@ -29,7 +29,7 @@ def main(request, uuid):
             return www.views.project.tasks.views.TaskHomepage(request, key=project.key)
 
         if isinstance(entity, Project):
-            return redirect(reverse("project:homepage", args=[entity.key]))
+            return redirect(reverse("project:home", args=[entity.key]))
 
     except AttributeError:
         if isinstance(entity, Project):
