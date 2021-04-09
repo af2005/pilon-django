@@ -1,24 +1,6 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
-{% block sidebar %}
-    {% with active_sidebar_item="Team" %}
-        {{ block.super }}
-    {% endwith %}
-{% endblock %}
-
-{% block window_title %}
-    {% with window_title=project.name|add:" - Team" %}
-        {{ block.super }}
-    {% endwith %}
-{% endblock %}
-
-{% block title %}
-    {% with page_title="Team" %}
-        {{ block.super }}
-    {% endwith %}
-{% endblock %}
-
 {% block content %}
     <div class="row">
         <div class="my-3 p-3 ">

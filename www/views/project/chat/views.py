@@ -3,7 +3,7 @@ from ..views import ProjectContext
 
 
 class ChatBase(ProjectContext):
-    pass
+    active_sidebar_item = "Chat"
 
 
 class ChatDetail(ChatBase, TemplateView):

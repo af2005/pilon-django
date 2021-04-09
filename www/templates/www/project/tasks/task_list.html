@@ -1,24 +1,6 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
-{% block sidebar %}
-    {% with active_sidebar_item="Tasks" %}
-        {{ block.super }}
-    {% endwith %}
-{% endblock %}
-
-{% block window_title %}
-    {% with window_title=project.name|add:" - Tasks" %}
-        {{ block.super }}
-    {% endwith %}
-{% endblock %}
-
-{% block title %}
-    {% with page_title="Tasks" %}
-        {{ block.super }}
-    {% endwith %}
-{% endblock %}
-
 
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static "www/custom/tasks.css" %}">

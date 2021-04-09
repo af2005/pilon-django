@@ -4,3 +4,4 @@ from ..views import ProjectContext
 
 class TeamView(ProjectContext, TemplateView):
     template_name = "www/project/team/team_detail.html"
+    active_sidebar_item = "Team"

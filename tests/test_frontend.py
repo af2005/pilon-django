@@ -37,7 +37,7 @@ class TestFrontend(TestCase):
 
     def test_project_views(self):
         project_views = [
-            "project:homepage",
+            "project:home",
             "project:child-entity-create",
             "project:tasks",
             "project:chat",

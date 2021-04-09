@@ -5,8 +5,9 @@ from ..views import ProjectContext
 
 class WikiPageBase(ProjectContext):
     model = WikiPage
+    active_sidebar_item = "Wiki"
+    extra_context = {"page_title": ""}
     fields = ["parent", "name", "markdown"]
-    extra_context = {"active_sidebar_item": "Wiki"}
 
 
 class WikiPageDetail(WikiPageBase, DetailView):
@@ -15,6 +16,7 @@ class WikiPageDetail(WikiPageBase, DetailView):
 
 class WikiPageCreate(WikiPageBase, CreateView):
     template_name = "www/project/wiki/wiki_page_create.html"
+    extra_context = {"page_title": "Create Wiki Page"}
 
 
 class WikiPageCreateFromFile(WikiPageBase, CreateView):
@@ -25,6 +27,6 @@ class WikiPageEdit(WikiPageBase, UpdateView):
     template_name = "www/project/wiki/wiki_page_edit.html"
 
 
-class WikiHomepage(WikiPageBase, ListView):
+class WikiHome(WikiPageBase, ListView):
     template_name = "www/project/wiki/wiki_home.html"
-    extra_context = {"page_title": "Wiki Homepage"}
+    extra_context = {"page_title": "Wiki Home"}
