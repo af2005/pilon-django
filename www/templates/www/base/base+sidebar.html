@@ -14,39 +14,11 @@
                         class=" bi bi-chevron-double-left"></i>
                 </button>
             </div>
-            <script type="application/javascript">
-                const sidebar = function () {
-                    function toggleCollapsedState() {
 
-                    }
-
-                    function extend() {
-
-                    }
-
-                    function collapse() {
-
-                    }
-
-                    function initToggleButton() {
-                        document.getElementById("sidebar-collapse-toggle").addEventListener('click', function () {
-                            document.getElementById("sidebar-wrapper").classList.toggle("sidebar-collapsed");
-                            const icon = document.getElementById("sidebar-collapse-toggle").getElementsByTagName("i")[0]
-                            icon.classList.toggle("bi-chevron-double-left");
-                            icon.classList.toggle("bi-chevron-double-right");
-                        }, false);
-                    }
-
-                    return {
-                        toggleCollapsedState: toggleCollapsedState,
-                        extend: extend,
-                        collapse: collapse,
-                        initToggleButton: initToggleButton
-                    }
-                }();
-                sidebar.initToggleButton()
-
-            </script>
+            {% block jquery_scripts %}
+                {{ block.super }}
+                <script type="application/javascript" src="{% static "www/custom/sidebar.js" %}"></script>
+            {% endblock %}
 
             {% for listitem in sidebar_items %}
                 <li>
