@@ -9,7 +9,6 @@ class WikiPageBase(ProjectContext):
 
 
 class WikiPageDetail(WikiPageBase, DetailView):
-    model = WikiPage
     template_name = "www/project/wiki/wiki_page_detail.html"
 
 
