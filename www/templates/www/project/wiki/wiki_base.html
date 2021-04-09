@@ -1,12 +1,6 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
-{% block sidebar %}
-    {% with active_sidebar_item="Wiki" %}
-        {{ block.super }}
-    {% endwith %}
-{% endblock sidebar %}
-
 {% block sidebar_lower_content %}
     <link rel="stylesheet" type="text/css"
           href="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.css" %}">

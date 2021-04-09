@@ -21,9 +21,9 @@ class TestFrontend(TestCase):
 
     def test_default_views(self):
         default_views = [
-            "dashboard-view",
-            "dashboard-all-updates",
-            "dashboard-last-worked-on",
+            "dashboard:home",
+            "dashboard:all-updates",
+            "dashboard:last-worked-on",
             "user-settings",
             "people-list",
             "project-create",

@@ -2,9 +2,9 @@ from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 
 SUBNAV_ITEMS = [
-    {"name": "Dashboard", "url": reverse_lazy("dashboard-view")},
-    {"name": "All Updates", "url": reverse_lazy("dashboard-all-updates")},
-    {"name": "Last Worked On", "url": reverse_lazy("dashboard-last-worked-on")},
+    {"name": "Dashboard", "url": reverse_lazy("dashboard:home")},
+    {"name": "All Updates", "url": reverse_lazy("dashboard:all-updates")},
+    {"name": "Last Worked On", "url": reverse_lazy("dashboard:last-worked-on")},
 ]
 
 
