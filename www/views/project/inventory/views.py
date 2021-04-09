@@ -11,5 +11,5 @@ class InventoryList(InventoryBase, TemplateView):
     context_object_name = "inventory"
 
 
-class InventoryHomepage(InventoryList):
+class InventoryHome(InventoryList):
     pass

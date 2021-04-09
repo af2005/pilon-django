@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.TaskHomepage.as_view(), name="tasks"),
+    path("", views.TaskHome.as_view(), name="tasks"),
     path("create/", views.TaskCreate.as_view(), name="task-create"),
     path("edit/<slug:pk>/", views.TaskEdit.as_view(), name="task-edit"),
     path(

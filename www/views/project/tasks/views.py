@@ -6,6 +6,7 @@ from www.models import Task
 class TaskBase(ProjectContext):
     model = Task
     fields = ["parent", "name", "assignee"]
+    active_sidebar_item = "Tasks"
 
 
 class TaskDetail(TaskBase, DetailView):
@@ -25,5 +26,5 @@ class TaskList(TaskBase, ListView):
     context_object_name = "tasks"
 
 
-class TaskHomepage(TaskList):
+class TaskHome(TaskList):
     pass

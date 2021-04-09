@@ -3,9 +3,7 @@ from ..views import ProjectContext
 
 
 class CalendarBase(ProjectContext):
-    extra_context = {
-        "window_title": "Calendar"
-    }
+    active_sidebar_item = "Calendar"
 
 
 class CalendarHome(CalendarBase, TemplateView):
