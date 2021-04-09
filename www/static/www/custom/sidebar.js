@@ -1,6 +1,6 @@
 const sidebar = function () {
     function toggleCollapsed() {
-         $("#sidebar-wrapper").toggleClass("sidebar-collapsed");
+        $("#sidebar-wrapper").toggleClass("sidebar-collapsed");
         $("#sidebar-collapse-toggle i").toggleClass("bi-chevron-double-left").toggleClass("bi-chevron-double-right");
 
     }
@@ -16,10 +16,7 @@ const sidebar = function () {
     }
 
     function initToggleButton() {
-        $("#sidebar-collapse-toggle").click(function () {
-            $("#sidebar-wrapper").toggleClass("sidebar-collapsed");
-            $("#sidebar-collapse-toggle i").toggleClass("bi-chevron-double-left").toggleClass("bi-chevron-double-right");
-        });
+        $("#sidebar-collapse-toggle").click(toggleCollapsed);
     }
 
     return {
@@ -31,12 +28,11 @@ const sidebar = function () {
 }();
 document.addEventListener("DOMContentLoaded", function (event) {
     sidebar.initToggleButton();
-    $(window).resize(function(e) {
-      if($(window).width()<=768){
-        sidebar.collapse()
-      }
-      else{
-          sidebar.extend();
-      }
+    $(window).resize(function (e) {
+        if ($(window).width() <= 768) {
+            sidebar.collapse()
+        } else {
+            sidebar.extend();
+        }
     });
 });
