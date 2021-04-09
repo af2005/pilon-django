@@ -6,3 +6,9 @@
         {{ block.super }}
     {% endwith %}
 {% endblock %}
+
+{% block window_title %}
+    {% with window_title="Create wiki page" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
