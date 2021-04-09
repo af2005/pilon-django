@@ -4,7 +4,7 @@ from . import views
 app_name = "project"
 
 urlpatterns = [
-    path("<str:key>/", views.ProjectHomepage.as_view(), name="homepage"),
+    path("<str:key>/", views.ProjectHome.as_view(), name="home"),
     path("<str:key>/create/", views.ContentCreate.as_view(), name="child-entity-create"),
     path("<str:key>/team/", include("www.views.project.team.urls"), name="team"),
     path("<str:key>/chat/", include("www.views.project.chat.urls"), name="chat"),

@@ -1,11 +1,6 @@
 {% extends "www/project/journal/journal_base.html" %}
 {% load static %}
 
-{% block window_title %}
-    {% with window_title=project.name|add:" - "|add:object.name %}
-        {{ block.super }}
-    {% endwith %}
-{% endblock %}
 
 {% block content %}
 

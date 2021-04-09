@@ -6,9 +6,10 @@ from django.views.generic import DetailView, ListView, CreateView
 class JournalBase(ProjectContext):
     model = JournalPage
     fields = ["parent", "name", "markdown"]
+    active_sidebar_item = "Journal"
 
 
-class JournalHomepage(JournalBase, ListView):
+class JournalHome(JournalBase, ListView):
     template_name = "www/project/journal/journal_page_list.html"
 
 

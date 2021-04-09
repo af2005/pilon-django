@@ -5,15 +5,24 @@ from www.models import Project
 
 
 class ProjectContext(ContextMixin, View):
+    active_sidebar_item = None
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         key = self.kwargs.get("key")
         context["project"] = Project.objects.filter(key=key).first()
-        return context
+        self.set_sidebar_context(context)
+        return super().get_context_data(**context)  # like this, the extra_context is added last
+
+    def set_sidebar_context(self, context):
+        context["active_sidebar_item"] = self.active_sidebar_item
+        context["window_title"] = self.active_sidebar_item
+        context["page_title"] = self.active_sidebar_item
 
 
-class ProjectHomepage(ProjectContext, TemplateView):
-    template_name = "www/project/project_homepage.html"
+class ProjectHome(ProjectContext, TemplateView):
+    template_name = "www/project/project_home.html"
+    active_sidebar_item = "Home"
 
 
 class ProjectCreate(CreateView):
