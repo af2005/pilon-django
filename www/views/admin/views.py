@@ -23,6 +23,7 @@ def template_admin(request, window_title, title="", subtitle="", sidebar_items=N
     }
     return template.render(context, request)
 
+
 def user_settings(request):
     return HttpResponse("User settings")
 

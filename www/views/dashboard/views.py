@@ -14,7 +14,7 @@ class DashboardView(TemplateView):
         "window_title": "Dashboard",
         "title": "Today",
         "subnav_items": SUBNAV_ITEMS,
-        "active_subnav_item": 0
+        "active_subnav_item": 0,
     }
 
 
@@ -24,7 +24,7 @@ class DashboardAllUpdates(TemplateView):
         "window_title": "All Updates",
         "title": "All Updates",
         "subnav_items": SUBNAV_ITEMS,
-        "active_subnav_item": 1
+        "active_subnav_item": 1,
     }
 
 
@@ -34,5 +34,5 @@ class DashboardLastWorkedOn(TemplateView):
         "window_title": "Recently Worked On",
         "title": "Recently Worked On",
         "subnav_items": SUBNAV_ITEMS,
-        "active_subnav_item": 2
+        "active_subnav_item": 2,
     }

@@ -54,7 +54,9 @@ def populate_calendar():
 def populate_user_groups():
     test_group = Group(name="TestGroup")
     test_group.save()
-    test_user = User(username="TestUser", first_name="Hans", last_name="Wurst", email="Hans@Wurst.com")
+    test_user = User(
+        username="TestUser", first_name="Hans", last_name="Wurst", email="Hans@Wurst.com"
+    )
     test_user.set_password(raw_password="password")
     test_user.save()
     test_user.groups.add(test_group)
