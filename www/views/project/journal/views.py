@@ -1,29 +1,24 @@
-from django.http import HttpResponse
-
-from www.views import templates
-import www.views.project.views as project_views
-
-
-def content_create(request, key) -> HttpResponse:
-    tpl = templates.default_editor(request, title="Create Journal Page", key=key)
-    return HttpResponse(tpl)
+from www.models import JournalPage
+from ..views import ProjectContext
+from django.views.generic import DetailView, ListView, CreateView
 
 
-def content_create_with_file(request, key) -> HttpResponse:
-    tpl = templates.default_editor(
-        request, title="Create Journal Page with File", key=key
-    )
-    return HttpResponse(tpl)
+class JournalBase(ProjectContext):
+    model = JournalPage
+    fields = ["parent", "name", "markdown"]
 
 
-def homepage(request, key) -> HttpResponse:
-    return project_views.project_view(
-        request, key, template="journal", title="Journal", active_sidebar_item="Journal"
-    )
+class JournalHomepage(JournalBase, ListView):
+    template_name = "www/project/journal/journal_page_list.html"
 
 
-def page(request, key, uuid) -> HttpResponse:
-    # TODO: Do not return homepage but actual page
-    return project_views.project_view(
-        request, key, template="journal", title="Journal", active_sidebar_item="Journal"
-    )
+class JournalPageDetail(JournalBase, DetailView):
+    template_name = "www/project/journal/journal_page_detail.html"
+
+
+class JournalPageCreate(JournalBase, CreateView):
+    template_name = "www/project/journal/journal_page_create.html"
+
+
+class JournalPageCreateFromFile(JournalBase, CreateView):
+    template_name = "www/project/journal/journal_page_create_from_file.html"

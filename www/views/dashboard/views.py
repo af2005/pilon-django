@@ -1,44 +1,38 @@
-from django.http import HttpResponse
-from www.views import templates
+from django.views.generic import TemplateView
+from django.urls import reverse_lazy
 
 SUBNAV_ITEMS = [
-    {"name": "Dashboard", "url": "/"},
-    {"name": "All updates", "url": "/dashboard/all-updates"},
-    {"name": "Last worked on", "url": "/dashboard/last-worked-on"},
+    {"name": "Dashboard", "url": reverse_lazy("dashboard:home")},
+    {"name": "All Updates", "url": reverse_lazy("dashboard:all-updates")},
+    {"name": "Last Worked On", "url": reverse_lazy("dashboard:last-worked-on")},
 ]
 
 
-def dashboard(request):
-    tpl = templates.dashboard(
-        request,
-        window_title="Dashboard",
-        title="Today",
-        subnav_items=SUBNAV_ITEMS,
-        active_subnav_item=0,
-    )
-
-    return HttpResponse(tpl)
+class DashboardView(TemplateView):
+    template_name = "www/dashboard/dashboard.html"
+    extra_context = {
+        "window_title": "Dashboard",
+        "title": "Today",
+        "subnav_items": SUBNAV_ITEMS,
+        "active_subnav_item": 0,
+    }
 
 
-def all_updates_board(request):
-    tpl = templates.dashboard(
-        request,
-        window_title="All updates",
-        title="All updates",
-        subnav_items=SUBNAV_ITEMS,
-        active_subnav_item=1,
-    )
-
-    return HttpResponse(tpl)
+class DashboardAllUpdates(TemplateView):
+    template_name = "www/dashboard/dashboard_all_updates.html"
+    extra_context = {
+        "window_title": "All Updates",
+        "title": "All Updates",
+        "subnav_items": SUBNAV_ITEMS,
+        "active_subnav_item": 1,
+    }
 
 
-def recently_worked_on_board(request):
-    tpl = templates.dashboard(
-        request,
-        window_title="Recently worked on",
-        title="Recently worked on",
-        subnav_items=SUBNAV_ITEMS,
-        active_subnav_item=2,
-    )
-
-    return HttpResponse(tpl)
+class DashboardLastWorkedOn(TemplateView):
+    template_name = "www/dashboard/dashboard_last_worked_on.html"
+    extra_context = {
+        "window_title": "Recently Worked On",
+        "title": "Recently Worked On",
+        "subnav_items": SUBNAV_ITEMS,
+        "active_subnav_item": 2,
+    }

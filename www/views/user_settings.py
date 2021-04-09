@@ -1,15 +1,7 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from . import templates
+from django.views.generic import TemplateView
 
 
-@login_required
-def main(request):
-    tpl = templates.simple(
-        request,
-        window_title="User settings",
-        title="User settings",
-        navbar_centertext="User settings",
-    )
-
-    return HttpResponse(tpl)
+class UserSettingsHome(TemplateView):
+    template_name = "www/user_settings_home.html"
+    title_ = "User Settings"
+    extra_context = {"window_title": title_, "page_title": title_, "navbar_centertext": title_}

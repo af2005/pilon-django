@@ -9,9 +9,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="calendarrelation",
             name="distinction",
-            field=models.CharField(
-                default="", max_length=20, verbose_name="distinction"
-            ),
+            field=models.CharField(default="", max_length=20, verbose_name="distinction"),
             preserve_default=False,
         ),
         migrations.AlterField(
@@ -31,9 +29,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="eventrelation",
             name="distinction",
-            field=models.CharField(
-                default="", max_length=20, verbose_name="distinction"
-            ),
+            field=models.CharField(default="", max_length=20, verbose_name="distinction"),
             preserve_default=False,
         ),
         migrations.AlterField(
@@ -45,9 +41,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="occurrence",
             name="title",
-            field=models.CharField(
-                blank=True, default="", max_length=255, verbose_name="title"
-            ),
+            field=models.CharField(blank=True, default="", max_length=255, verbose_name="title"),
             preserve_default=False,
         ),
         migrations.AlterField(

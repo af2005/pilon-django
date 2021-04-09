@@ -1,16 +1,18 @@
-from . import views
 from django.urls import path
+from .views import DashboardAllUpdates, DashboardLastWorkedOn, DashboardView
+
+app_name = "dashboard"
 
 urlpatterns = [
-    path("", views.dashboard, name="View Dashboard"),
+    path("", DashboardView.as_view(), name="home"),
     path(
         "dashboard/all-updates/",
-        views.all_updates_board,
-        name="All updates board",
+        DashboardAllUpdates.as_view(),
+        name="all-updates",
     ),
     path(
         "dashboard/last-worked-on/",
-        views.recently_worked_on_board,
-        name="Last worked on board",
+        DashboardLastWorkedOn.as_view(),
+        name="last-worked-on",
     ),
 ]

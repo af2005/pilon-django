@@ -1,10 +1,19 @@
-{% extends "www/base+sidebar+title.html" %}
+{% extends "www/base/base+sidebar+title.html" %}
 {% block sidebar_title %}
 <strong>{{ project.name }}</strong>
 {% endblock sidebar_title %}
 
+{% block navigation %}
+    {% with navbar_centertext=project.name %}
+        {% include 'www/snippets/project/navigation-create-button.html' %}
+    {% endwith %}
+{% endblock %}
+
+{% block sidebar %}
+    {% with sidebar_items=project.sidebar_items %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
 
 {% block content %}
-
-
 {% endblock %}

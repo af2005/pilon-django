@@ -137,9 +137,7 @@ class OccurrenceMixin(CalendarViewPermissionMixin, TemplateResponseMixin):
     form_class = OccurrenceForm
 
 
-class OccurrenceEditMixin(
-    CancelButtonMixin, OccurrenceEditPermissionMixin, OccurrenceMixin
-):
+class OccurrenceEditMixin(CancelButtonMixin, OccurrenceEditPermissionMixin, OccurrenceMixin):
     def get_initial(self):
         initial_data = super().get_initial()
         _, self.object = get_occurrence(**self.kwargs)
@@ -172,9 +170,7 @@ class CancelOccurrenceView(OccurrenceEditMixin, ModelFormMixin, ProcessFormView)
 
     def post(self, request, *args, **kwargs):
         event, occurrence = get_occurrence(**kwargs)
-        self.success_url = kwargs.get(
-            "next", get_next_url(request, event.get_absolute_url())
-        )
+        self.success_url = kwargs.get("next", get_next_url(request, event.get_absolute_url()))
         if "cancel" not in request.POST:
             occurrence.cancel()
         return HttpResponseRedirect(self.success_url)
@@ -200,12 +196,8 @@ class EditEventView(EventEditMixin, UpdateView):
     def form_valid(self, form):
         event = form.save(commit=False)
         old_event = Event.objects.get(pk=event.pk)
-        dts = datetime.timedelta(
-            minutes=int((event.start - old_event.start).total_seconds() / 60)
-        )
-        dte = datetime.timedelta(
-            minutes=int((event.end - old_event.end).total_seconds() / 60)
-        )
+        dts = datetime.timedelta(minutes=int((event.start - old_event.start).total_seconds() / 60))
+        dte = datetime.timedelta(minutes=int((event.end - old_event.end).total_seconds() / 60))
         event.occurrence_set.all().update(
             original_start=F("original_start") + dts,
             original_end=F("original_end") + dte,
@@ -259,9 +251,7 @@ class DeleteEventView(EventEditMixin, DeleteView):
         # Lastly redirect to the event detail of the recently create event
         """
         url_val = "fullcalendar" if USE_FULLCALENDAR else "day_calendar"
-        next_url = self.kwargs.get("next") or reverse(
-            url_val, args=[self.object.calendar.slug]
-        )
+        next_url = self.kwargs.get("next") or reverse(url_val, args=[self.object.calendar.slug])
         next_url = get_next_url(self.request, next_url)
         return next_url
 
@@ -290,9 +280,7 @@ def get_occurrence(
     elif None not in (year, month, day, hour, minute, second):
         event = get_object_or_404(Event, id=event_id)
         date = timezone.make_aware(
-            datetime.datetime(
-                int(year), int(month), int(day), int(hour), int(minute), int(second)
-            ),
+            datetime.datetime(int(year), int(month), int(day), int(hour), int(minute), int(second)),
             tzinfo,
         )
         occurrence = event.get_occurrence(date)
@@ -318,9 +306,7 @@ def get_next_url(request, default):
     if OCCURRENCE_CANCEL_REDIRECT:
         next_url = OCCURRENCE_CANCEL_REDIRECT
     _next_url = (
-        request.GET.get("next")
-        if request.method in ["GET", "HEAD"]
-        else request.POST.get("next")
+        request.GET.get("next") if request.method in ["GET", "HEAD"] else request.POST.get("next")
     )
     if _next_url and is_safe_url(url=_next_url, host=request.get_host()):
         next_url = _next_url
@@ -456,12 +442,8 @@ def api_edit_event(request):
         "end": request.POST.get("old_event_end"),
     }
 
-    start_delta = dateutil.parser.parse(event["start"]) - dateutil.parser.parse(
-        old_event["start"]
-    )
-    end_delta = dateutil.parser.parse(event["end"]) - dateutil.parser.parse(
-        old_event["end"]
-    )
+    start_delta = dateutil.parser.parse(event["start"]) - dateutil.parser.parse(old_event["start"])
+    end_delta = dateutil.parser.parse(event["end"]) - dateutil.parser.parse(old_event["end"])
 
     response = _api_edit_event(
         user=user,

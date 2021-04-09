@@ -1,12 +1,15 @@
 from django.urls import path
-from . import views
+from .views import JournalPageCreate, JournalHomepage, JournalPageDetail
 
 urlpatterns = [
-    path("create", views.content_create, name="create-journal-page"),
+    path("", JournalHomepage.as_view(), name="journal"),
+    path("create/", JournalPageCreate.as_view(), name="journal-page-create"),
     path(
         "create-from-file/",
-        views.content_create,
-        name="create-journal-page-from-file",
+        JournalPageCreate.as_view(),
+        name="journal-page-create-from-file",
     ),
-    path("", views.homepage, name="journal"),
+    path(
+        "view/<slug:pk>", JournalPageDetail.as_view(), name="journal-page-detail"
+    ),  # this must be the last url
 ]

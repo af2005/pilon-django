@@ -21,12 +21,10 @@ class TestLabel:
         assert label["name"] == "label1"
 
     def test_post_label(self):
-        response = self.client.post(
-            "/rest/label/", data={"name": "label1"}, format="json"
-        )
+        response = self.client.post("/rest/label/", data={"name": "label1"}, format="json")
         assert response.status_code == 201
 
-    # TODO: Fix with issue #84
+    # TODO:20 Fix with issue #84
     @pytest.mark.xfail(reason="needs fixing")
     def test_post_label_with_entity(self):
         entity = self.client.get("/rest/entity/").data[0]

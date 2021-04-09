@@ -17,6 +17,4 @@ class Migration(migrations.Migration):
 
     dependencies = [("schedule", "0009_merge_20180108_2303")]
 
-    operations = [
-        migrations.RunPython(forwards, migrations.RunPython.noop, elidable=True)
-    ]
+    operations = [migrations.RunPython(forwards, migrations.RunPython.noop, elidable=True)]

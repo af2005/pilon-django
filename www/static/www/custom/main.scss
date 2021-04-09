@@ -204,6 +204,15 @@ a.bg-secondary:hover {
   vertical-align: baseline;
 }
 
+a.disabled {
+  color: $gray !important;
+  pointer-events: none !important;
+  text-decoration: none!important;
+}
+a.disabled:hover{
+    text-decoration: none!important;
+}
+
 
 
 .text-white-50 {

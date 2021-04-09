@@ -34,12 +34,8 @@ class EventListManager:
 
         if after is None:
             after = timezone.now()
-        occ_replacer = OccurrenceReplacer(
-            Occurrence.objects.filter(event__in=self.events)
-        )
-        generators = [
-            event._occurrences_after_generator(after) for event in self.events
-        ]
+        occ_replacer = OccurrenceReplacer(Occurrence.objects.filter(event__in=self.events))
+        generators = [event._occurrences_after_generator(after) for event in self.events]
         occurrences = []
 
         for generator in generators:
@@ -52,9 +48,7 @@ class EventListManager:
             generator = occurrences[0][1]
 
             try:
-                next_occurrence = heapq.heapreplace(
-                    occurrences, (next(generator), generator)
-                )[0]
+                next_occurrence = heapq.heapreplace(occurrences, (next(generator), generator))[0]
             except StopIteration:
                 next_occurrence = heapq.heappop(occurrences)[0]
             yield occ_replacer.get_occurrence(next_occurrence)
@@ -80,9 +74,7 @@ class OccurrenceReplacer:
         Return a persisted occurrences matching the occ and remove it from lookup since it
         has already been matched
         """
-        return self.lookup.pop(
-            (occ.event.id, occ.original_start, occ.original_end), occ
-        )
+        return self.lookup.pop((occ.event.id, occ.original_start, occ.original_end), occ)
 
     def has_occurrence(self, occ):
         try:
@@ -122,9 +114,7 @@ def get_occurrence(request, **kwargs):
     from schedule.models import Occurrence
 
     occurrence_id = get_kwarg_or_param(request, kwargs, "occurrence_id")
-    return (
-        Occurrence.objects.filter(pk=occurrence_id).first() if occurrence_id else None
-    )
+    return Occurrence.objects.filter(pk=occurrence_id).first() if occurrence_id else None
 
 
 def get_event(occurrence, request, **kwargs):
@@ -146,11 +136,7 @@ def get_calendar(event, request, **kwargs):
         calendar = event.calendar
     else:
         calendar_slug = get_kwarg_or_param(request, kwargs, "calendar_slug")
-        calendar = (
-            Calendar.objects.filter(slug=calendar_slug).first()
-            if calendar_slug
-            else None
-        )
+        calendar = Calendar.objects.filter(slug=calendar_slug).first() if calendar_slug else None
     return calendar
 
 

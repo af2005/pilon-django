@@ -75,9 +75,7 @@ def title(context, occurrence):
 
 @register.inclusion_tag("schedule/_event_options.html", takes_context=True)
 def options(context, occurrence):
-    context.update(
-        {"occurrence": occurrence, "MEDIA_URL": getattr(settings, "MEDIA_URL")}
-    )
+    context.update({"occurrence": occurrence, "MEDIA_URL": getattr(settings, "MEDIA_URL")})
     context["view_occurrence"] = occurrence.get_absolute_url()
     user = context["request"].user
     if CHECK_EVENT_PERM_FUNC(occurrence.event, user) and CHECK_CALENDAR_PERM_FUNC(

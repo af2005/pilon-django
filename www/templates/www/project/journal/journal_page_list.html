@@ -1,0 +1,31 @@
+{% extends "www/project/journal/journal_base.html" %}
+{% load static %}
+
+
+
+{% block window_title %}
+    {% with window_title=project.name|add:" - Journal" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+
+{% block title %}
+    {% with page_title="Journal" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+
+
+
+{% block content %}
+    {% for object in object_list %}
+        <hr>
+        <div class="font-weight-bold">{{ object.name}}</div>
+        <div><span class="font-weight-bold">UUID</span>: {{ object.id }}</div>
+        <div><span class="font-weight-bold">Date</span>: {{ object.date }}</div>
+        <div>{{ object.markdown_rendered | safe }}</div>
+    {% endfor %}
+
+{% endblock %}
