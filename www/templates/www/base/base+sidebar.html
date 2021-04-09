@@ -1,6 +1,11 @@
 {% extends 'www/base/base.html' %}
 {% load static %}
 
+{% block jquery_scripts %}
+    {{ block.super }}
+    <script type="application/javascript" src="{% static "www/custom/sidebar.js" %}"></script>
+{% endblock %}
+
 {% block sidebar %}
     <link rel="stylesheet" type="text/css" href="{% static "www/custom/sidebar.css" %}">
     <div id="sidebar-wrapper" class="bg-light border-end">
@@ -15,10 +20,7 @@
                 </button>
             </div>
 
-            {% block jquery_scripts %}
-                {{ block.super }}
-                <script type="application/javascript" src="{% static "www/custom/sidebar.js" %}"></script>
-            {% endblock %}
+
 
             {% for listitem in sidebar_items %}
                 <li>
