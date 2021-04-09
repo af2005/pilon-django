@@ -8,40 +8,38 @@
 {% endblock %}
 
 
+
 {% block content %}
+    {% url "project:wiki-page-create" project.key as wiki_create_url %}
+    {% url "project:wiki-page-create-from-file" project.key as wiki_file_create_url %}
+    {% url "project:journal-page-create" project.key as journal_create_url %}
+    {% url "project:journal-page-create-from-file" project.key as journal_file_create_url %}
+    {% url "project:task-create" project.key as task_create_url %}
 
     <div class="row">
-        <div class="col-md-5">
-            <div class="card shadow-sm text-align-center">
-                <span class="card-img-top"><i class="bi bi-file-text"></i></span>
-                <div class="card-body">
-                    <h5 class="card-title">Wiki Page</h5>
-                    <p class="card-text">Store information in the project wiki.</p>
-                    <a href="{% url "project:wiki-page-create" project.key %}" class="btn btn-primary">Create Wiki page</a>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="{% url "project:wiki-page-create-from-file" project.key %}" class="card-link">Create from file...</a>
-                    </li>
-                </ul>
-            </div>
+        {% with icon="file-text" title="Wiki Page" %}
+            {% with text="Store information in the project wiki." link=wiki_create_url link_text="Create Wiki Page" %}
+                {% with secondary_link=wiki_file_create_url secondary_link_text="Create from file..." %}
+                    {% include "www/snippets/cards/create_entity_with_secondary_link.html" %}
+                {% endwith %}
+            {% endwith %}
+        {% endwith %}
 
-        </div>
+        {% with icon="journal" title="Journal Page" %}
+            {% with text="Create a new page in the journal." link=journal_create_url link_text="Create Journal Page" %}
+                {% with secondary_link=journal_file_create_url secondary_link_text="Create from file..." %}
+                    {% include "www/snippets/cards/create_entity_with_secondary_link.html" %}
+                {% endwith %}
+            {% endwith %}
+        {% endwith %}
 
-      <div class="col-md-5">
-            <div class="card shadow-sm text-align-center">
-                <span class="card-img-top"><i class="bi bi-journals"></i></span>
-                <div class="card-body">
-                    <h5 class="card-title">Journal Page</h5>
-                    <p class="card-text">Create a new page in the journal.</p>
-                    <a href="{% url "project:journal-page-create" project.key %}" class="btn btn-primary">Create Journal page</a>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="{% url "project:journal-page-create" project.key %}" class="card-link">Create from file...</a>
-                    </li>
-                </ul>
-            </div>
+        {% with icon="check2-circle" title="Task" %}
+            {% with text="Organize your work." link=task_create_url link_text="Create Task" %}
+                {% include "www/snippets/cards/create_entity.html" %}
+            {% endwith %}
+        {% endwith %}
 
-        </div>
+
     </div>
 
 
