@@ -59,16 +59,15 @@
                 <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Publish</button>
             </div>
         </form>
-        <script type="application/javascript">
-            const markdownForm = document.getElementById("markdown-form");
-            markdownForm.addEventListener("submit", function (e) {
-                e.preventDefault();
-                editor.changeMode("wysiwyg");
-                markdownForm.markdown.value = editor.getMarkdown();
-                markdownForm.submit();
-            })
-            editor.setMarkdown("{{ object.markdown|escapejs }}", cursorToEnd = false);
-        </script>
+
     </div>
 
+{% endblock %}
+
+{% block jquery_scripts %}
+{{ block.super }}
+    <script type="application/javascript" src="{% static "www/custom/markdownForm.js" %}"></script>
+    <script type="application/javascript">
+            editor.setMarkdown("{{ object.markdown|escapejs }}", cursorToEnd = false);
+    </script>
 {% endblock %}
