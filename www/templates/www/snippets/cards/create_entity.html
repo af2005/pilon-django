@@ -1,0 +1,11 @@
+<div class="col-md-5 mb-4">
+    <div class="card shadow-sm text-align-center">
+        <span class="card-img-top"><i class="bi bi-{{ icon }}"></i></span>
+        <div class="card-body">
+            <h5 class="card-title">{{ title }}</h5>
+            <p class="card-text">{{ text }}</p>
+            <a href="{{ link }}" class="btn btn-primary">{{ link_text }}</a>
+        </div>
+        {% block sublink %}{% endblock %}
+    </div>
+</div>
