@@ -15,12 +15,36 @@
                 </button>
             </div>
             <script type="application/javascript">
-                document.getElementById("sidebar-collapse-toggle").addEventListener('click', function () {
-                    document.getElementById("sidebar-wrapper").classList.toggle("sidebar-collapsed");
-                    const icon = document.getElementById("sidebar-collapse-toggle").getElementsByTagName("i")[0]
-                    icon.classList.toggle("bi-chevron-double-left");
-                    icon.classList.toggle("bi-chevron-double-right");
-                }, false);
+                const sidebar = function () {
+                    function toggleCollapsedState() {
+
+                    }
+
+                    function extend() {
+
+                    }
+
+                    function collapse() {
+
+                    }
+
+                    function initToggleButton() {
+                        document.getElementById("sidebar-collapse-toggle").addEventListener('click', function () {
+                            document.getElementById("sidebar-wrapper").classList.toggle("sidebar-collapsed");
+                            const icon = document.getElementById("sidebar-collapse-toggle").getElementsByTagName("i")[0]
+                            icon.classList.toggle("bi-chevron-double-left");
+                            icon.classList.toggle("bi-chevron-double-right");
+                        }, false);
+                    }
+
+                    return {
+                        toggleCollapsedState: toggleCollapsedState,
+                        extend: extend,
+                        collapse: collapse,
+                        initToggleButton: initToggleButton
+                    }
+                }();
+                sidebar.initToggleButton()
 
             </script>
 
