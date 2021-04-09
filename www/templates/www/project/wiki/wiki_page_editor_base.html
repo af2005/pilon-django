@@ -21,29 +21,6 @@
                 {% include "www/snippets/project/page_tree_for_editor_base.html" %}
             {% endwith %}
 
-            <button class="badge btn text-dark" data-bs-toggle="modal" data-bs-target="#edit-labels-modal">Edit
-                labels...
-            </button>
-
-            <div class="modal fade" id="edit-labels-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit labels</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            .
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
             <div class="input-group input-group-lg my-3">
@@ -51,12 +28,13 @@
                 <input name="name" value="{{ object.name }}" type="text" class="form-control" aria-label="Page name"
                        aria-describedby="page-name">
             </div>
+            {% include "www/snippets/modals/edit_labels.html" %}
             {% include 'www/snippets/editor.html' %}
             <div class="py-3 d-flex justify-content-end">
-                <a href="{% url "project:homepage" project.key %}">
+                <a href="{% url "project:wiki" project.key %}">
                     <button type="reset" class="btn btn-link">Cancel</button>
                 </a>
-                <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Publish</button>
+                {% include "www/snippets/forms/publish-button.html" %}
             </div>
         </form>
 
