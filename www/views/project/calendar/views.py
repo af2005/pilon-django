@@ -3,7 +3,9 @@ from ..views import ProjectContext
 
 
 class CalendarBase(ProjectContext):
-    pass
+    extra_context = {
+        "window_title": "Calendar"
+    }
 
 
 class CalendarHome(CalendarBase, TemplateView):

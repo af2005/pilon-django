@@ -3,7 +3,12 @@ from ..views import ProjectContext
 
 
 class ChatBase(ProjectContext):
-    pass
+    title_ = "Chat"
+    extra_context = {
+        "window_title": title_,
+        "active_sidebar_item": title_,
+        "page_title": title_
+    }
 
 
 class ChatDetail(ChatBase, TemplateView):

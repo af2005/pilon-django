@@ -11,6 +11,11 @@ class InventoryBase(ProjectContext):
 class InventoryList(InventoryBase, ListView):
     template_name = "www/project/inventory/inventory_list.html"
     context_object_name = "inventory"
+    extra_context = {
+        "active_sidebar_item": "Inventory",
+        "page_title": "Inventory",
+        "window_title": "Inventory"
+    }
 
 
 class InventoryHomepage(InventoryList):
