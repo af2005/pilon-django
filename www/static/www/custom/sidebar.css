@@ -7,11 +7,12 @@
 #wrapper {
     display: grid;
     overflow: hidden;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: fit-content(30%) 1fr;
 
 }
 #sidebar-wrapper{
     overflow-y: auto;
+    resize: horizontal;
 }
 
 .btn-stealth{
