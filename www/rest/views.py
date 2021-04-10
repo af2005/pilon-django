@@ -28,6 +28,14 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by("-date_joined")
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = (
+        "id",
+        "username",
+        "email",
+        "groups",
+        "tasks",
+        "created_entities",
+    )
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -38,6 +46,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ("id", "name")
 
 
 class LabelViewSet(viewsets.ModelViewSet):
@@ -47,6 +56,7 @@ class LabelViewSet(viewsets.ModelViewSet):
 
     queryset = Label.objects.all()
     serializer_class = LabelSerializer
+    filterset_fields = ["name", "slug", "entities"]
 
 
 # TODO:10 add permission
