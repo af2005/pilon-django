@@ -54,10 +54,17 @@ class EntityViewSet(viewsets.ModelViewSet):
     model = Entity
     queryset = model.objects.all()
     serializer_class = EntityPolymorphicSerializer
-    filterset_fields = ("name", "date_modified")
-
-    # def get_queryset(self):
-    #     return self.model.objects.all()
+    filterset_fields = (
+        "id",
+        "name",
+        "parent",
+        "date_created",
+        "date_modified",
+        "creator",
+        "children",
+        "labels",
+    )
+    # search_fields = ("id", "name", "date_modified")
 
     # inspired by: https://www.valentinog.com/blog/drf-request/
     def get_serializer(self, *args, **kwargs):
@@ -84,11 +91,13 @@ class EntityViewSet(viewsets.ModelViewSet):
 class ProjectViewSet(EntityViewSet):
     model = Project
     queryset = model.objects.all()
+    filterset_fields = ("key", "color") + EntityViewSet.filterset_fields
 
 
 class MarkdownEntityViewSet(EntityViewSet):
     model = MarkdownEntity
     queryset = model.objects.all()
+    filterset_fields = ("markdown", "markdown_rendered") + EntityViewSet.filterset_fields
 
 
 class WikiPageViewSet(EntityViewSet):
@@ -99,11 +108,14 @@ class WikiPageViewSet(EntityViewSet):
 class JournalPageViewSet(EntityViewSet):
     model = JournalPage
     queryset = model.objects.all()
+    filterset_fields = ("date",) + MarkdownEntityViewSet.filterset_fields
+    ordering = ("date",)
 
 
 class TaskViewSet(EntityViewSet):
     model = Task
     queryset = model.objects.all()
+    filterset_fields = ("due_date", "assignee") + MarkdownEntityViewSet.filterset_fields
 
 
 class CommentViewSet(EntityViewSet):
@@ -114,3 +126,4 @@ class CommentViewSet(EntityViewSet):
 class AttachmentViewSet(EntityViewSet):
     model = Attachment
     queryset = model.objects.all()
+    filterset_fields = ("file_name", "file_type", "file_path") + EntityViewSet.filterset_fields
