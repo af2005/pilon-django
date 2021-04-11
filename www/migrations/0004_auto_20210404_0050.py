@@ -5,7 +5,7 @@ import django.db.models.deletion
 import markdownfield.models
 import shortuuid.main
 import shortuuidfield.fields
-import www.models
+import www.models.entity
 
 
 class Migration(migrations.Migration):
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="entity",
             name="parent",
-            field=www.models.ShortUUIDPolymorphicTreeForeignKey(
+            field=www.models.models.ShortUUIDPolymorphicTreeForeignKey(
                 blank=True,
                 null=True,
                 on_delete=django.db.models.deletion.CASCADE,

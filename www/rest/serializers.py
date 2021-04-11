@@ -1,7 +1,5 @@
 from rest_framework import serializers
-from ..models import (
-    User,
-    Group,
+from www.models.models import (
     Entity,
     Project,
     MarkdownEntity,
@@ -12,6 +10,7 @@ from ..models import (
     Attachment,
     Label,
 )
+from www.models.user import User, Group
 from rest_polymorphic.serializers import PolymorphicSerializer
 from django.urls import reverse
 

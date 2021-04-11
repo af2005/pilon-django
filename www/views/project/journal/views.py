@@ -1,4 +1,4 @@
-from www.models import JournalPage
+from www.models.models import JournalPage
 from ..views import ProjectContext
 from django.views.generic import DetailView, ListView, CreateView
 

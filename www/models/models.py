@@ -1,14 +1,8 @@
-import shortuuid
-
 from django.db import models
-import django.contrib.auth.models as auth_models
 import inflection
-from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
-from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
-from shortuuidfield import ShortUUIDField
 from polymorphic_tree.models import (
     PolymorphicMPTTModel,
     PolymorphicTreeForeignKey,
@@ -21,32 +15,8 @@ from colorfield.fields import ColorField
 
 import reversion
 
-
-class RandomUUIDMixin(models.Model):
-    id = ShortUUIDField(primary_key=True, default=shortuuid.uuid)
-
-    class Meta:
-        abstract = True
-
-
-class SluggedNameMixin(models.Model):
-    name = models.CharField(max_length=255)
-    slug = models.SlugField(editable=False)
-
-    class Meta:
-        abstract = True
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
-
-class User(auth_models.AbstractUser, RandomUUIDMixin):
-    pass
-
-
-class Group(auth_models.Group, RandomUUIDMixin):
-    pass
+from www.models.mixins import SluggedNameMixin, RandomUUIDMixin
+from www.models.user import User
 
 
 class ShortUUIDPolymorphicTreeForeignKey(PolymorphicTreeForeignKey):

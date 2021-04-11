@@ -5,7 +5,7 @@ from polymorphic_tree.admin import (
 )
 from reversion_compare.admin import CompareVersionAdmin
 
-from .models import (
+from www.models.models import (
     Entity,
     Project,
     MarkdownEntity,
