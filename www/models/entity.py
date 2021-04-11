@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_STANDARD
 from polymorphic_tree.models import PolymorphicTreeForeignKey, _get_base_polymorphic_model, PolymorphicMPTTModel
+from dataclasses import dataclass, field
 
 from www.models.mixins import RandomUUIDMixin, SluggedNameMixin
 from www.models.user import User
@@ -18,6 +19,30 @@ class ShortUUIDPolymorphicTreeForeignKey(PolymorphicTreeForeignKey):
         base_model = _get_base_polymorphic_model(model_instance.__class__)
         parent = base_model.objects.get(pk=parent)
         super()._validate_parent(parent, model_instance)
+
+
+@dataclass
+class SidebarItem:
+    name: str
+    icon: str
+    url: str
+    _url: str = field(init=False, repr=False, default=None)
+
+    @property
+    def url(self):
+        if not self._url:
+            return f"project:{self.name.lower()}"
+        return self._url
+
+    @url.setter
+    def url(self, url):
+        self._url = url
+
+
+SIDEBAR_ITEMS = [
+    SidebarItem(name="Home", icon="house-fill"),
+]
+
 
 
 @reversion.register()
