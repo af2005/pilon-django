@@ -1,5 +1,5 @@
 from django.views.generic import UpdateView, DetailView, ListView, CreateView
-from www.models.models import WikiPage
+from www.models.entity import WikiPage
 from ..views import ProjectContext
 
 

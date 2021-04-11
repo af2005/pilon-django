@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="entity",
             name="parent",
-            field=www.models.models.ShortUUIDPolymorphicTreeForeignKey(
+            field=www.models.entity.ShortUUIDPolymorphicTreeForeignKey(
                 blank=True,
                 null=True,
                 on_delete=django.db.models.deletion.CASCADE,

@@ -1,6 +1,6 @@
 from django.db import transaction
 from django.core.management import call_command
-from www.models.models import Project, WikiPage, JournalPage, Comment, Entity
+from www.models.entity import Entity, Project, WikiPage, JournalPage, Comment
 from www.models.user import User, Group
 from schedule.models import Calendar, Event, Rule
 import datetime

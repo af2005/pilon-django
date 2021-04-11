@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from www.models.models import (
+from www.models.entity import (
     Entity,
     Project,
     MarkdownEntity,

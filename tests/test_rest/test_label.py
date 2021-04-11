@@ -1,7 +1,7 @@
 from rest_framework.test import APIClient
 import pytest
 
-from www.models.models import Label
+from www.models.entity import Label
 
 
 @pytest.mark.django_db

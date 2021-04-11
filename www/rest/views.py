@@ -1,15 +1,5 @@
 from rest_framework import viewsets, permissions
-from www.models.models import (
-    Entity,
-    Project,
-    MarkdownEntity,
-    WikiPage,
-    JournalPage,
-    Task,
-    Comment,
-    Attachment,
-    Label,
-)
+from ..models.entity import Entity, Label, Project, MarkdownEntity, WikiPage, JournalPage, Task, Comment, Attachment
 from ..models.user import User, Group
 from .serializers import (
     EntityPolymorphicSerializer,

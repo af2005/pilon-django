@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from www.models.models import Entity
+from www.models.entity import Entity
 from www.models.user import User
 import reversion
 from reversion.models import Version
