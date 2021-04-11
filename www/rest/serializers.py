@@ -8,8 +8,8 @@ from www.models.entity import (
     Task,
     Comment,
     Attachment,
-    Label,
 )
+from www.models.label import Label
 from www.models.user import User, Group
 from rest_polymorphic.serializers import PolymorphicSerializer
 from django.urls import reverse

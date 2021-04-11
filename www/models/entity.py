@@ -64,12 +64,6 @@ class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
         return self.get_descendants().instance_of(Comment)
 
 
-@reversion.register()
-class Label(RandomUUIDMixin, SluggedNameMixin):
-    name = models.CharField(unique=True, max_length=50)
-    entities = models.ManyToManyField(Entity, related_name="labels")
-
-
 @reversion.register(follow=["entity_ptr"])
 class Project(Entity):
     can_be_root = True
