@@ -86,7 +86,6 @@ class EntityViewSet(viewsets.ModelViewSet):
         """
         serializer_class = self.get_serializer_class()
         kwargs.setdefault("context", self.get_serializer_context())
-
         # Copy and manipulate the request
         if self.request.method != "GET":
             draft_request_data = self.request.data.copy()
@@ -95,6 +94,8 @@ class EntityViewSet(viewsets.ModelViewSet):
                 kwargs["data"] = draft_request_data
                 serializer = serializer_class(*args, **kwargs)
                 serializer.is_valid()
+                # print("saving object")
+                # print(f"model name: {self.model.__name__}")
                 serializer.save()
                 return serializer
         return serializer_class(*args, **kwargs)
@@ -116,7 +117,7 @@ class MarkdownEntityViewSet(EntityViewSet):
     }
 
 
-class WikiPageViewSet(MarkdownEntityViewSet):
+class WikiPageViewSet(EntityViewSet):
     model = WikiPage
     queryset = model.objects.all()
 
@@ -129,7 +130,7 @@ class JournalPageViewSet(EntityViewSet):
     ordering = ("date",)
 
 
-class TaskViewSet(MarkdownEntityViewSet):
+class TaskViewSet(EntityViewSet):
     model = Task
     queryset = model.objects.all()
     filterset_fields = {
@@ -139,7 +140,7 @@ class TaskViewSet(MarkdownEntityViewSet):
     }
 
 
-class CommentViewSet(MarkdownEntityViewSet):
+class CommentViewSet(EntityViewSet):
     model = Comment
     queryset = model.objects.all()
 
