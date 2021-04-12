@@ -1,5 +1,14 @@
 from rest_framework import viewsets, permissions
-from ..models.entity import Entity, Project, MarkdownEntity, WikiPage, JournalPage, Task, Comment, Attachment
+from ..models.entity import (
+    Entity,
+    Project,
+    MarkdownEntity,
+    WikiPage,
+    JournalPage,
+    Task,
+    Comment,
+    Attachment,
+)
 from ..models.label import Label
 from ..models.user import User, Group
 from .serializers import (
@@ -8,6 +17,8 @@ from .serializers import (
     GroupSerializer,
     LabelSerializer,
 )
+
+DATETIME_FIELD_LOOKUPS = ["exact", "date", "date__range"]
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -54,17 +65,16 @@ class EntityViewSet(viewsets.ModelViewSet):
     model = Entity
     queryset = model.objects.all()
     serializer_class = EntityPolymorphicSerializer
-    filterset_fields = (
-        "id",
-        "name",
-        "parent",
-        "date_created",
-        "date_modified",
-        "creator",
-        "children",
-        "labels",
-    )
-    filterset_fields = {field: ["exact"] for field in filterset_fields}
+    filterset_fields = {
+        "id": ["exact"],
+        "name": ["exact"],
+        "parent": ["exact"],
+        "date_created": DATETIME_FIELD_LOOKUPS,
+        "date_modified": DATETIME_FIELD_LOOKUPS,
+        "creator": ["exact"],
+        "children": ["exact"],
+        "labels": ["exact"],
+    }
     # search_fields = ("id", "name", "date_modified")
 
     # inspired by: https://www.valentinog.com/blog/drf-request/
@@ -92,24 +102,16 @@ class EntityViewSet(viewsets.ModelViewSet):
 class ProjectViewSet(EntityViewSet):
     model = Project
     queryset = model.objects.all()
-    # filterset_fields = ("key", "color") + EntityViewSet.filterset_fields
-    filterset_fields = {
-        "key": ["exact"],
-        "color": ["exact"],
-        **EntityViewSet.filterset_fields
-    }
-
-
+    filterset_fields = {"key": ["exact"], "color": ["exact"], **EntityViewSet.filterset_fields}
 
 
 class MarkdownEntityViewSet(EntityViewSet):
     model = MarkdownEntity
     queryset = model.objects.all()
-    # filterset_fields = ("markdown", "markdown_rendered") + EntityViewSet.filterset_fields
     filterset_fields = {
         "markdown": ["exact"],
-        "markdown_rednered": ["exact"],
-        **EntityViewSet.filterset_fields
+        "markdown_rendered": ["exact"],
+        **EntityViewSet.filterset_fields,
     }
 
 
@@ -121,19 +123,14 @@ class WikiPageViewSet(EntityViewSet):
 class JournalPageViewSet(EntityViewSet):
     model = JournalPage
     queryset = model.objects.all()
-    # filterset_fields = ("date",) + MarkdownEntityViewSet.filterset_fields
     # https://docs.djangoproject.com/en/3.2/ref/models/querysets/#field-lookups
-    filterset_fields = {
-        "date": ["exact", "date__range", "month"],
-        **EntityViewSet.filterset_fields
-    }
+    filterset_fields = {"date": DATETIME_FIELD_LOOKUPS, **EntityViewSet.filterset_fields}
     ordering = ("date",)
 
 
 class TaskViewSet(EntityViewSet):
     model = Task
     queryset = model.objects.all()
-    # filterset_fields = ("due_date", "assignee") + MarkdownEntityViewSet.filterset_fields
 
 
 class CommentViewSet(EntityViewSet):
@@ -144,4 +141,3 @@ class CommentViewSet(EntityViewSet):
 class AttachmentViewSet(EntityViewSet):
     model = Attachment
     queryset = model.objects.all()
-    # filterset_fields = ("file_name", "file_type", "file_path") + EntityViewSet.filterset_fields
