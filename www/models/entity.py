@@ -7,7 +7,11 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_STANDARD
-from polymorphic_tree.models import PolymorphicTreeForeignKey, _get_base_polymorphic_model, PolymorphicMPTTModel
+from polymorphic_tree.models import (
+    PolymorphicTreeForeignKey,
+    _get_base_polymorphic_model,
+    PolymorphicMPTTModel,
+)
 from dataclasses import dataclass, field
 
 from www.models.mixins import RandomUUIDMixin, SluggedNameMixin
@@ -44,9 +48,8 @@ SIDEBAR_ITEMS = [
 ]
 
 
-
 @reversion.register()
-class Entity(PolymorphicMPTTModel, RandomUUIDMixin, SluggedNameMixin):
+class Entity(PolymorphicMPTTModel, SluggedNameMixin, RandomUUIDMixin):
     #: Whether the node type allows to have children.
     can_have_children = True
 
