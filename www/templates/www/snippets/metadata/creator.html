@@ -1,16 +1,8 @@
-{% load static %}
-<img class="user-avatar user-avatar-small" src="
-{% if object.creator.avatar.url %}
-{{ object.creator.avatar.url }}
-{% else %}
-{% static "www/pilon-icons/avatardefault.min.svg" %}
-{% endif %}
-">
 by
-{% if object.creator.first_name and object.creator.last_name %}
-    {{ object.creator.first_name }} {{ object.creator.last_name }}
-{% elif object.creator.username %}
-    {{ object.creator.username }}
+{% if user.first_name and user.last_name %}
+    {{ user.first_name }} {{ user.last_name }}
+{% elif user.username %}
+    {{ user.username }}
 {% else %}
     unknown
 {% endif %}
