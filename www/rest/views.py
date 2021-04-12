@@ -87,17 +87,16 @@ class EntityViewSet(viewsets.ModelViewSet):
         serializer_class = self.get_serializer_class()
         kwargs.setdefault("context", self.get_serializer_context())
         # Copy and manipulate the request
-        if self.request.method != "GET":
+        if self.request.method != "GET" and kwargs.get("data"):
             draft_request_data = self.request.data.copy()
-            if draft_request_data:
-                draft_request_data["entity_type"] = self.model.__name__
-                kwargs["data"] = draft_request_data
-                serializer = serializer_class(*args, **kwargs)
-                serializer.is_valid()
-                # print("saving object")
-                # print(f"model name: {self.model.__name__}")
-                serializer.save()
-                return serializer
+            draft_request_data["entity_type"] = self.model.__name__
+            kwargs["data"] = draft_request_data
+            serializer = serializer_class(*args, **kwargs)
+            # serializer.is_valid()
+            # print("saving object")
+            # print(f"model name: {self.model.__name__}")
+            # serializer.save()
+            return serializer
         return serializer_class(*args, **kwargs)
 
 
