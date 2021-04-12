@@ -3,11 +3,11 @@
 
 {% block jquery_scripts %}
     {{ block.super }}
-    <script type="application/javascript" src="{% static "www/custom/sidebar.js" %}"></script>
+    <script type="application/javascript" src="{% static "www/custom/www/sidebar/sidebar.js" %}"></script>
 {% endblock %}
 
 {% block sidebar %}
-    <link rel="stylesheet" type="text/css" href="{% static "www/custom/sidebar.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "www/sidebar/sidebar.css" %}">
     <div id="sidebar-wrapper" class="bg-light border-end {% if sidebar_collapsed %}sidebar-collapsed{% endif %}">
         <ul class="sidebar-nav">
             <div id="sidebar-upper-content-header" class="d-grid align-content-center my-4">

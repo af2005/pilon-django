@@ -1,4 +1,12 @@
-<i class="bi bi-person"></i>
+{% load static %}
+<img class="user-avatar user-avatar-small" src="
+{% if object.creator.avatar.url %}
+{{ object.creator.avatar.url }}
+{% else %}
+{% static "www/pilon-icons/avatardefault.min.svg" %}
+{% endif %}
+">
+by
 {% if object.creator.first_name and object.creator.last_name %}
     {{ object.creator.first_name }} {{ object.creator.last_name }}
 {% elif object.creator.username %}
