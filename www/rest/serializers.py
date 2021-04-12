@@ -80,6 +80,9 @@ class EntitySerializer(serializers.HyperlinkedModelSerializer):
     children = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, required=False, view_name="entity-detail"
     )
+    labels = serializers.HyperlinkedRelatedField(
+        many=True, required=False, view_name="label-detail", queryset=Label.objects.all()
+    )
 
     class Meta:
         model = Entity
