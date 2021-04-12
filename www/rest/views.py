@@ -18,7 +18,8 @@ from .serializers import (
     LabelSerializer,
 )
 
-DATETIME_FIELD_LOOKUPS = ["exact", "date", "date__range"]
+# https://docs.djangoproject.com/en/3.2/ref/models/querysets/#field-lookups
+DATETIME_FIELD_LOOKUPS = ["exact", "date", "date__range", "gte", "lte"]
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -115,7 +116,7 @@ class MarkdownEntityViewSet(EntityViewSet):
     }
 
 
-class WikiPageViewSet(EntityViewSet):
+class WikiPageViewSet(MarkdownEntityViewSet):
     model = WikiPage
     queryset = model.objects.all()
 
@@ -124,16 +125,21 @@ class JournalPageViewSet(EntityViewSet):
     model = JournalPage
     queryset = model.objects.all()
     # https://docs.djangoproject.com/en/3.2/ref/models/querysets/#field-lookups
-    filterset_fields = {"date": DATETIME_FIELD_LOOKUPS, **EntityViewSet.filterset_fields}
+    filterset_fields = {"date": DATETIME_FIELD_LOOKUPS, **MarkdownEntityViewSet.filterset_fields}
     ordering = ("date",)
 
 
-class TaskViewSet(EntityViewSet):
+class TaskViewSet(MarkdownEntityViewSet):
     model = Task
     queryset = model.objects.all()
+    filterset_fields = {
+        "due_date": DATETIME_FIELD_LOOKUPS,
+        "assignee": ["exact"],
+        **MarkdownEntityViewSet.filterset_fields,
+    }
 
 
-class CommentViewSet(EntityViewSet):
+class CommentViewSet(MarkdownEntityViewSet):
     model = Comment
     queryset = model.objects.all()
 
@@ -141,3 +147,9 @@ class CommentViewSet(EntityViewSet):
 class AttachmentViewSet(EntityViewSet):
     model = Attachment
     queryset = model.objects.all()
+    filterset_fields = {
+        "file_name": ["exact"],
+        "file_type": ["exact"],
+        "file_path": ["exact"],
+        **EntityViewSet.filterset_fields,
+    }
