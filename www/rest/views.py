@@ -92,10 +92,6 @@ class EntityViewSet(viewsets.ModelViewSet):
             draft_request_data["entity_type"] = self.model.__name__
             kwargs["data"] = draft_request_data
             serializer = serializer_class(*args, **kwargs)
-            # serializer.is_valid()
-            # print("saving object")
-            # print(f"model name: {self.model.__name__}")
-            # serializer.save()
             return serializer
         return serializer_class(*args, **kwargs)
 
