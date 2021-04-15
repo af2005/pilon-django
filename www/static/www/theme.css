@@ -8323,9 +8323,6 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   overflow: hidden; }
 
-.display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
-  font-family: "Lora", serif; }
-
 main.outer-wrapper {
   height: 100vh;
   width: 100vw;
