@@ -10,6 +10,7 @@ class JournalBase(ProjectContext):
 
 
 class JournalHome(JournalBase, ListView):
+    paginate_by = 2
     template_name = "www/project/journal/journal_page_list.html"
 
 

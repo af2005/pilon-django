@@ -1,24 +1,21 @@
 <div class="text-muted small my-2">
-    <div class="pe-4 d-inline-block">
-        {% with user=object.creator %}
-            {% include "www/snippets/metadata/user_icon.html" %}
-            {% include "www/snippets/metadata/creator.html" %}
-        {% endwith %}
-    </div>
-    <div class="pe-4 d-inline-block ">
-        {% include "www/snippets/metadata/time.html" %}
-    </div>
-    <div class="pe-4 d-inline-block ">
-        {% include "www/snippets/metadata/labels.html" %}
-    </div>
-    <div class="pe-4 d-inline-block ">
-        <i class="bi bi-chat-left"></i>
-        <span>
-        {% if object.comments %}
-            {{ object.comments|length }}
-        {% else %}
-            No comments
-        {% endif %}
-        </span>
-    </div>
+    {% with user=object.creator %}
+        {% include "www/snippets/metadata/creator.html" %} <i class="bi bi-dot"></i>
+
+    {% endwith %}
+    {% include "www/snippets/metadata/time.html" %}
+<i class="bi bi-dot"></i>
+    {% include "www/snippets/metadata/labels.html" %}
+
+
+    {#    <div class="pe-4 d-inline-block ">#}
+    {#        <i class="bi bi-chat-left"></i>#}
+    {#        <span>#}
+    {#        {% if object.comments %}#}
+    {#            {{ object.comments|length }}#}
+    {#        {% else %}#}
+    {#            No comments#}
+    {#        {% endif %}#}
+    {#        </span>#}
+    {#    </div>#}
 </div>

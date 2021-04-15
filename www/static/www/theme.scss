@@ -44,20 +44,6 @@ $navbar-dark-color:                 $gray-400 !default;
 $navbar-dark-hover-color:           $gray-500 !default;
 $nav-bar-background:                $marine !default;
 
-// Pagination
-
-$pagination-color:                  $white !default;
-$pagination-bg:                     $success !default;
-$pagination-border-width:           0 !default;
-$pagination-border-color:           transparent !default;
-$pagination-hover-color:            $white !default;
-$pagination-hover-bg:               darken($success, 15%) !default;
-$pagination-hover-border-color:     transparent !default;
-$pagination-active-bg:              $pagination-hover-bg !default;
-$pagination-active-border-color:    transparent !default;
-$pagination-disabled-color:         $gray-200 !default;
-$pagination-disabled-bg:            lighten($success, 15%) !default;
-$pagination-disabled-border-color:  transparent !default;
 
 // List group
 
@@ -66,9 +52,11 @@ $list-group-disabled-bg:            $gray-200 !default;
 
 // Close
 
-$close-color:                       $white !default;
+$close-color:                       $red !default;
 $close-text-shadow:                 none !default;
 
+// badges
+$badge-font-weight:                 600 !default;
 
 @import "custom/datetime";
 @import 'bootstrap/scss/bootstrap';

@@ -1,7 +1,9 @@
-<i class="bi bi-tags"></i>
-{% if labels|length == 0 %}
-    <span class="ps-1">No labels</span>
-{% endif %}
+{#<i class="bi bi-tags"></i>#}
+{#{% if labels|length == 0 %}#}
+{#    <span class="ps-1">No labels</span>#}
+{#{% endif %}#}
+    <a class="badge badge-secondary" href="#">testlabel</a>
+
 {% for label in labels %}
     <a class="badge badge-secondary" href="#">{{ label }}</a>
 {% endfor %}

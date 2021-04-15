@@ -5,8 +5,8 @@ time.icon
   font-size: 1em; /* change icon size */
   display: block;
   position: relative;
-  width: 5em;
-  height: 5em;
+  width: 4em;
+  height: 4em;
   background-color: #fff;
   border-radius: 0.6em;
   overflow: hidden;
@@ -31,6 +31,8 @@ time.icon .month
   top: 0;
   color: #fff;
   background-color: $gray;
+    font-size: 0.8em;
+
 }
 
 time.icon .weekday
@@ -38,12 +40,13 @@ time.icon .weekday
   position: absolute;
   bottom: 0.2em;
   color: $gray;
+  font-size: 0.8em;
 }
 
 time.icon .day
 {
   width: 100%;
-  font-size: 2em;
+  font-size: 1.6em;
   letter-spacing: -0.05em;
   padding-top: 0.7em;
   color: $marine;
