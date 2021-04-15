@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "colorfield",
     "django_filters",
     "django.contrib.humanize",
+    "django_js_reverse",
 ]
 
 MIDDLEWARE = [
@@ -151,7 +152,6 @@ ADD_REVERSION_ADMIN = True
 
 # Calendar
 FIRST_DAY_OF_WEEK = 1
-
 
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
