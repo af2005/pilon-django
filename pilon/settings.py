@@ -153,4 +153,6 @@ ADD_REVERSION_ADMIN = True
 FIRST_DAY_OF_WEEK = 1
 
 
-REST_FRAMEWORK = {"DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",)}
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
+}

@@ -1,6 +1,7 @@
-from django.test import RequestFactory, TestCase
+from django.test import TestCase
 
-from www.models import Entity, User
+from www.models.entity import Entity
+from www.models.user import User
 import reversion
 from reversion.models import Version
 

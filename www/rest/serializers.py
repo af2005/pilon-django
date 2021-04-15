@@ -1,7 +1,5 @@
 from rest_framework import serializers
-from ..models import (
-    User,
-    Group,
+from www.models.entity import (
     Entity,
     Project,
     MarkdownEntity,
@@ -10,8 +8,9 @@ from ..models import (
     Task,
     Comment,
     Attachment,
-    Label,
 )
+from www.models.label import Label
+from www.models.user import User, Group
 from rest_polymorphic.serializers import PolymorphicSerializer
 from django.urls import reverse
 
@@ -80,6 +79,9 @@ class LabelSerializer(serializers.HyperlinkedModelSerializer):
 class EntitySerializer(serializers.HyperlinkedModelSerializer):
     children = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, required=False, view_name="entity-detail"
+    )
+    labels = serializers.HyperlinkedRelatedField(
+        many=True, required=False, view_name="label-detail", queryset=Label.objects.all()
     )
 
     class Meta:

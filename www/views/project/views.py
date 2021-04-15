@@ -1,7 +1,7 @@
 from django.views.generic.base import ContextMixin, View
 from django.views.generic import ListView, CreateView, TemplateView
 
-from www.models import Project
+from www.models.entity import Project
 
 
 class ProjectContext(ContextMixin, View):

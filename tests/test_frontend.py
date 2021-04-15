@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import RequestFactory, TestCase, Client
-from www.models import Project
+from www.models.entity import Project
 
 from django.urls import reverse
 
