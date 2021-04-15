@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     "colorfield",
     "django_filters",
     "django.contrib.humanize",
-    "django_js_reverse",
 ]
 
 MIDDLEWARE = [

@@ -8,13 +8,13 @@ const journalDatePicker = function () {
             "date_created__gte": selectedDates[0].toISOString(),
             "date_created__lte": selectedDates[1].toISOString()
         }
-        return $.getJSON(Urls.journalpageList()+"?"+$.param(parameter), writeListToDOM)
+        return $.getJSON("/rest/journal-page?"+$.param(parameter), writeListToDOM)
     }
 
     function writeListToDOM(data){
         let sItems = "";
         $.each( data, function( key, val ) {
-            sItems += `<li> ${val.name}</li>`
+            sItems += `<a class="d-block" href="${val.url}"> ${val.name}</a>`
         });
         $("#sidebar-journal-pages").html(sItems);
     }
