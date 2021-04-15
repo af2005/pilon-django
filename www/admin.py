@@ -5,7 +5,16 @@ from polymorphic_tree.admin import (
 )
 from reversion_compare.admin import CompareVersionAdmin
 
-from www.models.entity import Entity, Project, MarkdownEntity, WikiPage, JournalPage, Task, Comment, Attachment
+from www.models.entity import (
+    Entity,
+    Project,
+    MarkdownEntity,
+    WikiPage,
+    JournalPage,
+    Task,
+    Comment,
+    Attachment,
+)
 
 
 # The common admin functionality for all derived models:
