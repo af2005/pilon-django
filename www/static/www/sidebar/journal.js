@@ -4,6 +4,8 @@ const journalDatePicker = function () {
     const last_of_month = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
     function getJournalPagesInDateRange(selectedDates){
+        //increase end date by one day to include this day
+        selectedDates[1].setDate(selectedDates[1].getDate()+1);
         const parameter = {
             "date_created__gte": selectedDates[0].toISOString(),
             "date_created__lte": selectedDates[1].toISOString()

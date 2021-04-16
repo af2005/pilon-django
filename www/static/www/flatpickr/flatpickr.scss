@@ -510,17 +510,11 @@ span.flatpickr-weekday {
 .flatpickr-day {
   flex: 1 0 13%;
   background: none;
-  border: 1px solid transparent;
   border-radius: 150px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   color: $gray-800;
   cursor: pointer;
-  font-weight: 400;
-  width: 14.2857143%;
-  -webkit-flex-basis: 14.2857143%;
-  -ms-flex-preferred-size: 14.2857143%;
-  flex-basis: 14.2857143%;
   height: 2em;
   line-height: 2em;
   margin: 0;
@@ -541,9 +535,11 @@ span.flatpickr-weekday {
 }
 
 .flatpickr-day.today {
-  background-color: $yellow !important;
+  background-color: $red !important;
   border-radius: 0;
   font-weight: 700;
+  color:$white;
+  border-color:$darkred!important;
 
 }
 
@@ -569,10 +565,6 @@ span.flatpickr-weekday {
   border-radius: 0 50px 50px 0
 }
 
-.flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n+1)), .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n+1)), .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n+1)) {
-  -webkit-box-shadow: -10px 0 0 $primary;
-  box-shadow: -10px 0 0 $primary
-}
 
 .flatpickr-day.selected.startRange.endRange, .flatpickr-day.startRange.startRange.endRange, .flatpickr-day.endRange.startRange.endRange {
   border-radius: 50px
@@ -596,8 +588,6 @@ span.flatpickr-weekday {
 
 .flatpickr-day.week.selected {
   border-radius: 0;
-  -webkit-box-shadow: -5px 0 0 $primary, 5px 0 0 $primary;
-  box-shadow: -5px 0 0 $primary, 5px 0 0 $primary
 }
 
 .flatpickr-day.hidden {
