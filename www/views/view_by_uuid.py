@@ -1,4 +1,4 @@
-from django.http import HttpResponseNotFound, HttpResponse
+from django.http import HttpResponseNotFound
 from django.urls import reverse
 from django.shortcuts import redirect
 
@@ -7,7 +7,7 @@ import www.views.project.wiki.views
 import www.views.project.journal.views
 import www.views.project.tasks.views
 
-from www.models import Entity, Project, WikiPage, JournalPage, Task
+from www.models.entity import Entity, Project, WikiPage, JournalPage, Task
 
 
 def main(request, uuid):

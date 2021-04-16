@@ -1,18 +1,22 @@
 from django.views.generic.base import ContextMixin, View
 from django.views.generic import ListView, CreateView, TemplateView
 
-from www.models import Project
+from www.models.entity import Project
 
 
 class ProjectContext(ContextMixin, View):
     active_sidebar_item = None
+    query_pk_and_slug = True
+    slug_url_kwarg = "id"
+    slug_field = "id"
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
         key = self.kwargs.get("key")
-        context["project"] = Project.objects.filter(key=key).first()
+        context = {"project": Project.objects.filter(key=key).first()}
         self.set_sidebar_context(context)
-        return super().get_context_data(**context)  # like this, the extra_context is added last
+        return super().get_context_data(
+            **{**kwargs, **context}
+        )  # like this, the extra_context is added last
 
     def set_sidebar_context(self, context):
         context["active_sidebar_item"] = self.active_sidebar_item
