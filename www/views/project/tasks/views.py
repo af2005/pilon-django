@@ -1,6 +1,6 @@
 from django.views.generic import UpdateView, DetailView, ListView, CreateView
 from ..views import ProjectContext
-from www.models import Task
+from www.models.entity import Task
 
 
 class TaskBase(ProjectContext):
