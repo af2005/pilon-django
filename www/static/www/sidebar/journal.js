@@ -14,7 +14,8 @@ const journalDatePicker = function () {
     function writeListToDOM(data){
         let sItems = "";
         $.each( data, function( key, val ) {
-            sItems += `<a class="d-block" href="${val.url}"> ${val.name}</a>`
+            let created_date = new Date(val["date_created"]);
+            sItems += `<a class="sidebar-journal-item" href="${val["url"]}"> <i class="bi bi-journal text-dark"></i><span class="sidebar-journal-item-date">${created_date.getDate()}</span>${val["name"]}</a>`
         });
         $("#sidebar-journal-pages").html(sItems);
     }

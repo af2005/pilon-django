@@ -8491,6 +8491,24 @@ a.disabled {
 a.disabled:hover {
   text-decoration: none !important; }
 
+span.sidebar-journal-item-date {
+  position: relative;
+  left: -1.18em;
+  top: -0.15em;
+  font-size: 0.7em;
+  color: #1b1f23;
+  text-align: center;
+  display: inline-block;
+  width: 1em; }
+
+a.sidebar-journal-item {
+  display: block;
+  padding: 0.25em 0;
+  text-align: center; }
+
+a.sidebar-journal-item:hover {
+  background-color: white; }
+
 .text-white-50 {
   color: rgba(255, 255, 255, 0.5); }
 
