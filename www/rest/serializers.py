@@ -34,8 +34,6 @@ class ShortUUIDHyperlinkedModelSerializer(serializers.HyperlinkedModelSerializer
             AttributeError(
                 f"Serializer needs a class Meta with a model that inherits from {ShortUUIDMixin.__qualname__}."
             )
-        super().__init_subclass__(**kwargs)
-        print(f"{cls}:{cls.url}")
 
     def get_extra_kwargs(self):
         extra_kwargs = super().get_extra_kwargs()
@@ -119,6 +117,25 @@ class LabelSerializer(ShortUUIDHyperlinkedModelSerializer):
 
 
 class EntitySerializer(ShortUUIDHyperlinkedModelSerializer):
+    # absolute_url = serializers.URLField(source='get_absolute_url', read_only=True)
+    absolute_url = serializers.SerializerMethodField()
+
+    def get_absolute_url(self, obj):
+        obj_url = obj.get_absolute_url()
+        if obj_url:
+            return self.context["request"].build_absolute_uri(obj_url)
+        return None
+
+    # parent = serializers.RelatedField(
+    #     # lookup_field="id",
+    #     # lookup_url_kwarg="id",
+    #     many=False,
+    #     read_only=False,
+    #     required=False,
+    #     # view_name="entity-detail",
+    #     queryset=Entity.objects.all(),
+    # )
+
     children = serializers.HyperlinkedRelatedField(
         lookup_field="id",
         lookup_url_kwarg="id",
@@ -151,6 +168,7 @@ class EntitySerializer(ShortUUIDHyperlinkedModelSerializer):
         fields = (
             "url",
             "id",
+            "absolute_url",
             "name",
             "parent",
             "date_created",
