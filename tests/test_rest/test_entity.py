@@ -78,3 +78,5 @@ class TestAbsoluteURL:
         assert response.status_code == 200
         for comment in response.data:
             assert comment["absolute_url"] is None
+
+    # random comment
