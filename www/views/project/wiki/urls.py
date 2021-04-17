@@ -13,5 +13,5 @@ urlpatterns = [
     path("edit/<slug:id>/", WikiPageEdit.as_view(), name="wiki-page-edit"),
     path("create-from-file/", WikiPageCreateFromFile.as_view(), name="wiki-page-create-from-file"),
     # this must be the last url
-    path("view/<slug:id>", WikiPageDetail.as_view(), name="wiki-page-detail"),
+    path("view/<slug:id>/", WikiPageDetail.as_view(), name="wiki-page-detail"),
 ]

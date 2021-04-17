@@ -58,8 +58,11 @@ class TestAbsoluteURL:
         response = self.client.get("/rest/wiki-page/")
         assert response.status_code == 200
         for wiki_page in response.data:
-            print(wiki_page)
-            # assert wiki_page["absolute_url"] == f"http://testserver/project/test/wiki/view/{wiki_page['id']}/"
+            if wiki_page["absolute_url"] is not None:
+                assert (
+                    wiki_page["absolute_url"]
+                    == f"http://testserver/project/test/wiki/view/{wiki_page['id']}/"
+                )
 
     def test_journal_page(self):
         response = self.client.get("/rest/journal-page/")
@@ -67,7 +70,7 @@ class TestAbsoluteURL:
         for journal_page in response.data:
             assert (
                 journal_page["absolute_url"]
-                == f"http://testserver/project/test/journal/view/{journal_page['id']}"
+                == f"http://testserver/project/test/journal/view/{journal_page['id']}/"
             )
 
     def test_comment(self):
