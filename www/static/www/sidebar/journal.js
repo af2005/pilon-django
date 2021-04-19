@@ -20,7 +20,7 @@ const journalDatePicker = function () {
         let sItems = "";
         $.each(data, function (key, val) {
             let created_date = new Date(val["date_created"]);
-            sItems += `<a class="sidebar-journal-item" href="${val["url"]}"> <i class="bi bi-journal text-dark"></i><span class="sidebar-journal-item-date">${created_date.getDate()}</span>${val["name"]}</a>`
+            sItems += `<a class="sidebar-journal-item" href="${val["absolute_url"]}"> <i class="bi bi-journal text-dark"></i><span class="sidebar-journal-item-date">${created_date.getDate()}</span>${val["name"]}</a>`
         });
         $("#sidebar-journal-pages").html(sItems);
     }
@@ -37,4 +37,7 @@ const journalDatePicker = function () {
         },
         defaultDate: [first_of_month, last_of_month]
     });
+    return {
+
+    }
 }();
