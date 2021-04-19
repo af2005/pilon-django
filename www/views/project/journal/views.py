@@ -7,11 +7,13 @@ class JournalBase(ProjectContext):
     model = JournalPage
     fields = ["parent", "name", "markdown"]
     active_sidebar_item = "Journal"
+    extra_context = {"page_title": ""}
 
 
 class JournalHome(JournalBase, ListView):
     paginate_by = 10
     template_name = "www/project/journal/journal_page_list.html"
+    extra_context = {"page_title": "Last updated"}
 
 
 class JournalPageDetail(JournalBase, DetailView):
