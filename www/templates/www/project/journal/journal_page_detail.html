@@ -5,54 +5,8 @@
 {% block content %}
 
     <div class="d-flex align-items-start justify-content-between pb-3 ">
-        <div class="lh-1">
-            <h2 class="display-4">{{ object.name }}</h2>
-            <div class="text-muted">
-                <small>
-                Created by {{ object.creator }} on {{ object.created_date }}
-                and last updated {{ object.modified_date }}</small>
-            </div>
-            <div class="my-2">
-                {% for label in labels %}
-                    <a class="badge badge-secondary" href="#">label</a>
-                {% endfor %}
-
-                <button class="badge btn text-dark" data-bs-toggle="modal" data-bs-target="#edit-labels-modal">Edit
-                    labels...
-                </button>
-                <div class="modal fade" id="edit-labels-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit labels</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <div>
-            <a href="{% url "project:wiki-page-edit" project.key object.id %}">
-                <button class="btn btn-light"><i class="bi bi-pencil-square"></i> Edit</button>
-            </a>
-            <a href="#">
-                <button class="btn btn-light"><i class="bi bi-share-fill"></i> Share</button>
-
-            </a>
-        </div>
-
+        {% include "www/snippets/project/page_metadata.html" %}
+        {% include "www/snippets/project/page_buttons.html" %}
     </div>
 
     {{ object.markdown_rendered | safe }}
