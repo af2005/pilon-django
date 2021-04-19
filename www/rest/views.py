@@ -10,19 +10,29 @@ from ..models.entity import (
     Attachment,
 )
 from ..models.label import Label
-from ..models.user import User, Group
+from ..models.user import Group
 from .serializers import (
     EntityPolymorphicSerializer,
     UserSerializer,
     GroupSerializer,
     LabelSerializer,
 )
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 # https://docs.djangoproject.com/en/3.2/ref/models/querysets/#field-lookups
 DATETIME_FIELD_LOOKUPS = ["exact", "date", "date__range", "gte", "lte"]
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class ShortUUIDModelViewSet(viewsets.ModelViewSet):
+    lookup_field = "id"
+    lookup_url_kwarg = "id"
+
+    # pass
+
+
+class UserViewSet(ShortUUIDModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -49,9 +59,10 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
     filterset_fields = ("id", "name")
+    lookup_field = "id"
 
 
-class LabelViewSet(viewsets.ModelViewSet):
+class LabelViewSet(ShortUUIDModelViewSet):
     """
     API endpoint that allows labels to be viewed or edited.
     """
@@ -62,7 +73,7 @@ class LabelViewSet(viewsets.ModelViewSet):
 
 
 # TODO:10 add permission
-class EntityViewSet(viewsets.ModelViewSet):
+class EntityViewSet(ShortUUIDModelViewSet):
     model = Entity
     queryset = model.objects.all()
     serializer_class = EntityPolymorphicSerializer

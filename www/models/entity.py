@@ -2,7 +2,7 @@ import inflection
 import reversion
 from colorfield.fields import ColorField
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, NoReverseMatch
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from markdownfield.models import MarkdownField, RenderedMarkdownField
@@ -14,15 +14,19 @@ from polymorphic_tree.models import (
 )
 from dataclasses import dataclass, field
 
-from www.models.mixins import RandomUUIDMixin, SluggedNameMixin
+from www.models.mixins import ShortUUIDMixin, SluggedNameMixin
 from www.models.user import User
 
 
 class ShortUUIDPolymorphicTreeForeignKey(PolymorphicTreeForeignKey):
     def _validate_parent(self, parent, model_instance):
         base_model = _get_base_polymorphic_model(model_instance.__class__)
-        parent = base_model.objects.get(pk=parent)
+        parent = base_model.objects.get(id=parent)
         super()._validate_parent(parent, model_instance)
+
+    def validate(self, value, model_instance):
+        super().validate(value, model_instance)
+        print("validating model")
 
 
 @dataclass
@@ -49,7 +53,7 @@ SIDEBAR_ITEMS = [
 
 
 @reversion.register()
-class Entity(PolymorphicMPTTModel, SluggedNameMixin, RandomUUIDMixin):
+class Entity(PolymorphicMPTTModel, SluggedNameMixin, ShortUUIDMixin):
     #: Whether the node type allows to have children.
     can_have_children = True
 
@@ -60,12 +64,18 @@ class Entity(PolymorphicMPTTModel, SluggedNameMixin, RandomUUIDMixin):
     child_types = []
 
     parent = ShortUUIDPolymorphicTreeForeignKey(
-        "self", on_delete=models.CASCADE, null=True, blank=True, related_name="children"
+        "self",
+        to_field="id",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="children",
     )
     date_created = models.DateTimeField(default=timezone.now, editable=False)
     date_modified = models.DateTimeField(default=timezone.now)
     creator = models.ForeignKey(
         User,
+        to_field="id",
         on_delete=models.SET_NULL,
         related_name="created_entities",
         null=True,
@@ -77,15 +87,24 @@ class Entity(PolymorphicMPTTModel, SluggedNameMixin, RandomUUIDMixin):
         verbose_name = _("Entity")
         verbose_name_plural = _("Entities")
 
+    # def save(self, *args, **kwargs):
+    #     self.clean()
+    #     super().save()
+
     def repr(self):
         return {"id": self.id}
 
     def get_absolute_url(self):
         project = self.get_ancestors_of_type(Project).first()
-        return reverse(
-            f"project:{inflection.dasherize(inflection.underscore(self.__class__.__name__))}-detail",
-            kwargs={"key": project.key, "pk": self.id},
-        )
+        if project:
+            try:
+                return reverse(
+                    f"project:{self.url_base}-detail",
+                    kwargs={"key": project.key, "id": self.id},
+                )
+            except NoReverseMatch:
+                return None
+        return None
 
     @property
     def comments(self):
@@ -106,6 +125,9 @@ class Project(Entity):
     @property
     def wiki_page_tree(self):
         return self.get_descendants().instance_of(WikiPage)
+
+    def get_absolute_url(self):
+        return reverse(f"project:home", kwargs={"key": self.key})
 
     @property
     def sidebar_items(self):
@@ -192,7 +214,7 @@ class Task(MarkdownEntity):
 
     due_date = models.DateTimeField(null=True, blank=True)
     assignee = models.ForeignKey(
-        User, null=True, blank=True, on_delete=models.SET_NULL, related_name="tasks"
+        User, to_field="id", null=True, blank=True, on_delete=models.SET_NULL, related_name="tasks"
     )
 
 
@@ -221,7 +243,7 @@ class Attachment(Entity):
 
     file_name = models.CharField(max_length=255)
     file_type = models.CharField(max_length=255)
-    file_path = ""  # todo create uuid
+    file_path = models.CharField(max_length=255)  # todo create uuid
 
     @property
     def renderable(self):

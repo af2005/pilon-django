@@ -42,7 +42,7 @@ class TestLabel:
         assert label["name"] == "label with space"
 
         # change label name to not include spaces
-        response = self.client.patch(label["url"], data={"name": "labelnospace"})
+        self.client.patch(label["url"], data={"name": "labelnospace"})
         response = self.client.get("/rest/label/")
         assert response.status_code == 200
         label = response.data[0]

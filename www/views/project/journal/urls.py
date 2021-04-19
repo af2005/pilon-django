@@ -10,6 +10,6 @@ urlpatterns = [
         name="journal-page-create-from-file",
     ),
     path(
-        "view/<slug:pk>", JournalPageDetail.as_view(), name="journal-page-detail"
+        "view/<slug:id>/", JournalPageDetail.as_view(), name="journal-page-detail"
     ),  # this must be the last url
 ]

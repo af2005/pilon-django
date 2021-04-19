@@ -10,17 +10,72 @@ from www.models.entity import (
     Attachment,
 )
 from www.models.label import Label
-from www.models.user import User, Group
+from www.models.user import Group
+from www.models.mixins import ShortUUIDMixin
 from rest_polymorphic.serializers import PolymorphicSerializer
-from django.urls import reverse
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class ShortUUIDHyperlinkedModelSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ShortUUIDMixin
+
+    def __init_subclass__(cls, **kwargs):
+        try:
+            cls.url = serializers.HyperlinkedIdentityField(
+                view_name=f"{cls.Meta.model.url_base}-detail",
+                lookup_field="id",
+                lookup_url_kwarg="id",
+                read_only=True,
+            )
+        except AttributeError:
+            AttributeError(
+                f"Serializer needs a class Meta with a model that inherits from {ShortUUIDMixin.__qualname__}."
+            )
+
+    def get_extra_kwargs(self):
+        extra_kwargs = super().get_extra_kwargs()
+        url = {
+            "url": {
+                "view_name": f"{self.Meta.model.__name__.lower()}-detail",
+                "lookup_field": "id",
+                "lookup_url_kwarg": "id",
+            }
+        }
+        return {
+            **url,
+            **extra_kwargs,
+        }
+
+
+class UserSerializer(ShortUUIDHyperlinkedModelSerializer):
     tasks = serializers.HyperlinkedRelatedField(
-        many=True, read_only=True, required=False, view_name="task-detail"
+        lookup_field="id",
+        lookup_url_kwarg="id",
+        many=True,
+        read_only=True,
+        required=False,
+        view_name="task-detail",
     )
     created_entities = serializers.HyperlinkedRelatedField(
-        many=True, read_only=True, required=False, view_name="entity-detail"
+        lookup_field="id",
+        lookup_url_kwarg="id",
+        many=True,
+        read_only=True,
+        required=False,
+        view_name="entity-detail",
+    )
+
+    groups = serializers.HyperlinkedRelatedField(
+        lookup_field="id",
+        lookup_url_kwarg="id",
+        many=True,
+        read_only=False,
+        required=False,
+        view_name="group-detail",
+        queryset=Group.objects.all(),
     )
 
     class Meta:
@@ -37,32 +92,19 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name="group-detail", lookup_field="id", lookup_url_kwarg="id"
+    )
+
     class Meta:
         model = Group
         fields = ["url", "id", "name"]
 
 
-class EntityHyperlink(serializers.HyperlinkedRelatedField):
-    # We define these as class attributes, so we don't need to pass them as arguments.
-    view_name = "customer-detail"
-    queryset = Entity.objects.all()
-    many = True
-    required = False
-
-    def get_url(self, obj, view_name, request, format):
-        url_kwargs = {"organization_slug": obj.organization.slug, "customer_pk": obj.pk}
-        return reverse(view_name, kwargs=url_kwargs, request=request, format=format)
-
-    def get_object(self, view_name, view_args, view_kwargs):
-        lookup_kwargs = {
-            "organization__slug": view_kwargs["organization_slug"],
-            "pk": view_kwargs["customer_pk"],
-        }
-        return self.get_queryset().get(**lookup_kwargs)
-
-
-class LabelSerializer(serializers.HyperlinkedModelSerializer):
+class LabelSerializer(ShortUUIDHyperlinkedModelSerializer):
     entities = serializers.HyperlinkedRelatedField(
+        lookup_field="id",
+        lookup_url_kwarg="id",
         many=True,
         queryset=Entity.objects.all(),
         required=False,
@@ -73,15 +115,55 @@ class LabelSerializer(serializers.HyperlinkedModelSerializer):
         model = Label
         fields = ["url", "name", "slug", "entities"]
 
-        # extra_kwargs = {'url': {'lookup_field': 'slug'}}
 
+class EntitySerializer(ShortUUIDHyperlinkedModelSerializer):
+    # absolute_url = serializers.URLField(source='get_absolute_url', read_only=True)
+    absolute_url = serializers.SerializerMethodField()
 
-class EntitySerializer(serializers.HyperlinkedModelSerializer):
+    def get_absolute_url(self, obj):
+        obj_url = obj.get_absolute_url()
+        if obj_url:
+            return self.context["request"].build_absolute_uri(obj_url)
+        return None
+
+    # parent = serializers.RelatedField(
+    #     # lookup_field="id",
+    #     # lookup_url_kwarg="id",
+    #     many=False,
+    #     read_only=False,
+    #     required=False,
+    #     # view_name="entity-detail",
+    #     queryset=Entity.objects.all(),
+    # )
+
     children = serializers.HyperlinkedRelatedField(
-        many=True, read_only=True, required=False, view_name="entity-detail"
+        lookup_field="id",
+        lookup_url_kwarg="id",
+        many=True,
+        read_only=True,
+        required=False,
+        view_name="entity-detail",
     )
     labels = serializers.HyperlinkedRelatedField(
         many=True, required=False, view_name="label-detail", queryset=Label.objects.all()
+    )
+
+    labels = serializers.HyperlinkedRelatedField(
+        lookup_field="id",
+        lookup_url_kwarg="id",
+        many=True,
+        required=False,
+        view_name="label-detail",
+        queryset=Label.objects.all(),
+    )
+
+    creator = serializers.HyperlinkedRelatedField(
+        lookup_field="id",
+        lookup_url_kwarg="id",
+        many=False,
+        required=False,
+        view_name="user-detail",
+        queryset=User.objects.all(),
     )
 
     class Meta:
@@ -89,6 +171,7 @@ class EntitySerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             "url",
             "id",
+            "absolute_url",
             "name",
             "parent",
             "date_created",
@@ -97,64 +180,57 @@ class EntitySerializer(serializers.HyperlinkedModelSerializer):
             "children",
             "labels",
         )
-        extra_kwargs = {
-            "creator": {"view_name": "user-detail", "lookup_field": "pk"},
-            "labels": {"view_name": "label-detail", "lookup_field": "slug"},
-        }
 
 
 class ProjectSerializer(EntitySerializer):
     class Meta:
         model = Project
         fields = EntitySerializer.Meta.fields + ("key", "color")
-        extra_kwargs = EntitySerializer.Meta.extra_kwargs
 
 
 class MarkdownEntitySerializer(EntitySerializer):
     class Meta:
         model = MarkdownEntity
         fields = EntitySerializer.Meta.fields + ("markdown", "markdown_rendered")
-        extra_kwargs = EntitySerializer.Meta.extra_kwargs
 
 
 class WikiPageSerializer(MarkdownEntitySerializer):
     class Meta:
         model = WikiPage
         fields = MarkdownEntitySerializer.Meta.fields
-        extra_kwargs = MarkdownEntitySerializer.Meta.extra_kwargs
 
 
 class JournalPageSerializer(MarkdownEntitySerializer):
     class Meta:
         model = JournalPage
         fields = MarkdownEntitySerializer.Meta.fields + ("date",)
-        extra_kwargs = MarkdownEntitySerializer.Meta.extra_kwargs
 
 
 class TaskSerializer(MarkdownEntitySerializer):
+    assignee = serializers.HyperlinkedRelatedField(
+        lookup_field="id",
+        lookup_url_kwarg="id",
+        many=False,
+        required=False,
+        view_name="user-detail",
+        queryset=User.objects.all(),
+    )
+
     class Meta:
         model = Task
         fields = MarkdownEntitySerializer.Meta.fields + ("due_date", "assignee")
-        extra_kwargs = {
-            **MarkdownEntitySerializer.Meta.extra_kwargs,
-            **{
-                "assignee": {"view_name": "user-detail", "lookup_field": "pk"},
-            },
-        }
 
 
 class CommentSerializer(MarkdownEntitySerializer):
     class Meta:
         model = Comment
         fields = MarkdownEntitySerializer.Meta.fields
-        extra_kwargs = EntitySerializer.Meta.extra_kwargs
 
 
 class AttachmentSerializer(EntitySerializer):
     class Meta:
         model = Attachment
         fields = EntitySerializer.Meta.fields + ("file_name", "file_type", "file_path")
-        extra_kwargs = EntitySerializer.Meta.extra_kwargs
 
 
 class EntityPolymorphicSerializer(PolymorphicSerializer):
@@ -169,6 +245,3 @@ class EntityPolymorphicSerializer(PolymorphicSerializer):
         Comment: CommentSerializer,
         Attachment: AttachmentSerializer,
     }
-
-    # def to_resource_type(self, model_or_instance):
-    #     return model_or_instance._meta.object_name.lower()
