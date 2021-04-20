@@ -8509,6 +8509,10 @@ a.sidebar-journal-item {
 a.sidebar-journal-item:hover {
   background-color: white; }
 
+.bg-gradient-purple {
+  background: #6610f2;
+  background: linear-gradient(330deg, #6610f2 0%, #0366d6 61%); }
+
 .text-white-50 {
   color: rgba(255, 255, 255, 0.5); }
 

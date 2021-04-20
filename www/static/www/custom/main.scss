@@ -235,6 +235,11 @@ a.sidebar-journal-item:hover{
 }
 
 
+.bg-gradient-purple{
+  background: rgb(102,16,242);
+  background: linear-gradient(330deg,  $indigo 0%,$blue 61%);
+}
+
 .text-white-50 {
   color: rgba(255, 255, 255, .5);
 }
