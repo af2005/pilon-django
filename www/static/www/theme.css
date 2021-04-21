@@ -8370,6 +8370,14 @@ a:link.btn-link, a {
 .container {
   margin-left: 0; }
 
+.card {
+  border-width: 0;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px; }
+
+.card-header {
+  border-width: 0;
+  background-color: #f9fafc; }
+
 .card-img-top {
   text-align: center; }
 
@@ -8394,7 +8402,7 @@ button > i.bi::before {
   border-color: #6a737d; }
 
 :root {
-  --bs-breadcrumb-divider: ">" ; }
+  --bs-breadcrumb-divider: "\00B7" ; }
 
 @media (max-width: 767.98px) {
   .offcanvas-collapse {
@@ -8455,6 +8463,9 @@ button > i.bi::before {
 .bg-gray {
   background-color: #6a737d;
   color: white; }
+
+.bg-bluegray {
+  background-color: #edf3f7; }
 
 a.bg-secondary:hover {
   color: #f6f8fa; }

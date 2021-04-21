@@ -67,7 +67,14 @@ a:link.btn-link, a {
 .container {
   margin-left: 0;
 }
-
+.card{
+  border-width: 0;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+.card-header{
+  border-width: 0;
+  background-color: $gray-100;
+}
 .card-img-top {
   text-align: center;
 }
@@ -99,7 +106,7 @@ button > i.bi::before {
 }
 
 :root {
-  --bs-breadcrumb-divider: ">"
+  --bs-breadcrumb-divider: "\00B7"
 
 }
 
@@ -171,6 +178,10 @@ button > i.bi::before {
 .bg-gray {
   background-color: $gray;
   color: white;
+}
+
+.bg-bluegray{
+  background-color: #edf3f7;
 }
 
 a.bg-secondary:hover {

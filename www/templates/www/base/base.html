@@ -17,16 +17,16 @@
     {% endblock window_title %}
 </head>
 <body class="bg-light">
-<main class="outer-wrapper bg-gradient-purple">
+<main class="outer-wrapper  bg-bluegray">
     {% block navigation %}
         {% include 'www/snippets/navigation.html' %}
     {% endblock %}
     {% block subnavigation %}{% endblock %}
-    <div id="wrapper" class="m-3">
+    <div id="wrapper">
         {% block sidebar %}
         {% endblock %}
         <div id="page-content-wrapper" class="justify-content-between">
-            <div id="content-container" class="rounded container-fluid mb-4 py-4 bg-white">
+            <div id="content-container" class="rounded container-fluid mb-4 py-4">
                 <span id="top-of-page"></span>
                 {% block breadcrumbs %}
                 {% endblock %}
