@@ -8,27 +8,61 @@
 {% endblock %}
 
 {% block title %}
-    {% with page_title="Projects" %}
-    {{ block.super }}
+    {% with page_title="" %}
+        {{ block.super }}
     {% endwith %}
 {% endblock %}
 
 {% block content %}
-    <table class="table table-bordered" data-toggle="table">
-        <thead class="thead-light">
-        <tr class="th">
-            <th scope="col">Name</th>
-            <th scope="col">Key</th>
-            <th scope="col">Labels</th>
-        </tr>
-        </thead>
-        {% for project in projects %}
-            <tr>
-                <td><a href="{% url "project:home" project.key %}">{{ project.name }}</a></td>
-                <td>{{ project.key }}</td>
-                <td>{{ project.labels }}</td>
+    <style>
+
+
+    </style>
+    {#    https://htmlstream.com/front-dashboard/index.html#}
+    <div class="card m-1">
+        <div class="card-header">
+            <div class="row justify-content-between align-items-center flex-grow-1">
+                <div class="col-sm py-2">
+                    <h5>Project directory</h5>
+                </div>
+                <div class="col-sm">
+                    <form>
+                        <div class="input-group input-group-merge input-group-flush">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="bi bi-search"></i>
+                                </div>
+                            </div>
+                            <input type="search" class="form-control"
+                                   placeholder="Search projects"
+                                   aria-label="Search projects">
+                        </div>
+                        <!-- End Search -->
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+        <table class="table" data-toggle="table">
+            <thead class="thead-light">
+            <tr class="th">
+                <th scope="col">Name</th>
+                <th scope="col">Key</th>
+                <th scope="col">Labels</th>
             </tr>
-        {% endfor %}
-    </table>
+            </thead>
+            {% for project in projects %}
+                <tr>
+                    <td>
+                        <a href="{% url "project:home" project.key %}">{{ project.name }}</a>
+                    </td>
+                    <td>{{ project.key }}</td>
+                    <td>{{ project.labels }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
 
 {% endblock content %}
