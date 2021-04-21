@@ -93,31 +93,6 @@ a:link.btn-link, a {
   font-size: 4.5rem;
 }
 
-.card {
-  background-color: white;
-  //box-shadow: 0 0.5rem 1rem rgba(36, 41, 46, 0.10) !important;
-}
-
-
-.card-header {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.card-header {
-  padding: 1.3125rem 1.3125rem;
-  margin-bottom: 0;
-  background-color: #fff;
-  border-bottom: .0625rem solid rgba(231, 234, 243, .7);
-}
 
 .card-header h1, .card-header h2, .card-header h3, .card-header h4, .card-header h5, .card-header h6 {
   margin-bottom: 0;
