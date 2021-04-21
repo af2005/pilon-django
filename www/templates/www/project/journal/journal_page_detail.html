@@ -3,12 +3,17 @@
 
 
 {% block content %}
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex align-items-start justify-content-between py-3 ">
+                {% include "www/snippets/project/page_metadata.html" %}
+                {% include "www/snippets/project/page_buttons.html" %}
+            </div>
+        </div>
 
-    <div class="d-flex align-items-start justify-content-between pb-3 ">
-        {% include "www/snippets/project/page_metadata.html" %}
-        {% include "www/snippets/project/page_buttons.html" %}
+        <div class="card-body">
+            {{ object.markdown_rendered | safe }}
+        </div>
     </div>
-
-    {{ object.markdown_rendered | safe }}
 
 {% endblock %}
