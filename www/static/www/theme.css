@@ -1582,7 +1582,7 @@ progress {
   .table > thead {
     vertical-align: bottom; }
   .table > :not(:last-child) > :last-child > * {
-    border-bottom-color: currentColor; }
+    border-bottom-color: #e1e4e8; }
 
 .caption-top {
   caption-side: top; }
@@ -8345,8 +8345,17 @@ a:link.btn-link, a {
 
 .table .thead-light th {
   color: #495057;
-  background-color: #e9ecef;
+  background-color: #f6f8fa;
   border-color: #dee2e6; }
+
+.table thead th {
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-weight: 500; }
+
+.table > :not(caption) > * > * {
+  padding-top: 1rem;
+  padding-bottom: 1rem; }
 
 .input-group-prepend .input-group-text {
   display: block;
@@ -8375,6 +8384,30 @@ a:link.btn-link, a {
 
 .card-img-top .bi {
   font-size: 4.5rem; }
+
+.card {
+  background-color: white; }
+
+.card-header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem; }
+
+.card-header {
+  padding: 1.3125rem 1.3125rem;
+  margin-bottom: 0;
+  background-color: #fff;
+  border-bottom: 0.0625rem solid rgba(231, 234, 243, 0.7); }
+
+.card-header h1, .card-header .h1, .card-header h2, .card-header .h2, .card-header h3, .card-header .h3, .card-header h4, .card-header .h4, .card-header h5, .card-header .h5, .card-header h6, .card-header .h6 {
+  margin-bottom: 0; }
 
 .text-align-center {
   text-align: center; }

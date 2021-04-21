@@ -6,7 +6,6 @@ body {
 }
 
 
-
 main.outer-wrapper {
   height: 100vh;
   width: 100vw;
@@ -36,8 +35,19 @@ a:link.btn-link, a {
 
 .table .thead-light th {
   color: #495057;
-  background-color: #e9ecef;
+  background-color: $gray-200;
   border-color: #dee2e6;
+}
+
+.table thead th {
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-weight: 500;
+}
+
+.table > :not(caption) > * > * {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .input-group-prepend .input-group-text {
@@ -74,6 +84,36 @@ a:link.btn-link, a {
 
 .card-img-top .bi {
   font-size: 4.5rem;
+}
+
+.card {
+  background-color: white;
+  //box-shadow: 0 0.5rem 1rem rgba(36, 41, 46, 0.10) !important;
+}
+
+
+.card-header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.card-header {
+  padding: 1.3125rem 1.3125rem;
+  margin-bottom: 0;
+  background-color: #fff;
+  border-bottom: .0625rem solid rgba(231, 234, 243, .7);
+}
+
+.card-header h1, .card-header h2, .card-header h3, .card-header h4, .card-header h5, .card-header h6 {
+  margin-bottom: 0;
 }
 
 .text-align-center {
@@ -196,11 +236,12 @@ a.bg-secondary:hover {
   color: $black;
 }
 
-.navbar-dark a.navbar-brand:hover{
-  color:$primary;
+.navbar-dark a.navbar-brand:hover {
+  color: $primary;
   transition: color 0.15s ease-in-out;
 }
-.navbar-brand svg{
+
+.navbar-brand svg {
   height: 0.7em;
   padding: 0 0.2em;
   vertical-align: baseline;
@@ -209,35 +250,38 @@ a.bg-secondary:hover {
 a.disabled {
   color: $gray !important;
   pointer-events: none !important;
-  text-decoration: none!important;
+  text-decoration: none !important;
 }
-a.disabled:hover{
-    text-decoration: none!important;
+
+a.disabled:hover {
+  text-decoration: none !important;
 }
 
 span.sidebar-journal-item-date {
-    position: relative;
-    left: -1.18em;
-    top: -0.15em;
-    font-size: 0.7em;
-    color:$dark;
-    text-align: center;
-    display: inline-block;
-    width: 1em;
+  position: relative;
+  left: -1.18em;
+  top: -0.15em;
+  font-size: 0.7em;
+  color: $dark;
+  text-align: center;
+  display: inline-block;
+  width: 1em;
 }
-a.sidebar-journal-item{
+
+a.sidebar-journal-item {
   display: block;
   padding: 0.25em 0;
   text-align: center;
 }
-a.sidebar-journal-item:hover{
+
+a.sidebar-journal-item:hover {
   background-color: white;
 }
 
 
-.bg-gradient-purple{
-  background: rgb(102,16,242);
-  background: linear-gradient(330deg,  $indigo 0%,$blue 61%);
+.bg-gradient-purple {
+  background: rgb(102, 16, 242);
+  background: linear-gradient(330deg, $indigo 0%, $blue 61%);
 }
 
 .text-white-50 {
@@ -316,10 +360,10 @@ a.sidebar-journal-item:hover{
   color: $darkgray !important;
 }
 
-.shadow-strong{
+.shadow-strong {
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
 }
 
-.page-link .bi:before{
+.page-link .bi:before {
   vertical-align: -.19em;
 }
