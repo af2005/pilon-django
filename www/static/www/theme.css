@@ -1,17 +1,10 @@
 time.icon {
   font-size: 1em;
   /* change icon size */
-  display: block;
-  position: relative;
-  width: 4em;
-  height: 4em;
-  background-color: #fff;
-  border-radius: 0.6em;
-  overflow: hidden;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: rotate(0deg) skewY(0deg);
-  -webkit-transform-origin: 50% 10%;
-  transform-origin: 50% 10%; }
+  display: flex;
+  flex-flow: column;
+  width: 3em;
+  overflow: hidden; }
 
 time.icon * {
   display: block;
@@ -21,26 +14,31 @@ time.icon * {
   text-align: center; }
 
 time.icon .month {
-  position: absolute;
-  top: 0;
   color: #fff;
-  background-color: #6a737d;
-  font-size: 0.8em; }
+  background-color: #d73a49;
+  font-size: 0.8em;
+  border-top-left-radius: 0.6em;
+  border-top-right-radius: 0.6em; }
 
 time.icon .weekday {
-  position: absolute;
-  bottom: 0.2em;
   color: #6a737d;
-  font-size: 0.8em; }
+  font-size: 0.65em;
+  border: 1px #d1d5da solid;
+  border-bottom-left-radius: 0.6em;
+  border-bottom-right-radius: 0.6em;
+  border-top: 0;
+  background-color: #fff; }
 
 time.icon .day {
-  width: 100%;
-  font-size: 1.6em;
+  font-size: 2.4em;
   letter-spacing: -0.05em;
-  padding-top: 0.7em;
   color: #1b1f23;
   font-weight: bold;
-  font-family: monospace; }
+  font-family: monospace;
+  line-height: 1em;
+  border-left: 1px #d1d5da solid;
+  border-right: 1px #d1d5da solid;
+  background-color: #fff; }
 
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
@@ -8385,6 +8383,9 @@ a:link.btn-link, a {
 
 .card-header {
   border-width: 0;
+  background-color: #f9fafc; }
+
+.card-footer {
   background-color: #f9fafc; }
 
 .card-img-top {
