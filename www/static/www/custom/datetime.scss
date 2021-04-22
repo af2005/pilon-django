@@ -1,23 +1,14 @@
 @import "../colors/palette-2.scss";
 
-time.icon
-{
+time.icon {
   font-size: 1em; /* change icon size */
-  display: block;
-  position: relative;
-  width: 4em;
-  height: 4em;
-  background-color: #fff;
-  border-radius: 0.6em;
+  display: flex;
+  flex-flow: column;
+  width: 3em;
   overflow: hidden;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: rotate(0deg) skewY(0deg);
-  -webkit-transform-origin: 50% 10%;
-  transform-origin: 50% 10%;
 }
 
-time.icon *
-{
+time.icon * {
   display: block;
   width: 100%;
   font-size: 1em;
@@ -25,31 +16,35 @@ time.icon *
   text-align: center;
 }
 
-time.icon .month
-{
-  position: absolute;
-  top: 0;
+time.icon .month {
   color: #fff;
-  background-color: $gray;
-    font-size: 0.8em;
-
-}
-
-time.icon .weekday
-{
-  position: absolute;
-  bottom: 0.2em;
-  color: $gray;
+  background-color: $red;
   font-size: 0.8em;
+  border-top-left-radius: 0.6em;
+  border-top-right-radius: 0.6em;
+
+
 }
 
-time.icon .day
-{
-  width: 100%;
-  font-size: 1.6em;
+time.icon .weekday {
+  color: $gray;
+  font-size: 0.65em;
+  border: 1px $gray-400 solid;
+  border-bottom-left-radius: 0.6em;
+  border-bottom-right-radius: 0.6em;
+  border-top: 0;
+  background-color: $white;
+}
+
+time.icon .day {
+  font-size: 2.4em;
   letter-spacing: -0.05em;
-  padding-top: 0.7em;
   color: $marine;
   font-weight: bold;
   font-family: monospace;
+  line-height: 1em;
+  border-left: 1px $gray-400 solid;
+  border-right: 1px $gray-400 solid;
+    background-color: $white;
+
 }
