@@ -35,7 +35,9 @@ const journalDatePicker = function () {
         "locale": {
             "firstDayOfWeek": 1 // start week on Monday
         },
-        defaultDate: [first_of_month, last_of_month]
+        defaultDate: [first_of_month, last_of_month],
+        monthSelectorType: "static",
+        shorthandCurrentMonth: true,
     });
     return {
 
