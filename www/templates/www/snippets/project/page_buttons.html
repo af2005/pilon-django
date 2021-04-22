@@ -1,6 +1,6 @@
 <div>
     <a class="btn btn-stealth" data-bs-toggle="dropdown"
-       aria-expanded="false"><i class="bi bi-info-circle-fill"></i>
+       aria-expanded="false"><i class="text-dark bi bi-info-circle-fill"></i>
     </a>
     <div class="dropdown-menu">
         <h6 class="dropdown-header">Creation</h6>
@@ -22,7 +22,7 @@
                 {% include "www/snippets/metadata/creator.html" %}
             {% endwith %}
         </a>
-         <span class="dropdown-item">
+        <span class="dropdown-item">
             {% with date=object.date_modified %}
                 {% include "www/snippets/metadata/time.html" %}
             {% endwith %}

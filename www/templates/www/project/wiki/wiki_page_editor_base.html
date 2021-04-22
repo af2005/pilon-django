@@ -11,23 +11,24 @@
 {% endblock sidebar %}
 
 {% block content %}
-    <div class="bg-white">
+    <div class="">
 
         <form action="." method="post" id="markdown-form">
             {% csrf_token %}
             <input type="hidden" name="markdown" value="">
 
-            {% with nodes=project.wiki_page_tree hideSelf=True %}
-                {% include "www/snippets/project/page_tree_for_editor_base.html" %}
-            {% endwith %}
-
-            {% include "www/snippets/modals/edit_labels.html" %}
 
             <div class="input-group input-group-lg my-3">
                 <span class="input-group-text" id="page-name">Page Name</span>
-                <input name="name" value="{{ object.name }}" type="text" class="form-control" aria-label="Page name"
+                <input name="name" value="{{ object.name }}" type="text"
+                       class="form-control" aria-label="Page name"
                        aria-describedby="page-name">
             </div>
+            {% with nodes=project.wiki_page_tree hideSelf=True %}
+                {% include "www/snippets/project/page_tree_for_editor_base.html" %}
+            {% endwith %}
+            {% include "www/snippets/modals/edit_labels.html" %}
+
             {% include 'www/snippets/editor.html' %}
             <div class="py-3 d-flex justify-content-end">
                 <a href="{% url "project:wiki" project.key %}">
@@ -43,7 +44,8 @@
 
 {% block jquery_scripts %}
     {{ block.super }}
-    <script type="application/javascript" src="{% static "www/custom/markdownForm.js" %}"></script>
+    <script type="application/javascript"
+            src="{% static "www/custom/markdownForm.js" %}"></script>
     <script type="application/javascript">
         editor.setMarkdown("{{ object.markdown|escapejs }}", cursorToEnd = false);
     </script>
