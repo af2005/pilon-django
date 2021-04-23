@@ -1,13 +1,7 @@
-const journalDatePicker = function () {
-    const now = new Date();
-    const start_of_week = getMonday(now);
+const sidebarDatePicker = function () {
+    const start_of_week = getMonday(new Date());
+    const end_of_week = new Date(start_of_week).setDate(start_of_week.getDate()+6)
 
-    let end_of_week = new Date(start_of_week)
-    end_of_week.setDate(end_of_week.getDate()+6)
-
-    const end_of_today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
-
-    console.log(end_of_week)
     function getJournalPagesInDateRange(selectedDates) {
         if (selectedDates.length === 2) {
             //increase end date by one day to include this day
@@ -41,7 +35,7 @@ const journalDatePicker = function () {
         $("#sidebar-journal-pages").html(sItems);
     }
 
-    flatpickr("#sidebar-journal-calendar", {
+    const flatpickrInstance = flatpickr("#sidebar-journal-calendar", {
         enableTime: false,
         dateFormat: "Y-m-d",
         inline: true,
@@ -55,5 +49,5 @@ const journalDatePicker = function () {
         monthSelectorType: "static",
         shorthandCurrentMonth: true,
     });
-    return {}
+    return {flatpickrInstance:flatpickrInstance}
 }();
