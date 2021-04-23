@@ -1,5 +1,21 @@
 @import "../colors/palette-2.scss";
 
+time.sidebar-time-icon {
+  display: inline-flex;
+  flex-flow: column;
+  border-top: .25em $red solid;
+  background-color: $white;
+  border-radius: .25em;
+  font-size: small;
+  width: 1.5em;
+  text-align: center;
+}
+
+time.sidebar-time-icon .day {
+  line-height: 1em;
+}
+
+
 time.icon {
   font-size: 1em; /* change icon size */
   display: flex;
@@ -45,6 +61,6 @@ time.icon .day {
   line-height: 1em;
   border-left: 1px $gray-400 solid;
   border-right: 1px $gray-400 solid;
-    background-color: $white;
+  background-color: $white;
 
 }

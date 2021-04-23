@@ -536,25 +536,19 @@ span.flatpickr-weekday {
 }
 
 .flatpickr-day.today {
-  background-color: $red !important;
   border-radius: 0;
   font-weight: 700;
-  color:$white;
-  border-color:$darkred!important;
-
+  color: $red !important;;
 }
 
-.flatpickr-day.today:hover, .flatpickr-day.today:focus {
-  border-color: $gray-500;
-  background: $gray-500;
-  color: #fff;
-}
+
+
 
 .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, .flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, .flatpickr-day.endRange.inRange, .flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDay {
   background: $primary;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #fff;
+  color: #fff!important;
   border-color: $primary
 }
 

@@ -453,22 +453,15 @@ span.flatpickr-weekday {
   border-radius: 0; }
 
 .flatpickr-day.today {
-  background-color: #d73a49 !important;
   border-radius: 0;
   font-weight: 700;
-  color: #fff;
-  border-color: #9e1c23 !important; }
-
-.flatpickr-day.today:hover, .flatpickr-day.today:focus {
-  border-color: #959da5;
-  background: #959da5;
-  color: #fff; }
+  color: #d73a49 !important; }
 
 .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, .flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, .flatpickr-day.endRange.inRange, .flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDay {
   background: #0366d6;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #fff;
+  color: #fff !important;
   border-color: #0366d6; }
 
 .flatpickr-day.selected.startRange, .flatpickr-day.startRange.startRange, .flatpickr-day.endRange.startRange {

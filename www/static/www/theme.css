@@ -1,3 +1,16 @@
+time.sidebar-time-icon {
+  display: inline-flex;
+  flex-flow: column;
+  border-top: 0.25em #d73a49 solid;
+  background-color: #fff;
+  border-radius: .25em;
+  font-size: small;
+  width: 1.5em;
+  text-align: center; }
+
+time.sidebar-time-icon .day {
+  line-height: 1em; }
+
 time.icon {
   font-size: 1em;
   /* change icon size */
@@ -8527,11 +8540,7 @@ span.sidebar-journal-item-date {
 
 a.sidebar-journal-item {
   display: block;
-  padding: 0.25em 0;
-  text-align: center; }
-
-a.sidebar-journal-item:hover {
-  background-color: white; }
+  padding: 0.25em 0; }
 
 .bg-gradient-purple {
   background: #6610f2;

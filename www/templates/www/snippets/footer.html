@@ -1,8 +1,7 @@
 <footer class="container py-5 my-2 px-5 align-items-end justify-content-end ">
-
-        <p class="text-muted">
-          {% if user.is_authenticated %}Logged in as {{ user.username }}{% endif %}</p>
-
+    <p class="text-muted">
+        {% if user.is_authenticated %}Logged in as {{ user.username }}{% endif %}
+    </p>
     <p class="float-end"><a href="#top-of-page">Back to top</a></p>
     <p>© {% now "Y" %} pilon · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
 </footer>

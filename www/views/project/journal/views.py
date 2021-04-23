@@ -1,6 +1,6 @@
 from www.models.entity import JournalPage
 from ..views import ProjectContext
-from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView
 
 
 class JournalBase(ProjectContext):
@@ -22,6 +22,10 @@ class JournalPageDetail(JournalBase, DetailView):
 
 class JournalPageCreate(JournalBase, CreateView):
     template_name = "www/project/journal/journal_page_create.html"
+
+
+class JournalPageEdit(JournalBase, UpdateView):
+    template_name = "www/project/journal/journal_page_edit.html"
 
 
 class JournalPageCreateFromFile(JournalBase, CreateView):

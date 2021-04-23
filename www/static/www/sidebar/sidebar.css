@@ -44,7 +44,7 @@
 
 .sidebar-nav li {
 
-    line-height: 32px;
+    line-height: 2em;
     white-space: nowrap;
     overflow: hidden;
 }

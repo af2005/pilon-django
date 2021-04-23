@@ -1,8 +1,6 @@
 {% extends "www/project/project_base.html" %}
 {% load static %}
 
-{% block breadcrumbs %}
-{% endblock breadcrumbs %}
 
 {% block sidebar %}
     {% with sidebar_collapsed=True %}
@@ -31,9 +29,7 @@
 
             {% include 'www/snippets/editor.html' %}
             <div class="py-3 d-flex justify-content-end">
-                <a href="{% url "project:wiki" project.key %}">
-                    <button type="reset" class="btn btn-link">Cancel</button>
-                </a>
+                <a class="btn" href="{% url "project:wiki" project.key %}">Cancel</a>
                 {% include "www/snippets/forms/publish-button.html" %}
             </div>
         </form>
@@ -44,9 +40,8 @@
 
 {% block jquery_scripts %}
     {{ block.super }}
-    <script type="application/javascript"
-            src="{% static "www/custom/markdownForm.js" %}"></script>
-    <script type="application/javascript">
+    <script src="{% static "www/custom/markdownForm.js" %}"></script>
+    <script>
         editor.setMarkdown("{{ object.markdown|escapejs }}", cursorToEnd = false);
     </script>
 {% endblock %}

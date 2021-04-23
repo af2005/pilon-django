@@ -1,26 +1,42 @@
 const journalDatePicker = function () {
     const now = new Date();
-    const first_of_month = new Date(now.getFullYear(), now.getMonth(), 1);
-    const last_of_month = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    const start_of_week = getMonday(now);
 
+    let end_of_week = new Date(start_of_week)
+    end_of_week.setDate(end_of_week.getDate()+6)
+
+    const end_of_today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+
+    console.log(end_of_week)
     function getJournalPagesInDateRange(selectedDates) {
         if (selectedDates.length === 2) {
             //increase end date by one day to include this day
 
             selectedDates[1].setDate(selectedDates[1].getDate() + 1);
             const parameter = {
-                "date_created__gte": selectedDates[0].toISOString(),
-                "date_created__lte": selectedDates[1].toISOString()
+                "date__gte": selectedDates[0].toISOString(),
+                "date__lte": selectedDates[1].toISOString()
             }
             $.getJSON("/rest/journal-page?" + $.param(parameter), writeListToDOM)
         }
     }
 
+    function getMonday(d) {
+        d = new Date(d);
+        const day = d.getDay(),
+            diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+        return new Date(d.setDate(diff));
+    }
+
+
     function writeListToDOM(data) {
         let sItems = "";
+        //$(".sidebar-lower-content .flatpickr-day").removeClass("page-available")
         $.each(data, function (key, val) {
             let created_date = new Date(val["date_created"]);
-            sItems += `<a class="sidebar-journal-item" href="${val["absolute_url"]}"> <i class="bi bi-journal text-dark"></i><span class="sidebar-journal-item-date">${created_date.getDate()}</span>${val["name"]}</a>`
+            let timeblob = `<time dateTime="2021-4-23" class="sidebar-time-icon"><div class="day">${created_date.getDate()}</div></time>`;
+            sItems += `<li><a class="sidebar-journal-item" href="${val["absolute_url"]}">${timeblob}<span class="ps-2">${val["name"]}</span></a></li>`
+            //$(".sidebar-lower-content .flatpickr-day").eq(created_date.getDay()).addClass("page-available")
         });
         $("#sidebar-journal-pages").html(sItems);
     }
@@ -35,11 +51,9 @@ const journalDatePicker = function () {
         "locale": {
             "firstDayOfWeek": 1 // start week on Monday
         },
-        defaultDate: [first_of_month, last_of_month],
+        defaultDate: [start_of_week, end_of_week],
         monthSelectorType: "static",
         shorthandCurrentMonth: true,
     });
-    return {
-
-    }
+    return {}
 }();
