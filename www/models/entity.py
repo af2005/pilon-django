@@ -138,11 +138,6 @@ class Project(Entity):
                 "icon": "house-fill",
             },
             {
-                "name": "Team",
-                "url": reverse("project:team", args=[self.key]),
-                "icon": "people",
-            },
-            {
                 "name": "Chat",
                 "url": reverse("project:chat", args=[self.key]),
                 "icon": "envelope",
