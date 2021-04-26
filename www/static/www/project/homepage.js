@@ -14,15 +14,27 @@ const homepage = function () {
         }
 
         function template(entity) {
+            console.log(entity)
             const startDate = new Date(entity["start"]);
-            const months = ["Jan", "Feb", "Mar", "Apr", "May"]
-            return `<div>
+            const endDate = new Date(entity["end"]);
+            let timeDescription = "all day"
+            if (!entity["allDay"]){
+                timeDescription = startDate.toLocaleTimeString().substr(0,5)
+            }
+
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Oct", "Nov", "Dec"]
+            const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+            return `<div class="d-flex">
                 <time class="icon align-self-center">
-                    <div class="month">${startDate.getMonth()}</div>
+                    <div class="month">${months[startDate.getMonth()]}</div>
                     <div class="day">${startDate.getDate()}</div>
-                    <div class="weekday">Sun</div>
+                    <div class="weekday">${days[startDate.getDay()]}</div>
                 </time>
-                ${entity["title"]}
+                <div class="ms-2">
+                    ${timeDescription}
+                    <div class="font-weight-bold">${entity["title"]}</div>
+                </div>
+</div>
             </div>
             `
         }
