@@ -78,7 +78,7 @@ ROOT_URLCONF = "pilon.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -140,7 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-STATIC_ROOT = "www/static"
+STATIC_ROOT = "static"
 STATIC_URL = "/static/"
 MEDIA_ROOT = "media"
 MEDIA_URL = "/media/"
@@ -160,11 +160,22 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
 }
 
-# Sass Stuff
+# SASS SCSS compilation and compression
 STATICFILES_FINDERS = (
+    'compressor.finders.CompressorFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'sass_processor.finders.CssFinder',
+    'sass_processor.finders.CssFinder'
 )
 SASS_PRECISION = 8  # 8 ist required for bootstrap to function
 SASS_OUTPUT_STYLE = 'compressed'
+
+# Javascript compression
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+]
+COMPRESS_PRECOMPILERS = (
+    ('module', 'compressor_toolkit.precompilers.ES6Compiler')
+)
+COMPRESS_ENABLED = True
+

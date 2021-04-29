@@ -1,4 +1,5 @@
 {% extends "www/project/project_base.html" %}
+{% load compress %}
 {% load static %}
 
 {% block title %}
@@ -58,7 +59,8 @@
 {% endblock %}
 
 {% block jquery_scripts %}
-    <script src="{% static "www/project/homepage.js" %}"></script>
+    <script type="module" src="{% static "www/project/homepage.js" %}"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function (event) {
             homepage.getActivity("{{ project.id }}");
@@ -66,4 +68,5 @@
 
         });
     </script>
+
 {% endblock jquery_scripts %}
