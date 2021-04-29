@@ -12,9 +12,7 @@
 
     {% include 'www/snippets/theme.html' %}
     {% block extrahead %}{% endblock extrahead %}
-    {% block window_title %}
-        {% include "www/snippets/window_title.html" %}
-    {% endblock window_title %}
+    {% block window_title %}<title>{% include "www/snippets/window_title.html" %}</title>{% endblock window_title %}
 </head>
 <body class="bg-light">
 <main class="outer-wrapper  bg-bluegray">
