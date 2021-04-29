@@ -1,6 +1,7 @@
 {% load static %}
+{% load sass_tags %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'www/theme.css' %}">
+<link rel="stylesheet" type="text/css" href="{% sass_src 'www/theme.scss' %}">
 <style>
     @font-face {
         font-family: "bootstrap-icons";
