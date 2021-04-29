@@ -1,0 +1,13 @@
+{% load static %}
+{% load sass_tags %}
+
+<link rel="stylesheet" type="text/css" href="{% sass_src 'www/theme.scss' %}">
+<style>
+    @font-face {
+        font-family: "bootstrap-icons";
+        src: url("{% static 'www/bootstrap-icons/bootstrap-icons.woff' %}") format("woff"),
+        url("{% static 'www/bootstrap-icons/bootstrap-icons.woff2' %}") format("woff2");
+    }
+</style>
+<link rel="stylesheet" href="{% static 'www/bootstrap-icons/bootstrap-icons-patched.css' %}">
+<link rel="stylesheet" type="text/css" href="{% sass_src 'www/font/font.scss' %}">

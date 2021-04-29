@@ -1,0 +1,13 @@
+{% extends "www/base/base+sidebar+title.html" %}
+{% load static %}
+
+{% block additional_assets %}
+    <link rel="stylesheet" type="text/css" href="{% static "www/sidebar/sidebar.css" %}">
+{% endblock %}
+
+
+{% block title %}
+    {% include 'www/snippets/title_subtitle.html' %}
+{% endblock %}
+
+{% block content %}{{ content }}{% endblock %}

@@ -1,0 +1,8 @@
+<time datetime="{{ date.year }}-{{ date.month }}-{{ date.day }}"
+      class="icon align-self-center">
+
+    <div class="month">{{ date|date:"M" }}</div>
+    <div class="day">{{ date.day }}</div>
+    <div class="weekday">{{ date|date:"D" }}</div>
+
+</time>

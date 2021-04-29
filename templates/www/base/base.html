@@ -1,0 +1,47 @@
+{% load sass_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A powerful tool for collaborating.">
+    <meta name="author" content="Pilon">
+    {% include 'www/snippets/favicon.html' %}
+    {% include 'www/snippets/theme.html' %}
+    {% block additional_assets %}{% endblock %}
+    {% block extrahead %}{% endblock extrahead %}
+    {% block window_title %}<title>{% include "www/snippets/window_title.html" %}</title>{% endblock window_title %}
+</head>
+<body class="bg-light">
+<main class="outer-wrapper  bg-bluegray">
+    {% block navigation %}
+        {% include 'www/snippets/navigation.html' %}
+    {% endblock %}
+    {% block subnavigation %}{% endblock %}
+    <div id="wrapper">
+        {% block sidebar %}
+        {% endblock %}
+        <div id="page-content-wrapper" class="d-flex flex-column">
+            <div id="content-container" class="rounded container-fluid mb-4 py-4 flex-grow-1">
+                <span id="top-of-page"></span>
+                {% block breadcrumbs %}
+                {% endblock %}
+                {% block title %}
+                {% endblock %}
+                <div class="container">
+                    {% block content %}{% endblock %}
+                    {% include "www/snippets/pagination.html" %}
+                </div>
+            </div>
+            {% include 'www/snippets/footer.html' %}
+        </div>
+    </div>
+</main>
+<script src="{% static 'www/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'www/sidebar/mobile-sidebar.js' %}"></script>
+<script  src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>{% block jquery_scripts %}{% endblock %}
+{% block additional_scripts_eob %}{% endblock %}
+{% block extra_js %}{% endblock extra_js %}
+</body>
+</html>

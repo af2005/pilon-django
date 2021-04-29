@@ -144,6 +144,9 @@ class EntitySerializer(ShortUUIDHyperlinkedModelSerializer):
         required=False,
         view_name="entity-detail",
     )
+    labels = serializers.HyperlinkedRelatedField(
+        many=True, required=False, view_name="label-detail", queryset=Label.objects.all()
+    )
 
     labels = serializers.HyperlinkedRelatedField(
         lookup_field="id",

@@ -120,3 +120,13 @@ GitHub.sublime-settings
 # imdone
 .imdoneignore
 .imdone
+/node_modules/
+/www/static/CACHE/
+
+
+static/www/font/font.css
+static/www/font/font.css.map
+static/www/fullcalendar/custom.css
+static/www/fullcalendar/custom.css.map
+static/www/theme.css
+static/www/theme.css.map

@@ -1,0 +1,60 @@
+<div class="d-flex align-items-start justify-content-between py-3 ">
+    <div class="d-flex">
+        {% block pre_title %}
+        {% endblock pre_title %}
+        {% include "www/snippets/project/page_metadata.html" %}
+    </div>
+    <div class="text-end">
+        <a class="btn btn-stealth" data-bs-toggle="dropdown"
+           aria-expanded="false"><i class="text-dark bi bi-info-circle-fill"></i>
+        </a>
+        <div class="dropdown-menu">
+            <h6 class="dropdown-header">Creation</h6>
+            <a href="#" class="dropdown-item"><i class="bi bi-person-fill"></i>
+                {% with user=object.creator %}
+                    {% include "www/snippets/metadata/creator.html" %}
+                {% endwith %}
+            </a>
+            <span class="dropdown-item">
+            {% with date=object.date_created %}
+                {% include "www/snippets/metadata/time.html" %}
+            {% endwith %}</span>
+
+            <div class="dropdown-divider"></div>
+
+            <h6 class="dropdown-header">Last updated</h6>
+            <a href="#" class="dropdown-item"><i class="bi bi-person-fill"></i>
+                {% with user=object.creator %}
+                    {% include "www/snippets/metadata/creator.html" %}
+                {% endwith %}
+            </a>
+            <span class="dropdown-item">
+            {% with date=object.date_modified %}
+                {% include "www/snippets/metadata/time.html" %}
+            {% endwith %}
+         </span>
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" href="#"><i class="bi bi-clock-history"></i> History</a>
+
+        </div>
+        <a class="btn btn-stealth" data-bs-toggle="dropdown"
+           aria-expanded="false"><i class="bi bi-three-dots"></i>
+        </a>
+        <div class="dropdown-menu">
+            {% block edit_link %}
+            {% endblock %}
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"><i class="bi bi-star"></i> Mark as favorite</a>
+            <a class="dropdown-item" href="#"><i class="bi bi-share"></i> Share</a>
+            <a class="dropdown-item" href="#"><i
+                    class="bi bi-paperclip"></i>Attachments</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Export</a>
+            <a class="dropdown-item" href="#">Copy</a>
+            <a class="dropdown-item" href="#">Delete</a>
+
+
+        </div>
+    </div>
+</div>

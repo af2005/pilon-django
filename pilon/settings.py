@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os.path
 
 # Build paths inside the project like this: BASE_DIR / "subdir".
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,6 +54,9 @@ INSTALLED_APPS = [
     "colorfield",
     "django_filters",
     "django.contrib.humanize",
+    "compressor",
+    "compressor_toolkit",
+    "sass_processor"
 ]
 
 MIDDLEWARE = [
@@ -74,7 +78,7 @@ ROOT_URLCONF = "pilon.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -100,7 +104,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -120,7 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 AUTH_USER_MODEL = "www.User"
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -138,7 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-STATIC_ROOT = "www/static"
+STATIC_ROOT = "static"
 STATIC_URL = "/static/"
 MEDIA_ROOT = "media"
 MEDIA_URL = "/media/"
@@ -154,7 +156,26 @@ ADD_REVERSION_ADMIN = True
 # Calendar
 FIRST_DAY_OF_WEEK = 1
 
-
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
 }
+
+# SASS SCSS compilation and compression
+STATICFILES_FINDERS = (
+    'compressor.finders.CompressorFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder'
+)
+SASS_PRECISION = 8  # 8 ist required for bootstrap to function
+SASS_OUTPUT_STYLE = 'compressed'
+
+# Javascript compression
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+]
+COMPRESS_PRECOMPILERS = (
+    ('module', 'compressor_toolkit.precompilers.ES6Compiler')
+)
+COMPRESS_ENABLED = True
+

@@ -1,0 +1,39 @@
+{% extends "www/project/journal/journal_base.html" %}
+{% load humanize %}
+{% block content %}
+    <div class="card">
+        <div class="accordion">
+            {% for object in object_list %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#journal-{{ object.id }}"
+                                aria-expanded="false"
+                                aria-controls="journal-{{ object.id }}">
+                            {% with date=object.date %}
+                                {% include "www/snippets/metadata/date_icon.html" %}
+                            {% endwith %}
+                            <div class="ms-3">
+                                <div class="fw-bold">{{ object.name }}</div>
+                                <div>
+                                    {% with user=object.creator %}
+                                        {% include "www/snippets/metadata/creator.html" %}
+                                    {% endwith %}
+                                </div>
+                            </div>
+                        </button>
+                    </h2>
+                    <div id="journal-{{ object.id }}" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            {% lorem 2 p %}
+                            <div>{{ object.markdown_rendered | safe }}</div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "www/accounts/login_base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block form %}
+    <main class="login-form">
+        <div>
+            <div class=" justify-content-center">
+                <div >
+                    <div>
+                        {% if user.is_authenticated %}
+                            <div class="alert alert-info" role="alert">
+                                Already logged in as <span
+                                    class="font-weight-bold">{{ user.username }}</span>,
+                                but you can change.
+                            </div>
+                        {% endif %}
+                        {% if next %}
+                            {% if user.is_authenticated %}
+                                <p>Your account doesn't have access to this page. To
+                                    proceed,
+                                    please login with an account that has access.</p>
+                            {% else %}
+                                <div class="alert alert-info" role="alert">
+                                    Please login to see this page.
+                                </div>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if logout %}
+                            <div class="alert alert-success" role="alert">
+                                Logout successful.
+                            </div>
+                        {% endif %}
+
+                        {% if form.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                Username/Password combination wrong.
+                            </div>
+                        {% endif %}
+
+                        <form action="{% url 'login' %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group row my-1">
+                                <label for="email_address"
+                                       class="col-md-4 col-form-label text-md-right">{{ form.username.label_tag }}</label>
+                                <div>
+                                    <div class="input-group ">
+                                            <span class="input-group-text"><i
+                                                    class="bi bi-person-fill"></i> </span>
+                                        {{ form.username|add_class:'form-control' }}
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row my-2">
+                                <label for="password"
+                                       class="col-md-4 col-form-label text-md-right">{{ form.password.label_tag }}</label>
+                                <div>
+                                    <div class="input-group">
+                                            <span class="input-group-text"><i
+                                                    class="bi bi-key-fill"></i> </span>
+
+                                        {{ form.password|add_class:'form-control' }}
+                                    </div>
+                                </div>
+                            </div>
+                            <!--
+                            <div class="form-group row  my-2">
+                                <div class="col-md-6 offset-md-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="remember"> Remember Me
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            -->
+
+                            <div class=" offset-md-4 mt-4">
+                                <button type="submit" class="btn btn-primary ">
+                                    Login
+                                </button>
+                                <input type="hidden" name="next" value="{{ next }}">
+                                <a href="{% url 'password_reset' %}"
+                                   class="btn btn-link disabled">
+                                    Forgot Your Password?
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+{% endblock %}

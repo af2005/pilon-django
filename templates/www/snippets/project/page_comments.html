@@ -1,0 +1,31 @@
+<div class=" mt-4">
+    <div class="mx-2  align-items-center">
+        <span>{{ object.comments|length }}
+                <i class="bi bi-chat-left ps-1 small"></i>
+        </span>
+        <a class="small font-weight-bold ms-2" href="#">Add comment</a>
+
+    </div>
+    {% for comment in object.comments %}
+        <div class="card my-2">
+            <div class="card-body py-3 d-flex">
+                {#                <div class="me-4 font-weight-bold">#}
+                {#                    <a href="#">{{ comment.creator }}</a>#}
+                {#                </div>#}
+                <div>
+                    <div>
+                        {{ comment.markdown_rendered | safe }}
+                    </div>
+                    <div class="small mt-1">
+                        <a href="#">{{ comment.creator }}</a>
+                        <i class="bi bi-dot"></i>
+                        {{ comment.date_created }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+</div>
+{#    <div class="mt-3">0<i class="bi bi-chat-left ps-1 small"></i></div>#}

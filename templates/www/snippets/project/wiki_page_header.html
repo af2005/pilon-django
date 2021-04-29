@@ -1,0 +1,7 @@
+{% extends "www/snippets/project/page_header.html" %}
+{% block edit_link %}
+    <a class="dropdown-item"
+       href="{% url "project:wiki-page-edit" project.key object.id %}">
+        <i class="bi bi-pencil"></i> Edit
+    </a>
+{% endblock edit_link %}

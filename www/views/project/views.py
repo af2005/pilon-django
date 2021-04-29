@@ -25,8 +25,13 @@ class ProjectContext(ContextMixin, View):
 
 
 class ProjectHome(ProjectContext, TemplateView):
+    model = Project
+    fields = ["name", "key"]
     template_name = "www/project/project_home.html"
     active_sidebar_item = "Home"
+    extra_context = {
+        "page_title": ""
+    }
 
 
 class ProjectCreate(CreateView):

@@ -1,0 +1,9 @@
+{% load static %}
+
+<img class="user-avatar user-avatar-small" src="
+{% if user.avatar.url %}
+{{ user.avatar.url }}
+{% else %}
+{% static "www/pilon-icons/avatardefault.min.svg" %}
+{% endif %}
+">
