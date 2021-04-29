@@ -1,4 +1,5 @@
 {% extends "www/base/base+sidebar+title.html" %}
+{% load static %}
 {% block sidebar_title %}
 <strong>{{ project.name }}</strong>
 {% endblock sidebar_title %}
@@ -19,4 +20,9 @@
     {% with sidebar_items=project.sidebar_items %}
         {{ block.super }}
     {% endwith%}
+{% endblock %}
+
+{% block additional_scripts_eob %}
+    <script src="{% static 'frontend/index-bundle.js' %}"></script>
+    {{ block.super }}
 {% endblock %}

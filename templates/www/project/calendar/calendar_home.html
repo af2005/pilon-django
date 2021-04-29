@@ -24,9 +24,7 @@
 {% block additional_scripts_eob %}
     <script src='{% static "www/flatpickr/flatpickr.js" %}'></script>
     <script src='{% static "www/fullcalendar/custom.js" %}'></script>
-    {% compress js %}
-    <script type="module" src="{% static "www/project/calendar.js" %}"></script>
-    {% endcompress %}
+    <script src="{% static "www/project/calendar.js" %}"></script>
 {% endblock %}
 
 
