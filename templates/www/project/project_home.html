@@ -10,66 +10,19 @@
 
 
 {% block content %}
-    <div id="root"></div>
-
-<script src="{% static 'frontend/index-bundle.js' %}"></script>
-{#    <div class="row">#}
-{#        <div class="col-sm-6">#}
-{#            <div class="card  my-2 ">#}
-{#                <div class="card-header">#}
-{#                    <h6 class="mb-0">Activity</h6>#}
-{#                </div>#}
-{#                <div class=" list-group-flush" id="homepage-activity">#}
-{##}
-{#                </div>#}
-{#                <div class="card-footer">#}
-{#                    <small class="d-block text-end">#}
-{#                        <a href="{% url "project:journal" project.key %}">All updates</a>#}
-{#                    </small>#}
-{#                </div>#}
-{##}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="col-sm-6">#}
-{#            <div class="card my-2">#}
-{#                <div class="card-header">#}
-{#                    <h6 class="mb-0">Upcoming events and tasks</h6>#}
-{#                </div>#}
-{#                <div id="homepage-events" class="card-body">#}
-{##}
-{#                </div>#}
-{##}
-{#            </div>#}
-{#            <div class="card my-3">#}
-{#                <div class="card-header">#}
-{#                    <h6 class="d-flex align-items-center justify-content-between">#}
-{#                        <span>Team</span>#}
-{#                        <a href="#" class="btn btn-sm btn-light border btn-icon">#}
-{#                            <i class="bi bi-person-plus-fill"></i>#}
-{#                        </a></h6>#}
-{#                </div>#}
-{#                <div class="card-body">#}
-{#                </div>#}
-{#            </div>#}
-{##}
-{#        </div>#}
-{##}
-{##}
-{#    </div>#}
-
-
+    <div id="react"></div>
 
 {% endblock %}
 
 {% block jquery_scripts %}
-{#    <script type="module" src="{% static "www/project/homepage.js" %}"></script>#}
-{##}
-{#    <script>#}
-{#        document.addEventListener("DOMContentLoaded", function (event) {#}
-{#            homepage.getActivity("{{ project.id }}");#}
-{#            homepage.getEvents("{{ project.key }}");#}
-{##}
-{#        });#}
-{#    </script>#}
+    <script src="{% static "www/project/homepage.js" %}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            homepage.getActivity("{{ project.id }}");
+            homepage.getEvents("{{ project.key }}");
+
+        });
+    </script>
 
 {% endblock jquery_scripts %}

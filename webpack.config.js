@@ -1,10 +1,10 @@
 const path = require('path');
 
 module.exports = {
-    entry: './frontend/index.js',  // path to our input file
+    entry: './frontend/index.js',
     output: {
-        filename: 'index-bundle.js',  // output bundle file name
-        path: path.resolve(__dirname, './static/frontend'),  // path to our Django static directory
+        filename: 'index-bundle.js',
+        path: path.resolve(__dirname, './static/frontend'),
     },
     module: {
         rules: [
