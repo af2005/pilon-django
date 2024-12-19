@@ -1,10 +1,8 @@
 {% extends "www/base+sidebar+title.html" %}
 {% load static %}
 
-{% block additional_assets %}
+{% block navigation %}{% include 'www/snippets/navigation-create-button.html' %}{% endblock %}
 
-
-{% endblock %}
 
 {% block additional_scripts_eob %}
     <script src="{% static "www/datepicker/datepicker-full.min.js" %}"></script>
