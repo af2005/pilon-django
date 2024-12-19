@@ -1,0 +1,30 @@
+{% extends 'www/base.html' %}
+{% load static %}
+
+{% block additional_assets %}
+
+{% endblock %}
+
+
+{% block sidebar %}
+    <link rel="stylesheet" type="text/css" href="{% static "www/custom/sidebar.css" %}">
+    <div id="sidebar-wrapper" class="bg-light border-end pt-3">
+        <ul class="sidebar-nav">
+            {% block sidebar_upper_content %}
+            {% endblock %}
+            {% for listitem in sidebar_items %}
+                <li>
+                    <a class="{% if forloop.counter0 == active_sidebar_item %} font-weight-bold text-primary {% endif %}"
+                       href="{{ listitem.url }}">
+                        <i class="bi bi-{{ listitem.icon }}"></i>
+                        <span class="mx-1">{{ listitem.name }}</span>
+                    </a></li>
+            {% endfor %}
+        </ul>
+        {% block sidebar_lower_content %}
+        {% endblock %}
+
+    </div>
+{% endblock sidebar %}
+
+<!--<div class="resize-handle--x" data-target="aside"></div>-->

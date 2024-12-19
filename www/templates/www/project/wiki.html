@@ -1,20 +1,24 @@
-{% extends "www/project/project_base.html" %}
+{% extends "www/base+sidebar+title.html" %}
 {% load static %}
 
-{% block sidebar %}
-    {% include 'www/snippets/sidebar_pagetree.html' %}
+
+
+{% block sidebar_lower_content %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.min.css" %}">
+
+    <div class="bg-light">
+        <h6 class="mx-2 my-2">Wiki Page Tree</h6>
+        <div id="tree" class="treeview">
+        </div>
+    </div>
 {% endblock %}
-
-{% block additional_assets %}
-    <script type="application/javascript"
-            src="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.min.js" %}"></script>
-
-{% endblock %}
-
 
 {% block content %}
 
     {{ content }}
+    <script type="application/javascript"
+            src="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.min.js" %}"></script>
 
     <script type="application/javascript">
 
@@ -58,10 +62,13 @@
             }
         ];
 
+
         const tree = new tui.Tree('#tree', {
             data: data,
             nodeDefaultState: 'opened',
-            usageStatistics: false
+            usageStatistics: false,
+
+
         });
     </script>
 {% endblock %}

@@ -1,9 +1,8 @@
-{% extends "www/project/project_base.html" %}
+{% extends "www/base+sidebar+title.html" %}
 {% load static %}
 
 {% block additional_assets %}
-    <link rel="stylesheet" type="text/css" href="{% static "www/custom/tasks.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "www/datepicker/datepicker.min.css" %}">
+
 
 {% endblock %}
 
@@ -23,7 +22,8 @@
 
 {% block content %}
     {{ content }}
-
+    <link rel="stylesheet" type="text/css" href="{% static "www/custom/tasks.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "www/datepicker/datepicker.min.css" %}">
     <div class="d-flex justify-content-end">
         <button class="btn btn-sm btn-secondary m-1 float-right"><i class="bi bi-signpost"></i> Add Milestone</button>
 
