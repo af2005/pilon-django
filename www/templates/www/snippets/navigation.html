@@ -1,28 +1,30 @@
 <nav id="navbar-top" class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
     <div class="container-fluid">
+
         <a class="navbar-brand" href="/">pilon</a>
         <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas"
                 aria-label="Toggle navigation">
+                    <span style="margin-right:1rem; color: white; font-style: italic">{{ navbar_centertext }}</span>
+
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="navbar-collapse offcanvas-collapse d-flex justify-content-between" id="navbarsExampleDefault">
+            <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
                        aria-expanded="false">Projects</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown01">
                         <h6 class="dropdown-header">Recent Projects</h6>
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Not implemented, use directory</a></li>
                         <div class="dropdown-divider"></div>
                         <h6 class="dropdown-header">Pinned Projects</h6>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="#">Not implemented, use directory</a></li>
                         <div class="dropdown-divider"></div>
-                        <li><a class="dropdown-item" href="/project-directory">Project
+                        <li><a class="dropdown-item" href="/project/directory">Project
                             directory</a>
                         </li>
-                        <li><a class="dropdown-item" href="/create-project">Create new project</a></li>
+                        <li><a class="dropdown-item" href="/project/create">Create new project</a></li>
 
                     </ul>
                 </li>
@@ -31,9 +33,13 @@
                 </li>
 
             </ul>
+            <ul class="nav mb-2 mb-lg-0">
+                <li class="nav-item navbar_centertext">
+                    <span style="color: white; font-style: italic">{{ navbar_centertext }}</span>
+                </li>
+            </ul>
 
-
-            <ul class="nav justify-content-right">
+            <ul class="nav">
                 <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Search">
                     <a class="btn btn-dark border-0 nav-link bi bi-search mx-1" href="#"></a>
                 </li>
@@ -41,20 +47,22 @@
                     <a class="btn btn-dark border-0 nav-link bi bi-list-check mx-1" href="#" title="Your tasks"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-dark border-0 nav-link bi bi-chat-square-text-fill mx-1" href="#" title="Message center"></a>
+                    <a class="btn btn-dark border-0 nav-link bi bi-chat-square-text-fill mx-1" href="#"
+                       title="Message center"></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="btn btn-dark border-0 nav-link bi bi-person-fill mx-1" href="#"
                        id="user-menu-dropdown" data-bs-toggle="dropdown"
                        aria-expanded="false" style=""></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-menu-dropdown">
-                        <li><a class="dropdown-item" href="/user/settings">User settings</a></li>
-                        <li><a class="dropdown-item" href="/system/settings">System settings</a></li>
+                        <li><a class="dropdown-item" href="/accounts/settings">User settings</a></li>
+                        <li><a class="dropdown-item" href="/system-settings/global">System settings</a></li>
                         <div class="dropdown-divider"></div>
-                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        <li><a class="dropdown-item" href="/accounts/logout">Logout</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+

@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 
 from ..models import Project
 
@@ -8,9 +8,10 @@ def rest_handler_all(request):
         return get_all_projects()
 
     elif request.method == "POST":
-        if request.POST.key and request.POST.name:
-            create_new_project(request.POST.key, request.POST.name)
-            return get_single_project(request.POST.key)
+
+        if request.POST["project_key"] and request.POST["project_fullname"]:
+            create_new_project(request.POST["project_key"], request.POST["project_fullname"])
+            return HttpResponseRedirect("/project/contents/"+request.POST["project_key"])
         else:
             return HttpResponseBadRequest("You need to provide a key and a name when creating a new project")
 
@@ -25,7 +26,7 @@ def get_all_projects():
 
 
 def get_single_project(key):
-    return Project.objects.filter(key=key)
+    return repr(Project.objects.filter(key=key))
 
 
 def create_new_project(key, name):
