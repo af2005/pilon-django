@@ -1,6 +1,14 @@
+
+
 body{
     min-height: 100vh;
+    font-family: "Source Sans Pro", sans-serif;
+
 }
+
+
+
+
 a:link.btn-link,a{
     text-decoration: none;
 }
@@ -28,6 +36,6 @@ a:link.btn-link,a{
     font-size: calc(1.475rem + 1.4vw);
 }
 .font-weight-bold{
-    font-weight: bold;
+    font-weight: 600;
 }
 
