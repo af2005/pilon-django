@@ -1,7 +1,12 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static "www/custom/sidebar.css" %}">
+
+
 <!-- Sidebar -->
-<div id="sidebar-wrapper" class="bg-light border-right">
+<div id="sidebar-wrapper" class="bg-light border-end pt-3">
     <ul class="sidebar-nav">
-        <li class="sidebar-brand"></li>
+
         {% for listitem in sidebar_items %}
             <li>
                 <a class="{% if forloop.counter0 == active_sidebar_item %} font-weight-bold text-primary {% endif %}"
@@ -13,6 +18,7 @@
     </ul>
     {% block sidebar_lower_content %}
     {% endblock %}
+
 </div>
 
-<div class="resize-handle--x" data-target="aside"></div>
+<!--<div class="resize-handle--x" data-target="aside"></div>-->

@@ -4,27 +4,11 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
 
+
 #wrapper {
-    min-height: 100vh;
-}
-
-#sidebar-wrapper {
-    min-width: 100px;
-    max-width: 50vw;
-    width: 20vw;
-    resize: horizontal;
-    overflow: auto;
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    background-color: indianred;
-    height: 100vw;
-    border-right: 1px gainsboro solid;
-}
-
-#page-content-wrapper {
-    min-width: 200px;
-    margin-left:20vw
+    display: grid;
+    overflow: hidden;
+    grid-template-columns: auto 1fr;
 
 }
 
@@ -39,18 +23,23 @@
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
-    line-height: 35px;
+
+    line-height: 32px;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
     color: #41464b;
+    padding: 0 1rem;
 }
-.sidebar-nav li a.active{
+
+.sidebar-nav li a.active {
     font-weight: bold;
 }
+
 .sidebar-nav li a:hover {
     text-decoration: none;
     background: white;
@@ -61,11 +50,6 @@
     text-decoration: none;
 }
 
-.sidebar-nav > .sidebar-brand {
-    height: 56px;
-    font-size: 18px;
-    line-height: 56px;
-}
 
 .sidebar-nav > .sidebar-brand a {
 }
@@ -83,17 +67,9 @@
         padding-right: 250px;
     }
 
-    #sidebar-wrapper {
-        width: 0;
-    }
 
     #wrapper.toggled #sidebar-wrapper {
         width: 250px;
-    }
-
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
     }
 
     #wrapper.toggled #page-content-wrapper {
@@ -102,8 +78,8 @@
     }
 }
 
-.sidebar-nav .bi::before{
-    display: inline!important;
-    line-height: 1.25rem!important;
+.sidebar-nav .bi::before {
+    display: inline !important;
+    line-height: 1.25rem !important;
 
 }
