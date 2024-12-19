@@ -1,0 +1,73 @@
+{% extends "www/project/project_base.html" %}
+{% load static %}
+
+{% block additional_assets %}
+    <link rel="stylesheet" type="text/css" href="{% static "www/custom/sidebar.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "www/treeview/bootstrap-treeview.min.css" %}">
+{% endblock %}
+
+
+{% block sidebar %}
+    {% include 'www/snippets/sidebar_pagetree.html' %}
+{% endblock %}
+
+{% block additional_scripts_eob %}
+    <script type="application/javascript" src="{% static "www/treeview/bootstrap-treeview.min.js" %}"></script>
+    <script type="application/javascript">
+        function getTree() {
+            var tree = [
+                {
+                    text: "Parent 1",
+                    nodes: [
+                        {
+                            text: "Child 1",
+                            nodes: [
+                                {
+                                    text: "Grandchild 1"
+                                },
+                                {
+                                    text: "Grandchild 2"
+                                }
+                            ]
+                        },
+                        {
+                            text: "Child 2"
+                        }
+                    ],
+                    state: {
+                        expanded: true
+                    }
+                },
+                {
+                    text: "Parent 45"
+                },
+                {
+                    text: "Parent 3"
+                },
+                {
+                    text: "Parent 4"
+                },
+                {
+                    text: "Parent 5"
+                }
+            ];
+            return tree;
+        }
+
+        $('#treeview7').treeview({
+                data: getTree(),
+                showBorder: false
+            }
+        );
+    </script>
+{% endblock %}
+
+{% block title %}
+    {% include 'www/snippets/title_subtitle.html' %}
+{% endblock %}
+
+{% block content %}
+    {{ content }}
+
+
+{% endblock %}

@@ -9,18 +9,21 @@ def admin(request, window_title, title="", subtitle="", sidebar_items=None, cont
         'page_title': title,
         'page_subtitle': subtitle,
         'sidebar_items': sidebar_items,
-        'content': content
+        'content': content,
+        'navbar_centertext': 'System settings',
     }
     return template.render(context, request)
 
 
-def simple(request, window_title, title="", subtitle="", content=""):
+def simple(request, window_title, title="", subtitle="", content="", navbar_centertext=""):
     template = loader.get_template('www/simple.html')
     context = {
         'window_title': window_title,
         'content': content,
         'page_title': title,
         'page_subtitle': subtitle,
+        'navbar_centertext': navbar_centertext,
+
     }
     return template.render(context, request)
 
@@ -64,6 +67,7 @@ def project_view(request, key, template_name, title, sidebar_items, active_sideb
     project = list(Project.objects.filter(key=key).values())[0]
     template = loader.get_template(template_name)
     context = {
+        'project_key': project["key"],
         'window_title': f'{project["name"]} {title}',
         'page_title': f'{project["name"]} {title}',
         'page_subtitle': "",
