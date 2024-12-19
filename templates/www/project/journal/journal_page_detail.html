@@ -1,0 +1,20 @@
+{% extends "www/project/journal/journal_base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            {% include "www/snippets/project/journal_page_header.html" %}
+        </div>
+
+        <div class="card-body">
+            {{ object.markdown_rendered | safe }}
+        </div>
+    </div>
+
+
+    {% include "www/snippets/project/page_comments.html"  %}
+
+
+{% endblock %}

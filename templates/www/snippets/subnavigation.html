@@ -1,0 +1,13 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'www/custom/subnavigation.css' %}">
+
+
+<div class="nav-scroller bg-white shadow-sm">
+    <nav class="nav nav-underline" aria-label="Secondary navigation">
+        {% for items in subnav_items %}
+         <a class="nav-link {% if forloop.counter0 == active_subnav_item %} active {% endif %}
+" href="{{ items.url }}">{{ items.name }}</a>
+        {% endfor %}
+    </nav>
+</div>

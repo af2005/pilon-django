@@ -1,0 +1,46 @@
+{% extends "www/project/project_base.html" %}
+{% load static %}
+
+{% block window_title %}
+    {% with window_title=project.name|add:" - Create content " %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+
+
+{% block content %}
+    {% url "project:wiki-page-create" project.key as wiki_create_url %}
+    {% url "project:wiki-page-create-from-file" project.key as wiki_file_create_url %}
+    {% url "project:journal-page-create" project.key as journal_create_url %}
+    {% url "project:journal-page-create-from-file" project.key as journal_file_create_url %}
+    {% url "project:task-create" project.key as task_create_url %}
+
+    <div class="row">
+        {% with icon="file-text" title="Wiki Page" %}
+            {% with text="Store information in the project wiki." link=wiki_create_url link_text="Create Wiki Page" %}
+                {% with secondary_link=wiki_file_create_url secondary_link_text="Create from file..." %}
+                    {% include "www/snippets/cards/create_entity_with_secondary_link.html" %}
+                {% endwith %}
+            {% endwith %}
+        {% endwith %}
+
+        {% with icon="journal" title="Journal Page" %}
+            {% with text="Create a new page in the journal." link=journal_create_url link_text="Create Journal Page" %}
+                {% with secondary_link=journal_file_create_url secondary_link_text="Create from file..." %}
+                    {% include "www/snippets/cards/create_entity_with_secondary_link.html" %}
+                {% endwith %}
+            {% endwith %}
+        {% endwith %}
+
+        {% with icon="check2-circle" title="Task" %}
+            {% with text="Organize your work." link=task_create_url link_text="Create Task" %}
+                {% include "www/snippets/cards/create_entity.html" %}
+            {% endwith %}
+        {% endwith %}
+
+
+    </div>
+
+
+{% endblock %}

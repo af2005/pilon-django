@@ -1,0 +1,66 @@
+@import "../colors/palette-2.scss";
+
+time.sidebar-time-icon {
+  display: inline-flex;
+  flex-flow: column;
+  border-top: .25em $red solid;
+  background-color: $white;
+  border-radius: .25em;
+  font-size: small;
+  width: 1.5em;
+  text-align: center;
+}
+
+time.sidebar-time-icon .day {
+  line-height: 1em;
+}
+
+
+time.icon {
+  font-size: 1em; /* change icon size */
+  display: flex;
+  flex-flow: column;
+  width: 3em;
+  overflow: hidden;
+}
+
+time.icon * {
+  display: block;
+  width: 100%;
+  font-size: 1em;
+  font-style: normal;
+  text-align: center;
+}
+
+time.icon .month {
+  color: #fff;
+  background-color: $red;
+  font-size: 0.8em;
+  border-top-left-radius: 0.6em;
+  border-top-right-radius: 0.6em;
+
+
+}
+
+time.icon .weekday {
+  color: $gray;
+  font-size: 0.65em;
+  border: 1px $gray-400 solid;
+  border-bottom-left-radius: 0.6em;
+  border-bottom-right-radius: 0.6em;
+  border-top: 0;
+  background-color: $white;
+}
+
+time.icon .day {
+  font-size: 2.4em;
+  letter-spacing: -0.05em;
+  color: $marine;
+  font-weight: bold;
+  font-family: monospace;
+  line-height: 1em;
+  border-left: 1px $gray-400 solid;
+  border-right: 1px $gray-400 solid;
+  background-color: $white;
+
+}

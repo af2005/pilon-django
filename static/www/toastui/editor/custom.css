@@ -1,0 +1,43 @@
+.container {
+    margin-left: auto;
+}
+
+.tui-toolbar-icons {
+    background-image: none
+}
+
+.tui-editor-defaultUI-toolbar button {
+    padding: 0;
+    height: 1.4rem;
+    width: 1.4rem;
+    align-items: center;
+    background-color: inherit;
+    border: 0;
+}
+
+.tui-editor-contents table th {
+    background-color: #f8f9fa;
+    color: black;
+    font-weight: bold;
+}
+
+.tui-editor-defaultUI-toolbar {
+    background-color: #f8f9fa;
+}
+
+
+
+.tui-toolbar-icons::before {
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: middle;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.1rem;
+    color: black
+}

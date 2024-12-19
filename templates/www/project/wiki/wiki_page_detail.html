@@ -1,0 +1,22 @@
+{% extends "www/project/wiki/wiki_base.html" %}
+{% load static %}
+
+{% block window_title %}
+    {% with window_title=object.name %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            {% include "www/snippets/project/wiki_page_header.html" %}
+        </div>
+
+        <div class="card-body">
+            {{ object.markdown_rendered | safe }}
+        </div>
+    </div>
+    {% include "www/snippets/project/page_comments.html" %}
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "www/base/base+title.html" %}
+{% load static %}
+
+{% block window_title %}
+    {% with window_title="Projects" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block title %}
+    {% with page_title="Project directory" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+    <div class="card m-1">
+        <div class="card-header">
+            <div class="row justify-content-between align-items-center flex-grow-1">
+                <div class="col-sm py-2">
+                    <form>
+                        <div class="input-group input-group-merge input-group-flush">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="bi bi-search"></i>
+                                </div>
+                            </div>
+                            <input type="search" class="form-control"
+                                   placeholder="Search projects"
+                                   aria-label="Search projects">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm text-end">
+                    <a class="btn btn-stealth" href="#"><i class="bi bi-filter"></i>
+                        Filter</a>
+                </div>
+            </div>
+
+
+        </div>
+
+        <table class="table card-body m-0" data-toggle="table">
+            <thead class="thead-light">
+            <tr class="th">
+                <th scope="col">Name</th>
+                <th scope="col">Key</th>
+                <th scope="col">Labels</th>
+            </tr>
+            </thead>
+            {% for project in projects %}
+                <tr>
+                    <td>
+                        <a href="{% url "project:home" project.key %}">{{ project.name }}</a>
+                    </td>
+                    <td>{{ project.key }}</td>
+                    <td>{{ project.labels }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div class="card-footer border-0">
+        <span class="fst-italic">
+                    {{ projects|length }} Project{{ projects|length|pluralize }} found
+        </span>
+        </div>
+    </div>
+
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "www/project/project_base.html" %}
+{% load static %}
+
+{% block sidebar_lower_content %}
+
+    <link href='{% static "www/flatpickr/flatpickr.css" %}' rel='stylesheet'/>
+
+    <div class="container">
+        <input type="text" class="form-control d-none" id="sidebar-journal-calendar">
+    </div>
+    <ul id="sidebar-journal-pages" class="mt-4 container sidebar-nav">
+
+    </ul>
+{% endblock %}
+
+{% block additional_scripts_eob %}
+    <script src='{% static "www/flatpickr/flatpickr.js" %}'></script>
+    <script src='{% static "www/sidebar/journal.js" %}'></script>
+
+{% endblock additional_scripts_eob %}

@@ -1,0 +1,69 @@
+{% load static %}
+{% load mptt_tags %}
+{% comment %}
+This snippet requires the variable nodes to be set with something like this:
+wiki_pages = Project.objects.filter(key=key).first().get_descendants().instance_of(WikiPage)
+context = {"nodes": wiki_pages}
+{% endcomment %}
+{% block form %}
+
+{% endblock %}
+
+<script type="application/javascript"
+        src="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.min.js" %}"></script>
+<script type="application/javascript" src="{% static "www/mustache/mustache.min.js" %}"></script>
+<script type="application/javascript">
+    const wikiTree = function () {
+        const data = [{% recursetree nodes %}
+            {
+                text: '{{ node.name }}',
+                url:
+                    {% block urls %}
+                        '{{ node.get_absolute_url }}'
+                    {% endblock %}
+                ,
+                additionalClasses: {% if node.id == idToHighlight %}"fw-bold"
+                    {% elif hideSelf and node.id == object.id %}"disabled"{% else %}""{% endif %},
+                {% if not node.is_leaf_node %}
+                    children: [{{ children }}]
+                {% endif %}
+            },{% endrecursetree %}];
+
+        const tree = new tui.Tree('#tree', {
+            data: data, nodeDefaultState: 'opened', usageStatistics: false,
+            template: {
+                internalNode:
+                    '<div class="tui-tree-content-wrapper">' +
+                    '<button type="button" class="tui-tree-toggle-btn tui-js-tree-toggle-btn">' +
+                    '<span class="tui-ico-tree"></span>' +
+                    '{% templatetag openvariable %}stateLabel{% templatetag closevariable %}' +
+                    '</button>' +
+                    '<span class="tui-tree-text tui-js-tree-text">' +
+                    '<span class="tui-tree-ico tui-ico-folder"></span>' +
+                    '<a class="{% templatetag openvariable %}additionalClasses{% templatetag closevariable %}" href="{% templatetag openvariable %}url{% templatetag closevariable %}">' +
+                    '{% templatetag openvariable %}text{% templatetag closevariable %}' +
+                    '</a></span>' +
+                    '</div>' +
+                    '<ul class="tui-tree-subtree tui-js-tree-subtree">' +
+                    '{% templatetag openvariable %}children{% templatetag closevariable %}' +
+                    '</ul>',
+                leafNode:
+                    '<div class="tui-tree-content-wrapper">' +
+                    '<span class="tui-tree-text tui-js-tree-text">' +
+                    '<span class="tui-tree-ico tui-ico-file"></span>' +
+                    '<a class="{% templatetag openvariable %}additionalClasses{% templatetag closevariable %}"  href="{% templatetag openvariable %}url{% templatetag closevariable %}">' +
+                    '{% templatetag openvariable %}text{% templatetag closevariable %}' +
+                    '</a></span>' +
+                    '</div>'
+            },
+
+
+        });
+        return{
+            data:data,
+            tree:tree
+        }
+    }();
+
+
+</script>

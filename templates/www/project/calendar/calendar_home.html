@@ -1,0 +1,122 @@
+{% extends "www/project/project_base.html" %}
+{% load compress %}
+{% load static %}
+{% load sass_tags %}
+
+{% block additional_assets %}
+    <link href='{% sass_src "www/fullcalendar/custom.scss" %}' rel='stylesheet'/>
+    <link href='{% static "www/flatpickr/flatpickr.css" %}' rel='stylesheet'/>
+{% endblock %}
+
+
+{% block sidebar %}
+    {% with active_sidebar_item="Calendar" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block title %}
+    {% with page_title="" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block additional_scripts_eob %}
+    <script src='{% static "www/flatpickr/flatpickr.js" %}'></script>
+    <script src='{% static "www/fullcalendar/custom.js" %}'></script>
+    <script src="{% static "www/project/calendar.js" %}"></script>
+{% endblock %}
+
+
+{% block content %}
+
+
+
+
+
+    <div id="full-calendar" class="mx-2 row shadow bg-white">
+    </div>
+
+
+    <div id="calendar-event-modal" class="modal fade" tabindex="-1"
+         data-bs-backdrop="static"
+         data-bs-keyboard="false" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="calendar-event-modal-form" method="post">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="calendar-event-modal-heading">
+                            Create
+                            new event</h4>
+                        <button type="button" class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        {% csrf_token %}
+
+                        <input type="hidden" name="calendar_slug"
+                               value="{{ project.key }}">
+                        <input type="hidden" name="old_start" value="">
+                        <input type="hidden" name="old_end" value="">
+                        <input type="hidden" name="event_id" value="">
+                        <input type="hidden" name="existed" value="">
+                        <div class="input-group input-group-lg mb-1">
+                            <input name="title" type="text" class="form-control"
+                                   placeholder="Enter a title ..."
+                                   aria-label="title"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <input name="description" type="text"
+                                   class="form-control"
+                                   placeholder="Enter a description or location ..."
+                                   aria-label="title"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text"
+                                  style="width: 6em;">Start time</span>
+                            <input name="start" type="text"
+                                   class="form-control datetime-selector"
+                                   placeholder="Click to select a time"
+                                   aria-label="Start time"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"
+                                  style="width: 6em;">End time</span>
+                            <input name="end" type="text"
+                                   class="form-control datetime-selector"
+                                   placeholder="Click to select a time"
+                                   aria-label="End time"
+                                   aria-describedby="basic-addon1">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <div>
+                            <button name="delete-button" type="button"
+                                    class="btn btn-outline-danger d-none">Delete
+                                Event
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-light"
+                                    data-bs-dismiss="modal">Cancel
+                            </button>
+                            <button type="submit" name="submit"
+                                    class="btn btn-primary">
+                                Create Event
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

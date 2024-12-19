@@ -1,0 +1,28 @@
+{% extends "www/project/project_base.html" %}
+{% load compress %}
+{% load static %}
+
+{% block title %}
+    {% with page_title=project.name|add:" Home" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock title %}
+
+
+{% block content %}
+    <div id="react"></div>
+
+{% endblock %}
+
+{% block jquery_scripts %}
+    <script src="{% static "www/project/homepage.js" %}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            homepage.getActivity("{{ project.id }}");
+            homepage.getEvents("{{ project.key }}");
+
+        });
+    </script>
+
+{% endblock jquery_scripts %}

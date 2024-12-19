@@ -1,0 +1,61 @@
+{% extends "www/base/base.html" %}
+{% load static %}
+{% block window_title %}
+    {% with window_title=project.name|add:" - Create Journal Page" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block navigation %}
+    {% with navbar_centertext=project.name %}
+        {% include 'www/snippets/project/navigation-create-button.html' %}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+    <link href='{% static "www/flatpickr/flatpickr.css" %}' rel='stylesheet'/>
+
+    <div>
+        <form action="." method="post" id="markdown-create-form">
+            {% csrf_token %}
+            <input type="hidden" name="markdown" value="">
+            <input type="hidden" name="parent" value="{{ project.id }}">
+
+            <h6 class="display-6 my-2"> Journal Page</h6>
+
+            <div class="input-group input-group-lg my-3">
+                <span class="input-group-text" id="page-name-label">Page Name</span>
+                <input name="name" type="text" class="form-control" aria-label="Page name"
+                       aria-describedby="page-name-label" value="{{ object.name }}">
+            </div>
+            <div class="input-group input-group-lg my-3">
+                <span class="input-group-text" id="page-date-label">Date</span>
+                <input id="page-date-picker" name="date" type="text" class="form-control"
+                       aria-label="Page date"
+                       aria-describedby="page-date-label">
+                <input type="hidden" name="date" id="page-date" value="{{ object.date }}">
+            </div>
+
+            {% include 'www/snippets/editor.html' %}
+            <div class="py-3 justify-content-end d-flex">
+                <a class="btn" href="{% url "project:journal" project.key %}">Cancel</a>
+                {% include "www/snippets/forms/publish-button.html" %}
+            </div>
+        </form>
+
+    </div>
+
+{% endblock %}
+
+{% block jquery_scripts %}
+    {{ block.super }}
+    <script src='{% static "www/flatpickr/flatpickr.js" %}'></script>
+    <script src="{% static "www/forms/journal-create.js" %}"></script>
+    <script>
+        dateSelector.flatpickrObject.setDate("{{ object.date|date:"c" }}");
+    </script>
+{#    <script src="{% static "www/custom/markdownForm.js" %}"></script>#}
+    <script>
+        editor.setMarkdown("{{ object.markdown|escapejs }}", cursorToEnd = false);
+    </script>
+{% endblock %}

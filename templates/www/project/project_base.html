@@ -1,0 +1,28 @@
+{% extends "www/base/base+sidebar+title.html" %}
+{% load static %}
+{% block sidebar_title %}
+<strong>{{ project.name }}</strong>
+{% endblock sidebar_title %}
+
+{% block window_title %}
+    {% with window_title=window_title|add:" - "|add:project.name %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock window_title %}
+
+{% block navigation %}
+    {% with navbar_centertext=project.name %}
+        {% include 'www/snippets/project/navigation-create-button.html' %}
+    {% endwith %}
+{% endblock %}
+
+{% block sidebar %}
+    {% with sidebar_items=project.sidebar_items %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
+
+{% block additional_scripts_eob %}
+    <script src="{% static 'frontend/index-bundle.js' %}"></script>
+    {{ block.super }}
+{% endblock %}

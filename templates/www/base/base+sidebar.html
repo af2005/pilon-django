@@ -1,0 +1,38 @@
+{% extends 'www/base/base.html' %}
+{% load static %}
+
+{% block jquery_scripts %}
+    {{ block.super }}
+    <script type="application/javascript" src="{% static "www/sidebar/sidebar.js" %}"></script>
+{% endblock %}
+
+{% block sidebar %}
+    <link rel="stylesheet" type="text/css" href="{% static "www/sidebar/sidebar.css" %}">
+    <div id="sidebar-wrapper" class="{% if sidebar_collapsed %}sidebar-collapsed{% endif %}">
+        <ul class="sidebar-nav">
+            <div id="sidebar-upper-content-header" class="d-grid align-content-center my-3">
+                <span class="mx-3 my-auto">
+                    {% block sidebar_title %}
+                    {% endblock %}
+                </span>
+                <button id="sidebar-collapse-toggle" class="btn btn-sm btn-stealth mx-1"><i
+                        class=" bi {% if sidebar_collapsed %}bi-chevron-double-right{% else %}bi-chevron-double-left{% endif %}"></i>
+                </button>
+            </div>
+            {% for listitem in sidebar_items %}
+                <li>
+                    <a class="{% if listitem.name == active_sidebar_item %} font-weight-bold text-primary{% endif %} "
+                       href="{{ listitem.url }}">
+                        <i class="bi bi-{{ listitem.icon }}"></i>
+                        <span class="mx-1">{{ listitem.name }}</span>
+                    </a></li>
+            {% endfor %}
+        </ul>
+        <div class="sidebar-lower-content">
+            {% block sidebar_lower_content %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock sidebar %}
+
+<!--<div class="resize-handle--x" data-target="aside"></div>-->

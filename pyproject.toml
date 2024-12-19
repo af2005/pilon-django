@@ -2,15 +2,94 @@
 name = "pilon"
 version = "0.1.0"
 description = ""
-authors = ["Alexander Franke"]
+authors = [
+    "Alexander Franke",
+    "Jan Petermann"
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-Django = "^3.1.5"
+django = "^3.1.5"
+bleach = "^3.3.0"
+django-utils = "^0.0.2"
+django-extensions = "^3.1.1"
+django-markdownfield = "^0.10.0"
+django-mptt = "^0.12.0"
+django-polymorphic-tree = "^2.0"
+django-reversion = "^3.0.9"
+django-reversion-compare = "^0.14.0"
+icalendar = "^4.0.7"
+django-widget-tweaks = "^1.4.8"
+django-rest-polymorphic = "^0.1.9"
+httpie-django-auth = "^0.1.2"
+django-colorfield = "^0.4.1"
+django-shortuuidfield = "^0.1.3"
+shortuuid = "^1.0.1"
+django-filter = "^2.4.0"
+inflection = "^0.5.1"
+lorem-text = "^1.5"
+django-js-reverse = "^0.9.1"
+django-compressor = "^2.4.1"
+django-compressor-toolkit = "^0.6.0"
+django-sass-processor = "^1.0.1"
 
 
 [tool.poetry.dev-dependencies]
+black = "^20.8b1"
+pytest = "^6.2.2"
+pytest-django = "^4.1.0"
+flake8 = "^3.9.0"
+flakehell = "^0.9.0"
+pep8-naming = "^0.11.1"
+pre-commit = "^2.11.1"
+pytest-cov = "^2.11.1"
+libsass = "^0.20.1"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = "-v -p no:warnings --cov=. --cov-report term-missing --no-cov-on-fail --ignore=tests/schedule --log-level=INFO"
+DJANGO_SETTINGS_MODULE = "pilon.settings"
+python_files = "tests.py test_*.py *_tests.py"
+
+[tool.coverage]
+    [tool.coverage.run]
+    omit =[
+        "*/schedule/*",
+    ]
+    [tool.coverage.report]
+    fail_under = 35
+    omit =[
+        "*/schedule/*",
+    ]
+
+    [tool.coverage.html]
+    directory = "htmlcov"
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
+
+[tool.flakehell]
+# specify any flake8 options. For example, exclude "example.py":
+exclude = ["www/migrations/*"]
+# 80 chars aren't enough in 21 century
+max_line_length = 100
+# make output nice
+#format = "grouped"
+
+# show line of source code in output
+#show_source = false
+
+
+[tool.flakehell.plugins]
+format = "grouped"
+pycodestyle = ["+*","-W503"]
+pyflakes = ["+*"]
+pep8-naming = ["+*"]
+mccabe = ["+*"]
+pylint = ["+*"]

@@ -1,0 +1,31 @@
+{% extends "www/base/minimal.html" %}
+{% load static %}
+
+
+
+{% block content %}
+    <div class="container-fluid min-vh-100 align-items-center d-flex bg-gradient-purple" >
+        <div class="container bg-white mx-auto rounded shadow-lg py-5 px-4">
+        <div class="row">
+            <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
+
+                <div class="d-none d-sm-block">{% include 'www/snippets/logo.html' %}</div>
+                 <h3 class="display-3">Pilon</h3>
+
+
+            </div>
+
+            <div class="col-md-8">
+                {% block form %}
+
+                {% endblock form %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{#        {% include 'www/snippets/footer.html' %}#}
+
+
+{% endblock %}
