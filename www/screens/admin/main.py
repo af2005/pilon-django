@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
-from .. import default_template
+from .. import templates
 from www.rest import users
 
 SIDEBAR_ITEMS = [
@@ -15,7 +15,7 @@ def user_settings(request):
 
 def user_manager(request):
     content = users.list_all_users()
-    tpl = default_template.get(request, "User Manager", title="Manage Users", sidebar=True, sidebar_items=SIDEBAR_ITEMS, content=content)
+    tpl = templates.admin(request, "User Manager", title="Manage Users", sidebar=True, sidebar_items=SIDEBAR_ITEMS, content=content)
     return HttpResponse(tpl)
 
 
@@ -24,10 +24,10 @@ def system_settings(request, setting):
         return user_manager(request)
 
     content = ""
-    tpl = default_template.get(request,
-                               window_title="System Settings",
-                               title=setting,
-                               sidebar=True,
-                               sidebar_items=SIDEBAR_ITEMS,
-                               content=content)
+    tpl = templates.admin(request,
+                        window_title="System Settings",
+                        title=setting,
+                        sidebar=True,
+                        sidebar_items=SIDEBAR_ITEMS,
+                        content=content)
     return HttpResponse(tpl)
