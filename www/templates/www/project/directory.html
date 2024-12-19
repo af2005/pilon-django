@@ -1,0 +1,32 @@
+{% extends "www/simple.html" %}
+{% load static %}
+
+
+{% block additional_assets %}
+{% endblock %}
+
+{% block title %}
+    {% include 'www/snippets/title_subtitle.html' %}
+{% endblock %}
+{% block content %}
+
+    {{ content }}
+
+    <table class="table table-bordered" data-toggle="table">
+        <thead class="thead-light">
+        <tr class="th">
+            <th scope="col">Name</th>
+            <th scope="col">Key</th>
+            <th scope="col">Labels</th>
+        </tr>
+        </thead>
+        {% for project in projects %}
+            <tr>
+                <td>{{ project.name }}</td>
+                <td>{{ project.key }}</td>
+                <td>{{ project.labels }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
