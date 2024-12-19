@@ -1,29 +1,39 @@
 {% extends "www/base.html" %}
 {% load static %}
 
-
 {% block additional_assets %}
+    <link rel="stylesheet" type="text/css" href="{% static "www/custom/sidebar.css" %}">
 {% endblock %}
 
-{% block subnavigation %}
-    {% include 'www/snippets/subnavigation.html' %}
+
+
+{% block sidebar %}
+    {% include 'www/snippets/sidebar.html' %}
 {% endblock %}
+
 {% block title %}
     {% include 'www/snippets/title_subtitle.html' %}
 {% endblock %}
-{% block content %}
 
+{% block content %}
     {{ content }}
     <div class="row">
-        <div class="col-sm-4">
-            <div class="my-3 p-3 ">
-                <h6 class="border-bottom pb-2 mb-0">Pinned projects</h6>
+        <div class="col-sm-12">
+
+            <div class="my-3 p-3 rounded shadow-sm border">
+                <h6 class="pb-2 mb-0">Project Calendar</h6>
 
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="my-3 p-3 bg-white rounded shadow-sm border">
-                <h6 class="border-bottom pb-2 mb-0">Your Tasks</h6>
+        <div class="col-sm-6">
+            <div class="my-3 p-3 ">
+                <h6 class="border-bottom pb-2 mb-0">Recent Wiki updates</h6>
+
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="my-3 p-3 rounded ">
+                <h6 class="border-bottom pb-2 mb-0">Recent Journal updates</h6>
                 <div class="d-flex text-muted pt-3">
                     <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
                          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
@@ -58,4 +68,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}

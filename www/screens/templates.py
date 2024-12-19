@@ -1,4 +1,5 @@
 from django.template import loader
+from ..models import Project
 
 
 def admin(request, window_title, title="", subtitle="", sidebar_items=None, content=None):
@@ -58,3 +59,16 @@ def project_directory(request, projects=[]):
     }
     return template.render(context, request)
 
+
+def project_homepage(request, key, sidebar_items):
+    project = list(Project.objects.filter(key=key).values())[0]
+    template = loader.get_template('www/project/homepage.html')
+    context = {
+        'window_title': project["name"] + " Homepage",
+        'page_title': project["name"] + " Homepage",
+        'page_subtitle': "",
+        'project': project,
+        'sidebar_items': sidebar_items,
+        'navbar_centertext': project["name"]
+    }
+    return template.render(context, request)

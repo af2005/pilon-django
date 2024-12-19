@@ -49,11 +49,13 @@
     text-decoration: none;
     color: #41464b;
 }
-
+.sidebar-nav li a.active{
+    font-weight: bold;
+}
 .sidebar-nav li a:hover {
     text-decoration: none;
-    background: rgba(255, 255, 255, 0.2);
-    color: #084298;
+    background: white;
+
 }
 
 .sidebar-nav li a:active, .sidebar-nav li a:focus {
