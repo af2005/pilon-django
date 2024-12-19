@@ -11,7 +11,8 @@ from . import templates
 def main(request):
     tpl = templates.simple(request,
                            window_title="User settings",
-                           title="User settings"
+                           title="User settings",
+                           navbar_centertext="User settings"
                            )
 
     return HttpResponse(tpl)
