@@ -47,8 +47,19 @@
                 <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Search">
                     <a class="btn btn-dark border-0 nav-link bi bi-search mx-1" href="#"></a>
                 </li>
-                <li class="nav-item">
-                    <a class="btn btn-dark border-0 nav-link bi bi-list-check mx-1" href="{% url 'todo:lists' %}" title="Your tasks"></a>
+                <li class="nav-item dropdown">
+                    <a class="btn btn-dark border-0 nav-link bi bi-list-check mx-1" href="#"
+                       title="Your tasks" aria-expanded="false" id="tasks-dropdown" data-bs-toggle="dropdown"></a>
+
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="tasks-dropdown">
+                        <li><a href="{% url 'todo:lists' %}" class="dropdown-item">To-do Lists</a></li>
+                        <li><a href="{% url 'todo:mine' %}" class="dropdown-item">My Tasks</a></li>
+                        <li><a href="{% url 'todo:external_add' %}" class="dropdown-item">File Ticket</a>
+                        </li>
+                        <li><a href="{% url 'todo:import_csv' %}" class="dropdown-item">Import</a></li>
+
+                    </ul>
+
                 </li>
                 <li class="nav-item dropdown">
                     <a class="btn btn-dark border-0 nav-link bi bi-chat-square-text-fill mx-1" href="#"
@@ -70,7 +81,6 @@
                        id="user-menu-dropdown" data-bs-toggle="dropdown"
                        aria-expanded="false"></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-menu-dropdown">
-                        <li><a class="dropdown-item" href="{% url 'todo:mine' %}">My Tasks</a></li>
                         <li><a class="dropdown-item" href="/accounts/settings">User settings</a></li>
                         <li><a class="dropdown-item" href="/system-settings/global">System settings</a></li>
                         <div class="dropdown-divider"></div>
