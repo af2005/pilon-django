@@ -1,0 +1,23 @@
+{% extends "www/project/project_base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="card shadow-sm text-align-center">
+                <span class="card-img-top"><i class="bi bi-file-text"></i></span>
+                <div class="card-body">
+                    <h5 class="card-title">Create wiki Page</h5>
+                    <p class="card-text">Store information in the project wiki.</p>
+                    <a href="default-editor/" class="btn btn-primary disabled">Default editor</a>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a href="#" class="card-link">Markdown...</a>
+                    <li class="list-group-item disabled"><a href="#" class="card-link">Upload file...</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

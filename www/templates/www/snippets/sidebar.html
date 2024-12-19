@@ -6,7 +6,8 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper" class="bg-light border-end pt-3">
     <ul class="sidebar-nav">
-
+        {% block sidebar_upper_content %}
+        {% endblock %}
         {% for listitem in sidebar_items %}
             <li>
                 <a class="{% if forloop.counter0 == active_sidebar_item %} font-weight-bold text-primary {% endif %}"
