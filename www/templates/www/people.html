@@ -1,0 +1,29 @@
+{% extends "www/base.html" %}
+{% load static %}
+
+{% block title %}
+    {% include 'www/snippets/title_subtitle.html' %}
+{% endblock %}
+{% block content %}
+    <table class="table table-bordered" data-toggle="table">
+        <thead class="thead-light">
+        <tr class="th">
+            <th scope="col">Username</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+        </tr>
+        </thead>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+
+
+{% block additional_scripts_eob %}
+    <!--<script src="{% static 'www/bootstrap-table/bootstrap-table.min.js' %}"></script>-->
+{% endblock %}

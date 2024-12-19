@@ -1,13 +1,9 @@
 from django.db import models
-
-
-class User(models.Model):
-    username = models.CharField(max_length=30)
-    full_name = models.TextField()
+from django.contrib.auth.models import User
 
 
 class Project(models.Model):
-    key = models.CharField(max_length=20)
+    key = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=50)
 
 
@@ -17,6 +13,9 @@ class Page(models.Model):
     version = models.IntegerField()
     content = models.TextField()
     created_date = models.DateTimeField()
+
+    def repr(self):
+        return {"id": self.id}
 
 
 class WikiPage(Page):
