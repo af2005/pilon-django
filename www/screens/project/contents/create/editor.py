@@ -8,17 +8,17 @@ from www.screens import templates
 
 @login_required
 def view_default_editor(request, key):
-    tpl = templates.create_page_view(request, title="Create Content", key=key, subtitle="In project")
+    tpl = templates.default_editor(request, title="Create Content", key=key, subtitle="In project")
     return HttpResponse(tpl)
 
 
 @login_required
 def view_markdown_editor(request, key):
-    tpl = templates.create_page_view(request, title="Create Content", key=key, subtitle="In project")
+    tpl = templates.markdown_editor(request, title="Create Content", key=key, subtitle="In project")
     return HttpResponse(tpl)
 
 
 @login_required
 def view_file_upload(request, key):
-    tpl = templates.create_page_view(request, title="Create Content", key=key, subtitle="In project")
+    tpl = templates.simple(request, title="Create Content", key=key, subtitle="In project")
     return HttpResponse(tpl)
