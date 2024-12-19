@@ -4,7 +4,11 @@
     <ul class="sidebar-nav">
         <li class="sidebar-brand"></li>
         {% for listitem in sidebar_items %}
-            <li><a href="{{ listitem.url }}">{{ listitem.name }}</a></li>
+            <li>
+                <a class="{% if forloop.counter0 == active_sidebar_item %} text-primary {% endif %}" href="{{ listitem.url }}">
+                    <i class="bi bi-{{ listitem.icon }}"></i>
+                    <span class="mx-1">{{ listitem.name }}</span>
+                </a></li>
         {% endfor %}
     </ul>
 </div>

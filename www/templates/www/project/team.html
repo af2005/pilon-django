@@ -1,0 +1,52 @@
+{% extends "www/base.html" %}
+{% load static %}
+
+{% block additional_assets %}
+    <link rel="stylesheet" type="text/css" href="{% static "www/custom/sidebar.css" %}">
+{% endblock %}
+
+
+
+{% block sidebar %}
+    {% include 'www/snippets/sidebar.html' %}
+{% endblock %}
+
+{% block title %}
+    {% include 'www/snippets/title_subtitle.html' %}
+{% endblock %}
+
+{% block content %}
+    {{ content }}
+    <div class="row">
+        <div class="my-3 p-3 ">
+            <h6 class="d-flex align-items-end justify-content-between border-bottom pb-2 mb-0">
+                <span>Owners</span>
+                <a href="#" class="btn btn-sm btn-light border btn-icon">
+                    <i class="bi bi-person-plus-fill"></i>
+                </a></h6>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="my-3 p-3 ">
+            <h6 class="d-flex align-items-end justify-content-between border-bottom pb-2 mb-0">
+                <span>Editors</span>
+                <a href="#" class="btn btn-sm btn-light border btn-icon">
+                    <i class="bi bi-person-plus-fill"></i>
+                </a></h6>
+
+        </div>
+    </div>
+
+     <div class="row">
+        <div class="my-3 p-3 ">
+            <h6 class="d-flex align-items-end justify-content-between border-bottom pb-2 mb-0">
+                <span>Guests</span>
+                <a href="#"  class="btn btn-sm btn-light border btn-icon">
+                    <i class="bi bi-person-plus-fill"></i>
+                </a></h6>
+
+        </div>
+    </div>
+
+{% endblock %}

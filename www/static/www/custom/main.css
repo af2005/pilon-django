@@ -9,4 +9,19 @@ a:link.btn-link,a{
     background-color: #e9ecef;
     border-color: #dee2e6;
 }
+.input-group-prepend .input-group-text{
+    display: block;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.input-group-append .input-group-text{
+    display: block;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.fc a{
+    color: #495057
+}
+
 
