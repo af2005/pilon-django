@@ -1,41 +1,62 @@
 
-
-body{
+body {
     min-height: 100vh;
     font-family: "Source Sans Pro", sans-serif;
+    overflow: hidden;
+}
+
+main.outer-wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 3.5rem 1fr;
+}
+
+#wrapper {
+    display: grid;
+    overflow: hidden;
 
 }
 
+#page-content-wrapper {
+    overflow-y: scroll;
+}
 
 
-
-a:link.btn-link,a{
+a:link.btn-link, a {
     text-decoration: none;
 }
+
 .table .thead-light th {
     color: #495057;
     background-color: #e9ecef;
     border-color: #dee2e6;
 }
-.input-group-prepend .input-group-text{
+
+.input-group-prepend .input-group-text {
     display: block;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
-.input-group-append .input-group-text{
+
+.input-group-append .input-group-text {
     display: block;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.fc a{
+.fc a {
     color: #495057
 }
 
 .display-4 {
     font-size: calc(1.475rem + 1.4vw);
 }
-.font-weight-bold{
+
+.font-weight-bold {
     font-weight: 600;
+}
+.container{
+    margin-left: 0;
 }
 
