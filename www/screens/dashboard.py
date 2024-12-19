@@ -14,11 +14,10 @@ SIDEBAR_ITEMS = [
 
 
 def view_dashboard(request):
-    tpl = templates.default(request,
-                        window_title="Dashboard",
-                        title="Today",
-                        sidebar=True,
-                        sidebar_items=SIDEBAR_ITEMS
-                        )
+    tpl = templates.dashboard(request,
+                              window_title="Dashboard",
+                              title="Today",
+                              sidebar_items=SIDEBAR_ITEMS
+                              )
 
     return HttpResponse(tpl)
