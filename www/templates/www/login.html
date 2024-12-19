@@ -6,23 +6,24 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{% static "www/custom/main.css" %}">
 
 
     {% include 'www/snippets/bootstraplibs.html' %}
+    <link rel="stylesheet" type="text/css" href="{% static "www/custom/main.css" %}">
 
     <title>pilon - {{ window_title }}</title>
 </head>
-<body class="bg-light">
+<body class="bg-light" style="padding-top:0;">
+<nav id="navbar-top" class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">pilon</a>
+    </div>
+</nav>
 <main>
-    <nav id="navbar-top" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">pilon</a>
-        </div>
-    </nav>
+
     <div id="wrapper">
 
-        <div id="page-content-wrapper" class="bg-white">
+        <div id="page-content-wrapper" class="">
             <div class="container-fluid mb-4">
                 <div class="container d-flex align-items-center justify-content-center py-3 ">
                     {% include 'www/snippets/logo.html' %}
@@ -35,9 +36,22 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-md-8">
-                                    <div class="card">
+                                    <div class="card shadow-sm mb-5">
                                         <div class="card-header">Login</div>
+
                                         <div class="card-body">
+                                            {% if logout %}
+                                                <div class="alert alert-success" role="alert">
+                                                    Logout successful.
+                                                </div>
+                                            {% endif %}
+
+                                            {% if wrong_password %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    Username/Password combination wrong.
+                                                </div>
+                                            {% endif %}
+
                                             <form action="" method="">
                                                 <div class="form-group row my-1">
                                                     <label for="email_address"
@@ -69,7 +83,7 @@
 
                                                 <div class="col-md-6 offset-md-4">
                                                     <button type="submit" class="btn btn-primary">
-                                                        Register
+                                                        Login
                                                     </button>
                                                     <a href="#" class="btn btn-link">
                                                         Forgot Your Password?

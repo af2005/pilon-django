@@ -12,7 +12,13 @@ def view_login(request):
 
 
 def view_logout(request):
-    return HttpResponse("Login Windows")
+    template = loader.get_template('www/login.html')
+    context = {
+        'window_title': "Login",
+        'warning': "",
+        'logout': True
+    }
+    return HttpResponse(template.render(context, request))
 
 
 def rest_login(request):
