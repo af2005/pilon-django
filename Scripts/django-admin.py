@@ -1,4 +1,4 @@
-#!C:\Users\afranke\repos\donton\Scripts\python.exe
+#!C:\Users\afranke\repos\pilon\Scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
