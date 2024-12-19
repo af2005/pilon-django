@@ -73,4 +73,12 @@ a:link.btn-link, a {
 .text-align-center{
     text-align: center
 }
+.btn-link{
+    text-decoration: none;
+}
 
+button > i.bi::before {
+    width: 1em;
+    height: 1em;
+    vertical-align: -.2em;
+}
