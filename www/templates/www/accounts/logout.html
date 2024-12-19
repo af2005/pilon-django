@@ -14,6 +14,10 @@
                 <main class="login-form">
                     <div class="container">
                         <div class="row justify-content-center">
+                         <div class="alert alert-success" role="alert">
+                                                Logout successful.
+                                            </div>
+
                             <div class="col-md-8">
                                 <div class="card shadow-sm mb-5">
                                     <div class="card-header">Login</div>
@@ -28,11 +32,6 @@
                                             {% endif %}
                                         {% endif %}
 
-                                        {% if logout %}
-                                            <div class="alert alert-success" role="alert">
-                                                Logout successful.
-                                            </div>
-                                        {% endif %}
 
                                         {% if form.errors %}
                                             <div class="alert alert-danger" role="alert">
