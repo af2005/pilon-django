@@ -11,13 +11,14 @@
     {% endblock %}
 
     {% include 'www/snippets/bootstraplibs.html' %}
-    <link rel="stylesheet" type="text/css" href="{% static "www/custom/main.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'www/custom/main.css' %}">
 
     <title>pilon - {{ window_title }}</title>
 </head>
 <body class="bg-light">
 <main>
     {% include 'www/snippets/navigation.html' %}
+    {% block subnavigation %}{% endblock %}
     <div id="wrapper">
 
         {% block sidebar %}
@@ -44,5 +45,7 @@
 
 {% include 'www/snippets/endofbody.html' %}
 <script type="application/javascript" src="{% static 'www/custom/sidebar.js' %}"></script>
+{% block additional_scripts_eob %}
+{% endblock %}
 </body>
 </html>
