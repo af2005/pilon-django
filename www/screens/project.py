@@ -1,25 +1,15 @@
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.template import loader, Template
-
+from .snippets import forms
 from ..models import Project
 
 
 def view_create(request):
-    html = '<form action="rest/project" method="POST">'
+    html = '<form action="rest/project" method="POST" class="my-4">'
 
-    html += loader.get_template('www/snippets/forms/long-text-field.html').render({
-        "name": "project_key",
-        "description": "Project Key"
-    }, request)
-
-    html += loader.get_template('www/snippets/forms/long-text-field.html').render({
-        "name": "project_fullname",
-        "description": "Name"
-    }, request)
-
-    html += loader.get_template('www/snippets/forms/submit-button.html').render({
-        "text":"Create"
-    }, request)
+    html += forms.Textfield("project_key", "Project Key").render()
+    html += forms.Textfield("project_fullname", "Name").render()
+    html += forms.SubmitButton("Create").render()
 
     html += "</form>"
 
