@@ -1,6 +1,6 @@
 #bootstrap
 https://getbootstrap.com
-v5.0.0-beta1
+  v5.0.0-beta1
 
 #jQuery
 version 3.5.1
@@ -17,3 +17,9 @@ version: 5.5.1
 vanillajs-datepicker
 https://github.com/mymth/vanillajs-datepicker
 version 1.1.2
+
+#wysiwyg editor
+toast ui editor
+https://github.com/nhn/tui.editor
+jquery wrapper
+version 2.5.1 | Tue Nov 24 2020

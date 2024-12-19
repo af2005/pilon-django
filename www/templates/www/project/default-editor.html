@@ -1,6 +1,33 @@
-{% extends "www/project/project_base.html" %}
-{% load static %}
+{% extends "www/base.html" %}
 
+
+{% load static %}
+{% block additional_assets %}
+    <link rel="stylesheet" href="{% static "www/toastui/codemirror.min.css" %}"/>
+    <!-- Editor's Style -->
+    <link rel="stylesheet" href="{% static "www/toastui/toastui-editor.min.css" %}"/>
+{% endblock %}
 {% block content %}
 
+    <link rel="stylesheet" href="{% static "www/toastui/custom.css" %}"/>
+
+    <div class="bg-white">
+        <div id="editor" class="py-3"></div>
+    </div>
+
+    <script src="{% static "www/toastui/toastui-editor-all.min.js" %}"></script>
+    <script type="application/javascript">
+
+        const editor = new toastui.Editor({
+            el: document.querySelector('#editor'),
+            height: '80vh',
+            initialEditType: 'wysiwyg',
+            previewStyle: 'tab',
+            usageStatistics: false
+        });
+
+        editor.getHtml();
+    </script>
+
 {% endblock %}
+

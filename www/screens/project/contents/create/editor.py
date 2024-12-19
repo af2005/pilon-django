@@ -13,12 +13,6 @@ def view_default_editor(request, key):
 
 
 @login_required
-def view_markdown_editor(request, key):
-    tpl = templates.markdown_editor(request, title="Create Content", key=key, subtitle="In project")
-    return HttpResponse(tpl)
-
-
-@login_required
 def view_file_upload(request, key):
     tpl = templates.simple(request, title="Create Content", key=key, subtitle="In project")
     return HttpResponse(tpl)
