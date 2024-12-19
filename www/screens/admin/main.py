@@ -4,8 +4,8 @@ from .. import templates
 from www.rest import users
 
 SIDEBAR_ITEMS = [
-    {'name': 'Global', 'url': 'global'},
-    {'name': 'User Manager', 'url': 'user-manager'}
+    {'name': 'Global', 'url': '/system-settings/global'},
+    {'name': 'User Manager', 'url': '/system-settings/user-manager'}
 ]
 
 

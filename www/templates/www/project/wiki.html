@@ -1,72 +1,74 @@
-{% extends "www/project/project_base.html" %}
+{% extends "www/base+sidebar+title.html" %}
 {% load static %}
 
-{% block additional_assets %}
-    <link rel="stylesheet" type="text/css" href="{% static "www/treeview/bootstrap-treeview.min.css" %}">
-{% endblock %}
 
 
-{% block sidebar %}
-    {% include 'www/snippets/sidebar_pagetree.html' %}
-{% endblock %}
+{% block sidebar_lower_content %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.min.css" %}">
 
-{% block additional_scripts_eob %}
-    <script type="application/javascript" src="{% static "www/treeview/bootstrap-treeview.min.js" %}"></script>
-    <script type="application/javascript">
-        function getTree() {
-            var tree = [
-                {
-                    text: "Parent 1",
-                    nodes: [
-                        {
-                            text: "Child 1",
-                            nodes: [
-                                {
-                                    text: "Grandchild 1"
-                                },
-                                {
-                                    text: "Grandchild 2"
-                                }
-                            ]
-                        },
-                        {
-                            text: "Child 2"
-                        }
-                    ],
-                    state: {
-                        expanded: true
-                    }
-                },
-                {
-                    text: "Parent 45"
-                },
-                {
-                    text: "Parent 3"
-                },
-                {
-                    text: "Parent 4"
-                },
-                {
-                    text: "Parent 5"
-                }
-            ];
-            return tree;
-        }
-
-        $('#treeview7').treeview({
-                data: getTree(),
-                showBorder: false
-            }
-        );
-    </script>
-{% endblock %}
-
-{% block title %}
-    {% include 'www/snippets/title_subtitle.html' %}
+    <div class="bg-light">
+        <h6 class="mx-2 my-2">Wiki Page Tree</h6>
+        <div id="tree" class="treeview">
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}
+
     {{ content }}
+    <script type="application/javascript"
+            src="{% static "www/toastui/tree/node_modules/tui-tree/dist/tui-tree.min.js" %}"></script>
+
+    <script type="application/javascript">
+
+        const data = [
+            {
+                text: 'rootA', children: [
+                    {text: 'sub-A1'},
+                    {text: 'sub-A2'},
+                    {text: 'sub-A3'},
+                    {text: 'sub-A4'},
+                    {
+                        text: 'sub-A5', state: 'closed', children: [
+                            {
+                                text: 'sub-A5A', children: [
+                                    {text: 'sub-A5A1'}
+                                ]
+                            },
+                            {text: 'sub_A5B'}
+                        ]
+                    },
+                    {text: 'sub-A6'},
+                    {text: 'sub-A7'},
+                    {text: 'sub-A8'},
+                    {
+                        text: 'sub-A9', state: 'closed', children: [
+                            {text: 'sub-A9A'},
+                            {text: 'sub-A9B'}
+                        ]
+                    },
+                    {text: 'sub-A10'},
+                    {text: 'sub-A11'},
+                    {text: 'sub-A12'}
+                ]
+            },
+            {
+                text: 'rootB', state: 'closed', children: [
+                    {text: 'sub-B1'},
+                    {text: 'sub-B2'},
+                    {text: 'sub-B3'}
+                ]
+            }
+        ];
 
 
+        const tree = new tui.Tree('#tree', {
+            data: data,
+            nodeDefaultState: 'opened',
+            usageStatistics: false,
+
+
+        });
+    </script>
 {% endblock %}
