@@ -19,8 +19,10 @@ urlpatterns = [
     path('', dashboard.view_dashboard, name='Dashboard'),
     path('project/contents/<str:key>', project.view_homepage, name="Project Homepage"),
     path('project/contents/<str:key>/team', project.view_team, name="Project Tasks"),
+    path('project/contents/<str:key>/chat', project.view_chat, name="Project Chat"),
     path('project/contents/<str:key>/tasks', project.view_tasks, name="Project Tasks"),
     path('project/contents/<str:key>/calendar', project.view_calendar, name="Project Calendar"),
+    path('project/contents/<str:key>/inventory', project.view_inventory, name="Project Inventory"),
     path('project/contents/<str:key>/wiki', project.view_wiki, name="Project Wiki"),
     path('project/contents/<str:key>/journal', project.view_journal, name="Project Journal"),
 
